@@ -1,0 +1,1 @@
+Programa que lee una imagen pgm, calcula su histograma y genera una versión umbralizada (binaria) de la misma.
