@@ -9,26 +9,9 @@
 #include "funciones.h"
 
 int main(int argc, char **argv) {
-	//Validar argumentos
-	if(argc < 5) {
-		printf("Ingrese los siguientes argumentos:\n");
-		printf("[Nombre base de los primeros libros] [Numero de libros (1)] ");
-		printf("[Nombre base de los ultimos libros] [Numero de libros (2)] ");
-		printf("[Semilla (opcional)]\n");
-		return 0;
-	}
-
 	char first_books_name[30], last_books_name[30];
 	int n_files_fb, n_files_lb, seed = time(NULL);
-
-	strcpy(first_books_name, argv[1]);
-	strcpy(last_books_name, argv[3]);
-	n_files_fb = atoi(argv[2]);
-	n_files_lb = atoi(argv[4]);
-
-	if(argc >= 6)
-		seed = atoi(argv[5]);
-
+	if(!read_args(argc, argv, first_books_name, last_books_name, &n_files_fb, &n_files_lb, &seed)) return 0;
 	srand(seed);
 
 	//Fabricamos los bloques de archivos
@@ -41,8 +24,6 @@ int main(int argc, char **argv) {
 	printf("\n**---------- Generador de frecuencias ----------**\n");
 	int no_words = 0, frec_size = n_c_lb;
 	double **frec = generate_frec("chunked", n_c_lb, &no_words);
-
-	printf("%d %d\n", n_c_fb, n_c_lb);
 
 	//Se generan las matrices de las clases 1 y 2
 	printf("\n**---------- Clasificador de texto ----------**\n");
@@ -74,17 +55,9 @@ int main(int argc, char **argv) {
 	trying_set_c2 = generate_trying_set(trying_set_c2, m2sz);
 	bin_vect = generate_bin_vector(no_words);
 
-
-
 	printf("Realizando la clasificación.\n");
 	clasify(trying_set_c1, trying_set_c2, bin_vect, frec_c1, frec_c2, m1sz, m2sz, no_words);
-
-	delete_arr2d_i(trying_set_c1, m1sz);
-	delete_arr2d_i(trying_set_c2, m2sz);
-	delete_arr1d(bin_vect);
-	delete_arr2d_d(frec_c1, m1sz);
-	delete_arr2d_d(frec_c2, m2sz);
-	delete_arr2d_d(frec, frec_size);
+	close_items(trying_set_c1, trying_set_c2, bin_vect, frec_c1, frec_c2, frec, m1sz, m2sz, frec_size);
 
 	return 0;
 }

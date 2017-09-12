@@ -1,5 +1,27 @@
 #include "funciones.h"
 
+//Lee argumentos y regresa un entero, si pudo
+//leerlos todos o no
+int read_args(int argc, char **argv, char fbname[30], char lbname[30], int *nff, int *nfl, int *seed) {
+	if(argc < 5) {
+		printf("Ingrese los siguientes argumentos:\n");
+		printf("[Nombre base de los primeros libros] [Numero de libros (1)] ");
+		printf("[Nombre base de los ultimos libros] [Numero de libros (2)] ");
+		printf("[Semilla (opcional)]\n");
+		return 0;
+	}
+
+	strcpy(fbname, argv[1]);
+	strcpy(lbname, argv[3]);
+	*nff = atoi(argv[2]);
+	*nfl = atoi(argv[4]);
+
+	if(argc >= 6)
+		*seed = atoi(argv[5]);
+
+	return 1;
+}
+
 //Esta función se encarga de separar los n archivos especificados
 //Devuelve el índice del último bloque generado.
 int f_separate(char *first_books_name, int n_files_fb, int start_in) {
@@ -60,6 +82,20 @@ double distance(double *v1, double *v2, int *bin_vector, int no_words) {
 	return res;
 }
 
+void train(int i, double **m1, double **m2, int *bin_vector, int **trying_set, int m_sz, int val_to_set, double *d_min, int *c_dat, int no_words) {
+	double d_aux;
+	for(int j = 0; j < m_sz; j++) {
+		//Valor de entrenamiento!!
+		if(trying_set[j][0] == 0) {
+			d_aux = distance(m1[i], m2[j], bin_vector, no_words);
+			if(d_aux < *d_min) {
+				*d_min = d_aux;
+				*c_dat = val_to_set;
+			}
+		}
+	}
+}
+
 void clasify(int **trying_set1, int **trying_set2, int *bin_vector, double **m1, double **m2, int m1_sz, int m2_sz, int no_words) {
 	FILE *out = fopen("clasified.txt", "w");
 	fprintf(out, "Bloque Clase esperada Clase obtenida\n");
@@ -68,72 +104,40 @@ void clasify(int **trying_set1, int **trying_set2, int *bin_vector, double **m1,
 	//los clasificamos
 	for(int i = 0; i < m1_sz; i++) {
 		//Valor de prueba detectado
-		if(trying_set1[i][1] == 0) {
-			//printf("i: %d\n", i);
+		if(trying_set1[i][0] == 1) {
 			//Clasificar con los datos de la clase 1
 			double d_min = DBL_MAX, d_aux;
 			int c_dat = 0;
-			for(int j = 0; j < m1_sz; j++) {
-				//Valor de entrenamiento!!
-				if(trying_set1[j][0] == 1) {
-					//printf("j1: %d\n", j);
-					d_aux = distance(m1[i], m1[j], bin_vector, no_words);
-					if(d_aux < d_min) {
-						d_min = d_aux;
-						c_dat = 1;
-					}
-				}
-			}
 
-			for(int j = 0; j < m2_sz; j++) {
-				//Valor de entrenamiento!!
-				if(trying_set2[j][0] == 1) {
-					//printf("j2: %d\n", j);
-					d_aux = distance(m1[i], m2[j], bin_vector, no_words);
-					if(d_aux < d_min) {
-						d_min = d_aux;
-						c_dat = 2;
-					}
-				}
-			}
+			train(i, m1, m1, bin_vector, trying_set1, m1_sz, 1, &d_min, &c_dat, no_words);
+			train(i, m1, m2, bin_vector, trying_set2, m2_sz, 2, &d_min, &c_dat, no_words);
 
-			//trying_set1[i][1] = c_dat;
 			fprintf(out, "%d %d %d\n", i + 1, 1, c_dat);
 		}
 	}
 
 	for(int i = 0; i < m2_sz; i++) {
 		//Valor de prueba detectado
-		if(trying_set2[i][1] == 0) {
+		if(trying_set2[i][0] == 1) {
 			//Clasificar con los datos de la clase 1
 			double d_min = DBL_MAX, d_aux;
 			int c_dat = 0;
-			for(int j = 0; j < m1_sz; j++) {
-				//Valor de entrenamiento!!
-				if(trying_set1[j][0] == 1) {
-					d_aux = distance(m2[i], m1[j], bin_vector, no_words);
-					if(d_aux < d_min) {
-						d_min = d_aux;
-						c_dat = 1;
-					}
-				}
-			}
+			train(i, m2, m1, bin_vector, trying_set1, m1_sz, 1, &d_min, &c_dat, no_words);
+			train(i, m2, m2, bin_vector, trying_set2, m2_sz, 2, &d_min, &c_dat, no_words);
 
-			for(int j = 0; j < m2_sz; j++) {
-				//Valor de entrenamiento!!
-				if(trying_set2[j][0] == 1) {
-					d_aux = distance(m2[i], m2[j], bin_vector, no_words);
-					if(d_aux < d_min) {
-						d_min = d_aux;
-						c_dat = 2;
-					}
-				}
-			}
-
-			//trying_set2[i][1] = c_dat;
 			fprintf(out, "%d %d %d\n", m1_sz + i, 2, c_dat);
 		}
 	}
 
+	printf("Terminado.\n");
 	fclose(out);
+}
+
+void close_items(int **tsc1, int **tsc2, int *bv, double **fc1, double **fc2, double **frec, int m1sz, int m2sz, int frec_size) {
+	delete_arr1d(bv);
+	delete_arr2d_i(tsc1, m1sz);
+	delete_arr2d_i(tsc2, m2sz);
+	delete_arr2d_d(fc1, m1sz);
+	delete_arr2d_d(fc2, m2sz);
+	delete_arr2d_d(frec, frec_size);
 }
