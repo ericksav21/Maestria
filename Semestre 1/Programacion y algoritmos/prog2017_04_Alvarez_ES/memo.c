@@ -34,6 +34,7 @@ double** create_arr2d_by_chunks_d(int nr, int nc) {
 
 //Toma como entrada una matriz y devuelve una submatriz partida
 //por las filas de la original, incluyendo los límites
+//Nota: Begin y end están indexados a cero
 double** get_part_of_matrix(double **mat, int begin, int end, int nc) {
 	int nr = end - begin + 1;
 	double **res;

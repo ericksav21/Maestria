@@ -1,5 +1,8 @@
 CC=gcc
-CFLAGS=-I.
+CFLAGS=-I. -g
 
 main: main.o funciones.o frecuencias.o separador.o memo.o
 	$(CC) -o main main.o funciones.o frecuencias.o separador.o memo.o -I.
+
+clean:
+	rm chunked_*.txt words.txt frequencies.txt

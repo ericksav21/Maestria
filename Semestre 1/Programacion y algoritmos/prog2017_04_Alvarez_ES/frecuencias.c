@@ -68,16 +68,21 @@ int** update_hist(int **hist, int pinserted, int dict_size, int realocated, int 
 	return hist;
 }
 
+//Convierte la matríz de frecuencias a una de frecuencias relativas
+//Nota: la matríz resultante es transpuesta de la original
 double** convert_to_relative(int **hist, int pa, int cnt, int no_files) {
 	double **res;
-	res = create_arr2d_by_chunks_d(pa, no_files);
+	//res = create_arr2d_by_chunks_d(pa, no_files);
+	res = create_arr2d_by_chunks_d(no_files, pa);
 	for(int i = 0; i < pa; i++)
 		for(int j = 0; j < no_files; j++)
-			res[i][j] = (double)hist[i][j] / (double)cnt;
+			res[j][i] = (double)hist[i][j] / (double)cnt;
 
 	return res;
 }
 
+//Toma el diccionario y la matríz de frecuencias relativas y los imprime en
+//archivos distintos
 void print_words(char **dict, double **hist, int pa, int cnt, int no_files) {
 	FILE *words, *frequencies;
 	words = fopen("words.txt", "w");
@@ -89,7 +94,7 @@ void print_words(char **dict, double **hist, int pa, int cnt, int no_files) {
 	frequencies = fopen("frequencies.txt", "w");
 	for(int i = 0; i < pa; i++) {
 		for(int j = 0; j < no_files; j++) {
-			fprintf(frequencies, "%lf", hist[i][j]);
+			fprintf(frequencies, "%lf", hist[j][i]);
 			if(j < no_files - 1)
 				fprintf(frequencies, " ");
 		}
@@ -98,7 +103,7 @@ void print_words(char **dict, double **hist, int pa, int cnt, int no_files) {
 	fclose(frequencies);
 }
 
-double** generate_frec(char *files_name, int n_files, int *hist_size) {
+double** generate_frec(char *files_name, int n_files, int *no_words) {
 	FILE *in;
 	int word_size = 30, cur_file;
 	int pa = 0, dict_size = 10;
@@ -141,7 +146,7 @@ double** generate_frec(char *files_name, int n_files, int *hist_size) {
 
 	double **res = convert_to_relative(hist, pa, cnt, n_files);
 	print_words(dict, res, pa, cnt, n_files);
-	*hist_size = pa;
+	*no_words = pa;
 
 	printf("Terminado: %d palabras diferentes, %d palabras totales.\n", pa, cnt);
 	delete_arr2d_c(dict, dict_size);

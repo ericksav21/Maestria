@@ -16,6 +16,6 @@ int** update_hist(int **hist, int pinserted, int dict_size, int realocated, int 
 
 void print_words(char **dict, double **hist, int pa, int cnt, int no_files);
 
-double** generate_frec(char *files_name, int n_files, int *hist_size);
+double** generate_frec(char *files_name, int n_files, int *no_words);
 
 #endif
