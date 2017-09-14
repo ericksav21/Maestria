@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1504806903 source:/home/ericksav22/Codeblocks/MN_T2_1/funciones.c
+	"funciones.h"
+
+1504765589 /home/ericksav22/Codeblocks/MN_T2_1/funciones.h
+	<omp.h>
+	<stdio.h>
+	<stdlib.h>
+
+1504910026 source:/home/ericksav22/Codeblocks/MN_T2_1/main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/time.h>
+	"memo.h"
+	"funciones.h"
+
+1504740481 /home/ericksav22/Codeblocks/MN_T2_1/memo.h
+	<stdlib.h>
+
+1504795455 source:/home/ericksav22/Codeblocks/MN_T2_1/memo.c
+	"memo.h"
+
