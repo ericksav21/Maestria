@@ -15,4 +15,10 @@ double *resuelve_m_tsuperior(double **A, double *b, int nr, int nc, double tol);
 
 double get_error(double **A, double *x, double *b, int nr, int nc);
 
+double get_EPS();
+
+void print_vector(double *vect, int n);
+
+void print_matrix(double **mat, int nr, int nc);
+
 #endif

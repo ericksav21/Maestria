@@ -38,6 +38,15 @@ double get_error(double **A, double *x, double *b, int nr, int nc) {
 	return n;
 }
 
+double get_EPS() {
+    double Eps = 1.0;
+ 
+    while (1.0 + Eps / 2.0 != 1.0)
+        Eps /= 2.0;
+
+    return Eps;
+}
+
 //Encuentra la solución de una matríz diagonal (en forma de vector)
 double *resuelve_m_tinferior(double **A, double *b, int nr, int nc, double tol) {
 	double *x = create_vector(nc, double);
@@ -134,7 +143,6 @@ int factorize_LU(double **A, double ***L, double ***U, int n, double tol) {
 			//Es una Li
 			if(i > j) {
 				if(fabs((*U)[j][j]) < tol) {
-					//printf("Nooo: %d %d %lf\n", i, j, (*U)[j][j]);
 					return 0;
 				}
 				for(int k = 0; k < j; k++) {

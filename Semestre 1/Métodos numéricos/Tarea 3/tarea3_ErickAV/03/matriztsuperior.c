@@ -38,6 +38,15 @@ double get_error(double **A, double *x, double *b, int nr, int nc) {
 	return n;
 }
 
+double get_EPS() {
+    double Eps = 1.0;
+ 
+    while (1.0 + Eps / 2.0 != 1.0)
+        Eps /= 2.0;
+
+    return Eps;
+}
+
 //Encuentra la solución de una matríz diagonal (en forma de vector)
 double *resuelve_m_tsuperior(double **A, double *b, int nr, int nc, double tol) {
 	double *x = create_vector(nc, double);
@@ -80,4 +89,20 @@ double *resuelve_m_tsuperior(double **A, double *b, int nr, int nc, double tol) 
 	}
 
 	return x;
+}
+
+void print_vector(double *vect, int n) {
+	for(int i = 0; i < n; i++) {
+		printf("%lf ", vect[i]);
+	}
+	printf("\n");
+}
+
+void print_matrix(double **mat, int nr, int nc) {
+	for(int i = 0; i < nr; i++) {
+		for (int j = 0; j < nc; j++) {
+			printf("%lf ", mat[i][j]);
+		}
+		printf("\n");
+	}
 }

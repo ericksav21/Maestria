@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 		printf("Error. Ejecuta ./main [archivo 1] [archivo 2].\n");
 		return 0;
 	}
-	double tol = 1e-7;
+	double tol = pow(get_EPS(), 2.0/3.0);
 	char mtriang_f[30], indep_f[30];
 	strcpy(mtriang_f, argv[1]);
 	strcpy(indep_f, argv[2]);
@@ -19,23 +19,13 @@ int main(int argc, char **argv) {
 	double **A = read_matrix(mtriang_f, &nr, &nc);
 	double *b = read_vector(indep_f, &n);
 
-	for(int i = 0; i < nr; i++) {
-		for(int j = 0; j < nc; j++) {
-			printf("%lf ", A[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-	for(int j = 0; j < nc; j++) {
-		printf("%lf ", b[j]);
-	}
+	printf("Matriz:\n");
+	print_matrix(A, nr, nc);
+	printf("\nb:\n");
+	print_vector(b, nc);
 	printf("\n");
 
 	double *x = resuelve_m_tsuperior(A, b, nr, nc, tol);
-
-	for(int i = 0; i < nc; i++)
-		printf("%lf ", x[i]);
-	printf("\n");
 
 	if(x == NULL) {
 		free_matrix(A);
@@ -43,8 +33,10 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	else {
-		printf("Tamaño de la matriz: %dx%d\n", nr, nc);
-		printf("Error: %lf\n", get_error(A, x, b, nr, nc));
+		printf("x:\n");
+		print_vector(x, nc);
+		printf("Tamaño de la matriz: %d %d\n", nr, nc);
+		printf("Error: %10.20e\n", get_error(A, x, b, nr, nc));
 	}
 
 	free_matrix(A);

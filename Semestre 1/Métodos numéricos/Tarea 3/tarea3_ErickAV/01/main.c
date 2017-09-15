@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 #include "memo.h"
 #include "reader.h"
@@ -10,7 +11,7 @@ int main(int argc, char **argv) {
 		printf("Error. Ejecuta ./main [archivo 1] [archivo 2].\n");
 		return 0;
 	}
-	double tol = 1e-7;
+	double tol = pow(get_EPS(), 2.0/3.0);
 	char diagonal_f[30], indep_f[30];
 	strcpy(diagonal_f, argv[1]);
 	strcpy(indep_f, argv[2]);
@@ -18,6 +19,12 @@ int main(int argc, char **argv) {
 	int n;
 	double *d = read_vector(diagonal_f, &n);
 	double *b = read_vector(indep_f, &n);
+
+	printf("Matriz (diagonal):\n");
+	print_vector(d, n);
+	printf("\nb:\n");
+	print_vector(b, n);
+	printf("\n");
 
 	double *x = resuelve_m_diagonal(d, b, n, tol);
 
@@ -28,8 +35,10 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	else {
-		printf("Tamaño de la matriz: %dx%d\n", n, n);
-		printf("Error: %lf\n", get_error(d, x, b, n));
+		printf("x:\n");
+		print_vector(x, n);
+		printf("\nTamaño de la matriz: %d %d\n", n, n);
+		printf("Error: %10.20e\n", get_error(d, x, b, n));
 	}
 
 	free_vector(x);

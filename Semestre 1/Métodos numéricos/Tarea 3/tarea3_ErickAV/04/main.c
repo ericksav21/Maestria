@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 		printf("Error. Ejecuta ./main [archivo 1] [archivo 2].\n");
 		return 0;
 	}
-	double tol = 1e-7;
+	double tol = pow(get_EPS(), 2.0/3.0);
 	char mtriang_f[30], indep_f[30];
 	strcpy(mtriang_f, argv[1]);
 	strcpy(indep_f, argv[2]);
@@ -21,6 +21,13 @@ int main(int argc, char **argv) {
 	double **L = create_matrix(nr, nc, double);
 	double **U = create_matrix(nr, nc, double);
 
+	for(int i = 0; i < nr; i++) {
+		for(int j = 0; j < nc; j++) {
+			L[i][j] = U[i][j] = 0.0;
+		}
+	}
+
+	printf("Matriz:\n");
 	printf("%d %d\n", nr, nc);
 
 	print_matrix(A, nr, nc);
@@ -39,8 +46,9 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
+	printf("L:\n");
 	print_matrix(L, nr, nc);
-	printf("\n");
+	printf("\nU:\n");
 	print_matrix(U, nr, nc);
 	printf("\n");
 
@@ -49,6 +57,8 @@ int main(int argc, char **argv) {
 	
 	print_vector(x, nc);
 	printf("\n");
+
+	printf("Error: %10.20e\n", get_error(A, x, b, nr, nc));
 
 	free_matrix(L);
 	free_matrix(U);

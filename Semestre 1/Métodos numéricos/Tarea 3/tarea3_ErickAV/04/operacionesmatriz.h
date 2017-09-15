@@ -13,6 +13,8 @@ double norm(double *x, int sz);
 
 double get_error(double **A, double *x, double *b, int nr, int nc);
 
+double get_EPS();
+
 double *resuelve_m_tinferior(double **A, double *b, int nr, int nc, double tol);
 
 double *resuelve_m_tsuperior(double **A, double *b, int nr, int nc, double tol);
