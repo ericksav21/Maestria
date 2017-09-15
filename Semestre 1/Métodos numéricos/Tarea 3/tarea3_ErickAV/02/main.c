@@ -33,6 +33,10 @@ int main(int argc, char **argv) {
 
 	double *x = resuelve_m_tinferior(A, b, nr, nc, tol);
 
+	for(int i = 0; i < nc; i++)
+		printf("%lf ", x[i]);
+	printf("\n");
+
 	if(x == NULL) {
 		free_matrix(A);
 		free_vector(b);
