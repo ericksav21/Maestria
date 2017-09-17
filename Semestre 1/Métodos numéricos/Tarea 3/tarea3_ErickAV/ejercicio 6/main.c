@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	printf("%d %d\n", nr, nc);
 
 	print_matrix(A, nr, nc);
-	printf("\n");
+	printf("\n\nb:\n");
 	print_vector(b, n);
 	printf("\n");
 
@@ -55,6 +55,7 @@ int main(int argc, char **argv) {
 	double *y = resuelve_m_tinferior(L, b, nr, nc, tol);
 	double *x = resuelve_m_tsuperior(U, y, nr, nc, tol);
 	
+	printf("x:\n");
 	print_vector(x, nc);
 	printf("\n");
 
