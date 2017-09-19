@@ -44,7 +44,12 @@ int f_separate(char *first_books_name, int n_files_fb, int start_in) {
 }
 
 //30%: 1, 70%: 0
-int* generate_trying_set(int *set, int no_blocks) {
+int* generate_trying_set(int no_blocks) {
+	int *set = (int *)create_arr1d(no_blocks, sizeof(int));
+	for(int i = 0; i < no_blocks; i++) {
+		set[i] = 0;
+	}
+
 	int sz = (int)((float)no_blocks * 0.3);
 	int cnt = 0;
 	while(cnt < sz) {
@@ -96,10 +101,9 @@ void train(int i, double **m1, double **m2, int *bin_vector, int *trying_set, in
 }
 
 //void clasify(int **trying_set1, int **trying_set2, int *bin_vector, double **m1, double **m2, int m1_sz, int m2_sz, int no_words) {
-void clasify(FOBJ *params, int *bin_vector) {	
+void clasify(FOBJ *params, int *bin_vector, int *P, int *N, int *TP, int *TN) {	
 	FILE *out = fopen("clasified.txt", "w");
 	fprintf(out, "Bloque Clase esperada Clase obtenida\n");
-	int P = 0, N = 0, TP = 0, TN = 0;
 
 	//Iteramos sobre el conjunto de datos y los que son de tipo prueba
 	//los clasificamos
@@ -114,9 +118,9 @@ void clasify(FOBJ *params, int *bin_vector) {
 			train(i, params->m1, params->m2, bin_vector, params->trying_set2, params->m2_sz, 2, &d_min, &c_dat, params->no_words);
 
 			fprintf(out, "%d %d %d\n", i + 1, 1, c_dat);
-			P++;
+			(*P)++;
 			if(c_dat == 1)
-				TP++;
+				(*TP)++;
 		}
 	}
 
@@ -130,16 +134,21 @@ void clasify(FOBJ *params, int *bin_vector) {
 			train(i, params->m2, params->m2, bin_vector, params->trying_set2, params->m2_sz, 2, &d_min, &c_dat, params->no_words);
 
 			fprintf(out, "%d %d %d\n", params->m1_sz + i, 2, c_dat);
-			N++;
+			(*N)++;
 			if(c_dat == 2)
-				TN++;
+				(*TN)++;
 		}
 	}
 
 	printf("Terminado.\n");
-	printf("Calidad de la clasificación: %lf\n", params->quality_metric(P, N, TP, TN));
-	//printf("P: %d, N: %d, TP: %d, TN: %d\n", P, N, TP, TN);
 	fclose(out);
+}
+
+double metric_eval(FOBJ *params, int *bin_vector) {
+	int P, N, TP, TN;
+	P = N = TP = TN = 0;
+	clasify(params, bin_vector, &P, &N, &TP, &TN);
+	return params->quality_metric(P, N, TP, TN);
 }
 
 void close_items(int *tsc1, int *tsc2, double **fc1, double **fc2, double **frec, int m1sz, int m2sz, int frec_size) {

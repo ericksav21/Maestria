@@ -70,13 +70,13 @@ int** update_hist(int **hist, int pinserted, int dict_size, int realocated, int 
 
 //Convierte la matríz de frecuencias a una de frecuencias relativas
 //Nota: la matríz resultante es transpuesta de la original
-double** convert_to_relative(int **hist, int pa, int cnt, int no_files) {
+double** convert_to_relative(int **hist, int *tot_per_block, int pa, int no_files) {
 	double **res;
 	//res = create_arr2d_by_chunks_d(pa, no_files);
 	res = create_arr2d_by_chunks_d(no_files, pa);
 	for(int i = 0; i < pa; i++)
 		for(int j = 0; j < no_files; j++)
-			res[j][i] = (double)hist[i][j] / (double)cnt;
+			res[j][i] = (double)hist[i][j] / (double)tot_per_block[j];
 
 	return res;
 }
@@ -107,7 +107,7 @@ double** generate_frec(char *files_name, int n_files, int *no_words) {
 	FILE *in;
 	int word_size = 30, cur_file;
 	int pa = 0, dict_size = 10;
-	int **hist, cnt = 0;
+	int **hist, *tot_per_block, cnt = 0;
 	char word[word_size], out_name[30];
 	char **dict;
 
@@ -116,12 +116,13 @@ double** generate_frec(char *files_name, int n_files, int *no_words) {
 
 	//Crear la matriz que fungirá como histograma
 	hist = create_arr2d_by_chunks_i(10, n_files);
-
 	for(int i = 0; i < 10; i++) {
 		for(int j = 0; j < n_files; j++) {
 			hist[i][j] = 0;
 		}
 	}
+	tot_per_block = (int *)create_arr1d(n_files, sizeof(int));
+	for(int i = 0; i < n_files; i++) tot_per_block[i] = 0;
 
 	for(cur_file = 1; cur_file <= n_files; cur_file++) {
 		sprintf(out_name, "%s_%d.txt", files_name, cur_file);
@@ -131,6 +132,7 @@ double** generate_frec(char *files_name, int n_files, int *no_words) {
 		//Leer archivo palabra por palabra
 		while(fscanf(in, "%s", word) == 1) {
 			cnt++;
+			tot_per_block[cur_file - 1]++;
 			str_to_lower(word);
 			int pinserted = 0, realocated = 0;
 			dict = add_word_to_dict(word, dict, dict_size, pa, &pinserted, &realocated);
@@ -144,11 +146,12 @@ double** generate_frec(char *files_name, int n_files, int *no_words) {
 		fclose(in);
 	}
 
-	double **res = convert_to_relative(hist, pa, cnt, n_files);
+	double **res = convert_to_relative(hist, tot_per_block, pa, n_files);
 	print_words(dict, res, pa, cnt, n_files);
 	*no_words = pa;
 
 	printf("Terminado: %d palabras diferentes, %d palabras totales.\n", pa, cnt);
+	delete_arr1d((void *)tot_per_block);
 	delete_arr2d_c(dict, dict_size);
 	delete_arr2d_i(hist, dict_size);
 
