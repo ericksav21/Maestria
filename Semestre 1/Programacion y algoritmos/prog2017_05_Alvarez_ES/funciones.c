@@ -2,11 +2,12 @@
 
 //Lee argumentos y regresa un entero, si pudo
 //leerlos todos o no
-int read_args(int argc, char **argv, char fbname[30], char lbname[30], int *nff, int *nfl, int *seed) {
+int read_args(int argc, char **argv, char fbname[30], char lbname[30], char quality_metric[30], int *nff, int *nfl, int *seed) {
 	if(argc < 5) {
 		printf("Ingrese los siguientes argumentos:\n");
 		printf("[Nombre base de los primeros libros] [Numero de libros (1)] ");
 		printf("[Nombre base de los ultimos libros] [Numero de libros (2)] ");
+		printf("[Métrica de calidad (opcional)]\n");
 		printf("[Semilla (opcional)]\n");
 		return 0;
 	}
@@ -17,6 +18,8 @@ int read_args(int argc, char **argv, char fbname[30], char lbname[30], int *nff,
 	*nfl = atoi(argv[4]);
 
 	if(argc >= 6)
+		strcpy(quality_metric, argv[5]);
+	if(argc >= 7)
 		*seed = atoi(argv[5]);
 
 	return 1;

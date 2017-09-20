@@ -162,6 +162,9 @@ FOBJ* set_quality_metric(FOBJ *obj, char *metric) {
 	else if(strcmp(metric, "f1 score") == 0) {
 		obj->quality_metric = f1_score_metric;
 	}
+	else {
+		printf("No se encontró la métrica especificada.\n");
+	}
 
 	return obj;
 }

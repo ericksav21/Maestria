@@ -8,7 +8,7 @@
 #include "separador.h"
 #include "metricas_calidad.h"
 
-int read_args(int argc, char **argv, char fbname[30], char lbname[30], int *nff, int *nfl, int *seed);
+int read_args(int argc, char **argv, char fbname[30], char lbname[30], char quality_metric[30], int *nff, int *nfl, int *seed);
 
 int f_separate(char *first_books_name, int n_files_fb, int start_in);
 
