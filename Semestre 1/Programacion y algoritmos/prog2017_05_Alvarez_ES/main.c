@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 
 	//Liberar memoria
 	params = free_obj_mem(params);
-	printf("\nMétrica a usar: %s\n", quality_metric);
+	printf("\n**---------- Métrica de la clasificación ----------**\nMétrica a usar: %s\n", quality_metric);
 	printf("Calidad de la clasificación: %.0f%%\n", (quality * 100.0));
 	free(params);
 	delete_arr1d((void *)bin_vect);
