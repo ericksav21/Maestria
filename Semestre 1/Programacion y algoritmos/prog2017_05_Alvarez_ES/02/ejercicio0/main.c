@@ -3,7 +3,7 @@
 
 int imprimeVector(int *x, int n) {
 	for(int i = 0; i < n; i++)
-		printf("%g\n", x[i]);
+		printf("%d\n", x[i]);
 
 	return 0;
 }
