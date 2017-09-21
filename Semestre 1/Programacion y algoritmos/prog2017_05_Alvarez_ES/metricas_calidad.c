@@ -163,7 +163,7 @@ FOBJ* set_quality_metric(FOBJ *obj, char *metric) {
 		obj->quality_metric = f1_score_metric;
 	}
 	else {
-		printf("No se encontró la métrica especificada.\n");
+		printf("Error: No se encontró la métrica especificada.\n");
 	}
 
 	return obj;

@@ -38,7 +38,7 @@ int is_char_valid(char c) {
 //Devuelve la cantidad de archivos de bloques menos uno
 int separate(FILE *in, int start_in) {
 	FILE *out;
-	int cnt_f = start_in, cnt_char = 0, is_sep = 0;
+	int cnt_f = start_in, cnt_word = 0, is_sep = 0;
 	char c, out_name[30];
 
 	//Se genera el primer archivo de texto de salida
@@ -54,21 +54,21 @@ int separate(FILE *in, int start_in) {
 				continue;
 			is_sep = 1;
 			fputc(' ', out);
-			cnt_char++;
+			cnt_word++;
 		}
 		else {
 			//En este punto el caracter actual es válido
 			fputc(c, out);
-			cnt_char++;
+			//cnt_word++;
 			is_sep = 0;
 		}
 
 		//Se cierra el archivo actual y se crea uno nuevo con un nuevo nombre
-		if(cnt_char == 5000) {
+		if(cnt_word == 5000) {
 			fclose(out);
 			sprintf(out_name, "chunked_%d.txt", cnt_f++);
 			out = fopen(out_name, "w");
-			cnt_char = 0;
+			cnt_word = 0;
 		}
 	}
 

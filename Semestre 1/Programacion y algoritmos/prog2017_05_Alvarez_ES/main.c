@@ -18,18 +18,18 @@ int main(int argc, char **argv) {
 	srand(seed);
 
 	FOBJ *params = mem_obj_alloc(first_books_name, last_books_name, n_files_fb, n_files_lb);
-	params = set_quality_metric(params, quality_metric);
 
 	int *bin_vect;
 	bin_vect = generate_bin_vector(params->no_words);
 
 	printf("Realizando la clasificación.\n");
+	params = set_quality_metric(params, quality_metric);
 	double quality = metric_eval(params, bin_vect);
+	printf("\n**---------- Métrica de la clasificación ----------**\nMétrica a usar: %s\n", quality_metric);
+	printf("Calidad de la clasificación: %.0f%%\n", (quality * 100.0));
 
 	//Liberar memoria
 	params = free_obj_mem(params);
-	printf("\n**---------- Métrica de la clasificación ----------**\nMétrica a usar: %s\n", quality_metric);
-	printf("Calidad de la clasificación: %.0f%%\n", (quality * 100.0));
 	free(params);
 	delete_arr1d((void *)bin_vect);
 
