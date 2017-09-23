@@ -67,6 +67,7 @@ double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 
 	if(fabs(aux->b[n - 1]) < tol) {
 		free_vector(x);
+		free_vector(_d);
 		aux = free_mat_3d(aux);
 		free(aux);
 		printf("El sistema no tiene solución.\n");
@@ -85,6 +86,7 @@ double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 	}
 
 	aux = free_mat_3d(aux);
+	free_vector(_d);
 	free(aux);
 	return x;
 }

@@ -47,9 +47,9 @@ int main(int argc, char **argv) {
 	d[n - 1] -= phi(bb);
 
 	MAT3D *mat = create_mat_3d(n - 1);
-	mat->a = copy_matrix_1d_d(a + 1, n - 1);
-	mat->b = copy_matrix_1d_d(b + 1, n - 1);
-	mat->c = copy_matrix_1d_d(c + 1, n - 1);
+	mat->a = copy_matrix_1d_d(a + 1, mat->a, n - 1);
+	mat->b = copy_matrix_1d_d(b + 1, mat->b, n - 1);
+	mat->c = copy_matrix_1d_d(c + 1, mat->c, n - 1);
 
 	/*printf("Matriz (diagonales diferentes de cero):\n");
 	print_vector(mat->a + 1, n - 1);
@@ -60,16 +60,22 @@ int main(int argc, char **argv) {
 	printf("\nxi:\n");
 	print_vector(xi + 1, n - 1);
 
-	double *phi = resuelve_m_tridiagonal(mat, d + 1, tol);
+	double *phi_r = resuelve_m_tridiagonal(mat, d + 1, tol);
+	genera_tabla_txt(xi, phi_r, n);
 
-	if(phi == NULL) {
+	if(phi_r == NULL) {
 		printf("El sistema no tiene solución.\n");
 	}
 	else {
-		printf("\nphi:\n");
-		print_vector(phi, n - 1);
+		printf("\nphi (analítico):\n");
+		for(int i = 1; i < n; i++) {
+			printf("%lf ", phi(xi[i]));
+		}
 
-		printf("\nError: %10.20e\n", get_error(xi + 1, phi, n - 1));
+		printf("\n\nphi (numérico):\n");
+		print_vector(phi_r, n - 1);
+
+		printf("\nError: %10.20e\n", get_error(xi + 1, phi_r, n - 1));
 	}
 
 	mat = free_mat_3d(mat);
@@ -79,8 +85,8 @@ int main(int argc, char **argv) {
 	free_vector(c);
 	free_vector(d);
 	free_vector(xi);
-	if(phi != NULL)
-		free_vector(phi);
+	if(phi_r != NULL)
+		free_vector(phi_r);
 
 	return 0;
 }
