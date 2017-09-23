@@ -12,7 +12,7 @@
 
 void *create_matrix_1d(int sz, size_t type_size);
 
-double *copy_matrix_1d_d(double *src, int sz);
+double *copy_matrix_1d_d(double *src, double *dest, int sz);
 
 void **create_matrix_2d(int nr, int nc, size_t type_size);
 

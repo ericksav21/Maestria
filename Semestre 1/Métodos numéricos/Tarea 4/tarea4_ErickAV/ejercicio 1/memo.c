@@ -6,14 +6,12 @@ void *create_matrix_1d(int sz, size_t type_size) {
 	return vector;
 }
 
-double *copy_matrix_1d_d(double *src, int sz) {
-	double *res;
-	res = (double *)create_matrix_1d(sz, sizeof(double));
+double *copy_matrix_1d_d(double *src, double *dest, int sz) {
 	for(int i = 0; i < sz; i++) {
-		res[i] = src[i];
+		dest[i] = src[i];
 	}
 
-	return res;
+	return dest;
 }
 
 void **create_matrix_2d(int nr, int nc, size_t type_size) {

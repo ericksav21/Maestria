@@ -15,9 +15,9 @@ MAT3D* create_mat_3d(int n) {
 }
 
 MAT3D* free_mat_3d(MAT3D *src) {
-	free_vector(src->a);
-	free_vector(src->b);
-	free_vector(src->c);
+	free(src->a);
+	free(src->b);
+	free(src->c);
 	src->a = NULL;
 	src->b = NULL;
 	src->c = NULL;
@@ -26,23 +26,25 @@ MAT3D* free_mat_3d(MAT3D *src) {
 	return src;
 }
 
-double get_norm(double *x, int n) {
-	double res = 0.0;
-	for(int i = 0; i < n; i++) {
-		res += pow(x[i], 2);
-	}
-	return sqrt(res);
+double phi(double x) {
+	return 2.0 + x * exp(x);
 }
 
-double get_error(double *x, double *b, int n) {
-	double *aux = create_vector(n, double);
-	for(int i = 0; i < n; i++) {
-		aux[i] = x[i] - b[i];
-	}
-	double err = get_norm(aux, n);
-	free_vector(aux);
+double phi_2(double x) {
+	return exp(x) * (2.0 + x);
+}
 
-	return err;
+double q(double x, double k) {
+	return (-k) * phi_2(x);
+}
+
+double get_error(double *xi, double *p, int n) {
+	double err = 0.0;
+	for(int i = 0; i < n; i++) {
+		err += pow(phi(xi[i]) - p[i], 2);
+	}
+
+	return sqrt(err);
 }
 
 //Encuentra la solución de una matríz tridiagonal
@@ -65,7 +67,6 @@ double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 
 	if(fabs(aux->b[n - 1]) < tol) {
 		free_vector(x);
-		free_vector(_d);
 		aux = free_mat_3d(aux);
 		free(aux);
 		printf("El sistema no tiene solución.\n");
@@ -75,7 +76,6 @@ double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 	for(int i = n - 2; i >= 0; i--) {
 		if(fabs(aux->b[i]) < tol) {
 			free_vector(x);
-			free_vector(_d);
 			aux = free_mat_3d(aux);
 			free(aux);
 			printf("El sistema no tiene solución.\n");
@@ -86,7 +86,6 @@ double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 
 	aux = free_mat_3d(aux);
 	free(aux);
-	free_vector(_d);
 	return x;
 }
 

@@ -8,23 +8,7 @@
 #include "matriztridiagonal.h"
 
 int main(int argc, char **argv) {
-	/*if(argc < 4) {
-		printf("Error. Ejecuta ./main [Matriz tridiagonal(1)] [Matriz tridiagonal(2)] [Matriz tridiagonal(3)] [Vector independiente].\n");
-		return 0;
-	}
-
-	char tridiagonal_f1[30], tridiagonal_f2[30], tridiagonal_f3[30], indep_f[30];
-	strcpy(tridiagonal_f1, argv[1]);
-	strcpy(tridiagonal_f2, argv[2]);
-	strcpy(tridiagonal_f3, argv[3]);
-	strcpy(indep_f, argv[4]);
-
-	int n1, n2, n3, nb;
-	double *a = read_vector(tridiagonal_f1, &n1);
-	double *b = read_vector(tridiagonal_f2, &n2);
-	double *c = read_vector(tridiagonal_f3, &n3);
-	double *d = read_vector(indep_f, &nb);*/
-	double tol = pow(get_EPS(), 2.0/3.0);
+	double tol = pow(get_EPS(), 2.0 / 3.0);
 	int n = 12;
 	double *a, *b, *c, *d, *x, *s;
 	a = create_vector(n, double);
@@ -54,21 +38,24 @@ int main(int argc, char **argv) {
 	}
 
 	MAT3D *mat = create_mat_3d(n);
-	mat->a = copy_matrix_1d_d(a, n);
-	mat->b = copy_matrix_1d_d(b, n);
-	mat->c = copy_matrix_1d_d(c, n);
+	mat->a = copy_matrix_1d_d(a, mat->a, n);
+	mat->b = copy_matrix_1d_d(b, mat->b, n);
+	mat->c = copy_matrix_1d_d(c, mat->c, n);
 
 	printf("Matriz (diagonales diferentes de cero):\n");
+	printf("a:\n");
 	print_vector(mat->a, n);
-	print_vector(mat->b, n);
-	print_vector(mat->c, n);
 	printf("\nb:\n");
+	print_vector(mat->b, n);
+	printf("\nc:\n");
+	print_vector(mat->c, n);
+	printf("\nd:\n");
 	print_vector(d, n);
 	printf("\n");
 
 	double *phi = resuelve_m_tridiagonal(mat, d, tol);
 
-	if(x == NULL) {
+	if(phi == NULL) {
 		printf("El sistema no tiene solución.\n");
 	}
 	else {
