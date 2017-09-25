@@ -26,6 +26,11 @@ int main(int argc, char **argv) {
 	params = set_quality_metric(params, args->quality_metric);
 	//double quality = metric_eval(params, bin_vect);
 	int *best_vb = get_best_bv(args, params);
+	printf("Mejor vector binario:\n");
+	for(int i = 0; i < args->nwords; i++) {
+		printf("%d ", best_vb[i]);
+	}
+	printf("\n");
 
 	//Liberar memoria
 	free(args);
