@@ -148,7 +148,6 @@ void clasify(FOBJ *params, int *bin_vector, int *P, int *N, int *TP, int *TN) {
 		}
 	}
 
-	printf("Terminado.\n");
 	fclose(out);
 }
 

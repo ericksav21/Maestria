@@ -24,13 +24,14 @@ int main(int argc, char **argv) {
 	FOBJ *params = mem_obj_alloc(args);
 
 	params = set_quality_metric(params, args->quality_metric);
-	//double quality = metric_eval(params, bin_vect);
+	
+	printf("\n**---------- Generador binario ----------**\n");
 	int *best_vb = get_best_bv(args, params);
 	printf("Mejor vector binario:\n");
 	for(int i = 0; i < args->nwords; i++) {
 		printf("%d ", best_vb[i]);
 	}
-	printf("\n");
+	printf("\nCalidad producida por el vector: %lf%%\n", metric_eval(params, best_vb) * 100.0);
 
 	//Liberar memoria
 	free(args);
