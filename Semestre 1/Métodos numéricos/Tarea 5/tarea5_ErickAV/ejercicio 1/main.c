@@ -23,7 +23,9 @@ int main(int argc, char **argv) {
 	double **A = read_matrix(mat_name, &nr, &nc);
 	double *v_ant = create_vector(nc, double);
 
+	double spectral_radius = power_iteration(A, v_ant, nr, nc, no_iter, tol);
 
+	printf("%lf\n", spectral_radius);
 
 	free_matrix(A);
 	free_vector(v_ant);
