@@ -10,7 +10,7 @@ void print_vector(double *vect, int n) {
 void print_matrix(double **mat, int nr, int nc) {
 	for(int i = 0; i < nr; i++) {
 		for (int j = 0; j < nc; j++) {
-			printf("%lf ", mat[i][j]);
+			printf("%8.3f   ", mat[i][j]);
 		}
 		printf("\n");
 	}
@@ -81,6 +81,7 @@ double get_err(double **A, double *v, double vp, int nr, int nc) {
 double power_iteration(double **A, double *v_ant, int nr, int nc, int iter, double tol) {
 	double *v_act = create_vector(nc, double);
 	double oldVp = 1, newVp = 0;
+	double err = 1e10;
 	int t = 0;
 	for(int i = 0; i < nc; i++) {
 		v_ant[i] = 1.0;
@@ -96,7 +97,8 @@ double power_iteration(double **A, double *v_ant, int nr, int nc, int iter, doub
 			newVp += v_act[i] * v_ant[i];
 		}
 
-		if(get_err(A, v_act, newVp, nr, nc) < tol || t >= iter)
+		err = get_err(A, v_act, newVp, nr, nc);
+		if(err < tol || t >= iter)
 			break;
 
 		t++;
@@ -104,6 +106,14 @@ double power_iteration(double **A, double *v_ant, int nr, int nc, int iter, doub
 			v_ant[i] = v_act[i];
 		}
 	}
+
+	if(t >= iter)
+		printf("El método se tuvo que detener debido al límite de iteraciones.\n");
+	else
+		printf("Método terminado.\n");
+	
+	printf("Número de Iteraciones realizadas: %d\n", t);
+	printf("Error en la última iteración: %g\n", err);
 
 
 	free_vector(v_act);
