@@ -5,7 +5,7 @@
 
 int main(int argc, char **argv) {
 	if(argc < 2) {
-		printf("Error. Ejecuta: ./main [N]\n");
+		printf("Error. Ejecuta: %s [N]\n", argv[0]);
 		return 0;
 	}
 

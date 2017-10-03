@@ -5,11 +5,11 @@ EXEC=main
 CPPS:=$(wildcard *.c)
 OBJS:=$(patsubst %.c, %.o, $(CPPS))
 
-$(EXEC): $(OBJS) lista.h
-	$(CC) $(LFLAGS) $@ $(OBJS)
+$(EXEC): $(OBJS) newton.h
+	$(CC) $(LFLAGS) $@ $(OBJS) -lm
 
 $(OBJS):
 	$(CC) $(CFLAGS) $(CPPS)
 
 clean:
-	rm -f $(EXEC) $(OBJS) lista.txt
+	rm -f $(EXEC) $(OBJS)

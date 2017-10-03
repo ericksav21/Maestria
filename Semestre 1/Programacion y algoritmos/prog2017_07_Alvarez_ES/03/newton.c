@@ -18,6 +18,6 @@ double newton_raphson(double x, double eps, int iter) {
 	if(fabs(fx) < eps)
 		return x;
 
-	x = x - fx / fp(x, 1.0e-5);
+	x = x - fx / fp(x, eps);
 	return newton_raphson(x, eps, iter - 1);
 }

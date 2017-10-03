@@ -76,7 +76,7 @@ void print_list_in_file(NODEPTR root, char *files_name) {
 	if(root) {
 		NODEPTR nxt = root;
 		while(nxt) {
-			fprintf(out, "%s %d\n", nxt->str, nxt->freq);
+			fprintf(out, "%4d %9.12s\n", nxt->freq, nxt->str);
 			nxt = nxt->next;
 		}
 	}
