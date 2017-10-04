@@ -308,7 +308,7 @@ void get_eigenpairs(double **A, int nr, int nc, int n) {
 	int iter = 1000;
 	double *x = create_vector(nc, double);
 
-	for(int k = 0; k <= n; k++) {
+	for(int k = 0; k <= 2 * n; k++) {
 		double mu = 0.0;
 		double dd = d / (double)n;
 		double delta = -d + k * dd;
@@ -322,9 +322,7 @@ void get_eigenpairs(double **A, int nr, int nc, int n) {
 			print_vector(x, nc);
 			printf("\n");
 		}
-		/*else {
-			printf("No se encontró algún eigenpar en la iteración %d.\n", k);
-		}*/
+
 		mu_0 = mu;
 	}
 
