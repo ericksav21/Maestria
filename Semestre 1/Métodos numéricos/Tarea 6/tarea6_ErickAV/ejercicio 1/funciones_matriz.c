@@ -103,6 +103,7 @@ double norm_inf(double **A, int nr, int nc) {
 		res = max(res, x[i]);
 	}
 
+	free_vector(x);
 	return res;
 }
 
@@ -232,7 +233,7 @@ int factorize_LU(double **A, double ***L, double ***U, int n, double tol) {
 	return 1;
 }
 
-double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double delta, int iter, double tol) {
+double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double delta, int iter, int *k_res, double tol) {
 	double **L = create_matrix(nr, nc, double);
 	double **U = create_matrix(nr, nc, double);
 	double **I = get_I(nr);
@@ -284,6 +285,7 @@ double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double
 		free_vector(ws);
 
 		if(e < tol || t == iter) {
+			free_vector(xp);
 			break;
 		}
 		t++;
@@ -297,6 +299,7 @@ double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double
 	free_matrix(L);
 	free_matrix(U);
 
+	*k_res = t;
 	return e;
 }
 
@@ -305,7 +308,7 @@ void get_eigenpairs(double **A, int nr, int nc, int n) {
 	printf("Norma inf: %lf\n", d);
 	double mu_0 = -10.0 * d;
 	double tol = pow(get_EPS(), 1.0 / 2.0);
-	int iter = 1000;
+	int iter = 1000, k_res;
 	double *x = create_vector(nc, double);
 
 	for(int k = 0; k <= 2 * n; k++) {
@@ -315,10 +318,10 @@ void get_eigenpairs(double **A, int nr, int nc, int n) {
 		for(int i = 0; i < nc; i++) x[i] = 1.0;
 		x = normalize(x, nc);
 
-		double e = inverse_power(A, nr, nc, &x, &mu, delta, iter, tol);
+		double e = inverse_power(A, nr, nc, &x, &mu, delta, iter, &k_res, tol);
 
 		if(e < tol && fabs(mu_0 - mu) > 1e-4) {
-			printf("Eigenpar:\nmu: %g\nx:\n", mu);
+			printf("Eigenpar encontrado con %d iteraciones:\nmu: %g\nx:\n", k_res, mu);
 			print_vector(x, nc);
 			printf("\n");
 		}

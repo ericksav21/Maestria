@@ -38,7 +38,7 @@ double *solve_mupper(double **A, double *b, int nr, int nc, double tol);
 
 int factorize_LU(double **A, double ***L, double ***U, int n, double tol);
 
-double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double delta, int iter, double tol);
+double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double delta, int iter, int *k_res, double tol);
 
 void get_eigenpairs(double **A, int nr, int nc, int n);
 
