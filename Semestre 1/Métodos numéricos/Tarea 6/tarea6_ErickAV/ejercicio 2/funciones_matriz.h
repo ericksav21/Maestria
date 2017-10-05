@@ -34,11 +34,11 @@ double* normalize(double *x, int sz);
 
 double norm_inf(double **A, int nr, int nc);
 
-int sign(double n);
+double frobenius_norm(double **A, int nr, int nc);
 
 double get_EPS();
 
-double** Givens(int n, int i, int j, double s, double c);
+void GAG(double ***A, double ***V, int n, int i, int j, double c, double s);
 
 double Jacobi(double ***A, double ***V, int nr, int nc, double tol, int M, int *k_res);
 

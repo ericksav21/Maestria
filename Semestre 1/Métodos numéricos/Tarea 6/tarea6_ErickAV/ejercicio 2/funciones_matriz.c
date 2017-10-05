@@ -132,12 +132,15 @@ double norm_inf(double **A, int nr, int nc) {
 	return res;
 }
 
-int sign(double n) {
-	if(n == 0)
-		return 0;
-	if(n < 0)
-		return -1;
-	return 1;
+double frobenius_norm(double **A, int nr, int nc) {
+	double res = 0.0;
+	for(int i = 0; i < nr; i++) {
+		for(int j = 0; j < nc; j++) {
+			res += pow(A[i][j], 2);
+		}
+	}
+
+	return sqrt(res);
 }
 
 double get_EPS() {
@@ -149,13 +152,32 @@ double get_EPS() {
     return Eps;
 }
 
-double** Givens(int n, int i, int j, double s, double c) {
-	double **G = get_I(n);
-	G[i][i] = G[j][j] = c;
-	G[i][j] = s;
-	G[j][i] = -s;
+void GAG(double ***A, double ***V, int n, int i, int j, double c, double s) {
+	double n1, n2;
 
-	return G;
+	//A*G
+	for(int k = 0; k < n; k++) {
+		n1 = (*A)[k][i] * c + (*A)[k][j] * s;
+		n2 = -(*A)[k][i] * s + (*A)[k][j] * c;
+
+		(*A)[k][i] = n1;
+		(*A)[k][j] = n2;
+
+		n1 = (*V)[k][i] * c + (*V)[k][j] * s;
+		n2 = -(*V)[k][i] * s + (*V)[k][j] * c;
+
+		(*V)[k][i] = n1;
+		(*V)[k][j] = n2;
+	}
+
+	//Gt*A
+	for(int k = 0; k < n; k++) {
+		n1 = (*A)[i][k] * c + (*A)[j][k] * s;
+		n2 = -(*A)[i][k] * s + (*A)[j][k] * c;
+
+		(*A)[i][k] = n1;
+		(*A)[j][k] = n2;
+	}
 }
 
 double Jacobi(double ***A, double ***V, int nr, int nc, double tol, int M, int *k_res) {
@@ -166,15 +188,13 @@ double Jacobi(double ***A, double ***V, int nr, int nc, double tol, int M, int *
 		//Encontrar el mayor elemento en valor absoluto
 		int imax, jmax;
 		mmax = -1.0;
-		for(int x = 0; x < nr; x++) {
-			for(int y = 0; y < nc; y++) {
-				if(x == y)
-					continue;
-				double aux = fabs((*A)[x][y]);
+		for(int col = 0; col < nc - 1; col++) {
+			for(int row = col + 1; row < nr; row++) {
+				double aux = fabs((*A)[row][col]);
 				if(aux > mmax) {
 					mmax = aux;
-					imax = x;
-					jmax = y;
+					imax = row;
+					jmax = col;
 				}
 			}
 		}
@@ -183,34 +203,11 @@ double Jacobi(double ***A, double ***V, int nr, int nc, double tol, int M, int *
 			break;
 		}
 
-		double delta = ((*A)[jmax][jmax] - (*A)[imax][imax]) / (2.0 * mmax);
-		double t = sign(delta) / (fabs(delta) + sqrt(1.0 + delta * delta));
-		double c = 1.0 / sqrt(1.0 + t * t);
-		double s = c * t;
+		double tetha = 0.5 * atan2(2 * (*A)[imax][jmax], ((*A)[imax][imax] - (*A)[jmax][jmax]));
+		double c = cos(tetha);
+		double s = sin(tetha);
 
-		//Calcular la rotación de Givens
-		double **G = Givens(nr, imax, jmax, s, c);
-		double **Gt = create_matrix(nr, nc, double);
-		double **AUX1 = create_matrix(nr, nc, double);
-		double **AUX2 = create_matrix(nr, nc, double);
-		double **AUX3 = create_matrix(nr, nc, double);
-
-		Gt = transpose_matrix(G, Gt, nr, nc);
-		AUX1 = mul_mat_mat(Gt, *A, AUX1, nr);
-		AUX2 = mul_mat_mat(AUX1, G, AUX2, nr);
-		*A = copy_matrix(AUX2, *A, nr, nc);
-
-		AUX3 = mul_mat_mat(*V, G, AUX3, nr);
-		*V = copy_matrix(AUX3, *V, nr, nc);
-
-		/*print_matrix(*V, nr, nc);
-		printf("\n");*/
-
-		free_matrix(G);
-		free_matrix(Gt);
-		free_matrix(AUX1);
-		free_matrix(AUX2);
-		free_matrix(AUX3);
+		GAG(A, V, nr, imax, jmax, c, s);
 	}
 
 	*k_res = i;
@@ -220,7 +217,10 @@ double Jacobi(double ***A, double ***V, int nr, int nc, double tol, int M, int *
 void get_eigenpairs(double **A, int nr, int nc, int M) {
 	int k_res;
 	double **V = NULL;
+	double **Aorg = create_matrix(nr, nc, double);
 	double tol = pow(get_EPS(), 1.0 / 2.0);
+
+	Aorg = copy_matrix(A, Aorg, nr, nc);
 	double e = Jacobi(&A, &V, nr, nc, tol, M, &k_res);
 	printf("Algoritmo terminado, número de iteraciones %d.\n", k_res);
 	printf("A:\n");
@@ -229,6 +229,21 @@ void get_eigenpairs(double **A, int nr, int nc, int M) {
 	print_matrix(V, nr, nc);
 	printf("\nE: %g\n", e);
 
+	double **AUX1 = create_matrix(nr, nc, double);
+	double **AUX2 = create_matrix(nr, nc, double);
+	double **AUX3 = create_matrix(nr, nc, double);
+
+	AUX1 = mul_mat_mat(Aorg, V, AUX1, nr);
+	AUX2 = mul_mat_mat(V, A, AUX2, nr);
+	AUX3 = substract_mat(AUX1, AUX2, AUX3, nr, nc);
+
+	printf("\n");
+	printf("Error: %g\n", frobenius_norm(AUX3, nr, nc));
+
+	free_matrix(AUX1);
+	free_matrix(AUX2);
+	free_matrix(AUX3);
+	free_matrix(Aorg);
 	free_matrix(V);
 }
 
