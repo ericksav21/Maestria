@@ -222,12 +222,15 @@ void get_eigenpairs(double **A, int nr, int nc, int M) {
 
 	Aorg = copy_matrix(A, Aorg, nr, nc);
 	double e = Jacobi(&A, &V, nr, nc, tol, M, &k_res);
-	printf("Algoritmo terminado, número de iteraciones %d.\n", k_res);
-	printf("A:\n");
-	print_matrix(A, nr, nc);
-	printf("\n\nV:\n");
+	printf("Algoritmo terminado, número de iteraciones: %d.\n", k_res);
+	printf("Matriz de eigenvalores (D):\n");
+	for(int i = 0; i < nr; i++) {
+		printf("D[%d] = %lf\n", i, A[i][i]);
+	}
+
+	printf("\n\nMatriz de eigenvectores (V):\n");
 	print_matrix(V, nr, nc);
-	printf("\nE: %g\n", e);
+	printf("\nNúmero más grande en valor absoluto (E): %g\n", e);
 
 	double **AUX1 = create_matrix(nr, nc, double);
 	double **AUX2 = create_matrix(nr, nc, double);
@@ -237,8 +240,7 @@ void get_eigenpairs(double **A, int nr, int nc, int M) {
 	AUX2 = mul_mat_mat(V, A, AUX2, nr);
 	AUX3 = substract_mat(AUX1, AUX2, AUX3, nr, nc);
 
-	printf("\n");
-	printf("Error: %g\n", frobenius_norm(AUX3, nr, nc));
+	printf("Error: %g\n", norm_inf(AUX3, nr, nc));
 
 	free_matrix(AUX1);
 	free_matrix(AUX2);

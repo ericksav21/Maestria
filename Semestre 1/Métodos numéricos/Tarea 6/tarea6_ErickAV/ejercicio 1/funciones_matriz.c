@@ -305,7 +305,7 @@ double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double
 
 void get_eigenpairs(double **A, int nr, int nc, int n) {
 	double d = norm_inf(A, nr, nc);
-	printf("Norma inf: %lf\n", d);
+	printf("Norma inf: %lf\n\n", d);
 	double mu_0 = -10.0 * d;
 	double tol = pow(get_EPS(), 1.0 / 2.0);
 	int iter = 1000, k_res;
@@ -320,8 +320,8 @@ void get_eigenpairs(double **A, int nr, int nc, int n) {
 
 		double e = inverse_power(A, nr, nc, &x, &mu, delta, iter, &k_res, tol);
 
-		if(e < tol && fabs(mu_0 - mu) > 1e-4) {
-			printf("Eigenpar encontrado con %d iteraciones:\nmu: %g\nx:\n", k_res, mu);
+		if(e < tol && fabs(mu_0 - mu) > 1.0e-4) {
+			printf("Eigenpar encontrado con %d iteraciones y con un error de %g:\nmu: %g\nx: ", k_res, e, mu);
 			print_vector(x, nc);
 			printf("\n");
 		}
