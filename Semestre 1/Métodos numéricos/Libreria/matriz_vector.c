@@ -119,6 +119,22 @@ double norm_inf(double **A, int nr, int nc) {
 	return res;
 }
 
+double get_err(double **A, double *v, double vp, int nr, int nc) {
+	double *aux1 = create_vector(nc, double);
+	double *aux2 = create_vector(nc, double);
+	double *aux3 = create_vector(nc, double);
+	aux1 = mul_mat_vector(A, v, aux1, nr, nc);
+	aux2 = scale_vect(v, aux2, vp, nc);
+	aux3 = substract_vect(aux1, aux2, aux3, nc);
+	double err = norm_p(aux3, nc, 2);
+
+	free_vector(aux1);
+	free_vector(aux2);
+	free_vector(aux3);
+
+	return err;
+}
+
 /*---------- END MATRIX ZONE ----------*/
 
 /*---------- VECTOR ZONE ----------*/
@@ -174,7 +190,7 @@ double norm_2(double *x, int sz) {
 
 double norm_p(double *x, int sz, int p) {
 	double res = 0.0;
-	for(int i = 0; i < n; i++) {
+	for(int i = 0; i < sz; i++) {
 		res += pow(fabs(x[i]), p);
 	}
 	

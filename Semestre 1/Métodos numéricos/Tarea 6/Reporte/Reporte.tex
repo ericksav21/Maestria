@@ -36,7 +36,7 @@
 	\end{center}
 
 	\begin{center}
-		5 de Octubre de 2017
+		8 de Octubre de 2017
 	\end{center}
 
 
@@ -62,7 +62,7 @@ A continuación se mostrará el resultado de la ejecución del método de la pot
 
 \begin{figure}[H]
 	\centering
-	\subfloat[][Figura 1. Resultado de la ejecución del programa con 50 particiones.]{
+	\subfloat[][Figura 1. Ejecución del algoritmo de la potencia inversa con 50 particiones.]{
 		\includegraphics[scale=0.3]{E1.png}
 	}\hfill
 \end{figure}
@@ -92,6 +92,38 @@ $./main\ mat005.bin\ 50$
 \section{Método de Jacobi para eigenvalores}
 
 \subsection{Descripción}
-Este método también nos va a servir para encontrar todos los eigenpares de una matriz $A \in R^{nxn}$ la cual si debe cumplir la restricción de ser simétrica. La idea de este método parte de la siguiente igualdad $A\Phi = \Phi\Lambda$ donde $\Phi$ es una matriz que contiene todos los eigenvectores de $A$ y $\Lambda$ es una matriz diagonal que contiene los eigenvalores asociados a su propio eigenvector.
+Este método también nos va a servir para encontrar todos los eigenpares de una matriz $A \in R^{nxn}$ la cual si debe cumplir la restricción de ser simétrica. La idea de este método parte de la siguiente igualdad $A\Phi = \Phi\Lambda$ donde $\Phi$ es una matriz que contiene todos los eigenvectores de $A$ y $\Lambda$ es una matriz diagonal que contiene los eigenvalores asociados a su propio eigenvector. Para obtener lo anterior usamos un tipo de matrices, las cuales llamaremos rotaciones de Givens, las cuales son matrices de tamaño $n$x$n$ que son iguales a la identidad, con la excepción que en las posiciones $[i,j],\ [j,i],\ [i,i],\ [j,j]$ contienen senos y cosenos que permiten realizar una rotación.\\
+Los índices $i,j$ son las posiciones donde encontraremos al elemento más grande en la matriz $A$, la idea es convertir en cero ese elemento, pero hay que recordar que estaremos afectando dos filas y dos columnas para lograr esto, por lo que si ya habíamos convertido a cero en otro elemento en alguna de las filas y columnas afectadas mediante una rotación, esto se perderá, pero a su vez se generá un número pequeño, entonces podemos hacer muchas iteraciones hasta lograr convertir en ceros (o números muy cercanos a cero) todos los elementos que no se encuentren en la diagonal de la matriz.
+
+\subsection{Ejemplos de ejecución}
+A continuación se mostrará un ejemplo de ejecución del método de Jacobi para una matriz de 8x8 con un total de 20000 iteraciones propuestas.\\
+
+\begin{figure}[H]
+	\centering
+	\subfloat[][Figura 2. Ejecución del algoritmo de Jacobi con una matriz 5x5.]{
+		\includegraphics[scale=0.3]{E2.png}
+	}\hfill
+\end{figure}
+
+Podemos observar en la Figura 1. que pese a que se propusieron 20000 iteraciones como límite sólo se necesitaron 86 para encontrar todos los eigenpares de la matriz con un error del orden de menos quince.\\
+Ahora se mostrará una parte del resultado de la ejecución del mismo algoritmo aplicado a una matriz de tamaño 100x100 con un total de 20000 iteraciones.\\
+
+\begin{figure}[H]
+	\centering
+	\subfloat[][Figura 3. Ejecución del algoritmo de Jacobi con una matriz 100x100.]{
+		\includegraphics[scale=0.2]{E3.png}
+	}\hfill
+\end{figure}
+
+Para este caso la imagen genera un resultado muy abrumador ya que se están mostrando todos los eigenvectores encontrados, y pese a que no se muestra, se necesitaron un total de 17254 iteraciones para que el algoritmo terminara, y esto anterior con un error del orden de menos trece.
+
+\subsection{Compilación y ejecución}
+Para la compilación se proporcionan las mismas instrucciones que en el programa anterior, se cuenta con un archivo Makefile o con con los mismos comandos de compilación del método de la potencia inversa.\\
+
+\textbf{Para ejecutar:} Únicamente debemos de usar el comando $./main$ para ejecutar el programa en consola.\\
+El programa recibe dos argumentos: Un string que representa el nombre del archivo binario (incluida la extensión) donde se encuentra la matriz; Un entero que representa el número máximo de iteraciones que realizará el algoritmo.\\
+A continuación se mostrará un ejemplo de cómo ejecutar el programa:\\
+
+$./main\ mat008.bin\ 20000$
 
 \end{document}

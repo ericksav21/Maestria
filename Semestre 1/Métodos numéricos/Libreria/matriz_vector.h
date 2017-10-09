@@ -1,8 +1,10 @@
 #ifndef MATRIZ_VECTOR_H
 #define MATRIZ_VECTOR_H
 
-#include "memo.h"
+#include <stdio.h>
 #include <math.h>
+
+#include "memo.h"
 
 /*
 	Esta librería contiene muchas operaciones básicas que
@@ -10,6 +12,11 @@
 */ 
 
 #include "matriz_vector.h"
+
+#define max(a, b) \
+   ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a > _b ? _a : _b; })
 
 /*---------- MATRIX ZONE ----------*/
 
@@ -44,6 +51,9 @@ double** mul_mat_mat(double **A, double **B, double **X, int n);
 
 /* Calcula la norma infinito de una matriz */
 double norm_inf(double **A, int nr, int nc);
+
+/* Calcula el error generado en el sistema Ax = b */
+double get_err(double **A, double *v, double vp, int nr, int nc);
 
 /*---------- END MATRIX ZONE ----------*/
 

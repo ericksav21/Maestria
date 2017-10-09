@@ -1,8 +1,15 @@
 CC=gcc
-CFLAGS=-I. -g
+CFLAGS=-c
+LFLAGS=-o
+EXEC=main
+CPPS:=$(wildcard *.c)
+OBJS:=$(patsubst %.c, %.o, $(CPPS))
 
-main: main.o memo.o imagen.o
-	$(CC) -o main main.o memo.o imagen.o -I. -lm
+$(EXEC): $(OBJS) imagen.h
+	$(CC) $(LFLAGS) $@ $(OBJS) -lm
+
+*.o: $(CPPS)
+	$(CC) $(CFLAGS) $<
 
 clean:
-	rm -f main main.o memo.o imagen.o
+	rm -f $(EXEC) $(OBJS)

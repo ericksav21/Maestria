@@ -2,131 +2,80 @@
 #define MET_NUM_H
 
 #include <stdio.h>
+#include <math.h>
 
-double get_EPS() {
-    double Eps = 1.0;
- 
-    while (1.0 + Eps / 2.0 != 1.0)
-        Eps /= 2.0;
+#include "memo.h"
+#include "matriz_vector.h"
 
-    return Eps;
-}
+/*---------- Calcula el épsilon de la maquina ----------*/
+double get_EPS();
 
-double *solve_mlower(double **A, double *b, int nr, int nc, double tol) {
-	double *x = create_vector(nc, double);
-	if(fabs(A[0][0]) < tol) {
-		free_vector(x);
-		if(b[0] == 0)
-			printf("El sistema tiene infinitas soluciones.\n");
-		else
-			printf("El sistema no tiene solución.\n");
-		return NULL;
-	}
-	x[0] = b[0] / A[0][0];
-	for(int i = 1; i < nr; i++) {
-		int flag = 0;
-		for(int k = 0; k <= i; k++) {
-			if(fabs(A[i][k]) > tol) {
-				flag = 1;
-				break;
-			}
-		}
-		if(!flag) {
-			free_vector(x);
-			if(b[i] == 0)
-				printf("El sistema tiene infinitas soluciones.\n");
-			else
-				printf("El sistema no tiene solución.\n");
-			return NULL;
-		}
+/*---------- EQUATION SYSTEM SOLVERS ----------*/
+double *solve_mdiagonal(double *d, double *b, int n, double tol);
 
-		if(fabs(A[i][i]) < tol) {
-			free_vector(x);
-			printf("El sistema no tiene solución.\n");
-			return NULL;
-		}
-		double sum = 0.0;
-		for(int j = 0; j < i; j++) {
-			sum += (A[i][j] * x[j]);
-		}
-		x[i] = (b[i] - sum) / A[i][i];
-	}
+/*---------- Reuelve un sistema donde la matriz es triangular inferior ----------*/
+double *solve_mlower(double **A, double *b, int nr, int nc, double tol);
 
-	return x;
-}
+/*---------- Reuelve un sistema donde la matriz es triangular superior ----------*/
+double *solve_mupper(double **A, double *b, int nr, int nc, double tol);
 
-double *solve_mupper(double **A, double *b, int nr, int nc, double tol) {
-	double *x = create_vector(nc, double);
-	if(fabs(A[nr - 1][nc - 1]) < tol) {
-		free_vector(x);
-		if(b[nc - 1] == 0)
-			printf("El sistema tiene infinitas soluciones.\n");
-		else
-			printf("El sistema no tiene solución.\n");
-		return NULL;
-	}
-	x[nc - 1] = b[nc - 1] / A[nr - 1][nc - 1];
-	for(int i = nr - 2; i >= 0; i--) {
-		int flag = 0;
-		for(int k = nc - 1; k >= i; k--) {
-			if(fabs(A[i][k]) > tol) {
-				flag = 1;
-				break;
-			}
-		}
-		if(!flag) {
-			free_vector(x);
-			if(b[i] == 0)
-				printf("El sistema tiene infinitas soluciones.\n");
-			else
-				printf("El sistema no tiene solución.\n");
-			return NULL;
-		}
+/* 
+	Realiza la factorización LU a la matriz A, los parámetros son los siguientes:
+	-A: Una matriz cuadrada no necesariamente simétrica.
+	-L, U: Puntero a matrices de la misma dimensión de A que se convertirán en las factorizadas.
+	-nr, nc: Las dimensiones de la matriz.
+	-xk: Un vector de tamaño nc, el cual se convertirá en el eigenvector (Este vector inicialmente puede estar normalizado).
+	-mu: El eigenvalor resultante.
+	-delta: El valor delta al cual tenderá el eigenvalor, si delta vale cero entonces el método retornará el eigenvalor más pequeño.
+	-iter: El número de iteraciones máximo que realizará el algoritmo.
+	-k_res: El número de iteraciones que realizó el algoritmo.
+	-tol: El valor de la tolerancia que se tendrá para la convergencia.
+*/
+int factorize_LU(double **A, double ***L, double ***U, int n, double tol);
 
-		if(fabs(A[i][i]) < tol) {
-			free_vector(x);
-			printf("El sistema no tiene solución.\n");
-			return NULL;
-		}
-		double sum = 0.0;
-		for(int j = nc - 1; j > i; j--) {
-			sum += (A[i][j] * x[j]);
-		}
-		x[i] = (b[i] - sum) / A[i][i];
-	}
+int cholesky(double **A, double ***L, double ***Lt, int n, double tol);
 
-	return x;
-}
+/*---------- END EQUATION SYSTEM SOLVERS ----------*/
 
-int factorize_LU(double **A, double ***L, double ***U, int n, double tol) {
-	for(int i = 0; i < n; i++) {
-		for(int j = 0; j < n; j++) {
-			double aux = 0.0;
+/*---------- EIGENVALUES AND EIGENVECTORS ----------*/
 
-			//Es una Li
-			if(i > j) {
-				if(fabs((*U)[j][j]) < tol) {
-					return 0;
-				}
-				for(int k = 0; k < j; k++) {
-					aux += ((*L)[i][k] * (*U)[k][j]);
-				}
-				(*L)[i][j] = (A[i][j] - aux) / (*U)[j][j];
-			}
-			else {
-				for(int k = 0; k < i; k++) {
-					aux += ((*L)[i][k] * (*U)[k][j]);
-				}
-				(*U)[i][j] = A[i][j] - aux;
-			}
+/* 
+	Realiza el método de la potencia a la matriz A, los parámetros son los siguientes:
+	-A: Una matriz cuadrada no necesariamente simétrica.
+	-v_ant: Un vector vacío.
+	-nr, nc: Las dimensiones de la matriz.
+	-iter: El número de iteraciones máximo que realizará el algoritmo.
+	-tol: El valor de la tolerancia que se tendrá para la convergencia.
+*/
+double power_iteration(double **A, double *v_ant, int nr, int nc, int iter, double tol);
 
-			if(i == j){
-				(*L)[i][i] = 1.0;
-			}
-		}
-	}
+/* 
+	Realiza el método de la potencia inversa a la matriz A, los parámetros son los siguientes:
+	-A: Una matriz cuadrada no necesariamente simétrica.
+	-nr, nc: Las dimensiones de la matriz.
+	-xk: Un vector de tamaño nc, el cual se convertirá en el eigenvector (Este vector inicialmente puede estar normalizado).
+	-mu: El eigenvalor resultante.
+	-delta: El valor delta al cual tenderá el eigenvalor, si delta vale cero entonces el método retornará el eigenvalor más pequeño.
+	-iter: El número de iteraciones máximo que realizará el algoritmo.
+	-k_res: El número de iteraciones que realizó el algoritmo.
+	-tol: El valor de la tolerancia que se tendrá para la convergencia.
+*/
+double inverse_power(double **A, int nr, int nc, double **xk, double *mu, double delta, int iter, int *k_res, double tol);
 
-	return 1;
-}
+void GAG(double ***A, double ***V, int n, int i, int j, double c, double s);
+
+/* 
+	Realiza el método de Jacobi a la matriz A, los parámetros son los siguientes:
+	-A: Puntero a una matriz cuadrada y simétrica, (Esta matriz se convierte en la de eigenvalores).
+	-V: Puntero a una matriz que resultará ser la matriz de eigenvectores resultantes.
+	-nr, nc: Las dimensiones de la matriz.
+	-tol: El valor de la tolerancia que se tendrá para la convergencia.
+	-xk: Un vector de tamaño nc, el cual se convertirá en el eigenvector (Este vector inicialmente puede estar normalizado).
+	-M: El número de iteraciones máximo que realizará el algoritmo.
+	-k_res: El número de iteraciones que realizó el algoritmo.
+*/
+double Jacobi(double ***A, double ***V, int nr, int nc, double tol, int M, int *k_res);
+
+/*---------- END EIGENVALUES AND EIGENVECTORS ----------*/
 
 #endif
