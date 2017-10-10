@@ -13,7 +13,8 @@ int main(int argc, char **argv) {
 		for(int j = 0; j < resized.width; j++)
 			resized.mat[i][j] = (resized.mat[i][j] == 0 ? 255 : 0);*/
 	IMG sk = skeletonize(resized);
-	print_img(sk);
+	print_img(resized, "out1.pgm");
+	print_img(sk, "out2.pgm");
 
 	free_img(img);
 	free_img(sk);

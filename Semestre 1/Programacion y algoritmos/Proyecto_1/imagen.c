@@ -42,9 +42,9 @@ IMG read_img(char *files_name) {
 	return res;
 }
 
-void print_img(IMG img) {
+void print_img(IMG img, char *files_name) {
 	FILE *out;
-	out = fopen("out.pgm", "w");
+	out = fopen(files_name, "w");
 	fprintf(out, "P2\n");
 	fprintf(out, "%d %d\n255\n", img.width, img.height);
 
@@ -151,14 +151,14 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
 
 int A_test(IMG img, int i, int j) {
 	int cnt = 0;
-	if(img.mat[i - 1][j] && !img.mat[i - 1][j + 1]) cnt++;
-	if(img.mat[i - 1][j + 1] && !img.mat[i][j + 1]) cnt++;
-	if(img.mat[i][j + 1] && !img.mat[i + 1][j + 1]) cnt++;
-	if(img.mat[i + 1][j + 1] && !img.mat[i + 1][j]) cnt++;
-	if(img.mat[i + 1][j] && !img.mat[i + 1][j - 1]) cnt++;
-	if(img.mat[i + 1][j - 1] && !img.mat[i][j - 1]) cnt++;
-	if(img.mat[i][j - 1] && !img.mat[i - 1][j - 1]) cnt++;
-	if(img.mat[i - 1][j - 1] && !img.mat[i - 1][j]) cnt++;
+	if(!img.mat[i - 1][j] && img.mat[i - 1][j + 1] != 0) cnt++;
+	if(!img.mat[i - 1][j + 1] && img.mat[i][j + 1] != 0) cnt++;
+	if(!img.mat[i][j + 1] && img.mat[i + 1][j + 1] != 0) cnt++;
+	if(!img.mat[i + 1][j + 1] && img.mat[i + 1][j] != 0) cnt++;
+	if(!img.mat[i + 1][j] && img.mat[i + 1][j - 1] != 0) cnt++;
+	if(!img.mat[i + 1][j - 1] && img.mat[i][j - 1] != 0) cnt++;
+	if(!img.mat[i][j - 1] && img.mat[i - 1][j - 1] != 0) cnt++;
+	if(!img.mat[i - 1][j - 1] && img.mat[i - 1][j] != 0) cnt++;
 
 	return cnt;
 }
@@ -169,7 +169,7 @@ int B_test(IMG img, int i, int j) {
 	for(int r = -1; r <= 1; r++) {
 		for(int c = -1; c <= 1; c++) {
 			if(r == 0 && c == 0) continue;
-			if(!img.mat[i + r][j + c]) {
+			if(img.mat[i + r][j + c] != 0) {
 				cnt++;
 			}
 		}
@@ -182,24 +182,24 @@ IMG skeletonize(IMG ori) {
 	IMG dest = copy_img(ori);
 	int width = ori.width, height = ori.height;
 	int **mat = dest.mat;
-	struct pxl {
-		int i, j;
-	} pixels_1[width * height], pixels_2[width * height];
+	PIXEL *pixels_1 = (PIXEL *)malloc(width * height * sizeof(PIXEL));
+	PIXEL *pixels_2 = (PIXEL *)malloc(width * height * sizeof(PIXEL));
 	int changed_1, changed_2;
 
 	do {
 		changed_1 = 0;
 		changed_2 = 0;
+
 		for(int i = 1; i < height - 1; i++) {
 			for(int j = 1; j < width - 1; j++) {
-				if(mat[i][j] == 0) {
-					int b_res = B_test(ori, i, j);
-					int a_res = A_test(ori, i, j);
+				if(mat[i][j] != 0) {
+					int b_res = B_test(dest, i, j);
+					int a_res = A_test(dest, i, j);
 					if((b_res >= 2 && b_res <= 6) &&
 						a_res == 1 &&
 						//P2 * P4 * P6
-						(mat[i - 1][j] + mat[i][j + 1] + mat[i + 1][j] > 0) &&
-						 mat[i][j + 1] + mat[i + 1][j] + mat[i][j - 1] > 0) {
+						(mat[i - 1][j] * mat[i][j + 1] * mat[i + 1][j] == 0) &&
+						 mat[i][j + 1] * mat[i + 1][j] * mat[i][j - 1] == 0) {
 
 						//Cambio en el pixel
 						pixels_1[changed_1].i = i;
@@ -210,19 +210,19 @@ IMG skeletonize(IMG ori) {
 			}
 		}
 		for(int i = 0; i <= changed_1; i++) {
-			mat[pixels_1[i].i][pixels_1[i].j] = 255;
+			mat[pixels_1[i].i][pixels_1[i].j] = 0;
 		}
 
 		for(int i = 1; i < height - 1; i++) {
 			for(int j = 1; j < width - 1; j++) {
-				if(mat[i][j] == 0) {
-					int b_res = B_test(ori, i, j);
-					int a_res = A_test(ori, i, j);
+				if(mat[i][j] != 0) {
+					int b_res = B_test(dest, i, j);
+					int a_res = A_test(dest, i, j);
 					if((b_res >= 2 && b_res <= 6) &&
 						a_res == 1 &&
 						//P2 * P4 * P8
-						(mat[i - 1][j] + mat[i][j + 1] + mat[i][j - 1] > 0) &&
-						 mat[i - 1][j] + mat[i + 1][j] + mat[i][j - 1] > 0) {
+						(mat[i - 1][j] * mat[i][j + 1] * mat[i][j - 1] == 0) &&
+						 mat[i - 1][j] * mat[i + 1][j] * mat[i][j - 1] ==  0) {
 
 						//Cambio en el pixel
 						pixels_2[changed_2].i = i;
@@ -233,9 +233,11 @@ IMG skeletonize(IMG ori) {
 			}
 		}
 		for(int i = 0; i <= changed_2; i++) {
-			mat[pixels_2[i].i][pixels_2[i].j] = 255;
+			mat[pixels_2[i].i][pixels_2[i].j] = 0;
 		}
 	} while(changed_1 != 0 || changed_2 != 0);
+	free(pixels_1);
+	free(pixels_2);
 
 	return dest;
 }

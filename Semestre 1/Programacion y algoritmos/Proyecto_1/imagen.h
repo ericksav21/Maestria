@@ -6,6 +6,10 @@
 
 #include "memo.h"
 
+typedef struct pixel {
+	int i, j;
+} PIXEL;
+
 typedef struct img {
 	int **mat;
 	int width, height;
@@ -15,7 +19,7 @@ IMG create_img(int width, int height);
 
 IMG read_img(char *files_name);
 
-void print_img(IMG img);
+void print_img(IMG img, char *files_name);
 
 IMG copy_img(IMG img);
 
