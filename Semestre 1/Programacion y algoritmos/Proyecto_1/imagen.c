@@ -101,12 +101,16 @@ IMG resize_img(IMG img) {
 	int new_width = (maxX - minX + 1);
 	int new_height = (maxY - minY + 1);
 
-	res.width = new_width;
-	res.height = new_height;
-	res.mat = create_matrix(new_height, new_width, int);
+	res.width = new_width + 2;
+	res.height = new_height + 2;
+	res.mat = create_matrix(new_height + 2, new_width + 2, int);
 
-	for(int i = 0, x = minY; i < new_height; i++, x++) {
-		for(int j = 0, y = minX; j < new_width; j++, y++) {
+	for(int i = 0; i < res.width; i++) {
+		res.mat[0][i] = res.mat[res.width - 1][i] = 0;
+	}
+	for(int i = 1, x = minY; i < res.height - 1; i++, x++) {
+		res.mat[i][0] = res.mat[i][res.width - 1] = 0;
+		for(int j = 1, y = minX; j < res.width - 1; j++, y++) {
 			res.mat[i][j] = img.mat[x][y];
 		}
 	}
