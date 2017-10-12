@@ -5,15 +5,8 @@
 #include <math.h>
 
 #include "memo.h"
-
-typedef struct pixel {
-	int i, j;
-} PIXEL;
-
-typedef struct img {
-	int **mat;
-	int width, height;
-} IMG;
+#include "estructuras.h"
+#include "lista_ligada.h"
 
 IMG create_img(int width, int height);
 
@@ -28,6 +21,12 @@ void free_img(IMG obj);
 IMG resize_img(IMG img);
 
 void draw_line(IMG img, int x0, int y0, int x1, int y1);
+
+PIXEL find_leftmost_pxl(IMG img, int start_line);
+
+PIXEL find_rightmost_pxl(IMG img, int start_line);
+
+void get_lines(IMG img, IMG org, int ind);
 
 int A_test(IMG img, int i, int j);
 

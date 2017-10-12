@@ -122,7 +122,7 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
     int dx = x1 - x0;
     int dy = y1 - y0;
 
-    img.mat[x0][y0] = 255;
+    img.mat[x0][y0] = 50;
     //this.dibujaPunto(x0, y0);
     if (abs(dx) > abs(dy)) {  // pendiente < 1
         float m = (float) dy / (float) dx;
@@ -134,8 +134,7 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
         while (x0 != x1) {
             x0 += dx;
             y0 = round(m * x0 + b);
-            img.mat[x0][y0] = 255;
-            //this.dibujaPunto(x0, y0);
+            img.mat[x0][y0] = 50;
         }
     } else if (dy != 0) {                          // pendiente >= 1
         float m = (float) dx / (float) dy;
@@ -147,10 +146,141 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
         while (y0 != y1) {
             y0 += dy;
             x0 = round(m * y0 + b);
-            img.mat[x0][y0] = 255;
-            //this.dibujaPunto(x0, y0);
+            img.mat[x0][y0] = 50;
         }
     }
+}
+
+PIXEL find_leftmost_pxl(IMG img, int start_line) {
+	PIXEL res;
+	res.i = 0;
+	res.j = img.width;
+	int tol = 5;
+	for(int i = start_line; i < img.height; i++) {
+		//Encontrar el primer punto que esté más a la izquierda
+		int pj = 0;
+		for(int j = 0; j < img.width; j++) {
+			if(img.mat[i][j] != 0) {
+				pj = j;
+				break;
+			}
+		}
+		if(pj <= res.j) {
+			res.i = i;
+			res.j = pj;
+		}
+		else {
+			//Obtener la distancia con el mayor para detectar cambio
+			//De dirección
+			int dist = abs(res.j - pj);
+			if(dist > tol) {
+				break;
+			}
+		}
+	}
+
+	return res;
+}
+
+PIXEL find_rightmost_pxl(IMG img, int start_line) {
+	PIXEL res;
+	res.i = 0;
+	res.j = 0;
+	int tol = 5;
+	for(int i = start_line; i < img.height; i++) {
+		//Encontrar el primer punto que esté más a la izquierda
+		int pj = 0;
+		for(int j = img.width - 1; j >= 0; j--) {
+			if(img.mat[i][j] != 0) {
+				pj = j;
+				break;
+			}
+		}
+		if(pj >= res.j) {
+			res.i = i;
+			res.j = pj;
+		}
+		else {
+			//Obtener la distancia con el mayor para detectar cambio
+			//De dirección
+			int dist = abs(res.j - pj);
+			if(dist > tol) {
+				break;
+			}
+		}
+	}
+
+	return res;
+}
+
+NODEPTR add_neigh(NODEPTR root, int i, int j) {
+	PIXEL pxl;
+	pxl.i = i - 1;
+	pxl.j = j - 1;
+	root = add_node(root, pxl);
+
+	return root;
+}
+
+NODEPTR get_path(IMG img, int i, int j) {
+	NODEPTR neigh = NULL;
+	//Obtener vecinos
+	if(img.mat[i - 1][j - 1] != 0)
+		neigh = add_neigh(neigh, i - 1, j - 1);
+	if(img.mat[i - 1][j] != 0)
+		neigh = add_neigh(neigh, i - 1, j);
+	if(img.mat[i - 1][j + 1] != 0)
+		neigh = add_neigh(neigh, i - 1, j + 1);
+	if(img.mat[i][j + 1] != 0)
+		neigh = add_neigh(neigh, i, j + 1);
+	if(img.mat[i + 1][j + 1] != 0)
+		neigh = add_neigh(neigh, i + 1, j + 1);
+	if(img.mat[i + 1][j] != 0)
+		neigh = add_neigh(neigh, i + 1, j);
+	if(img.mat[i + 1][j - 1] != 0)
+		neigh = add_neigh(neigh, i + 1, j - 1);
+	if(img.mat[i][j - 1] != 0)
+		neigh = add_neigh(neigh, i, j - 1);
+
+	int len = list_size(neigh);
+	if(len > 1) {
+		for(int i = 0; i < len; i++) {
+			NODEPTR aux = get_path(img)
+		}
+	}
+}
+
+void get_lines(IMG img, IMG org, int ind) {
+	//Obtener el primer punto
+	PIXEL p1;
+	p1.i = 0;
+	for(int i = 0; i < img.height; i++) {
+		int band = 0;
+		for(int j = 0; j < img.width; j++) {
+			if(img.mat[i][j] != 0) {
+				p1.i = i;
+				p1.j = j;
+				band = 1;
+				break;
+			}
+		}
+		if(band)
+			break;
+	}
+	PIXEL p2 = find_leftmost_pxl(img, p1.i);
+	PIXEL p3 = find_rightmost_pxl(img, p2.i);
+	PIXEL p4 = find_leftmost_pxl(img, p3.i);
+	PIXEL p5 = find_rightmost_pxl(img, p4.i);
+
+	//Dibujar línea
+	draw_line(org, p1.i, p1.j, p2.i, p2.j);
+	draw_line(org, p2.i, p2.j, p3.i, p3.j);
+	draw_line(org, p3.i, p3.j, p4.i, p4.j);
+	draw_line(org, p4.i, p4.j, p5.i, p5.j);
+
+	char out_name[30];
+	sprintf(out_name, "out%d.pgm", ind);
+	print_img(org, out_name);
 }
 
 int A_test(IMG img, int i, int j) {
