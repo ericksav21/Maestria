@@ -1,6 +1,7 @@
 #ifndef LISTA_LIGADA_H
 #define LISTA_LIGADA_H
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "estructuras.h"
@@ -18,7 +19,13 @@ NODEPTR add_node(NODEPTR root, PIXEL pixel);
 
 NODEPTR free_node(NODEPTR node);
 
+NODEPTR list_copy(NODEPTR org, NODEPTR dest);
+
 int list_size(NODEPTR root);
+
+NODEPTR list_get(NODEPTR root, int n);
+
+void print_list(NODEPTR root);
 
 void free_list(NODEPTR root);
 

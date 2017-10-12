@@ -22,6 +22,10 @@ IMG resize_img(IMG img);
 
 void draw_line(IMG img, int x0, int y0, int x1, int y1);
 
+NODEPTR add_neigh(NODEPTR root, int i, int j);
+
+NODEPTR get_path(IMG img, int i, int j, int **mark);
+
 PIXEL find_leftmost_pxl(IMG img, int start_line);
 
 PIXEL find_rightmost_pxl(IMG img, int start_line);

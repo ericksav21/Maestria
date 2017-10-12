@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "imagen.h"
+#include "lista_ligada.h"
 
 int main(int argc, char **argv) {
 	/*char files_name[30];
@@ -15,8 +16,8 @@ int main(int argc, char **argv) {
 		IMG resized = resize_img(img);
 		IMG sk = skeletonize(resized);
 		//print_img(resized, "out1.pgm");
-		//print_img(sk, out_name);
-		get_lines(sk, resized, i);
+		print_img(sk, out_name);
+		//get_lines(sk, resized, i);
 
 		free_img(img);
 		free_img(sk);

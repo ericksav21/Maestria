@@ -151,6 +151,75 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
     }
 }
 
+NODEPTR add_neigh(NODEPTR root, int i, int j) {
+	PIXEL pxl;
+	pxl.i = i - 1;
+	pxl.j = j - 1;
+	root = add_node(root, pxl);
+
+	return root;
+}
+
+NODEPTR get_path(IMG img, int i, int j, int **mark) {
+	NODEPTR neigh = NULL;
+	NODEPTR lmax = NULL;
+	mark[i][j] = 1;
+
+	//Obtener vecinos
+	if(img.mat[i - 1][j - 1] != 0 && !mark[i - 1][j - 1])
+		neigh = add_neigh(neigh, i - 1, j - 1);
+	if(img.mat[i - 1][j] != 0 && !mark[i - 1][j])
+		neigh = add_neigh(neigh, i - 1, j);
+	if(img.mat[i - 1][j + 1] != 0 && !mark[i - 1][j + 1])
+		neigh = add_neigh(neigh, i - 1, j + 1);
+	if(img.mat[i][j + 1] != 0 && !mark[i][j + 1])
+		neigh = add_neigh(neigh, i, j + 1);
+	if(img.mat[i + 1][j + 1] != 0 && !mark[i + 1][j + 1])
+		neigh = add_neigh(neigh, i + 1, j + 1);
+	if(img.mat[i + 1][j] != 0 && !mark[i + 1][j])
+		neigh = add_neigh(neigh, i + 1, j);
+	if(img.mat[i + 1][j - 1] != 0 && !mark[i + 1][j - 1])
+		neigh = add_neigh(neigh, i + 1, j - 1);
+	if(img.mat[i][j - 1] != 0 && !mark[i][j - 1])
+		neigh = add_neigh(neigh, i, j - 1);
+
+	int len = list_size(neigh);
+	int max = -1;
+	if(len > 1) {
+		for(int i = 0; i < len; i++) {
+			NODEPTR vi = list_get(neigh, i);
+			NODEPTR aux = get_path(img, vi->pixel.i, vi->pixel.j, mark);
+			int aux_len = list_size(aux);
+
+			if(aux_len > max) {
+				max = aux_len;
+				lmax = list_copy(aux, lmax);
+			}
+		}
+		PIXEL pxl;
+		pxl.i = i;
+		pxl.j = j;
+		lmax = add_node(lmax, pxl);
+	}
+	else if(len == 1) {
+		NODEPTR vi = list_get(neigh, 0);
+		NODEPTR aux = get_path(img, vi->pixel.i, vi->pixel.j, mark);
+		lmax = list_copy(aux, lmax);
+		PIXEL pxl;
+		pxl.i = i;
+		pxl.j = j;
+		lmax = add_node(lmax, pxl);
+	}
+	else {
+		PIXEL pxl;
+		pxl.i = i;
+		pxl.j = j;
+		lmax = add_node(lmax, pxl);
+	}
+
+	return lmax;
+}
+
 PIXEL find_leftmost_pxl(IMG img, int start_line) {
 	PIXEL res;
 	res.i = 0;
@@ -211,43 +280,6 @@ PIXEL find_rightmost_pxl(IMG img, int start_line) {
 	}
 
 	return res;
-}
-
-NODEPTR add_neigh(NODEPTR root, int i, int j) {
-	PIXEL pxl;
-	pxl.i = i - 1;
-	pxl.j = j - 1;
-	root = add_node(root, pxl);
-
-	return root;
-}
-
-NODEPTR get_path(IMG img, int i, int j) {
-	NODEPTR neigh = NULL;
-	//Obtener vecinos
-	if(img.mat[i - 1][j - 1] != 0)
-		neigh = add_neigh(neigh, i - 1, j - 1);
-	if(img.mat[i - 1][j] != 0)
-		neigh = add_neigh(neigh, i - 1, j);
-	if(img.mat[i - 1][j + 1] != 0)
-		neigh = add_neigh(neigh, i - 1, j + 1);
-	if(img.mat[i][j + 1] != 0)
-		neigh = add_neigh(neigh, i, j + 1);
-	if(img.mat[i + 1][j + 1] != 0)
-		neigh = add_neigh(neigh, i + 1, j + 1);
-	if(img.mat[i + 1][j] != 0)
-		neigh = add_neigh(neigh, i + 1, j);
-	if(img.mat[i + 1][j - 1] != 0)
-		neigh = add_neigh(neigh, i + 1, j - 1);
-	if(img.mat[i][j - 1] != 0)
-		neigh = add_neigh(neigh, i, j - 1);
-
-	int len = list_size(neigh);
-	if(len > 1) {
-		for(int i = 0; i < len; i++) {
-			NODEPTR aux = get_path(img)
-		}
-	}
 }
 
 void get_lines(IMG img, IMG org, int ind) {
