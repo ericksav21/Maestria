@@ -26,11 +26,13 @@ NODEPTR add_neigh(NODEPTR root, int i, int j);
 
 NODEPTR get_path(IMG img, int i, int j, int **mark);
 
+IMG clean_skeleton(IMG img);
+
 PIXEL find_leftmost_pxl(IMG img, int start_line);
 
 PIXEL find_rightmost_pxl(IMG img, int start_line);
 
-void get_lines(IMG img, IMG org, int ind);
+void get_lines_1(IMG img, IMG org, int ind);
 
 int A_test(IMG img, int i, int j);
 

@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-c
-LFLAGS=-o
+CFLAGS=-g -c
+LFLAGS=-g -o
 EXEC=main
 CPPS:=$(wildcard *.c)
 OBJS:=$(patsubst %.c, %.o, $(CPPS))

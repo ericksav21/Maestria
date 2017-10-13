@@ -136,7 +136,8 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
             y0 = round(m * x0 + b);
             img.mat[x0][y0] = 50;
         }
-    } else if (dy != 0) {                          // pendiente >= 1
+    }
+    else if (dy != 0) {                          // pendiente >= 1
         float m = (float) dx / (float) dy;
         float b = x0 - m * y0;
         if(dy < 0)
@@ -153,71 +154,11 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
 
 NODEPTR add_neigh(NODEPTR root, int i, int j) {
 	PIXEL pxl;
-	pxl.i = i - 1;
-	pxl.j = j - 1;
+	pxl.i = i;
+	pxl.j = j;
 	root = add_node(root, pxl);
 
 	return root;
-}
-
-NODEPTR get_path(IMG img, int i, int j, int **mark) {
-	NODEPTR neigh = NULL;
-	NODEPTR lmax = NULL;
-	mark[i][j] = 1;
-
-	//Obtener vecinos
-	if(img.mat[i - 1][j - 1] != 0 && !mark[i - 1][j - 1])
-		neigh = add_neigh(neigh, i - 1, j - 1);
-	if(img.mat[i - 1][j] != 0 && !mark[i - 1][j])
-		neigh = add_neigh(neigh, i - 1, j);
-	if(img.mat[i - 1][j + 1] != 0 && !mark[i - 1][j + 1])
-		neigh = add_neigh(neigh, i - 1, j + 1);
-	if(img.mat[i][j + 1] != 0 && !mark[i][j + 1])
-		neigh = add_neigh(neigh, i, j + 1);
-	if(img.mat[i + 1][j + 1] != 0 && !mark[i + 1][j + 1])
-		neigh = add_neigh(neigh, i + 1, j + 1);
-	if(img.mat[i + 1][j] != 0 && !mark[i + 1][j])
-		neigh = add_neigh(neigh, i + 1, j);
-	if(img.mat[i + 1][j - 1] != 0 && !mark[i + 1][j - 1])
-		neigh = add_neigh(neigh, i + 1, j - 1);
-	if(img.mat[i][j - 1] != 0 && !mark[i][j - 1])
-		neigh = add_neigh(neigh, i, j - 1);
-
-	int len = list_size(neigh);
-	int max = -1;
-	if(len > 1) {
-		for(int i = 0; i < len; i++) {
-			NODEPTR vi = list_get(neigh, i);
-			NODEPTR aux = get_path(img, vi->pixel.i, vi->pixel.j, mark);
-			int aux_len = list_size(aux);
-
-			if(aux_len > max) {
-				max = aux_len;
-				lmax = list_copy(aux, lmax);
-			}
-		}
-		PIXEL pxl;
-		pxl.i = i;
-		pxl.j = j;
-		lmax = add_node(lmax, pxl);
-	}
-	else if(len == 1) {
-		NODEPTR vi = list_get(neigh, 0);
-		NODEPTR aux = get_path(img, vi->pixel.i, vi->pixel.j, mark);
-		lmax = list_copy(aux, lmax);
-		PIXEL pxl;
-		pxl.i = i;
-		pxl.j = j;
-		lmax = add_node(lmax, pxl);
-	}
-	else {
-		PIXEL pxl;
-		pxl.i = i;
-		pxl.j = j;
-		lmax = add_node(lmax, pxl);
-	}
-
-	return lmax;
 }
 
 PIXEL find_leftmost_pxl(IMG img, int start_line) {
@@ -282,7 +223,7 @@ PIXEL find_rightmost_pxl(IMG img, int start_line) {
 	return res;
 }
 
-void get_lines(IMG img, IMG org, int ind) {
+void get_lines_1(IMG img, IMG org, int ind) {
 	//Obtener el primer punto
 	PIXEL p1;
 	p1.i = 0;
@@ -406,4 +347,52 @@ IMG skeletonize(IMG ori) {
 	free(pixels_2);
 
 	return dest;
+}
+
+
+IMG skeletonize_2(IMG ori) {
+	IMG cpy = copy_img(ori);
+	
+	while(1) {
+		for(int i = 1; i < height - 1; i++) {
+			for(int j = 1; j < width - 1; j++) {
+				//Obtener vecinos
+				if(img.mat[i - 1][j - 1] != 0) {
+					neigh[pcnt].i = i - 1;
+					neigh[pcnt++].j = j - 1;
+				}
+				if(img.mat[i - 1][j] != 0) {
+					neigh[pcnt].i = i - 1;
+					neigh[pcnt++].j = j;
+				}
+				if(img.mat[i - 1][j + 1] != 0) {
+					neigh[pcnt].i = i - 1;
+					neigh[pcnt++].j = j + 1;
+				}
+				if(img.mat[i][j + 1] != 0) {
+					neigh[pcnt].i = i;
+					neigh[pcnt++].j = j + 1;
+				}
+				if(img.mat[i + 1][j + 1] != 0) {
+					neigh[pcnt].i = i + 1;
+					neigh[pcnt++].j = j + 1;
+				}
+				if(img.mat[i + 1][j] != 0) {
+					neigh[pcnt].i = i + 1;
+					neigh[pcnt++].j = j;
+				}
+				if(img.mat[i + 1][j - 1] != 0) {
+					neigh[pcnt].i = i + 1;
+					neigh[pcnt++].j = j - 1;
+				}
+				if(img.mat[i][j - 1] != 0) {
+					neigh[pcnt].i = i;
+					neigh[pcnt++].j = j - 1;
+				}
+			}
+		}
+
+		free_img(ori);
+		ori = copy_img(cpy);
+	}
 }

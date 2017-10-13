@@ -15,8 +15,8 @@ int main(int argc, char **argv) {
 		IMG img = read_img(files_name);
 		IMG resized = resize_img(img);
 		IMG sk = skeletonize(resized);
+		//print_img(sk, "sk.pgm");
 		//print_img(resized, "out1.pgm");
-		print_img(sk, out_name);
 		//get_lines(sk, resized, i);
 
 		free_img(img);

@@ -34,15 +34,12 @@ NODEPTR free_node(NODEPTR node) {
 }
 
 NODEPTR list_copy(NODEPTR org, NODEPTR dest) {
-	free_list(dest);
-	NODEPTR nxt_org = org;
-	NODEPTR nxt_dest = dest;
-	while(nxt_org) {
-		nxt_dest = add_node(nxt_dest, nxt_org->pixel);
-		nxt_org = nxt_org->next;
-		nxt_dest = nxt_dest->next;
-	}
+	//free_list(dest);
+	if(!org)
+		return NULL;
 
+	dest = add_node(dest, org->pixel);
+	dest->next = list_copy(org->next, dest->next);
 	return dest;
 }
 
@@ -81,16 +78,10 @@ void print_list(NODEPTR root) {
 }
 
 void free_list(NODEPTR root) {
-	if(root) {
-		NODEPTR nxt = root->next;
-		while(nxt->next) {
-			free_node(root);
-			root = nxt;
-			nxt = nxt->next;
-		}
-		if(nxt)
-			free_node(nxt);
-		if(root)
-			free_node(root);
+	NODEPTR tmp;
+	while (root != NULL) {
+		tmp = root;
+		root = root->next;
+		free(tmp);
 	}
 }
