@@ -1,5 +1,9 @@
 #include "imagen.h"
 
+double distance(PIXEL p1, PIXEL p2) {
+	return sqrt(pow(p2.j - p1.j, 2) + pow(p2.i - p1.i, 2));
+}
+
 IMG create_img(int width, int height) {
 	IMG res;
 	res.width = width;
@@ -152,13 +156,95 @@ void draw_line(IMG img, int x0, int y0, int x1, int y1) {
     }
 }
 
-NODEPTR add_neigh(NODEPTR root, int i, int j) {
-	PIXEL pxl;
-	pxl.i = i;
-	pxl.j = j;
-	root = add_node(root, pxl);
+void get_path(IMG ori, IMG *dest, int **mark, PIXEL p_ini, PIXEL **extreme_points, int *k) {
+	PIXEL neigh[8];
+	int cnt = 0, i = p_ini.i, j = p_ini.j;
+	if(ori.mat[i - 1][j - 1] /*&& !mark[i - 1][j - 1]*/) {
+		neigh[cnt].i = i - 1; neigh[cnt++].j = j - 1;
+	}
+	if(ori.mat[i - 1][j] /*&& !mark[i - 1][j]*/) {
+		neigh[cnt].i = i - 1; neigh[cnt++].j = j;
+	}
+	if(ori.mat[i - 1][j + 1] /*&& !mark[i - 1][j + 1]*/) {
+		neigh[cnt].i = i - 1; neigh[cnt++].j = j + 1;
+	}
+	if(ori.mat[i][j + 1] /*&& !mark[i][j + 1]*/) {
+		neigh[cnt].i = i; neigh[cnt++].j = j + 1;
+	}
+	if(ori.mat[i + 1][j + 1] /*&& !mark[i + 1][j + 1]*/) {
+		neigh[cnt].i = i + 1; neigh[cnt++].j = j + 1;
+	}
+	if(ori.mat[i + 1][j] /*&& !mark[i + 1][j]*/) {
+		neigh[cnt].i = i + 1; neigh[cnt++].j = j;
+	}
+	if(ori.mat[i + 1][j - 1] /*&& !mark[i + 1][j - 1]*/) {
+		neigh[cnt].i = i + 1; neigh[cnt++].j = j - 1;
+	}
+	if(ori.mat[i][j - 1] /*&& !mark[i][j - 1]*/) {
+		neigh[cnt].i = i; neigh[cnt++].j = j - 1;
+	}
 
-	return root;
+	mark[i][j] = 1;
+	if(cnt == 1) {
+		(*extreme_points) = (PIXEL *)realloc(*extreme_points, ((*k) + 1) * sizeof(PIXEL));
+		(*extreme_points)[(*k) - 1].i = neigh[0].i;
+		(*extreme_points)[(*k) - 1].j = neigh[0].j;
+		(*k)++;
+	}
+	for(int c = 0; c < cnt; c++) {
+		PIXEL aux;
+		aux.i = neigh[c].i; aux.j = neigh[c].j;
+		if(!mark[aux.i][aux.j]) {
+			get_path(ori, dest, mark, aux, extreme_points, k);
+		}
+	}
+	dest->mat[i][j] = 255;
+}
+
+IMG clean_skeletonize(IMG ori) {
+	IMG res = create_img(ori.width, ori.height);
+	PIXEL p_ini;
+	PIXEL *extreme_points = (PIXEL *)malloc(sizeof(PIXEL));
+	int **mark = create_matrix(ori.height, ori.width, int), k = 1;
+	for(int i = 0; i < ori.height; i++) {
+		for(int j = 0; j < ori.width; j++) {
+			mark[i][j] = 0;
+		}
+	}
+	for(int i = 1; i < ori.height - 1; i++) {
+		int band = 0;
+		for(int j = 1; j < ori.width - 1; j++) {
+			if(ori.mat[i][j]) {
+				p_ini.i = i;
+				p_ini.j = j;
+				band = 1;
+				break;
+			}
+		}
+		if(band)
+			break;
+	}
+
+	get_path(ori, &res, mark, p_ini, &extreme_points, &k);
+	PIXEL p1, p2;
+	double dist = -1;
+	for(int i = 0; i < k - 2; i++) {
+		for(int j = 1; j < k - 1; j++) {
+			double aux = distance(extreme_points[i], extreme_points[j]);
+			if(aux > dist) {
+				dist = aux;
+				p1.i = extreme_points[i].i; p1.j = extreme_points[i].j;
+				p2.i = extreme_points[j].i; p2.j = extreme_points[j].j;
+			}
+		}
+	}
+
+	draw_line(res, p1.i, p1.j, p2.i, p2.j);
+
+	free_matrix(mark);
+	free(extreme_points);
+
+	return res;
 }
 
 PIXEL find_leftmost_pxl(IMG img, int start_line) {
@@ -350,49 +436,39 @@ IMG skeletonize(IMG ori) {
 }
 
 
-IMG skeletonize_2(IMG ori) {
+/*IMG skeletonize_2(IMG ori) {
 	IMG cpy = copy_img(ori);
+	int neigh[8];
 	
 	while(1) {
 		for(int i = 1; i < height - 1; i++) {
 			for(int j = 1; j < width - 1; j++) {
 				//Obtener vecinos
-				if(img.mat[i - 1][j - 1] != 0) {
-					neigh[pcnt].i = i - 1;
-					neigh[pcnt++].j = j - 1;
-				}
-				if(img.mat[i - 1][j] != 0) {
-					neigh[pcnt].i = i - 1;
-					neigh[pcnt++].j = j;
-				}
-				if(img.mat[i - 1][j + 1] != 0) {
-					neigh[pcnt].i = i - 1;
-					neigh[pcnt++].j = j + 1;
-				}
-				if(img.mat[i][j + 1] != 0) {
-					neigh[pcnt].i = i;
-					neigh[pcnt++].j = j + 1;
-				}
-				if(img.mat[i + 1][j + 1] != 0) {
-					neigh[pcnt].i = i + 1;
-					neigh[pcnt++].j = j + 1;
-				}
-				if(img.mat[i + 1][j] != 0) {
-					neigh[pcnt].i = i + 1;
-					neigh[pcnt++].j = j;
-				}
-				if(img.mat[i + 1][j - 1] != 0) {
-					neigh[pcnt].i = i + 1;
-					neigh[pcnt++].j = j - 1;
-				}
-				if(img.mat[i][j - 1] != 0) {
-					neigh[pcnt].i = i;
-					neigh[pcnt++].j = j - 1;
-				}
+				neigh[0] = img.mat[i - 1][j - 1];
+				neigh[1] = img.mat[i - 1][j];
+				neigh[2] = img.mat[i - 1][j + 1];
+				neigh[3] = img.mat[i][j + 1];
+				neigh[4] = img.mat[i + 1][j + 1];
+				neigh[5] = img.mat[i + 1][j];
+				neigh[6] = img.mat[i + 1][j - 1];
+				neigh[7] = img.mat[i][j - 1];
+
+				//Aplicar filtros
+				int f1 = (!neigh[0] && !neigh[1] && !neigh[2] && neigh[4] && neigh[5] && neigh[6]);
+				int f2 = (!neigh[1] && !neigh[2] && !neigh[3] && neigh[5] && neigh[7]);
+				int f3 = (!neigh[2] && !neigh[3] && !neigh[4] && neigh[6] && neigh[7] && neigh[0]);
+				int f4 = (!neigh[3] && !neigh[4] && !neigh[5] && neigh[1] && neigh[7]);
+				int f5 = (!neigh[4] && !neigh[5] && !neigh[6] && neigh[0] && neigh[1] && neigh[2]);
+				int f6 = (!neigh[5] && !neigh[6] && !neigh[7] && neigh[1] && neigh[3]);
+				int f7 = (!neigh[0] && !neigh[6] && !neigh[7] && neigh[2] && neigh[3] && neigh[4]);
+				int f8 = (!neigh[0] && !neigh[1] && !neigh[7] && neigh[3] && neigh[5]);
+
+				if(f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8)
+					cpy.mat[i][j] = 255;
 			}
 		}
 
 		free_img(ori);
 		ori = copy_img(cpy);
 	}
-}
+}*/

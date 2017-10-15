@@ -8,6 +8,8 @@
 #include "estructuras.h"
 #include "lista_ligada.h"
 
+double distance(PIXEL p1, PIXEL p2);
+
 IMG create_img(int width, int height);
 
 IMG read_img(char *files_name);
@@ -22,11 +24,9 @@ IMG resize_img(IMG img);
 
 void draw_line(IMG img, int x0, int y0, int x1, int y1);
 
-NODEPTR add_neigh(NODEPTR root, int i, int j);
+void get_path(IMG ori, IMG *dest, int **mark, PIXEL p_ini, PIXEL **extreme_points, int *k);
 
-NODEPTR get_path(IMG img, int i, int j, int **mark);
-
-IMG clean_skeleton(IMG img);
+IMG clean_skeletonize(IMG ori);
 
 PIXEL find_leftmost_pxl(IMG img, int start_line);
 
