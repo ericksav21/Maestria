@@ -13,10 +13,10 @@ int main(int argc, char **argv) {
 	double **A = create_matrix(3, 3, double);
 	double **L = create_matrix(3, 3, double);
 	double **U = create_matrix(3, 3, double);
-	double *x = create_vector(3, double);
 	double *y = create_vector(3, double);
-	double *v_aux = create_vector(3, double);
 	double *sol = create_vector(m, double);
+	double *v_aux;
+	double *x;
 
 	for(int i = 0; i < m; i++) {
 		px[i] = ((double)i * M_PI) / (double)(m - 1);
@@ -28,11 +28,11 @@ int main(int argc, char **argv) {
 	v_aux = solve_mlower(L, y, 3, 3, tol);
 	x = solve_mupper(U, v_aux, 3, 3, tol);
 
-	printf("a: %lf, b: %lf, c: %lf\n", x[0], x[1], x[2]);
-	printf("Error: %g\n", get_err(A, x, y, 3, 3));
-
 	for(int i = 0; i < m; i++)
 		sol[i] = f(px[i], x[0], x[1], x[2]);
+
+	printf("a: %lf, b: %lf, c: %lf\n", x[0], x[1], x[2]);
+	printf("Error: %g\n", get_err(py, sol, m));
 
 	//Imprimir los resultados en un archivo
 	print_data(px, py, sol, m, "tabla.txt");

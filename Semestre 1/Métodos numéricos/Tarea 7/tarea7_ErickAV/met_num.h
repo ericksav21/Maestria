@@ -9,6 +9,8 @@
 
 void initialize(double *px, double *py, double **A, double *y, int m);
 
+double get_err(double *real, double *aprox, int m);
+
 double f(double x, double a, double b, double c);
 
 void print_data(double *px, double *py, double *sol, int m, char *files_name);

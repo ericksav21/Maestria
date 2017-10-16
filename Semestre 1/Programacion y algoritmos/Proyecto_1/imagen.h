@@ -10,34 +10,44 @@
 
 double distance(PIXEL p1, PIXEL p2);
 
-IMG create_img(int width, int height);
+int pixel_cmp(const void *a, const void *b);
 
-IMG read_img(char *files_name);
+IMG* create_img(int width, int height);
 
-void print_img(IMG img, char *files_name);
+IMG* read_img(char *files_name);
 
-IMG copy_img(IMG img);
+void print_img(IMG *img, char *files_name);
 
-void free_img(IMG obj);
+IMG* copy_img(IMG *img);
 
-IMG resize_img(IMG img);
+void free_img(IMG *obj);
 
-void draw_line(IMG img, int x0, int y0, int x1, int y1);
+IMG* resize_img(IMG *img);
 
-void get_path(IMG ori, IMG *dest, int **mark, PIXEL p_ini, PIXEL **extreme_points, int *k);
+void draw_line(IMG *img, int x0, int y0, int x1, int y1);
 
-IMG clean_skeletonize(IMG ori);
+void dfs(IMG *ori, PIXEL p_ini, NODEPTR *extreme_points, NODEPTR *path);
 
-PIXEL find_leftmost_pxl(IMG img, int start_line);
+//void get_path(IMG *ori, IMG *dest, int **mark, PIXEL p_ini, PIXEL **extreme_points, int *k, PIXEL **path, int *psz);
 
-PIXEL find_rightmost_pxl(IMG img, int start_line);
+IMG* clean_skeletonize(IMG *ori, PIXEL *p1, PIXEL *p2, NODEPTR *n_path);
 
-void get_lines_1(IMG img, IMG org, int ind);
+PIXEL get_leftmost_pixel(int *start_line, PIXEL *path, int psz);
 
-int A_test(IMG img, int i, int j);
+PIXEL get_rightmost_pixel(int *start_line, PIXEL *path, int psz);
 
-int B_test(IMG img, int i, int j);
+void get_lines(IMG *img, PIXEL p1, PIXEL p2, NODEPTR n_path, int ind);
 
-IMG skeletonize(IMG ori);
+double ortho_dist(PIXEL pt, PIXEL l_start, PIXEL l_end);
+
+void RDP(NODEPTR points, int sz, NODEPTR *outs, double eps);
+
+int A_test(IMG *img, int i, int j);
+
+int B_test(IMG *img, int i, int j);
+
+IMG* skeletonize(IMG *ori);
+
+void skeletonize_2(IMG *ori);
 
 #endif

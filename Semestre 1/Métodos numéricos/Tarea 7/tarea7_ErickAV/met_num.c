@@ -26,6 +26,15 @@ void initialize(double *px, double *py, double **A, double *y, int m) {
 	y[2] = nsy;
 }
 
+double get_err(double *real, double *aprox, int m) {
+	double err = 0.0;
+	for(int i = 0; i < m; i++) {
+		err += pow(aprox[i] - real[i], 2);
+	}
+
+	return sqrt(err);
+}
+
 double f(double x, double a, double b, double c) {
 	return a * x * x + b * x + c;
 }

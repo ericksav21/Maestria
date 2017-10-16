@@ -119,19 +119,6 @@ double norm_inf(double **A, int nr, int nc) {
 	return res;
 }
 
-double get_err(double **A, double *x, double *b, int nr, int nc) {
-	double *aux1 = create_vector(nc, double);
-	double *aux2 = create_vector(nc, double);
-	aux1 = mul_mat_vector(A, x, aux1, nr, nc);
-	aux2 = substract_vect(aux1, b, aux2, nc);
-	double err = norm_p(aux2, nc, 2);
-
-	free_vector(aux1);
-	free_vector(aux2);
-
-	return err;
-}
-
 /*---------- END MATRIX ZONE ----------*/
 
 /*---------- VECTOR ZONE ----------*/

@@ -52,9 +52,6 @@ double** mul_mat_mat(double **A, double **B, double **X, int n);
 /* Calcula la norma infinito de una matriz */
 double norm_inf(double **A, int nr, int nc);
 
-/* Calcula el error generado en el sistema Ax = b */
-double get_err(double **A, double *x, double *b, int nr, int nc);
-
 /*---------- END MATRIX ZONE ----------*/
 
 /*---------- VECTOR ZONE ----------*/

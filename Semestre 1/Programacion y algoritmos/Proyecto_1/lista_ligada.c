@@ -13,16 +13,36 @@ NODEPTR create_node(PIXEL pixel) {
 
 NODEPTR add_node(NODEPTR root, PIXEL pixel) {
 	//El nodo tiene al menos un elemento
-	if(root) {
-		NODEPTR nxt = root;
-		while(nxt->next)
-			nxt = nxt->next;
-		nxt->next = create_node(pixel);
+	NODEPTR new_node = create_node(pixel);
+	NODEPTR last = root;
+	if(root == NULL) {
+		root = new_node;
+		return root;
 	}
-	else {
-		root = create_node(pixel);
+	while(last->next != NULL) {
+		last = last->next;
 	}
+	last->next = new_node;
+	return root;
+}
 
+NODEPTR remove_node(NODEPTR root, int i) {
+	NODEPTR tmp = root, prev;
+	int k = 0;
+	if(tmp != NULL && k == i) {
+		root = tmp->next;
+		free_node(tmp);
+		return root;
+	}
+	while(tmp != NULL && k != i) {
+		prev = tmp;
+		tmp = tmp->next;
+		k++;
+	}
+	if(tmp == NULL)
+		return root;
+	prev->next = tmp->next;
+	free_node(tmp);
 	return root;
 }
 
@@ -65,6 +85,10 @@ NODEPTR list_get(NODEPTR root, int n) {
 		nxt = nxt->next;
 
 	return nxt;
+}
+
+int is_list_empty(NODEPTR root) {
+	return (list_size(root) == 0);
 }
 
 void print_list(NODEPTR root) {
