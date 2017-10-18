@@ -9,6 +9,11 @@
 #include "lista_ligada.h"
 
 /*
+	Genera un número aleatorio entre a y b.
+*/
+int rand_in_range(int a, int b);
+
+/*
 	Encuentra la distancia euclideana entre dos puntos.
 */
 double distance(PIXEL p1, PIXEL p2);
@@ -72,5 +77,20 @@ IMG* skeletonize(IMG *ori);
 	Obtiene los ángulos de un conjunto de rectas dado.
 */
 double* get_angles(NODEPTR lines);
+
+/*
+	Añade una lista de ángulos a un archivo.
+*/
+void append_angles(double *angles, int n, int ind, FILE *out);
+
+/*
+	Obtiene las longitudes de un conjunto de rectas dado.
+*/
+double* get_lens(NODEPTR lines);
+
+/*
+	Añade una lista de longitudes a un archivo.
+*/
+void append_lens(double *lens, int n, int ind, FILE *out);
 
 #endif

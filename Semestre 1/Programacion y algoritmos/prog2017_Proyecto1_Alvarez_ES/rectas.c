@@ -1,5 +1,9 @@
 #include "rectas.h"
 
+int rand_in_range(int a, int b) {
+	return rand() % (b - a + 1) + a;
+}
+
 double distance(PIXEL p1, PIXEL p2) {
 	return sqrt(pow(p2.j - p1.j, 2) + pow(p2.i - p1.i, 2));
 }
@@ -173,7 +177,6 @@ NODEPTR get_lines(IMG *img, PIXEL p1, PIXEL p2, NODEPTR n_path, int ind) {
 		lsz = list_size(outs);
 
 		if(lsz <= 8) {
-			//printf("%d\n", lsz);
 			break;
 		}
 		free_list(outs);
@@ -181,7 +184,9 @@ NODEPTR get_lines(IMG *img, PIXEL p1, PIXEL p2, NODEPTR n_path, int ind) {
 	}
 
 	for(int i = 0; i < lsz; i++) {
-		PIXEL p_end = list_get(outs, i)->pixel;
+		PIXEL *p_end = &list_get(outs, i)->pixel;
+		int r = rand_in_range(1, 3);
+		p_end->j += r;
 	}
 	PIXEL pm1, pm2, pm3;
 	int idx = 1;
@@ -196,10 +201,10 @@ NODEPTR get_lines(IMG *img, PIXEL p1, PIXEL p2, NODEPTR n_path, int ind) {
 	res = add_node(res, pm3);
 	res = add_node(res, p2);
 
-	/*draw_line(img, p1.i, p1.j, pm1.i, pm1.j);
+	draw_line(img, p1.i, p1.j, pm1.i, pm1.j);
 	draw_line(img, pm1.i, pm1.j, pm2.i, pm2.j);
 	draw_line(img, pm2.i, pm2.j, pm3.i, pm3.j);
-	draw_line(img, pm3.i, pm3.j, p2.i, p2.j);*/
+	draw_line(img, pm3.i, pm3.j, p2.i, p2.j);
 
 	free_list(outs);
 	free_list(discretized);
@@ -261,7 +266,6 @@ void RDP(NODEPTR points, int sz, NODEPTR *outs, double eps) {
 			(*outs) = add_node((*outs), p_aux);
 		}
 		for(int i = 0; i < list_size(r2); i++) {
-			//outs[i] = r2[j];
 			NODEPTR aux = list_get(r2, i);
 			PIXEL p_aux;
 			p_aux.i = aux->pixel.i;
@@ -377,13 +381,43 @@ double* get_angles(NODEPTR lines) {
 	int lsz = list_size(lines);
 	double *res = create_vector(lsz - 1, double);
 	int cnt = 0;
+	double val = 180.0 / M_PI;
 
 	for(int i = 1; i < lsz; i++) {
 		PIXEL p1 = list_get(lines, i - 1)->pixel;
 		PIXEL p2 = list_get(lines, i)->pixel;
-		double m = (double)(p2.i - p1.i) / (double)(p2.j - p1.j);
-		res[cnt++] = atan(m);
+		res[cnt++] = atan2((double)(p2.j - p1.j), (double)(p2.i - p1.i)) * val + 90.0;
 	}
 
 	return res;
+}
+
+void append_angles(double *angles, int n, int ind, FILE *out) {
+	fprintf(out, "%d ", ind);
+	for(int i = 0; i < n; i++) {
+		fprintf(out, "%lf ", angles[i]);
+	}
+	fprintf(out, "\n");
+}
+
+double* get_lens(NODEPTR lines) {
+	int lsz = list_size(lines);
+	double *res = create_vector(lsz - 1, double);
+	int cnt = 0;
+
+	for(int i = 1; i < lsz; i++) {
+		PIXEL p1 = list_get(lines, i - 1)->pixel;
+		PIXEL p2 = list_get(lines, i)->pixel;
+		res[cnt++] = distance(p1, p2);
+	}
+
+	return res;
+}
+
+void append_lens(double *lens, int n, int ind, FILE *out) {
+	fprintf(out, "%d ", ind);
+	for(int i = 0; i < n; i++) {
+		fprintf(out, "%lf ", lens[i]);
+	}
+	fprintf(out, "\n");
 }

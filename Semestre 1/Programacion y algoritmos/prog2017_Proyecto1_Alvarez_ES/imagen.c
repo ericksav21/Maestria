@@ -124,8 +124,7 @@ void draw_line(IMG *img, int x0, int y0, int x1, int y1) {
     int dy = y1 - y0;
 
     img->mat[x0][y0] = 150;
-    //this.dibujaPunto(x0, y0);
-    if (abs(dx) > abs(dy)) {  // pendiente < 1
+    if (abs(dx) > abs(dy)) {	// pendiente < 1
         double m = (double) dy / (double) dx;
         double b = y0 - m * x0;
         if(dx < 0)
@@ -138,7 +137,7 @@ void draw_line(IMG *img, int x0, int y0, int x1, int y1) {
             img->mat[x0][y0] = 150;
         }
     }
-    else if (dy != 0) {                          // pendiente >= 1
+    else if (dy != 0) {		// pendiente >= 1
         double m = (double) dx / (double) dy;
         double b = x0 - m * y0;
         if(dy < 0)
