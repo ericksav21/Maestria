@@ -12,26 +12,26 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
-	double tol = get_EPS();
+	double tol = sqrt(get_EPS());
 	int nr, nc, n;
 	double **A = read_matrix(argv[1], &nr, &nc);
 	double *b = read_vector(argv[2], &n);
 	double *x = create_vector(n, double);
 
-	printf("A:\n");
-	print_matrix(A, n, n);
-	printf("\nB:\n");
-	print_vector(b, n);
+	printf("Tamaño de la matriz: %d %d\n", n, n);
 
 	for(int i = 0; i < n; i++) {
 		x[i] = 1.0;
 	}
 
-	printf("\n");
-	x = conjugate_gradient(A, x, b, n, tol);
+	int iter;
+	x = conjugate_gradient(A, x, b, n, &iter, tol);
 
 	printf("\nX:\n");
 	print_vector(x, n);
+
+	printf("\nNúmero de iteraciones: %d\n", iter);
+	printf("Error: %g\n", get_err(A, x, b, n, n));
 
 	free_matrix(A);
 	free_vector(b);

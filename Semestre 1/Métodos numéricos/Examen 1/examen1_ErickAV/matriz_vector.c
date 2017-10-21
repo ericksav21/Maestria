@@ -29,7 +29,7 @@ double** copy_matrix(double **A, double **B, int nr, int nc) {
 void print_matrix(double **A, int nr, int nc) {
 	for(int i = 0; i < nr; i++) {
 		for (int j = 0; j < nc; j++) {
-			printf("%lf ", A[i][j]);
+			printf("%g ", A[i][j]);
 		}
 		printf("\n");
 	}
@@ -119,15 +119,18 @@ double norm_inf(double **A, int nr, int nc) {
 	return res;
 }
 
-double get_err(double **A, double *x, double *b, int nr, int nc) {
+double get_err(double **A, double *v, double vp, int nr, int nc) {
 	double *aux1 = create_vector(nc, double);
 	double *aux2 = create_vector(nc, double);
-	aux1 = mul_mat_vector(A, x, aux1, nr, nc);
-	aux2 = substract_vect(aux1, b, aux2, nc);
-	double err = norm_2(aux2, nc);
+	double *aux3 = create_vector(nc, double);
+	aux1 = mul_mat_vector(A, v, aux1, nr, nc);
+	aux2 = scale_vect(v, aux2, vp, nc);
+	aux3 = substract_vect(aux1, aux2, aux3, nc);
+	double err = norm_p(aux3, nc, 2);
 
 	free_vector(aux1);
 	free_vector(aux2);
+	free_vector(aux3);
 
 	return err;
 }
@@ -135,14 +138,6 @@ double get_err(double **A, double *x, double *b, int nr, int nc) {
 /*---------- END MATRIX ZONE ----------*/
 
 /*---------- VECTOR ZONE ----------*/
-
-double* copy_vector(double *v, double *x, int n) {
-	for(int i = 0; i < n; i++) {
-		x[i] = v[i];
-	}
-
-	return x;
-}
 
 void print_vector(double *vect, int n) {
 	for(int i = 0; i < n; i++) {
@@ -153,7 +148,7 @@ void print_vector(double *vect, int n) {
 
 double* add_vect(double *v1, double *v2, double *x, int sz) {
 	for(int i = 0; i < sz; i++) {
-		x[i] = v1[i] + v2[i];
+		x[i] = v2[i] + v1[i];
 	}
 
 	return x;
@@ -161,7 +156,7 @@ double* add_vect(double *v1, double *v2, double *x, int sz) {
 
 double* substract_vect(double *v1, double *v2, double *x, int sz) {
 	for(int i = 0; i < sz; i++) {
-		x[i] = v1[i] - v2[i];
+		x[i] = v2[i] - v1[i];
 	}
 
 	return x;
@@ -209,6 +204,15 @@ double* normalize(double *v, double *x, int sz) {
 	}
 
 	return x;
+}
+
+double vect_err(double *x1, double *x2, int n) {
+	double *aux = create_vector(n, double);
+	aux = substract_vect(x1, x2, aux, n);
+
+	free_vector(aux);
+
+	return norm_2(aux, n);
 }
 
 /*---------- END VECTOR ZONE ----------*/

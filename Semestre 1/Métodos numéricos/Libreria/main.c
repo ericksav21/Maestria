@@ -7,33 +7,31 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
-	double **A = create_matrix(3, 3, double);
-	double **L = create_matrix(3, 3, double);
-	double **Lt = create_matrix(3, 3, double);
-	double *b = create_vector(3, double);
-	double *x;
-	double *y;
+	double **A = create_matrix(5, 5, double);
+	double *x = create_vector(5, double), *b = create_vector(5, double);
+	int iter;
 
-	for(int i = 0; i < 3; i++)
-		for(int j = 0; j < 3; j++)
-			scanf("%lf", &A[i][j]);
-	printf("\nB:\n");
-	for(int i = 0; i < 3; i++)
-		scanf("%lf", &b[i]);
+	printf("A:\n");
+	double aux;
+	for(int i = 0; i < 5; i++) {
+		for(int j = 0; j < 5; j++) {
+			scanf("%lf", &aux);
+			A[i][j] = aux;
+		}
+	}
+	printf("\nb:\n");
+	for(int i = 0; i < 5; i++) {
+		scanf("%lf", &aux);
+		b[i] = aux;
+		x[i] = 0.0;
+	}
 
-	int res = cholesky(A, &L, &Lt, 3, 1e-7);
-	y = solve_mlower(L, b, 3, 3, 1e-7);
-	x = solve_mupper(Lt, y, 3, 3, 1e-7);
-
-	printf("\nx:\n");
-	print_vector(x, 3);
+	int res = Jacobi_Iter(A, b, x, 5, 50, &iter, 1e-7);
+	printf("\n");
+	print_vector(x, 5);
 
 	free_matrix(A);
-	free_matrix(L);
-	free_matrix(Lt);
-	free_vector(b);
 	free_vector(x);
-	free_vector(y);
-
+	free_vector(b);
 	return 0;
 }

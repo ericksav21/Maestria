@@ -52,14 +52,12 @@ double** mul_mat_mat(double **A, double **B, double **X, int n);
 /* Calcula la norma infinito de una matriz */
 double norm_inf(double **A, int nr, int nc);
 
-double get_err(double **A, double *x, double *b, int nr, int nc);
+/* Calcula el error generado en el sistema Ax = b */
+double get_err(double **A, double *v, double vp, int nr, int nc);
 
 /*---------- END MATRIX ZONE ----------*/
 
 /*---------- VECTOR ZONE ----------*/
-
-/* Hace una copia del vector v en el vector x ya inicializado */
-double* copy_vector(double *v, double *x, int n);
 
 /* Imprime un vector en consola */
 void print_vector(double *vect, int n);
@@ -86,6 +84,9 @@ double norm_p(double *x, int sz, int p);
 
 /* Normaliza el vector v usando la norma 2 y guarda el resultado en x */
 double* normalize(double *v, double *x, int sz);
+
+/* Computa ||x1 - x2|| */
+double vect_err(double *x1, double *x2, int n);
 
 /*---------- END VECTOR ZONE ----------*/
 
