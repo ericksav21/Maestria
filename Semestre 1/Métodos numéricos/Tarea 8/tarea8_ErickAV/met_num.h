@@ -9,6 +9,6 @@
 
 double get_EPS();
 
-double *conjugate_gradient(double **A, double *x0, double *b, int n, int *iter, double tol);
+double *conjugate_gradient(double **A, double *x0, double *b, int n, int *iter, double *err, double tol);
 
 #endif

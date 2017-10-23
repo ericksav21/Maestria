@@ -10,7 +10,7 @@ double get_EPS() {
 }
 
 
-double *conjugate_gradient(double **A, double *x0, double *b, int n, int *iter, double tol) {
+double *conjugate_gradient(double **A, double *x0, double *b, int n, int *iter, double *err, double tol) {
 	double *r = create_vector(n, double);
 	double *aux_1 = create_vector(n, double);
 	double *p = create_vector(n, double);
@@ -21,7 +21,6 @@ double *conjugate_gradient(double **A, double *x0, double *b, int n, int *iter, 
 
 	int k = 0;
 	while(k < 2 * n && norm_2(r, n) > tol) {
-		//printf("Norma: %g\n", norm_2(r, n));
 		double *w = create_vector(n, double);
 		double *x1 = create_vector(n, double);
 		double *r_1 = create_vector(n, double);
@@ -55,6 +54,7 @@ double *conjugate_gradient(double **A, double *x0, double *b, int n, int *iter, 
 		free_vector(w_s);
 	}
 	*iter = k;
+	*err = get_err(A, x0, b, n, n);
 
 	free_vector(aux_1);
 	free_vector(p);

@@ -25,13 +25,14 @@ int main(int argc, char **argv) {
 	}
 
 	int iter;
-	x = conjugate_gradient(A, x, b, n, &iter, tol);
+	double err;
+	x = conjugate_gradient(A, x, b, n, &iter, &err, tol);
 
 	printf("\nX:\n");
 	print_vector(x, n);
 
 	printf("\nNúmero de iteraciones: %d\n", iter);
-	printf("Error: %g\n", get_err(A, x, b, n, n));
+	printf("Error: %g\n", err);
 
 	free_matrix(A);
 	free_vector(b);

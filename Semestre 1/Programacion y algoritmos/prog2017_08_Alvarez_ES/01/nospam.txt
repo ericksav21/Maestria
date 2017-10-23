@@ -1,0 +1,17 @@
+Register now for the next free ACM Learning Webinar, "Reactive Microsystems—The Evolution of Microservices at Scale," presented on Wednesday, November 15 at 12 PM ET by Jonas Bonér, Founder and CTO of Lightbend (formerly known as Typesafe), inventor of the Akka project, and ACM Queue Case Study contributor. Viktor Klang, Deputy CTO at Lightbend, will moderate the talk.
+
+Leave your comments and questions with our speaker now and any time before the live event on ACM's Discourse Page. And check out the page after the webcast for extended discussion with your peers in the computing community, as well as further resources on Microservices and Reactive Microsystems.
+
+(If you'd like to attend but can't make it to the virtual event, you still need to register to receive a recording of the webinar when it becomes available.)
+
+Note: You can stream this and all ACM Learning Webinars on your mobile device, including smartphones and tablets.
+
+Everyone is talking about Microservices and there is more confusion than ever about what the promise of Microservices really means—and how to deliver on it. To address this situation, we will explore Microservices from first principles—distilling their essence and putting them in their true context: Distributed Systems.
+
+Distributed Systems is very hard and we—system developers—have been spoiled by centralized servers for too long. Slicing an existing system into various REST services and wiring them back together again with synchronous protocols and traditional enterprise tools—designed for Monolithic architectures—will set us up for failure.
+
+As if that wasn’t enough, we can’t only think about systems of Microservices. In order to make each Microservice scalable and resilient in and of itself, we have to design each Microservice as a Distributed System—a "Microsystem"—architected from the ground up using the Reactive principles and Events-first Domain Driven Design.
+
+In this talk I’ll walk you through the evolution of such a system, discussing what you need to know in order to design a Scalable Microservices Architecture.
+
+Duration: 60 minutes (including audience Q&A).
