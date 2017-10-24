@@ -1,8 +1,23 @@
-CC=g++
-CFLAGS=-I. -g
+CPP=g++
+CFLAGS=-w -c
+LFLAGS=
+EXEC=main
+CPPS:=$(wildcard *.cpp)
+OBJS:=$(patsubst %.cpp,%.o,$(CPPS))
+OBJDIR:=obj
+DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
 
-main: main.o separador.o clasificador.o memo.o
-	$(CC) -o main main.o separador.o clasificador.o memo.o -I.
+$(EXEC): $(DIROBJS)
+	$(CPP) $(LFLAGS) -o $@ $(DIROBJS)
+
+$(OBJDIR)/%.o: %.cpp
+	$(CPP) $(CFLAGS) $< -o $@
+
+debug:
+	$(MAKE) CFLAGS="-g -std=c++11 -w -c" LFLAGS="-g -std=c++11"
+
+release:
+	$(MAKE) CFLAGS="-O2 -std=c++11 -w -c" LFLAGS="-O2 -std=c++11"
 
 clean:
-	rm -f main *.o
+	rm -f $(EXEC) $(DIROBJS)

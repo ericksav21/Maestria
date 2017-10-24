@@ -26,6 +26,40 @@ REG new_reg(string str, int freq_s, int freq_ns) {
 	return reg;
 }
 
+bool is_number(char c) {
+	int aux = (int)c;
+	if(aux >= 48 && aux <= 57)
+		return true;
+	return false;
+}
+
+bool is_letter(char c) {
+	int aux = (int)c;
+	if((aux >= 97 && aux <= 122) || (aux >= 65 && aux <= 90))
+		return true;
+	return false;
+}
+
+bool is_char_valid(char c) {
+	if(is_number(c))
+		return true;
+	else if(is_letter(c))
+		return true;
+
+	return false;
+}
+
+string validate_str(string word) {
+	string res = "";
+	for(int i = 0; i < word.size(); i++) {
+		if(is_char_valid(word[i])) {
+			res += word[i];
+		}
+	}
+
+	return res;
+}
+
 string to_lower(string str) {
 	for(int i = 0; i < str.size(); i++) {
 		str[i] = tolower(str[i]);
@@ -45,6 +79,7 @@ vector<WORD> read_from_file(string files_name) {
 	string str;
 	while(file >> str) {
 		str = to_lower(str);
+		str = validate_str(str);
 		int ind = in_dict(dict, str);
 		if(ind == -1) {
 			dict.push_back(new_word(str));

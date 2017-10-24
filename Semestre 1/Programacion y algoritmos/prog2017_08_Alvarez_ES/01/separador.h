@@ -25,6 +25,14 @@ WORD new_word(string str);
 
 REG new_reg(string str, int freq_s, int freq_ns);
 
+bool is_number(char c);
+
+bool is_letter(char c);
+
+bool is_char_valid(char c);
+
+string validate_str(string word);
+
 string to_lower(string str);
 
 vector<WORD> read_from_file(string files_name);
