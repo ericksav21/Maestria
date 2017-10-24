@@ -40,6 +40,46 @@ void print_img(int **img, int width, int height, string files_name) {
 	file.close();
 }
 
+vector<POINT> get_neighbors(int **img, int width, int height, int i, int j) {
+	POINT p_aux;
+	vector<POINT> neigh;
+
+	if(i - 1 >= 0 && j - 1 >= 0 && img[i - 1][j - 1]) {
+		p_aux.i = i - 1; p_aux.j = j - 1;
+		neigh.push_back(p_aux);
+	}
+	if(i - 1 >= 0 && img[i - 1][j]) {
+		p_aux.i = i - 1; p_aux.j = j;
+		neigh.push_back(p_aux);
+	}
+	if(i - 1 >= 0 && j + 1 < width && img[i - 1][j + 1]) {
+		p_aux.i = i - 1; p_aux.j = j + 1;
+		neigh.push_back(p_aux);
+	}
+	if(j + 1 < width && img[i][j + 1]) {
+		p_aux.i = i; p_aux.j = j + 1;
+		neigh.push_back(p_aux);
+	}
+	if(i + 1 < height && j + 1 < width && img[i + 1][j + 1]) {
+		p_aux.i = i + 1; p_aux.j = j + 1;
+		neigh.push_back(p_aux);
+	}
+	if(i + 1 < height && img[i + 1][j]) {
+		p_aux.i = i + 1; p_aux.j = j;
+		neigh.push_back(p_aux);
+	}
+	if(i + 1 < height && j - 1 >= 0 && img[i + 1][j - 1]) {
+		p_aux.i = i + 1; p_aux.j = j - 1;
+		neigh.push_back(p_aux);
+	}
+	if(j - 1 >= 0 && img[i][j - 1]) {
+		p_aux.i = i; p_aux.j = j - 1;
+		neigh.push_back(p_aux);
+	}
+
+	return neigh;
+}
+
 int bfs(int **img, int width, int height, int ii, int jj, int **visited) {
 	int cnt = 1;
 	queue<POINT> q;
@@ -52,43 +92,8 @@ int bfs(int **img, int width, int height, int ii, int jj, int **visited) {
 		POINT p_act = q.front();
 		q.pop();
 
-		vector<POINT> neigh;
-		POINT p_aux;
 		int i = p_act.i, j = p_act.j;
-		//cout << 1 << endl;
-		if(i - 1 >= 0 && j - 1 >= 0 && img[i - 1][j - 1]) {
-			p_aux.i = i - 1; p_aux.j = j - 1;
-			neigh.push_back(p_aux);
-		}
-		if(i - 1 >= 0 && img[i - 1][j]) {
-			p_aux.i = i - 1; p_aux.j = j;
-			neigh.push_back(p_aux);
-		}
-		if(i - 1 >= 0 && j + 1 < width && img[i - 1][j + 1]) {
-			p_aux.i = i - 1; p_aux.j = j + 1;
-			neigh.push_back(p_aux);
-		}
-		if(j + 1 < width && img[i][j + 1]) {
-			p_aux.i = i; p_aux.j = j + 1;
-			neigh.push_back(p_aux);
-		}
-		if(i + 1 < height && j + 1 < width && img[i + 1][j + 1]) {
-			p_aux.i = i + 1; p_aux.j = j + 1;
-			neigh.push_back(p_aux);
-		}
-		if(i + 1 < height && img[i + 1][j]) {
-			p_aux.i = i + 1; p_aux.j = j;
-			neigh.push_back(p_aux);
-		}
-		if(i + 1 < height && j - 1 >= 0 && img[i + 1][j - 1]) {
-			p_aux.i = i + 1; p_aux.j = j - 1;
-			neigh.push_back(p_aux);
-		}
-		if(j - 1 >= 0 && img[i][j - 1]) {
-			p_aux.i = i; p_aux.j = j - 1;
-			neigh.push_back(p_aux);
-		}
-		//cout << 2 << endl;
+		vector<POINT> neigh = get_neighbors(img, width, height, i, j);	
 
 		for(int c = 0; c < neigh.size(); c++) {
 			POINT p_i = neigh[c];
