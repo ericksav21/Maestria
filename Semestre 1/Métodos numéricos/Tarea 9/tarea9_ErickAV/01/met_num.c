@@ -9,25 +9,11 @@ double get_EPS() {
     return Eps;
 }
 
-int read_points(char *files_name, double *x, double *y, int n) {
-	FILE *in = fopen(files_name, "r");
-	if(!in) {
-		printf("No se pudo abrir el archivo.\n");
-		return 0;
-	}
-	for(int i = 0; i < n + 1; i++) {
-		fscanf(in, "%lf %lf", &x[i], &y[i]);
-	}
-
-	fclose(in);
-	return 1;
-}
-
 double **create_matrix_vander(double *xs, int n) {
-	double **mat = create_matrix(n + 1, n + 1, double);
-	for(int i = 0; i < n + 1; i++) {
+	double **mat = create_matrix(n, n, double);
+	for(int i = 0; i < n; i++) {
 		mat[i][0] = 1;
-		for(int j = 1; j < n + 1; j++) {
+		for(int j = 1; j < n; j++) {
 			mat[i][j] = pow(xs[i], j);
 		}
 	}
@@ -153,17 +139,41 @@ int factorize_LU(double **A, double ***L, double ***U, int n, double tol) {
 }
 
 double* solve_system(double *A, double *b, int n, double tol) {
-	double **L = create_matrix(n + 1, n + 1, double);
-	double **U = create_matrix(n + 1, n + 1, double);
+	double **L = create_matrix(n, n, double);
+	double **U = create_matrix(n, n, double);
 	double *x, *y;
 
-	factorize_LU(A, &L, &U, n + 1, tol);
-	y = solve_mlower(L, b, n + 1, n + 1, tol);
-	x = solve_mlower(U, y, n + 1, n + 1, tol);
+	factorize_LU(A, &L, &U, n, tol);
+	y = solve_mlower(L, b, n, n, tol);
+	x = solve_mupper(U, y, n, n, tol);
 
 	free_vector(y);
 	free_matrix(L);
 	free_matrix(U);
 
 	return x;
+}
+
+double evaluate_pol(double x, double *c, int n) {
+	double res = 0.0;
+	for(int i = 0; i < n; i++) {
+		res += (c[i] * pow(x, i));
+	}
+
+	return res;
+}
+
+void generate(double *x, double *c, int n, char *files_name) {
+	int N = 4 * n;
+	double dx = (x[n - 1] - x[0]) / (double)N;
+	FILE *out = fopen(files_name, "w");
+
+	for(int i = 0; i <= N; i++) {
+		double xp = x[0] + i * dx;
+		double pn = evaluate_pol(xp, c, n);
+
+		fprintf(out, "%lf %lf\n", xp, pn);
+	}
+
+	fclose(out);
 }

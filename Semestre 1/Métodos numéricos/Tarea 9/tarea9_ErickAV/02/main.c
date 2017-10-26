@@ -14,7 +14,6 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
-	double tol = sqrt(get_EPS());
 	char files_name[30];
 	int nr, nc;
 
@@ -29,15 +28,10 @@ int main(int argc, char **argv) {
 		y[i] = data[i][1];
 	}
 
-	double **mat = create_matrix_vander(x, nr);
-	double *c = solve_system(mat, y, nr, tol);
-	printf("Err: %g\n", get_err(mat, c, y, nr, nr));
-	generate(x, c, nr, "tabla.txt");
+	generate(x, y, nr, "tabla.txt");
 
 	free_vector(x);
 	free_vector(y);
-	free_vector(c);
-	free_matrix(mat);
 	free_matrix(data);
 
 	return 0;
