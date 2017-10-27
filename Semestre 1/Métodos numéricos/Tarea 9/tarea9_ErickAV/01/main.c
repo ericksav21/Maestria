@@ -31,7 +31,6 @@ int main(int argc, char **argv) {
 
 	double **mat = create_matrix_vander(x, nr);
 	double *c = solve_system(mat, y, nr, tol);
-	printf("Err: %g\n", get_err(mat, c, y, nr, nr));
 	generate(x, c, nr, "tabla.txt");
 
 	free_vector(x);

@@ -9,6 +9,12 @@
 
 double get_EPS();
 
-double prod(double *x, double xc, int i);
+double newton(double *x, double xc, int i);
+
+double** differences(double *x, double *y, int n);
+
+double evaluate_pol(double *x, double **A, double xc, int n);
+
+void generate(double *x, double *y, int n, char *files_name);
 
 #endif

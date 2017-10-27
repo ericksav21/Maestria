@@ -29,6 +29,7 @@ double evaluate_pol(double *x, double *y, double xc, int n) {
 }
 
 void generate(double *x, double *y, int n, char *files_name) {
+	printf("Generando puntos de interpolación...\n");
 	int N = 4 * n;
 	double dx = (x[n - 1] - x[0]) / (double)N;
 	FILE *out = fopen(files_name, "w");
@@ -41,4 +42,5 @@ void generate(double *x, double *y, int n, char *files_name) {
 	}
 
 	fclose(out);
+	printf("Puntos generados en el archivo %s\n", files_name);
 }

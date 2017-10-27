@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 		y[i] = data[i][1];
 	}
 
-	//generate(x, y, nr, "tabla.txt");
+	generate(x, y, nr, "tabla.txt");
 
 	free_vector(x);
 	free_vector(y);

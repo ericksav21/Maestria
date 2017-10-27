@@ -138,7 +138,7 @@ int factorize_LU(double **A, double ***L, double ***U, int n, double tol) {
 	return 1;
 }
 
-double* solve_system(double *A, double *b, int n, double tol) {
+double* solve_system(double **A, double *b, int n, double tol) {
 	double **L = create_matrix(n, n, double);
 	double **U = create_matrix(n, n, double);
 	double *x, *y;
@@ -164,6 +164,7 @@ double evaluate_pol(double x, double *c, int n) {
 }
 
 void generate(double *x, double *c, int n, char *files_name) {
+	printf("Generando puntos de interpolación...\n");
 	int N = 4 * n;
 	double dx = (x[n - 1] - x[0]) / (double)N;
 	FILE *out = fopen(files_name, "w");
@@ -176,4 +177,5 @@ void generate(double *x, double *c, int n, char *files_name) {
 	}
 
 	fclose(out);
+	printf("Puntos generados en el archivo %s\n", files_name);
 }

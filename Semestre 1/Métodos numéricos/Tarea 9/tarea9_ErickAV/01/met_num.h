@@ -17,7 +17,7 @@ double *solve_mupper(double **A, double *b, int nr, int nc, double tol);
 
 int factorize_LU(double **A, double ***L, double ***U, int n, double tol);
 
-double* solve_system(double *A, double *b, int n, double tol);
+double* solve_system(double **A, double *b, int n, double tol);
 
 double evaluate_pol(double x, double *c, int n);
 

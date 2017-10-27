@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.3)  22 OCT 2017 15:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.2)  26 OCT 2017 18:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -400,42 +400,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
-Package: subfig 2005/06/28 ver: 1.3 subfig package
-
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
-
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen160
-\captionmargin@=\dimen161
-\captionwidth=\dimen162
-\caption@tempdima=\dimen163
-\caption@indent=\dimen164
-\caption@parindent=\dimen165
-\caption@hangindent=\dimen166
-)
-\c@ContinuedFloat=\count119
-)
-\c@KVtest=\count120
-\sf@farskip=\skip46
-\sf@captopadj=\dimen167
-\sf@capskip=\skip47
-\sf@nearskip=\skip48
-\c@subfigure=\count121
-\c@subfigure@save=\count122
-\c@lofdepth=\count123
-\c@subtable=\count124
-\c@subtable@save=\count125
-\c@lotdepth=\count126
-\sf@top=\skip49
-\sf@bottom=\skip50
-)
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count127
+\c@float@type=\count119
 \float@exts=\toks32
 \float@box=\box39
 \@float@everytoks=\toks33
@@ -759,11 +726,11 @@ Language: spanish.ldf 2016/01/15 v5.0o Spanish support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2016/02/24 3.9q Babel common definitions
-\babel@savecnt=\count128
-\U@D=\dimen168
+\babel@savecnt=\count120
+\U@D=\dimen160
 )
 \es@quottoks=\toks36
-\es@quotdepth=\count129
+\es@quotdepth=\count121
 Package babel Info: Making " an active character on input line 533.
 Package babel Info: Making . an active character on input line 634.
 Package babel Info: Making < an active character on input line 679.
@@ -776,42 +743,63 @@ Package: amsthm 2015/03/04 v2.20.2
 \thm@headfont=\toks39
 \thm@notefont=\toks40
 \thm@headpunct=\toks41
-\thm@preskip=\skip51
-\thm@postskip=\skip52
-\thm@headsep=\skip53
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
 \dth@everypar=\toks42
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen161
+\captionmargin@=\dimen162
+\captionwidth=\dimen163
+\caption@tempdima=\dimen164
+\caption@indent=\dimen165
+\caption@parindent=\dimen166
+\caption@hangindent=\dimen167
+)
+\c@ContinuedFloat=\count122
+Package caption Info: float package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+\c@subfigure=\count123
+\c@subtable=\count124
 ) (./Reporte.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
 \openout1 = `Reporte.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-
-ABD: EveryShipout initializing macros
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+ ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count130
-\scratchdimen=\dimen169
+\scratchcounter=\count125
+\scratchdimen=\dimen168
 \scratchbox=\box41
-\nofMPsegments=\count131
-\nofMParguments=\count132
+\nofMPsegments=\count126
+\nofMParguments=\count127
 \everyMPshowfont=\toks43
-\MPscratchCnt=\count133
-\MPscratchDim=\dimen170
-\MPnumerator=\count134
-\makeMPintoPDFobject=\count135
+\MPscratchCnt=\count128
+\MPscratchDim=\dimen169
+\MPnumerator=\count129
+\makeMPintoPDFobject=\count130
 \everyMPtoPDFconversion=\toks44
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -861,81 +849,137 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+LaTeX Info: Redefining \. on input line 18.
+LaTeX Info: Redefining \% on input line 18.
 Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: subfig package v1.3 is loaded.
-Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \. on input line 17.
-LaTeX Info: Redefining \% on input line 17.
 
 <cimat_logo.png, id=4, 250.9375pt x 160.6pt>
 File: cimat_logo.png Graphic file (type png)
  <use cimat_logo.png>
-Package pdftex.def Info: cimat_logo.png used on input line 19.
+Package pdftex.def Info: cimat_logo.png used on input line 20.
 (pdftex.def)             Requested size: 150.56364pt x 96.36073pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 51.
+LaTeX Font Info:    Try loading font information for U+msa on input line 55.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 51.
+LaTeX Font Info:    Try loading font information for U+msb on input line 55.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 55--56
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
 
-<E1.png, id=5, 1272.755pt x 171.64125pt>
+<E1.png, id=5, 297.11pt x 152.57pt>
 File: E1.png Graphic file (type png)
  <use E1.png>
-Package pdftex.def Info: E1.png used on input line 61.
-(pdftex.def)             Requested size: 509.09299pt x 68.65527pt.
+Package pdftex.def Info: E1.png used on input line 68.
+(pdftex.def)             Requested size: 119.50095pt x 61.3668pt.
 
-Overfull \hbox (19.00302pt too wide) in paragraph at lines 61--62
- [][] 
- []
-
-<E2.png, id=6, 1855.93375pt x 263.98625pt>
+<E2.png, id=6, 222.8325pt x 578.16pt>
 File: E2.png Graphic file (type png)
  <use E2.png>
-Package pdftex.def Info: E2.png used on input line 68.
-(pdftex.def)             Requested size: 371.18018pt x 52.79631pt.
- [1
+Package pdftex.def Info: E2.png used on input line 73.
+(pdftex.def)             Requested size: 99.58311pt x 258.37872pt.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./cimat_logo.png (PNG copy
-)> <./E1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
+Overfull \hbox (49.79535pt too wide) in paragraph at lines 66--76
+ []$[]$$[]$ 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
-[2 <./E2.png>] (./Reporte.aux
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./cimat_logo.png (PNG copy
+)>] <Grafica1.png, id=20, 770.88pt x 587.19376pt>
+File: Grafica1.png Graphic file (type png)
+ <use Grafica1.png>
+Package pdftex.def Info: Grafica1.png used on input line 85.
+(pdftex.def)             Requested size: 159.3336pt x 121.36107pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+[2 <./E1.png> <./E2.png> <./Grafica1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
+
+ []
+
+File: E1.png Graphic file (type png)
+<use E1.png>
+Package pdftex.def Info: E1.png used on input line 104.
+(pdftex.def)             Requested size: 89.62799pt x 46.0251pt.
+ <E3.png, id=26, 222.8325pt x 585.18625pt>
+File: E3.png Graphic file (type png)
+ <use E3.png>
+Package pdftex.def Info: E3.png used on input line 109.
+(pdftex.def)             Requested size: 74.68924pt x 196.13905pt.
+
+Overfull \hbox (49.79535pt too wide) in paragraph at lines 102--112
+ []$[]$$[]$ 
+ []
+
+[3 <./E3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
+
+ []
+
+File: E1.png Graphic file (type png)
+<use E1.png>
+Package pdftex.def Info: E1.png used on input line 139.
+(pdftex.def)             Requested size: 89.62799pt x 46.0251pt.
+ <E4.png, id=32, 215.80624pt x 584.1825pt>
+File: E4.png Graphic file (type png)
+ <use E4.png>
+Package pdftex.def Info: E4.png used on input line 144.
+(pdftex.def)             Requested size: 74.68924pt x 202.17606pt.
+
+Overfull \hbox (49.79535pt too wide) in paragraph at lines 137--147
+ []$[]$$[]$ 
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
+
+ []
+
+[5 <./E4.png>] [6] (./Reporte.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) ) 
 Here is how much of TeX's memory you used:
- 14658 strings out of 493029
- 277149 string characters out of 6136234
- 324053 words of memory out of 5000000
- 17914 multiletter control sequences out of 15000+600000
- 10102 words of font info for 38 fonts, out of 8000000 for 9000
+ 14586 strings out of 493029
+ 275909 string characters out of 6136234
+ 322339 words of memory out of 5000000
+ 17841 multiletter control sequences out of 15000+600000
+ 10402 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,10n,54p,611b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,8n,54p,736b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb>
-Output written on Reporte.pdf (2 pages, 192676 bytes).
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb>
+Output written on Reporte.pdf (6 pages, 206595 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
