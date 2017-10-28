@@ -22,6 +22,7 @@ int main(int argc, char **argv) {
 	double **data;
 
 	data = read_matrix(files_name, &nr, &nc);
+
 	double *x = create_vector(nr, double);
 	double *y = create_vector(nr, double);
 	for(int i = 0; i < nr; i++) {
