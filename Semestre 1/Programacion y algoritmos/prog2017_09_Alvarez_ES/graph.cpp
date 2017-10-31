@@ -1,17 +1,5 @@
 #include "graph.h"
 
-/*void fill_graph(vector<vector<Node> > &adj) {
-	adj[1].pb(mp(2, 7));
-	adj[1].pb(mp(4, 2));
-	adj[2].pb(mp(4, 2));
-	adj[2].pb(mp(3, 1));
-	adj[3].pb(mp(5, 5));
-	adj[4].pb(mp(2, 3));
-	adj[4].pb(mp(3, 8));
-	adj[4].pb(mp(5, 5));
-	adj[5].pb(mp(3, 4));
-}*/
-
 int rand_in_range(int a, int b) {
 	return rand() % (b - a + 1) + a;
 }
@@ -21,7 +9,7 @@ void fill_graph(vector<vector<Node> > &adj) {
 	for(int i = 1; i < adj.size(); i++) {
 		for(int j = i + 1; j < adj.size(); j++) {
 			int p = rand_in_range(1, 100);
-			//P(2/3) de haber conexión
+			//P(A) de haber conexión
 			if(p > 60) {
 				int w = rand_in_range(1, 25);
 				adj[i].pb(mp(j, w));

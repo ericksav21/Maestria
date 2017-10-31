@@ -79,30 +79,51 @@ void write_text(cairo_t *cr, vector<CIRCLE> circles) {
 	}
 }
 
-void write_weight(cairo_t *cr, int x1, int y1, int x2, int y2, int w, map<pair<int, int>, bool> &mmap) {
-	int xm = (x1 + x2) / 2, ym = (y1 + y2) / 2;
+void write_weight(cairo_t *cr, int x1, int y1, int x2, int y2, int w) {
+	int tam = 25;
 	char str[5];
 	sprintf(str, "%d", w);
 	int ax = 0, ay = 0;
 	int dx = x2 - x1, dy = y2 - y1;
+	double theta = atan2(dy, dx);
+	int xm = x1 + tam * cos(theta);
+	int ym = y1 + tam * sin(theta);
 	double m = (double)(abs(dy)) / (double)(abs(dx));
-	if(m >= 1) {
-		pair<int, int> pp = mp(xm, ym);
-		ax = (mmap.count(pp) ? ax - 20 : ax + 20);
-		mmap.insert(mp(pp, true));
-	}
-	else {
-		pair<int, int> pp = mp(xm, ym);
-		ay = (mmap.count(pp) ? ay + 10 : ay - 10);
-		mmap.insert(mp(pp, true));
-	}
+	string aux(str);
 
 	cairo_set_source_rgb(cr, 0, 0, 0);
 	cairo_move_to(cr, xm + ax, ym + ay);
 	cairo_show_text(cr, str);
 }
 
-void draw_arrow(cairo_t *cr, int x2, int y2, int tam, double theta) {
+void draw_edge(cairo_t *cr, vector<vector<Node> > adj, CIRCLE c1, CIRCLE c2, int i, int j, double &theta, double *rgb) {
+	double m1;
+	if(c2.x == c1.x) {
+		theta = atan2(c2.y - c1.y, c2.x - c1.x + 2);
+		m1 = (c2.y - c1.y) / (c2.x - c1.x + 2);
+	}
+	else {
+		theta = atan2(c2.y - c1.y, c2.x - c1.x);
+		m1 = (c2.y - c1.y) / (c2.x - c1.x);
+	}
+
+	int x1 = c1.x + c1.r * cos(theta);
+	int y1 = c1.y + c1.r * sin(theta);
+	int x2 = c2.x - c2.r * cos(theta);
+	int y2 = c2.y - c2.r * sin(theta);
+	int w = adj[i][j].snd;
+
+	cairo_set_source_rgb(cr, rgb[0], rgb[1], rgb[2]);
+	cairo_move_to(cr, x1, y1);
+	cairo_line_to(cr, x2, y2);
+	cairo_set_line_width(cr, 1.8);
+	cairo_stroke(cr);
+
+	write_weight(cr, x1, y1, x2, y2, w);
+}
+
+void draw_arrow(cairo_t *cr, CIRCLE c, int tam, double theta, double *rgb) {
+	int x2 = c.x - c.r * cos(theta), y2 = c.y - c.r * sin(theta);
 	int xr = x2 - tam * cos(theta);
 	int yr = y2 - tam * sin(theta);
 	//30 grados
@@ -114,6 +135,7 @@ void draw_arrow(cairo_t *cr, int x2, int y2, int tam, double theta) {
 	double end2x = (x2 + (dx * ecos + dy * esin));
 	double end2y = (y2 + (dx * -esin + dy * ecos));
 
+	cairo_set_source_rgb(cr, rgb[0], rgb[1], rgb[2]);
 	cairo_move_to(cr, end1x, end1y);
 	cairo_line_to(cr, x2, y2);
 	cairo_move_to(cr, end2x, end2y);
@@ -135,37 +157,18 @@ void draw_graph(cairo_t *cr, vector<vector<Node> > adj, vector<CIRCLE> circles) 
 	//Dibujar las letras
 	write_text(cr, circles);
 	//Dibujar las aristas
-	map<pair<int, int>, bool> mmap;
 	for(int i = 1; i < adj.size(); i++) {
 		for(int j = 0; j < adj[i].size(); j++) {
+			double theta = 0.0;
+
 			//Dibujar las aristas
 			CIRCLE c1 = circles[i - 1];
 			CIRCLE c2 = circles[adj[i][j].fst - 1];
-			double theta, m1;
-			if(c2.x == c1.x) {
-				theta = atan2(c2.y - c1.y, c2.x - c1.x + 2);
-				m1 = (c2.y - c1.y) / (c2.x - c1.x + 2);
-			}
-			else {
-				theta = atan2(c2.y - c1.y, c2.x - c1.x);
-				m1 = (c2.y - c1.y) / (c2.x - c1.x);
-			}
-
-			int x1 = c1.x + c1.r * cos(theta);
-			int y1 = c1.y + c1.r * sin(theta);
-			int x2 = c2.x - c2.r * cos(theta);
-			int y2 = c2.y - c2.r * sin(theta);
-			int w = adj[i][j].snd;
-			write_weight(cr, x1, y1, x2, y2, w, mmap);
-
-			cairo_set_source_rgb(cr, 0.7607, 0.9803, 1);
-			cairo_move_to(cr, x1, y1);
-			cairo_line_to(cr, x2, y2);
-			cairo_set_line_width(cr, 1.8);
-			cairo_stroke(cr);
+			double rgb[3] = {0.7607, 0.9803, 1};
+			draw_edge(cr, adj, c1, c2, i, j, theta, rgb);
 
 			//Dibujar las flechas
-			draw_arrow(cr, x2, y2, 15, theta);
+			draw_arrow(cr, c2, 15, theta, rgb);
 		}
 	}
 }
@@ -186,6 +189,25 @@ void update_circles(vector<int> path, vector<CIRCLE> &circles, int orig, int des
 	}
 }
 
+void update_edges(cairo_t *cr, vector<vector<Node> > adj, vector<int> path, vector<CIRCLE> &circles) {
+	double rgb[3] = {0.8627, 0.6431, 0.1803};
+	for(int i = 0; i < path.size() - 1; i++) {
+		double theta = 0.0;
+		int u = path[i], v = path[i + 1], vv;
+		for(int i = 0; i < adj[u].size(); i++) {
+			if(adj[u][i].fst == v) {
+				vv = i;
+				break;
+			}
+		}
+		CIRCLE c_o = circles[u - 1], c_d = circles[v - 1];
+		draw_edge(cr, adj, c_o, c_d, u, vv, theta, rgb);
+
+		//Dibujar las flechas
+		draw_arrow(cr, c_d, 15, theta, rgb);
+	}
+}
+
 void reset_circles(vector<CIRCLE> &circles) {
 	for(int i = 0; i < circles.size(); i++) {
 		circles[i].rgb[0] = 0.3686;
@@ -198,5 +220,13 @@ void create_img(vector<vector<Node> > adj, vector<CIRCLE> circles, int width, in
 	cairo_surface_t *surface;
 	cairo_t *cr = init_cairo(width, height, &surface);
 	draw_graph(cr, adj, circles);
+	cairo_finish(cr, surface, files_name);
+}
+
+void create_img(vector<vector<Node> > adj, vector<CIRCLE> circles, vector<int> path, int width, int height, char *files_name) {
+	cairo_surface_t *surface;
+	cairo_t *cr = init_cairo(width, height, &surface);
+	draw_graph(cr, adj, circles);
+	update_edges(cr, adj, path, circles);
 	cairo_finish(cr, surface, files_name);
 }
