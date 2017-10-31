@@ -19,7 +19,7 @@ using namespace std;
 
 typedef pair<int, int> Node;
 
-const int INF = 1000;
+const int INF = 10000;
 
 class Node_cmp {
 public:

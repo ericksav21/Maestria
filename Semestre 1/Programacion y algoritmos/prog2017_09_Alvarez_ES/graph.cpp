@@ -11,7 +11,7 @@ void fill_graph(vector<vector<Node> > &adj) {
 			int p = rand_in_range(1, 100);
 			//P(A) de haber conexión
 			if(p > 60) {
-				int w = rand_in_range(1, 25);
+				int w = rand_in_range(1, 100);
 				adj[i].pb(mp(j, w));
 			}
 		}
@@ -76,7 +76,13 @@ vector<int> shortest_path(vector<vector<Node> > adj, vector<int> &dist, int orig
 	get_path(prev, path, dest);
 
 	char c_orig = 'A' + (orig - 1), c_dest = 'A' + (dest - 1);
-	cout << endl << "Distancia de " << c_orig << " a " << c_dest << ": " << dist[dest] << endl;
+	cout << endl << "Distancia de " << c_orig << " a " << c_dest << ": ";
+	if(dist[dest] >= INF) {
+		cout << "Inexistente" << endl;
+	}
+	else {
+		cout << dist[dest] << endl;
+	}
 	cout << "Ruta: ";
 	for(int i = 0; i < path.size(); i++) {
 		char c_act = 'A' + (path[i] - 1);

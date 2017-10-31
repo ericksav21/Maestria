@@ -23,11 +23,11 @@ release:
 	$(MAKE) CFLAGS="-O2 -w -c" LFLAGS="-O2"
 
 clean:
-	rm -f $(EXEC) $(DIROBJS) *.png
+	rm -f $(EXEC) $(DIROBJS) *.png *.ps
 
 help:
 	@echo 'Opciones de compilación:'
 	@echo 'Comando: make - Compila normalmente, genera un ejecutable llamado main y sus archivos objeto en la carpeta obj.'
 	@echo 'Comando: make release - Compila de manera optimizada.'
 	@echo 'Comando: make debug - Compila en modo debug.'
-	@echo 'Comando: make clean - Limpia todos los archivos generados por la compilación incluyendo el ejecutable.'
+	@echo 'Comando: make clean - Limpia todos los archivos generados por la compilación y ejecución incluyendo el ejecutable.'

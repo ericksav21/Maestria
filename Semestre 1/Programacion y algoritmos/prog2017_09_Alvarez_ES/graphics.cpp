@@ -1,18 +1,33 @@
 #include "graphics.h"
 
-cairo_t* init_cairo(int width, int height, cairo_surface_t **surface) {
-	//cairo_surface_t *surface;
+cairo_t* init_cairo(int width, int height, cairo_surface_t **surface, char *files_name, bool is_png) {
 	cairo_t *cr;
-	*surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
+	if(is_png) {
+		*surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
+	}
+	else {
+		*surface = cairo_ps_surface_create(files_name, width, height);
+	}
 	cr = cairo_create(*surface);
+
+	if(!is_png) {
+		cairo_ps_surface_dsc_begin_page_setup (*surface);
+    	cairo_ps_surface_dsc_comment (*surface, "%%PageOrientation: Portrait");
+	}
 	create_background(cr, width, height);
 
 	return cr;
 }
 
-void cairo_finish(cairo_t *cr, cairo_surface_t *surface, char *files_name) {
-	cairo_surface_write_to_png(surface, files_name);
+void cairo_finish(cairo_t *cr, cairo_surface_t *surface, char *files_name, bool is_png) {
+	if(is_png) {
+		cairo_surface_write_to_png(surface, files_name);
+	}
+	else {
+		cairo_surface_show_page(surface);
+	}
 	cairo_destroy(cr);
+	cairo_surface_finish(surface);
 	cairo_surface_destroy(surface);
 }
 
@@ -216,17 +231,32 @@ void reset_circles(vector<CIRCLE> &circles) {
 	}
 }
 
-void create_img(vector<vector<Node> > adj, vector<CIRCLE> circles, int width, int height, char *files_name) {
+void create_img_png(vector<vector<Node> > adj, vector<CIRCLE> circles, int width, int height, char *files_name) {
 	cairo_surface_t *surface;
-	cairo_t *cr = init_cairo(width, height, &surface);
+	cairo_t *cr = init_cairo(width, height, &surface, "", true);
 	draw_graph(cr, adj, circles);
-	cairo_finish(cr, surface, files_name);
+	cairo_finish(cr, surface, files_name, true);
 }
 
-void create_img(vector<vector<Node> > adj, vector<CIRCLE> circles, vector<int> path, int width, int height, char *files_name) {
+void create_img_png(vector<vector<Node> > adj, vector<CIRCLE> circles, vector<int> path, int width, int height, char *files_name) {
 	cairo_surface_t *surface;
-	cairo_t *cr = init_cairo(width, height, &surface);
+	cairo_t *cr = init_cairo(width, height, &surface, "", true);
 	draw_graph(cr, adj, circles);
 	update_edges(cr, adj, path, circles);
-	cairo_finish(cr, surface, files_name);
+	cairo_finish(cr, surface, files_name, true);
+}
+
+void create_img_ps(vector<vector<Node> > adj, vector<CIRCLE> circles, int width, int height, char *files_name) {
+	cairo_surface_t *surface;
+	cairo_t *cr = init_cairo(width, height, &surface, files_name, false);
+	draw_graph(cr, adj, circles);
+	cairo_finish(cr, surface, files_name, false);
+}
+
+void create_img_ps(vector<vector<Node> > adj, vector<CIRCLE> circles, vector<int> path, int width, int height, char *files_name) {
+	cairo_surface_t *surface;
+	cairo_t *cr = init_cairo(width, height, &surface, files_name, false);
+	draw_graph(cr, adj, circles);
+	update_edges(cr, adj, path, circles);
+	cairo_finish(cr, surface, files_name, false);
 }

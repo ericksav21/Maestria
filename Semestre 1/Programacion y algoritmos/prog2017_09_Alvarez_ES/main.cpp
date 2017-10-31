@@ -4,6 +4,7 @@
 #include <utility>
 #include <algorithm>
 #include <string>
+#include <cctype>
 #include <cairo/cairo.h>
 
 #include "graphics.h"
@@ -17,8 +18,8 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	int V = atoi(argv[1]);
-	char c_orig = argv[2][0];
-	char c_dest = argv[3][0];
+	char c_orig = (char)toupper(argv[2][0]);
+	char c_dest = (char)toupper(argv[3][0]);
 	int orig = (int)(c_orig - 'A' + 1);
 	int dest = (int)(c_dest - 'A' + 1);
 
@@ -29,15 +30,17 @@ int main(int argc, char **argv) {
 	fill_graph(adj);
 	print_graph(adj);
 	vector<CIRCLE> nodes_g = create_circles(adj, x_ini, y_ini, r);
-	create_img(adj, nodes_g, width, height, "Grafo.png");
+	create_img_png(adj, nodes_g, width, height, "Grafo.png");
+	create_img_ps(adj, nodes_g, width, height, "Grafo.ps");
 
 	reset_circles(nodes_g);
 	vector<int> dist(adj.size());
 	vector<int> path = shortest_path(adj, dist, orig, dest);
 	cout << endl;
-	if(dist[dest] < 1000) {
+	if(dist[dest] < 10000) {
 		update_circles(path, nodes_g, orig, dest);
-		create_img(adj, nodes_g, path, width, height, "Ruta.png");
+		create_img_png(adj, nodes_g, path, width, height, "Ruta.png");
+		create_img_ps(adj, nodes_g, path, width, height, "Ruta.ps");
 	}
 	else {
 		cout << "No se pudo determinar el camino mínimo debido a que no existe conexión entre los nodos origen y destino." << endl;
