@@ -16,3 +16,10 @@ double LinearAlgebra::inner_product(vector<double> v1, vector<double> v2) {
 double LinearAlgebra::norm(vector<double> v) {
 	return sqrt(inner_product(v, v));
 }
+
+void LinearAlgebra::print_vector(vector<double> v) {
+	for(int i = 0; i < v.size(); i++) {
+		cout << v[i] << " ";
+	}
+	cout << endl;
+}

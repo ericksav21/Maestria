@@ -27,6 +27,9 @@ public:
 	~Layer();
 	int n;
 	double bias;
+	void set_input(int i, double v);
+	void set_output(int i, double v);
+	void set_err(int i, double v);
 	vector<double> get_input();
 	vector<double> get_output();
 	vector<double> get_err();
@@ -80,11 +83,13 @@ public:
 	NeuralNetwork(vector<int> layers_size, double lr, double cr, int iter);
 	~NeuralNetwork();
 	void init();
+	void print_nn();
 	void add_hidden_layer(int dim);
 	void compute_layer_input(int l);
 	void compute_layer_output(int l);
-	void clasify(vector<double> x);
-	void train();
+	vector<double> clasify(vector<double> x);
+	void compute_layer_err(int l);
+	void train(vector<double> t);
 };
 
 #endif
