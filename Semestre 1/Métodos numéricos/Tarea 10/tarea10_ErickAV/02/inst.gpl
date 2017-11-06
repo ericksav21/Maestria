@@ -1,0 +1,6 @@
+plot "datos2D_4.txt" using 1:2 title 'Conjunto de puntos' w p, "tabla.txt" using 1:2 title 'Spline cubico' w l
+set terminal png nocrop enhanced size 1024,768
+set output 'Grafica2.png'
+replot
+set term x11
+set output

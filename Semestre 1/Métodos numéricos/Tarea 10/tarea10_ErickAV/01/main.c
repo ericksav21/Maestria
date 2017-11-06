@@ -8,12 +8,12 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
-	if(argc < 3) {
-		printf("Error. Ejecuta: %s [Nombre del archivo] [M].\n", argv[0]);
+	if(argc < 4) {
+		printf("Error. Ejecuta: %s [Nombre del archivo] [N] [Lambda].\n", argv[0]);
 		return 0;
 	}
-	double tol = sqrt(get_EPS());
-	int m = atoi(argv[2]);
+	int n = atoi(argv[2]);
+	double lambda = atof(argv[3]);
 	char files_name[30];
 
 	strcpy(files_name, argv[1]);
@@ -29,13 +29,11 @@ int main(int argc, char **argv) {
 		x[i] = data[i][0];
 		y[i] = data[i][1];
 	}
-	double *M = generate_M(x, y, nr, tol);
-	generate(x, y, M, m, nr, "tabla.txt");
+	generate(x, y, nr, n, lambda, "tabla.txt");
 	printf("Tabla generada.\n");
 
 	free_vector(x);
 	free_vector(y);
-	free_vector(M);
 	free_matrix(data);
 
 	return 0;

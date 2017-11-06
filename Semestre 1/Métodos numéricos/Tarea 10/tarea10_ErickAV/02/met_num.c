@@ -104,7 +104,6 @@ double evaluate_pol(double *x, double *y, double *M, double xm, int n) {
 			break;
 		}
 	}
-	printf("Xi: %lf\n", x[ii]);
 	double hi = x[ii] - x[ii - 1];
 	double Cp = y[ii - 1] - (M[ii - 1] * hi * hi / 6.0);
 	double C = ((y[ii] - y[ii - 1]) / hi) - ((hi / 6.0) * (M[ii] - M[ii - 1]));

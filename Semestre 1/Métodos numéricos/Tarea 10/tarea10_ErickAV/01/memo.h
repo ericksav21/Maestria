@@ -14,6 +14,11 @@
 #define free_vector(v) free_matrix_1d((void *)v)
 #define free_matrix(m) free_matrix_2d((void **)m)
 
+typedef struct mat3d {
+	double *a, *b, *c;
+	int n;
+} MAT3D;
+
 /* Genera un vector de tamaño n */
 void *create_matrix_1d(int sz, size_t type_size);
 
@@ -25,5 +30,13 @@ void free_matrix_1d(void *v);
 
 /* Libera una matriz */
 void free_matrix_2d(void **m);
+
+double *copy_matrix_1d_d(double *src, double *dest, int sz);
+
+/* Genera una matriz tridiagonal */
+MAT3D* create_mat_3d(int n);
+
+/* Libera una matriz tridiagonal */
+MAT3D* free_mat_3d(MAT3D *src);
 
 #endif
