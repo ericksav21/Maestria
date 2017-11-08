@@ -1,5 +1,9 @@
 #include "neural.hpp"
 
+int rand_in_range(int a, int b) {
+        return rand() % (b - a + 1) + a;
+}
+
 vector<TrainingElement> read_data(int no_rows, char *files_name) {
 	ifstream file(files_name);
 	vector<TrainingElement> res;
@@ -168,7 +172,7 @@ void NeuralNetwork::compute_layer_input(int l) {
 		for(int j = 0; j < layers[l - 1].n; j++) {
 			val += layers[l - 1].get_output()[j] * w.mat[j][i]; //?
 		}
-		//val += layers[l - 1].bias[i];
+		val += layers[l - 1].bias[i];
 		layers[l].set_input(i, val);
 	}
 }
@@ -187,6 +191,7 @@ void NeuralNetwork::compute_layer_output(int l) {
 
 vector<double> NeuralNetwork::clasify(vector<double> x) {
 	int input_sz = layers_size[0];
+	LinearAlgebra linear;
 	//Nos aseguramos que sea correcto el tamaño con la primer capa
 	if(x.size() == input_sz) {
 		//Caso especial, primera capa
@@ -201,7 +206,6 @@ vector<double> NeuralNetwork::clasify(vector<double> x) {
 		//Se retorna el resultado en la última capa
 		return layers[this->no_layers - 1].get_output();
 	}
-
 	return x;
 }
 
@@ -247,12 +251,19 @@ double NeuralNetwork::train() {
 		vector<double> x = te.in;
 		vector<double> y_des = te.out;
 		vector<double> y_act = clasify(x);
+		/*for(int i = 0; i < y_act.size(); i++) {
+			if(y_act[i] >= 0.5)
+				y_act[i] = 1;
+			else
+				y_act[i] = 0;
+		}*/
 
 		//Calc global err
 		double err = 0.0;
 		for(int i = 0; i < y_act.size(); i++) {
 			err += pow(y_des[i] - y_act[i], 2);
 		}
+		cout << "Error: " << err << endl;
 		train_err += (err * err);
 
 		int llsz = layers_size.size() - 1;

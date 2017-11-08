@@ -30,7 +30,9 @@ cairo_t* init_cairo(int width, int height, cairo_surface_t **surface, char *file
 
 void write_text(cairo_t *cr, int x, int y, int id);
 
-void print_arrows(cairo_t *cr, vector<vector<pair<int, int> > > neurons, double r);
+void print_arrows(cairo_t *cr, int x, int y, double r, int tam, double theta);
+
+void print_rects(cairo_t *cr, vector<vector<pair<int, int> > > neurons, double r);
 
 void draw_graph(cairo_t *cr, vector<int> layers, int width, int height);
 

@@ -47,7 +47,28 @@ void write_text(cairo_t *cr, int x, int y, int id, bool is_last) {
 	cairo_stroke(cr);
 }
 
-void print_arrows(cairo_t *cr, vector<vector<pair<int, int> > > neurons, double r) {
+void print_arrows(cairo_t *cr, int x, int y, double r, int tam, double theta) {
+	int x2 = x - r * cos(theta), y2 = y - r * sin(theta);
+	int xr = x2 - tam * cos(theta);
+	int yr = y2 - tam * sin(theta);
+	//30 grados
+	double ecos = 0.866, esin = 0.500;
+	double dx = xr - x2, dy = yr - y2;
+	double end1x = (x2 + (dx * ecos + dy * -esin));
+	double end1y = (y2 + (dx * esin + dy * ecos));
+
+	double end2x = (x2 + (dx * ecos + dy * esin));
+	double end2y = (y2 + (dx * -esin + dy * ecos));
+
+	cairo_set_source_rgb(cr, 1, 1, 1);
+	cairo_move_to(cr, end1x, end1y);
+	cairo_line_to(cr, x2, y2);
+	cairo_move_to(cr, end2x, end2y);
+	cairo_line_to(cr, x2, y2);
+	cairo_stroke(cr);
+}
+
+void print_rects(cairo_t *cr, vector<vector<pair<int, int> > > neurons, double r) {
 	for(int i = 0; i < neurons.size() - 1; i++) {
 		for(int j = 0; j < neurons[i].size(); j++) {
 			for(int k = 0; k < neurons[i + 1].size(); k++) {
@@ -60,6 +81,7 @@ void print_arrows(cairo_t *cr, vector<vector<pair<int, int> > > neurons, double 
 				cairo_move_to(cr, x1, y1);
 				cairo_line_to(cr, x2, y2);
 				cairo_stroke(cr);
+				print_arrows(cr, p2.first, p2.second, r, 15, theta);
 			}
 		}
 	}
@@ -88,7 +110,7 @@ void draw_graph(cairo_t *cr, vector<int> layers, int width, int height) {
 			write_text(cr, xm, ym, j, i == layers.size() - 1);
 		}
 	}
-	print_arrows(cr, neurons, r);
+	print_rects(cr, neurons, r);
 }
 
 void cairo_finish(cairo_t *cr, cairo_surface_t *surface, char *files_name, bool is_png) {

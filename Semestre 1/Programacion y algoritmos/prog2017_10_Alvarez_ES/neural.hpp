@@ -23,6 +23,8 @@ struct TrainingElement {
 	}	
 };
 
+int rand_in_range(int a, int b);
+
 vector<TrainingElement> read_data(int no_rows, char *files_name);
 
 class Neuron {
