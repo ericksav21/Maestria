@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.3)  5 NOV 2017 23:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.2)  9 NOV 2017 17:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -873,98 +873,106 @@ File: cimat_logo.png Graphic file (type png)
  <use cimat_logo.png>
 Package pdftex.def Info: cimat_logo.png used on input line 20.
 (pdftex.def)             Requested size: 150.56364pt x 96.36073pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 57.
+LaTeX Font Info:    Try loading font information for U+msa on input line 55.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 57.
+LaTeX Font Info:    Try loading font information for U+msb on input line 55.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<Grafica1.png, id=5, 770.88pt x 578.16pt>
-File: Grafica1.png Graphic file (type png)
- <use Grafica1.png>
-Package pdftex.def Info: Grafica1.png used on input line 68.
-(pdftex.def)             Requested size: 308.34654pt x 231.2599pt.
- [1
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--62
+
+ []
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./cimat_logo.png (PNG copy
-)>]
-<Grafica11.png, id=22, 770.88pt x 578.16pt>
-File: Grafica11.png Graphic file (type png)
- <use Grafica11.png>
-Package pdftex.def Info: Grafica11.png used on input line 75.
-(pdftex.def)             Requested size: 308.34654pt x 231.2599pt.
+)>] <E41.png, id=19, 1194.4625pt x 128.48pt>
+File: E41.png Graphic file (type png)
+ <use E41.png>
+Package pdftex.def Info: E41.png used on input line 77.
+(pdftex.def)             Requested size: 358.3415pt x 38.54428pt.
 
-<Grafica2.png, id=23, 770.88pt x 578.16pt>
-File: Grafica2.png Graphic file (type png)
- <use Grafica2.png>
-Package pdftex.def Info: Grafica2.png used on input line 84.
-(pdftex.def)             Requested size: 308.34654pt x 231.2599pt.
- [2 <./Grafica1.png> <./Grafica11.png>] <Grafica21.png, id=30, 770.88pt x 578.1
-6pt>
-File: Grafica21.png Graphic file (type png)
+<E61.png, id=20, 1184.425pt x 127.47626pt>
+File: E61.png Graphic file (type png)
+ <use E61.png>
+Package pdftex.def Info: E61.png used on input line 84.
+(pdftex.def)             Requested size: 355.33025pt x 38.24316pt.
 
-<use Grafica21.png>
-Package pdftex.def Info: Grafica21.png used on input line 91.
-(pdftex.def)             Requested size: 308.34654pt x 231.2599pt.
- [3 <./Grafica2.png> <./Grafica21.png>]
-<Grafica3.png, id=36, 770.88pt x 578.16pt>
-File: Grafica3.png Graphic file (type png)
- <use Grafica3.png>
-Package pdftex.def Info: Grafica3.png used on input line 110.
-(pdftex.def)             Requested size: 308.34654pt x 231.2599pt.
+<E81.png, id=21, 1187.43625pt x 123.46124pt>
+File: E81.png Graphic file (type png)
+ <use E81.png>
+Package pdftex.def Info: E81.png used on input line 91.
+(pdftex.def)             Requested size: 356.23363pt x 37.03865pt.
 
-<Grafica4.png, id=37, 770.88pt x 578.16pt>
-File: Grafica4.png Graphic file (type png)
- <use Grafica4.png>
-Package pdftex.def Info: Grafica4.png used on input line 117.
-(pdftex.def)             Requested size: 308.34654pt x 231.2599pt.
- [4 <./Grafica3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+<E42.png, id=22, 1196.47pt x 123.46124pt>
+File: E42.png Graphic file (type png)
+ <use E42.png>
+Package pdftex.def Info: E42.png used on input line 100.
+(pdftex.def)             Requested size: 358.94377pt x 37.03865pt.
+ [2 <./E41.png> <./E61.png> <./E81.png>] <E62.png, id=28, 1189.44376pt x 128.48
+pt>
+File: E62.png Graphic file (type png)
+ <use E62.png>
+Package pdftex.def Info: E62.png used on input line 107.
+(pdftex.def)             Requested size: 356.83588pt x 38.54428pt.
 
- []
-
-[5 <./Grafica4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+<E82.png, id=29, 1189.44376pt x 122.4575pt>
+File: E82.png Graphic file (type png)
+ <use E82.png>
+Package pdftex.def Info: E82.png used on input line 114.
+(pdftex.def)             Requested size: 356.83588pt x 36.73752pt.
+ [3 <./E42.png> <./E62.png> <./E82.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
-[6] (./Reporte.aux
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+[4] (./Reporte.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) ) 
 Here is how much of TeX's memory you used:
- 14679 strings out of 493029
- 277544 string characters out of 6136234
- 322925 words of memory out of 5000000
- 17931 multiletter control sequences out of 15000+600000
- 10102 words of font info for 38 fonts, out of 8000000 for 9000
+ 14686 strings out of 493029
+ 277443 string characters out of 6136234
+ 323923 words of memory out of 5000000
+ 17936 multiletter control sequences out of 15000+600000
+ 11494 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,10n,54p,440b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,10n,54p,629b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
-fb>
-Output written on Reporte.pdf (6 pages, 180758 bytes).
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b>
+Output written on Reporte.pdf (4 pages, 300497 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 

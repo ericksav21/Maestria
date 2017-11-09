@@ -5,13 +5,16 @@
 #include <math.h>
 
 #include "memo.h"
-#include "matriz_vector.h"
 
 double get_EPS();
 
 double f1(double x);
 
+double F1(double a, double b);
+
 double f2(double x);
+
+double F2(double a, double b);
 
 double trap(double (*func)(double), int i, double a, double b, double r_ant);
 

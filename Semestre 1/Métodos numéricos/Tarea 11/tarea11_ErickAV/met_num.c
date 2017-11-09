@@ -10,13 +10,20 @@ double get_EPS() {
 }
 
 double f1(double x) {
-	//return sin(2.0 * M_PI * x);
-	//return pow(x, 3) / cos(x);
-	return x * x;
+	return sin(2.0 * M_PI * x);
+}
+
+double F1(double a, double b) {
+	double ap = 2.0 * M_PI * a, bp = 2.0 * M_PI * b;
+	return (-1.0 / (2 * M_PI)) * (cos(bp) - cos(ap));
 }
 
 double f2(double x) {
 	return 4.0 * pow(x, 3) - 2.0 * x + 1.0;
+}
+
+double F2(double a, double b) {
+	return pow(b, 4) - pow(a, 4) - b * b + a * a + b - a;
 }
 
 double trap(double (*func)(double), int i, double a, double b, double r_ant) {
@@ -32,29 +39,30 @@ double trap(double (*func)(double), int i, double a, double b, double r_ant) {
 }
 
 double eval(double (*func)(double), int n, double a, double b) {
-	double **R = create_matrix(n, n, double);
-	for(int i = 0; i < n; i++) {
-		for(int j = 0; j < n; j++) {
+	double **R = create_matrix(n + 1, n + 1, double);
+	for(int i = 0; i <= n; i++) {
+		for(int j = 0; j <= n; j++) {
 			R[i][j] = 0.0;
 		}
 	}
 	//R_00
 	R[0][0] = ((b - a) / 2.0) * (func(a) + func(b));
 	//R_i0
-	for(int i = 1; i < n; i++) {
+	for(int i = 1; i <= n; i++) {
 		R[i][0] = trap(func, i, a, b, R[i - 1][0]);
 	}
 	//R_ij
 	//Columnas
-	for(int j = 1; j < n; j++) {
+	for(int j = 1; j <= n; j++) {
 		//Filas
-		for(int i = j; i < n; i++) {
-			double aux = (1.0 / pow(4.0, j)) * (R[i][j - 1] - R[i - 1][j - 1]);
+		for(int i = j; i <= n; i++) {
+			double aux = (1.0 / (pow(4.0, j) - 1)) * (R[i][j - 1] - R[i - 1][j - 1]);
 			R[i][j] = R[i][j - 1] + aux;
 		}
 	}
 
-	double res = R[n - 1][n - 1];
+	double res = R[n][n];
 	free_matrix(R);
+
 	return res;
 }

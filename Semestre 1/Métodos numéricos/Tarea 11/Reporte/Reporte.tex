@@ -28,7 +28,7 @@
 
 	\begin{center}
 		\begin{large}
-			Descripción tarea 10 - Métodos numéricos
+			Descripción tarea 11 - Métodos numéricos
 		\end{large}
 	\end{center}
 	
@@ -37,7 +37,7 @@
 	\end{center}
 
 	\begin{center}
-		5 de Noviembre de 2017
+		9 de Noviembre de 2017
 	\end{center}
 
 
@@ -47,81 +47,76 @@
 %\tableofcontents
 
 \section{Introducción}
-En el presente reporte se describirán los resultados de dos métodos empleados en la tarea 10 para la interpolación polinomial, el primero consiste en resolver un problema de minimización empleando elemento finito y el segundo consiste en realizar el desarrollo de un spline cúbico para la interpolación. Se presentarán los resultados de las ejecuciones así como algunas gráficas formadas a través de ellos.
+En el presente reporte se describirán los resultados obtenidos del método de Romberg el cual se usa para calcular la integral definida de una función contínua. Dicho algoritmo emplea internamente el método recursivo del trapecio y la extrapolación de Richardson para mejorar la aproximación de la integral. Para concluir se mostrarán algunos ejemplos de ejecuciones realizadas con diversas funciones y diferente número de particiones.
 
-\section{Problema de minimización}
+\section{Descripción}
+Como se mencionó anteriormente, un método numérico para calcular la integral de una función continua es el del trapecio, el cual realiza se basa en hacer una interpolación con un polinomio de grado 1 el cual pasará por dos puntos, de ahí se podrá notar que se tiene la forma de un trapecio la cual su área se aproximará al área bajo la curva de la función. Su fórmula es la siguiente:
 
-\subsection{Descripción}
-En este ejercicio se presentó un problema de minimización de la siguiente función:
+$$\int_{a}^{b}f(x) dx \approx h [\frac{f(a) + f(b)}{2} + \sum_{i=1}^{n - 1}f(x_i)]$$
 
-$$min_{\phi_0,\phi_1,...,\phi_n \sum_{i=1}^{m}[\phi(x_i)-y_i]^2+\lambda \int_{0}^{10}(\phi')^2}$$
+donde $h = \frac{(b - a)}{n}$. La formula anterior refiere al método del trapecio definido a pedazos, la idea es generar una partición uniforme dentro del rango $[a, b]$ y para cada par de puntos aplicar el método, esto mejorará la aproximación del área.\\
 
-Para lo cual se utilizó la técnica de elemento finito, con ella se hizo una discretización para poder construir un sistema de ecuaciones tridiagonal y así encontrar el arreglo de $\phi_i$. Al final el programa se probó con varios valores de $\lambda$ los cuales generan una penalización en la parte de suavidad del polinomio interpolador.
+La regla recursiva del trapecio es una mejora que nos permite usar lo anterior para calcular la integral sin tener que evaluar la función en puntos previamente evaluados. En general la regla nos dice que:\\
 
-\subsection{Ejemplo de ejecución}
-A continuación se mostrará el resultado de la ejecución del programa usando dos conjuntos de datos distintos y a su vez valores de $\lambda$ distintos.
+$R(n, 0) = \frac{b - a}{2}[f(a) + f(b)]$ si $n = 0$ y $R(n, 0) = \frac{h}{2}[f(a) + f(b)] + h \sum_{i = 1}^{2^n - 1} f(a + ih)$ si $n > 0$\\
+
+La extrapolación de Richardson permite construir a partir de una secuencia convergente otra secuencia más rápidamente convergente. Esta técnica se usa frecuentemente para mejorar los resultados de métodos numéricos a partir de una estimación previa, en este caso la usaremos para definir el método de Romberg el cual evalúa el integrando en puntos equiespaciados del intervalo de integración estudiado. Para que este método funcione, el integrando debe ser suficientemente derivable en el intervalo, aunque se obtienen resultados bastante buenos incluso para integrandos poco derivables.\\
+El método se crea de forma recursiva usando la definición anterior dada con la regla del trapecio, dicha fórmula nos permite calcular los valores de la primer columna. Ahora para obtener los valores de las siguientes se usan los de la columna previamente calculada usando lo siguiente:
+
+$$R(n, m) = R(n, m - 1) + \frac{1}{4^m - 1}[R(n, m - 1) - R(n - 1, m - 1)]$$
+
+Calculamos recursivamente hasta tener el valor de R(n, n) el cual será la mejor aproximación que este método nos dará.
+
+\section{Ejemplo de ejecución}
+El algoritmo se probó con varias funciones diferenciables y nos brindó muy buenos resultados, para el presente se mostrarán en particular contra las funciones $f_1(x) = sin(2 \pi x)$ y $f_2(x) = 4x^3 - 2x + 1$ y con diferentes valores de $n$.
 
 \begin{figure}[H]
 	\centering
-	\subfloat[][Figura 1. Conjunto de datos 1, lambda = 0.1.]{
-		\includegraphics[scale=0.4]{Grafica1.png}
+	\subfloat[][Figura 1. Resultados para ejecución función 1, n = 4.]{
+		\includegraphics[scale=0.3]{E41.png}
 	}\hfill
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\subfloat[][Figura 2. Conjunto de datos 1, lambda = 10.]{
-		\includegraphics[scale=0.4]{Grafica11.png}
-	}\hfill
-\end{figure}
-
-En las Figuras 1 y 2. podemos observar la ejecución del mismo algoritmo pero con una variación en el parámetro lambda que genera una gran penalización en el polinomio interpolador, ya que para el promer lambda dado se genera una muy buena interpolación y para el otro hay muchas diferencias en la nube de puntos con respecto a la curva.
-
-\begin{figure}[H]
-	\centering
-	\subfloat[][Figura 3. Conjunto de datos 2, lambda = 0.1.]{
-		\includegraphics[scale=0.4]{Grafica2.png}
+	\subfloat[][Figura 2. Resultados para ejecución función 1, n = 6.]{
+		\includegraphics[scale=0.3]{E61.png}
 	}\hfill
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\subfloat[][Figura 4. Conjunto de datos 2, lambda = 10.]{
-		\includegraphics[scale=0.4]{Grafica21.png}
+	\subfloat[][Figura 3. Resultados para ejecución función 1, n = 8.]{
+		\includegraphics[scale=0.3]{E81.png}
 	}\hfill
 \end{figure}
 
-Al igual que en el caso anterior, se ejecutó el programa con dos diferentes lambdas para ver la penalización provocada por las mismas. En las Figuras 3 y 4. se puede apreciar la diferencia de la interpolación provocada por un lambda de 0.1 y otro de 10.
-
-\subsection{Observaciones}
-Cabe destacar que en el código se definió la función $phi(x)$ como se describe en la presentación de la clase usando las funciones $N_k$ y $N_{k+1}$ y no usando la delta de Kronecker.
-
-\section{Splines}
-\subsection{Descripción}
-Para este ejercicio se dieron un conjunto de puntos y se propuso un spline cúbico que los interpolara, para ello se analizó el desgloce propuesto en el paper de la clase de Splines y se logró definir un sistema tridiagonal que al resolverlo nos daría el arreglo de $M_i$ el cual serviría para generar los splines $S(x_i)$.
-
-\subsection{Ejemplo de ejecución}
-A continuación se mostrarán los resultados de la ejecución del programa con dos conjuntos distintos de puntos.
+Podemos ver en las imágenes anteriores que el resultado mejora bastante únicamente con un pequeño aumento en las particiones.
 
 \begin{figure}[H]
 	\centering
-	\subfloat[][Figura 4. Conjunto de datos 1.]{
-		\includegraphics[scale=0.4]{Grafica3.png}
+	\subfloat[][Figura 4. Resultados para ejecución función 2, $n$ = 4.]{
+		\includegraphics[scale=0.3]{E42.png}
 	}\hfill
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\subfloat[][Figura 5. Conjunto de datos 2.]{
-		\includegraphics[scale=0.4]{Grafica4.png}
+	\subfloat[][Figura 5. Resultados para ejecución función 2, $n$ = 6.]{
+		\includegraphics[scale=0.3]{E62.png}
 	}\hfill
 \end{figure}
 
-Se puede ver en las gráficas anteriores que los conjuntos de puntos fueron interpolados por los splines definidos a pares. Aunque en el conjunto dos se pueden notar unos picos y valles tal vez no deseados, esto puede presentarse porque la función está definida a trozos y se genera el genómeno de Gibbs.
+\begin{figure}[H]
+	\centering
+	\subfloat[][Figura 6. Resultados para ejecución función 2, $n$ = 8.]{
+		\includegraphics[scale=0.3]{E82.png}
+	}\hfill
+\end{figure}
+
+Podemos ver en las tres imágenes anteriores desde que el valor de $n$ es 4 ya tenemos la aproximación exacta (o casi exacta) del área bajo la curva.
 
 \section{Compilación y ejecución}
-Para esta tarea, los programas se dividieron en tres carpetas, mediante las cuales se encuentran los archivos del código y los de prueba, hay que mencionar que para cada programa se usará la misma forma de compilar, por lo que solo es necesario describir los pasos una vez.\\
-
 \textbf{Para compilar:} En la carpeta encontraremos los archivos $.c$ y $.h$ con los que se podrá compilar el ejecutable. De la misma forma, en conjunto con los archivos anteriores, también podremos encontrar un Makefile para, en caso de encontrarse en linux, compilar de manera sencilla.
 
 \begin{enumerate}
@@ -130,28 +125,28 @@ Para esta tarea, los programas se dividieron en tres carpetas, mediante las cual
 	\begin{itemize}
 		\item gcc -c main.c -o obj/main.o
 		\item gcc -c memo.c -o obj/memo.o
-		\item gcc -c reader.c -o obj/reader.o
-		\item gcc -c matriz\_vector.c -o obj/matriz\_vector.o
 		\item gcc -c met\_num.c -o obj/met\_num.o
-		\item gcc -o main obj/main.o obj/memo.o obj/reader.o obj/matriz\_vector.o obj/met\_num.o\ -lm
+		\item gcc -o main obj/main.o obj/memo.o obj/met\_num.o\ -lm
 	\end{itemize}
 \end{enumerate}
 
-\textbf{Para ejecutar (programa 1):} Únicamente debemos de usar el comando $./main$ para ejecutar el programa en consola, este recibe los siguientes argumentos:
+\textbf{Para ejecutar:} Únicamente debemos de usar el comando $./main$ para ejecutar el programa en consola, este recibe los siguientes argumentos:
 \begin{itemize}
-	\item \textbf{Un string:} El nombre del archivo binario donde se encuentra la matriz de puntos.
-	\item \textbf{Un entero}: El tamaño de la discretización que se generará.
-	\item \textbf{Un doble}: El valor $\lambda$ que penalizará la interpolación. 
+	\item \textbf{Un número decimal:} El límite inferior del intervalo.
+	\item \textbf{Un número decimal:} El límite superior del intervalo.
+	\item \textbf{Un entero:} El número de particiones.
+	\item \textbf{Un entero:} El tipo de función que se usará (función 1 o función 2). 
 \end{itemize}
 
-El programa ejecutará generará un archivo de texto el cual contendrá los valores de los puntos del polinomio interpolador.\\
+El programa ejecutará el método de Romberg para la función y límites indicados, al final imprimirá el valor del área estimado, el área obtenida con la expresión analítica y el error relativo.\\
 
-\textbf{Para ejecutar (programa 2):} Únicamente debemos de usar el comando $./main$ para ejecutar el programa en consola, este recibe los siguientes argumentos:
-\begin{itemize}
-	\item \textbf{Un string:} El nombre del archivo binario donde se encuentra la matriz de puntos.
-	\item \textbf{Un entero}: El tamaño de puntos que contendrá el spline. 
-\end{itemize}
+\textbf{Ejemplo de ejecución:} ./main 0 3.141592653589 8 2\\
 
-El programa ejecutará generará un archivo de texto el cual contendrá los valores de los puntos del spline.\\
+Ahí estamos diciendo que los límites de integración van de 0 a $\pi$, que queremos una partición de $n = 8$ y que usaremos la función 2.\\
+Las funciones que tiene el código son las siguientes:
+\begin{enumerate}
+	\item $f(x) = sin(2 \pi x)$
+	\item $f(x) = 4x^3 - 2x + 1$
+\end{enumerate}
 
 \end{document}
