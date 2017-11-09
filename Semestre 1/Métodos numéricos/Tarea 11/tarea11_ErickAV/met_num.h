@@ -9,12 +9,12 @@
 
 double get_EPS();
 
-double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol);
-
 double f1(double x);
 
 double f2(double x);
 
-double eval_trap(double (*func)(double), int i, double r_i1);
+double trap(double (*func)(double), int i, double a, double b, double r_ant);
+
+double eval(double (*func)(double), int n, double a, double b);
 
 #endif

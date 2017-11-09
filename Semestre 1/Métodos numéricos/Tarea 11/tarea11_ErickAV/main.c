@@ -7,23 +7,22 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
-	if(argc < 4) {
-		printf("Error. Ejecuta: %s [Límite inferior] [Límite superior] [N].\n", argv[0]);
+	if(argc < 5) {
+		printf("Error. Ejecuta: %s [Límite inferior] [Límite superior] [N] [Funcion].\n", argv[0]);
 		return 0;
 	}
-	int a = atoi(argv[1]), b = atoi(argv[2]), n = atoi(argv[3]);
-
-	double *x = create_vector(nr, double);
-	double *y = create_vector(nr, double);
-	for(int i = 0; i < nr; i++) {
-		x[i] = data[i][0];
-		y[i] = data[i][1];
+	double a = atof(argv[1]), b = atof(argv[2]);
+	int n = atoi(argv[3]), ft = atoi(argv[4]);
+	
+	double area = 0.0;
+	if(ft == 1) {
+		area = eval(f1, n, a, b);
 	}
-	generate(x, y, nr, n, lambda, "tabla.txt");
-	printf("Tabla generada.\n");
+	else {
+		area = eval(f2, n, a, b);
+	}
 
-	free_vector(x);
-	free_vector(y);
+	printf("Estimación del área: %g\n", area);
 
 	return 0;
 }
