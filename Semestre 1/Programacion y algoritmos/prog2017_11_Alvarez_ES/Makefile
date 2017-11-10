@@ -8,7 +8,7 @@ OBJDIR:=obj
 DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
 
 $(EXEC): $(DIROBJS)
-	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lcairo -lm
+	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lm
 
 $(OBJDIR)/%.o: %.cpp | $(OBJDIR)
 	$(CPP) $(CFLAGS) $< -o $@
@@ -23,7 +23,7 @@ release:
 	$(MAKE) CFLAGS="-O2 -w -c" LFLAGS="-O2"
 
 clean:
-	rm -f $(EXEC) $(DIROBJS) *.png *.ps
+	rm -f $(EXEC) $(DIROBJS)
 
 help:
 	@echo 'Opciones de compilación:'

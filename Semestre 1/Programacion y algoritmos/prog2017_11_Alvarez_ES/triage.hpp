@@ -1,17 +1,12 @@
 #ifndef TRIAGE_H
 #define TRIAGE_H
 
+#include <iostream>
 #include <string>
 
-class Person {
-private:
-	string name;
-	double height;
-	
-public:
-	Person();
-	~Person();
-	
-};
+#include "person.hpp"
+#include "patient.hpp"
+
+using namespace std;
 
 #endif
