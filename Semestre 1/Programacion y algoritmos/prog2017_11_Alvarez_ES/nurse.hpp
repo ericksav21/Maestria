@@ -10,12 +10,11 @@
 
 using namespace std;
 
-class Nurse : public Person {
+class Nurse : public Doctor {
 
 public:
 	Nurse(string name, char gender, double height, double weight);
 	~Nurse();
-	void check_vital_signs(Patient p, Doctor d);
 };
 
 #endif

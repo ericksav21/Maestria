@@ -1,5 +1,5 @@
 CPP=g++
-CFLAGS=-w -c
+CFLAGS=-w -std=c++11 -c
 LFLAGS=
 EXEC=main
 CPPS:=$(wildcard *.cpp)
@@ -17,10 +17,10 @@ $(OBJDIR):
 	mkdir -p $@
 
 debug:
-	$(MAKE) CFLAGS="-g -w -c" LFLAGS="-g"
+	$(MAKE) CFLAGS="-g -w -std=c++11 -c" LFLAGS="-g"
 
 release:
-	$(MAKE) CFLAGS="-O2 -w -c" LFLAGS="-O2"
+	$(MAKE) CFLAGS="-O2 -w -std=c++11 -c" LFLAGS="-O2"
 
 clean:
 	rm -f $(EXEC) $(DIROBJS)
