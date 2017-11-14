@@ -68,7 +68,7 @@ void Utils::init_hospital(vector<string> data, Hospital *h) {
         string init_t_time = data[c++];
         char gender = data[c++][0];
         double hp = atof(data[c++].c_str()), lp = atof(data[c++].c_str());
-        double height = atof(data[c++].c_str()), weight = atof(data[c++].c_str());
+        double weight = atof(data[c++].c_str()), height = atof(data[c++].c_str());
         string end_t_time = data[c++];
         vector<int> vs;
         for(int i = 0; i < 12; i++) {

@@ -16,7 +16,7 @@ void Doctor::add_patient(Patient p) {
 }
 
 void Doctor::get_info(Patient p) {
-	cout << "Obtención de información básica del paciente:" << endl;
+	cout << "Registro de información básica del paciente:" << endl;
 	cout << "Nombre: " << p.get_name() << endl;
 	cout << "Número de seguridad social: " << p.get_nss() << endl;
 	cout << "Peso: " << p.get_weight() << endl;

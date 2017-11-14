@@ -4,11 +4,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <utility>
 #include <queue>
 #include <cmath>
-#include <chrono>
-#include <thread>
 
 #include "patient.hpp"
 #include "doctor.hpp"
