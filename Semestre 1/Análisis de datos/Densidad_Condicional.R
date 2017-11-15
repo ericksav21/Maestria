@@ -1,9 +1,17 @@
-for(i in 1:50) {
-  x <- runif(1, 0, 2)
-  print(paste(c("El valor elegido para X es: ", x)))
-  U <- runif(100, 0, 1)
-  #Y <- (U * runif(100, 0, 2)) / 2
-  Y <- (U * x) / 2
-  print(cor(U, Y))
-  #print(paste(c("La correlación de X con Y es: ", cor(U, Y))))
+C <- rep(100)
+for(i in 1:100) {
+  U1 <- runif(100, 0, 1)
+  U2 <- runif(100, 0, 1)
+  X <- 2 * sqrt(U1)
+  Y <- (U2 * X) / 2
+  C[i] <- cov(X, Y)
 }
+
+#Se proyecta la densidad de las covarianzas
+#plot(density(C))
+
+#Hacer un QQPlot
+qm <- sort(C)
+qt <- rnorm(100)
+qqplot(qt, qm, xlab="Cuantil teórico", ylab="Cuantil muestral")
+qqline(qm, col = 2)
