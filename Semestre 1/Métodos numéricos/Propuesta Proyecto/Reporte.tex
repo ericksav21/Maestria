@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage{pgf, tikz}
+\usepackage{amsmath, amsfonts, amssymb, graphicx}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsthm}
+\usepackage{caption}
+
+\setlength{\textheight}{23cm} \setlength{\evensidemargin}{0cm}
+\setlength{\oddsidemargin}{-.5cm} \setlength{\topmargin}{-3cm}
+\setlength{\textwidth}{17.5cm} \setlength{\parskip}{.2cm}
+
+
+%opening
+
+\begin{document}
+	\begin{picture}(80, 80)
+	\put(170,0){\hbox{\includegraphics[scale=0.6]{cimat_logo.png}}}
+	\end{picture}
+	
+	\begin{center}
+		\begin{huge}
+			Centro de Investigación en Matemáticas, A.C.
+		\end{huge}
+	\end{center}
+
+	\begin{center}
+		\begin{large}
+			Propuesta para proyecto final
+		\end{large}
+	\end{center}
+	
+	\begin{center}
+		\textbf{Erick Salvador Alvarez Valencia}
+	\end{center}
+
+	\begin{center}
+		Noviembre de 2017
+	\end{center}
+
+
+
+%\maketitle
+
+%\tableofcontents
+
+\section{Descripción}
+Para el proyecto la propuesta recae sobre el área de flujo óptico, el cual se define como el patrón del movimiento aparente de los objetos, superficies y bordes en una escena causado por el movimiento relativo entre un observador (un ojo o una cámara) y la escena.\\
+Se propone realizar el algoritmo de Horn and Schunck el cual es un algoritmo de flojuo óptico global que asume que toda la imagen tiene cierta suavidad en su flujo, para lo cual se tiene un problema de minimización de la siguiente ecuación:
+
+$$\int_{D}(\nabla I \vec{V} + I_t)^2 + \lambda ^2[(\frac{\partial V_x}{\partial x})^2 + (\frac{\partial V_x}{\partial y})^2 + (\frac{\partial V_y}{\partial x})^2 + (\frac{\partial V_y}{\partial y})^2] dxdy$$
+
+Donde: $I$ es una función de intensidad en el pixel. $\vec{v}$ es el vector de velocidades de flujo óptico y $\lambda$ es un término de regularización. Todo se explicará con más detalle en el reporte y en la presentación.
+
+Se trabajará con dicho problema de minimización para encontrar el flujo óptico usando diversas imágenes, se analizará el desempeño del algoritmo de Horn and Schunck y se obtendrá el error con respecto al valor real.
+
+\end{document}

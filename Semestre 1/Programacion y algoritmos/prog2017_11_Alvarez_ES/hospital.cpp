@@ -71,7 +71,8 @@ void Hospital::process(Patient p_nxt, Doctor *d) {
 	d->set_patients_vs(p_nxt.get_vital_signs());
 	int c = d->clasify();
 	cout << "Se ha clasificado al paciente con resultado: " << d->get_condition(c) << endl;
-	cout << "Hora de término del triage: " << p_nxt.get_end_t_time() << endl << endl;
+	cout << "Hora de término del triage: " << p_nxt.get_end_t_time() << endl;
+	cout << "Firma: " << d->get_name() << endl << endl;
 }
 
 void Hospital::process(Patient p_nxt, Nurse *n) {
@@ -81,7 +82,8 @@ void Hospital::process(Patient p_nxt, Nurse *n) {
 	n->set_patients_vs(p_nxt.get_vital_signs());
 	int c = n->clasify();
 	cout << "Se ha clasificado al paciente con resultado: " << n->get_condition(c) << endl;
-	cout << "Hora de término del triage: " << p_nxt.get_end_t_time() << endl << endl;
+	cout << "Hora de término del triage: " << p_nxt.get_end_t_time() << endl;
+	cout << "Firma: " << n->get_name() << endl << endl;
 }
 
 void Hospital::triage() {
