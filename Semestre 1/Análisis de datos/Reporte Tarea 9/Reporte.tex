@@ -55,7 +55,7 @@ $$F_x^{-1}(x) = 2 \sqrt U_1$$
 $$G_{Y|X=x}^{-1}(y) = \frac{U_2 X}{2}$$
 
 Donde $U_1$ y $U_2$ son variables aleatorias con distribución uniforme. Para la simulación se creó un vector de 100 entradas y se hicieron 100 pruebas. Cada prueba consistía en calcular dos vectores de tamaño 100 que tuvieran valores de las distribuciones mencionadas anteriormente, para ello se tuvieron que calcular valores de la distribución uniforme y sustituirlos en las funciones anteriores. Al calcular dichos vectores se aplicó la función de covarianza en los mismos y el resultado se almacenó en el vector mencionado al comienzo.\\
-Al concluir la simulación se verificó cómo se comportaban las covarianzas obtenidas y se determinó que su distribución se asemeja a la Normal con parámetros $\mu = 0$ y $\sigma^2$. A continuación se mostrará el código usado y posteriormente las gráficas de la densidad de la distribución de las covarianzas y un QQPlot que las compara con valores de una Normal.\\
+Al concluir la simulación se verificó cómo se comportaban las covarianzas obtenidas y se determinó que su distribución se asemeja a la Normal con parámetros $\mu = 0.05$ y $\sigma^2$. A continuación se mostrará el código usado y posteriormente las gráficas de la densidad de la distribución de las covarianzas y un QQPlot que las compara con valores de una Normal.\\
 
 \begin{lstlisting}[language=R]
 #Aqui se guardaran las covarianzas de cada simulacion
@@ -95,6 +95,6 @@ A continuación se muestran las gráficas obtenidas:
 	}\hfill
 \end{figure}
 
-Podemos ver en la Figura 1. la similitud de la densidad comparada con la de una normal centrada en cero, y de la misma forma en la Figura 2. el QQPlot de las distribuciones está casi centrado en la recta identidad lo cual indica un alto grado de similitud.
+Podemos ver en la Figura 1. la similitud de la densidad comparada con la de una normal centrada en $0.05$ lo que se obtuvo en el cálculo que se pide en el ejercicio $\frac{1}{18}$, y de la misma forma en la Figura 2. el QQPlot de las distribuciones está casi centrado en la recta identidad lo cual indica un alto grado de similitud.
 
 \end{document}

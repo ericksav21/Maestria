@@ -11,7 +11,7 @@ for(i in 1:100) {
 #plot(density(C))
 
 #Hacer un QQPlot
-qm <- sort(C)
+qm <- C
 qt <- rnorm(100)
 qqplot(qt, qm, xlab="Cuantil teórico", ylab="Cuantil muestral")
 qqline(qm, col = 2)
