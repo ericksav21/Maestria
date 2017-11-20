@@ -7,12 +7,13 @@
 #include "matriz_vector.h"
 
 int main(int argc, char **argv) {
-	if(argc < 2) {
-		printf("Error. Ejecuta: %s [N].\n", argv[0]);
+	if(argc < 4) {
+		printf("Error. Ejecuta: %s [Límite inferior] [Límite superior] [N].\n", argv[0]);
 		return 0;
 	}
-	int n = atoi(argv[1]);
-	solve(0, 5, n);	
+	double a = atof(argv[1]), b = atof(argv[2]);
+	int n = atoi(argv[3]);
+	solve(a, b, n);	
 
 	return 0;
 }

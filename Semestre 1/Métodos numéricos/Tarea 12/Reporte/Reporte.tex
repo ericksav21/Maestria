@@ -98,11 +98,16 @@ Se puede ver en la Figura 2. que pese a que aumentó mucho el número de valores
 
 \textbf{Para ejecutar:} Únicamente debemos de usar el comando $./main$ para ejecutar el programa en consola, este recibe el siguiente argumento:
 \begin{itemize}
+	\item \textbf{Un número en punto flotante:} El límite inferior.
+	\item \textbf{Un número en punto flotante:} El límite superior.
 	\item \textbf{Un número entero:} El tamaño de la discretización.
 \end{itemize}
 
 El programa ejecutará el método trapezoidal para el PVI mostrado anteriormente dentro del intervalo [0, 5]. Se mostrará como resultado el error absoluto promedio y el error absoluto máximo, así como el último valor $y_n$ y el valor de la solución analítica.\\
 
-\textbf{Ejemplo de ejecución:} ./main 400\\
+\textbf{Ejemplo de ejecución:} ./main 0 5 400\\
+
+\section{Observaciones}
+Pese a que el programa funcionó perfectamente en el intervalo antes mencionado, se probó con un rango un poco más amplio y el error empezó a aumentar considerablemente, con lo que se concluye que para rangos más amplios se requiere una discretización mucho mayor.
 
 \end{document}
