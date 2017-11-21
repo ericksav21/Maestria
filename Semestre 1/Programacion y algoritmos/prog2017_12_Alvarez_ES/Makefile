@@ -8,7 +8,7 @@ OBJDIR:=obj
 DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
 
 $(EXEC): $(DIROBJS)
-	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lm
+	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lcairo -lm
 
 $(OBJDIR)/%.o: %.cpp | $(OBJDIR)
 	$(CPP) $(CFLAGS) $< -o $@

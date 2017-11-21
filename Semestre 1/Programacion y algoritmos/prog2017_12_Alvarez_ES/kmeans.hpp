@@ -3,39 +3,37 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <algorithm>
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+#include <map>
+#include <utility>
+
+#include "point.hpp"
 
 #define INF 1000000
 
 using namespace std;
 
-class Point {
-private:
-	double x, y;
-public:
-	Point();
-	Point(double x, double y);
-	~Point();
-	double get_x();
-	double get_y();
-	void set_x(double x);
-	void set_y(double y);
-};
-
 class KMeans {
 private:
-	int no_clusters;
+	int no_clusters, iter;
 	vector<Point> points, centroids;
+	vector<vector<Point> > comp;
 public:
-	KMeans(vector<Point> points, int no_clusters);
+	KMeans(vector<Point> points, int no_clusters, int iterations);
 	~KMeans();
+	vector<Point> get_points();
 	int rand_in_range(int a, int b);
 	double distance(Point a, Point b);
 	void init_centroids();
+	int nearest_centroid(Point p);
+	void run();
+	void print_centroids();
+	void print_points();
 };
 
 #endif

@@ -1,0 +1,6 @@
+plot "data.txt" using 1:2 title 'Conjunto de puntos' w p, "centroids2.txt" using 1:2 title 'Centroids' w p pointtype 6 lc rgb "blue"
+set terminal png nocrop enhanced size 1024,768
+set output 'Grafica2.png'
+replot
+set term x11
+set output
