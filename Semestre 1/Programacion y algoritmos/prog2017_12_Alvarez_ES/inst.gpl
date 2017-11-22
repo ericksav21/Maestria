@@ -1,6 +1,7 @@
-plot "data.txt" using 1:2 title 'Conjunto de puntos' w p, "centroids2.txt" using 1:2 title 'Centroids' w p pointtype 6 lc rgb "blue"
+set palette defined (1 'orange', 2 'red', 3 'gray', 4 'green', 5 'blue', 6 'purple', 7 'coral', 8 '#00FF00', 9 '#BA55D3', 10 '#008080')
+plot "data.txt" using 1:2:3 title 'Conjunto de puntos' w p pt 2 palette, "centroids.txt" using 1:2 title 'Centroides' w p ps 3 pt 6 lc rgb "black"
 set terminal png nocrop enhanced size 1024,768
-set output 'Grafica2.png'
+set output 'Grafica.png'
 replot
 set term x11
 set output

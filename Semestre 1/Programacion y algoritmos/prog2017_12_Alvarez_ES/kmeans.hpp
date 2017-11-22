@@ -14,17 +14,16 @@
 
 #include "point.hpp"
 
-#define INF 1000000
-
 using namespace std;
 
 class KMeans {
 private:
 	int no_clusters, iter;
+	double threshold;
 	vector<Point> points, centroids;
 	vector<vector<Point> > comp;
 public:
-	KMeans(vector<Point> points, int no_clusters, int iterations);
+	KMeans(vector<Point> points, int no_clusters, int iterations, double threshold);
 	~KMeans();
 	vector<Point> get_points();
 	int rand_in_range(int a, int b);

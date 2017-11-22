@@ -1,10 +1,11 @@
 #include "kmeans.hpp"
 
 //Kmeans
-KMeans::KMeans(vector<Point> points, int no_clusters, int iterations) {
+KMeans::KMeans(vector<Point> points, int no_clusters, int iterations, double threshold) {
 	this->points = points;
 	this->no_clusters = no_clusters;
 	this->iter = iterations;
+	this->threshold = threshold;
 
 	init_centroids();
 }
@@ -58,8 +59,9 @@ void KMeans::init_centroids() {
 				break;
 			}
 		}
-		if(!is_valid)
+		if(!is_valid) {
 			continue;
+		}
 
 		Point res(auxX, auxY, k + 1);
 		centroids.push_back(res);
@@ -85,10 +87,9 @@ int KMeans::nearest_centroid(Point p) {
 void KMeans::run() {
 	int t = 0;
 	comp.resize(no_clusters + 1);
+	vector<Point> centroids_ant(no_clusters, Point(0, 0));
 	while(true) {
 		comp.clear();
-		//print_centroids();
-		//cout << endl;
 		//Asociar cada punto a su centroide más cercano
 		for(int i = 0; i < points.size(); i++) {
 			Point *p_act = &(points[i]);
@@ -114,9 +115,28 @@ void KMeans::run() {
 			centroids[i].set_y(my);
 		}
 
-		t++;
-		if(t == iter)
+		//Verificar convergencia
+		bool band = false;
+		for(int i = 0; i < centroids.size(); i++) {
+			double dist = distance(centroids[i], centroids_ant[i]);
+			if(dist >= threshold) {
+				band = true;
+				break;
+			}
+		}
+		if(!band) {
+			cout << "K-Means terminado por convergencia en la iteración: " << (t + 1) << "." << endl;
 			break;
+		}
+		t++;
+		if(t == iter) {
+			cout << "K-Means cumplió el número de iteraciones (" << t << ")." << endl;
+			break;
+		}
+		//Copiar los centroides
+		for(int i = 0; i < centroids.size(); i++) {
+			centroids_ant[i] = centroids[i];
+		}
 	}
 }
 
@@ -132,17 +152,18 @@ void KMeans::print_points() {
 	out_c.open("centroids.txt");
 	vector<int> count(no_clusters + 1);
 	for(int i = 0; i < points.size(); i++) {
-		cout << "X: " << points[i].get_x() << ", Y: " << points[i].get_y() << ", id: " << points[i].get_id() << endl;
+		//cout << "X: " << points[i].get_x() << ", Y: " << points[i].get_y() << ", id: " << points[i].get_id() << endl;
 		count[points[i].get_id()]++;
-		out << points[i].get_x() << " " << points[i].get_y() << endl;
+		out << points[i].get_x() << " " << points[i].get_y() << " " << points[i].get_id() << endl;
 	}
 	for(int i = 0; i < centroids.size(); i++) {
 		out_c << centroids[i].get_x() << " " << centroids[i].get_y() << endl;
 	}
 	out.close();
 	out_c.close();
-	cout << "Conteo:" << endl;
+	cout << "Puntos generados en archivo: data.txt" << endl;
+	cout << "Información de clusters:" << endl;
 	for(int i = 1; i < count.size(); i++) {
-		cout << "Id (" << i << "): " << count[i] << endl;
+		cout << "Cluster #" << i << ": " << count[i] << " elementos." << endl;
 	}
 }

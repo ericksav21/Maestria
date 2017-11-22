@@ -9,6 +9,8 @@
 #include <cstdlib>
 #include <vector>
 
+#define INF 1000000
+
 class Point {
 private:
 	double x, y;

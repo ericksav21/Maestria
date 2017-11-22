@@ -12,22 +12,26 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	if(argc < 3) {
-		cout << "Error. Ejecuta: " << string(argv[0]) << " [Archivo CSV] [No. clusters]." << endl;
+	if(argc < 7) {
+		cout << "Error. Ejecuta: " << string(argv[0]) << " [Archivo CSV] [Col 1] [Col 2] [No. clusters] [Tolerancia] [No. iter]." << endl;
 		return 0;
 	}
 	srand(time(NULL));
 	vector<Point> data;
-	read_data(argv[1], data);
-	KMeans km(data, atoi(argv[2]), 100);
+	int c1 = atoi(argv[2]), c2 = atoi(argv[3]);
+	int no_clusters = atoi(argv[4]), iter = atoi(argv[6]);
+	double tol = atof(argv[5]);
+	if(no_clusters > 10) {
+		cout << "Se limita el número de clusters a máximo 10." << endl;
+		return 0;
+	}
+
+	read_data(argv[1], data, c1, c2);
+	KMeans km(data, no_clusters, iter, tol);
 	km.run();
 	km.print_points();
-
-	Graphics g(1024, 768, "png");
-	g.create_background();
-	g.draw_grid();
-	g.set_points(Graphics::normalize_points(km.get_points(), 1150));
-	g.save_img();
+	Graphics g;
+	g.plot_data();
 
 	return 0;
 }

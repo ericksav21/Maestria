@@ -41,7 +41,7 @@ vector<string> read_csv_line(istream &in, char delimiter) {
 	}
 }
 
-void read_data(char *files_name, vector<Point> &data) {
+void read_data(char *files_name, vector<Point> &data, int c1, int c2) {
 	ifstream in;
 	vector<string> v;
 
@@ -51,7 +51,7 @@ void read_data(char *files_name, vector<Point> &data) {
     while(in.good()) {
     	vector<string> row = read_csv_line(in, ',');
     	if(k > 0) {
-    		Point p(atof(row[6].c_str()), atof(row[9].c_str()));
+    		Point p(atof(row[c1 - 1].c_str()), atof(row[c2 - 1].c_str()));
     		data.push_back(p);
     	}
     	k++;

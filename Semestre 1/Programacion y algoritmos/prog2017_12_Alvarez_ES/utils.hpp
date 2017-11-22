@@ -15,6 +15,6 @@ string trim(string str);
 
 vector<string> read_csv_line(istream &in, char delimiter);
 
-void read_data(char *files_name, vector<Point> &data);
+void read_data(char *files_name, vector<Point> &data, int c1, int c2);
 
 #endif
