@@ -11,6 +11,17 @@ Point::Point(int i, int j) {
 
 Point::~Point() {}
 
+double Point::distance(Point o) const {
+	//Calcula la distancia de este punto con respecto a 'o'
+	double res = pow(i - o.get_i(), 2) + pow(j - o.get_j(), 2);
+	return sqrt(res);
+}
+
+double Point::distance() const {
+	//Se asume la distancia con respecto al origen
+	return distance(Point(0, 0));
+}
+
 int Point::get_i() {
 	return i;
 }

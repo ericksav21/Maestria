@@ -1,5 +1,18 @@
 #include "image.hpp"
 
+Image::Image(int width, int height, int color) {
+	//Genera una imagen con fondo basado en el color dado
+	this->width = width;
+	this->height = height;
+	scale = 255;
+	mat.resize(height);
+	for(int i = 0; i < height; i++) {
+		for(int j = 0; j < width; j++) {
+			mat[i].push_back(color);
+		}
+	}
+}
+
 Image::Image(string files_name) {
 	read_from_file(files_name);
 }
@@ -110,6 +123,7 @@ void Image::skeletonize() {
 					if((b_res >= 2 && b_res <= 6) &&
 						a_res == 1 &&
 						//P2 * P4 * P6
+						//P4 * P6 * P8
 						(mat[i - 1][j] * mat[i][j + 1] * mat[i + 1][j] == 0) &&
 						 mat[i][j + 1] * mat[i + 1][j] * mat[i][j - 1] == 0) {
 
@@ -133,6 +147,7 @@ void Image::skeletonize() {
 					if((b_res >= 2 && b_res <= 6) &&
 						a_res == 1 &&
 						//P2 * P4 * P8
+						//P2 * P6 * P8
 						(mat[i - 1][j] * mat[i][j + 1] * mat[i][j - 1] == 0) &&
 						 mat[i - 1][j] * mat[i + 1][j] * mat[i][j - 1] ==  0) {
 
@@ -147,6 +162,76 @@ void Image::skeletonize() {
 			mat[points[i].get_i()][points[i].get_j()] = 0;
 		}
 	} while(change);
+}
+
+void Image::draw_line(Point a, Point b, int color) {
+	int x0 = a.get_i(), y0 = a.get_j();
+	int x1 = b.get_i(), y1 = b.get_j();
+	int dx = x1 - x0;
+    int dy = y1 - y0;
+
+    mat[x0][y0] = color;
+    if (abs(dx) > abs(dy)) {
+        double m = (double) dy / (double) dx;
+        double b = y0 - m * x0;
+        if(dx < 0)
+            dx = -1;
+        else
+            dx = 1;
+        while (x0 != x1) {
+            x0 += dx;
+            y0 = round(m * x0 + b);
+            mat[x0][y0] = color;
+        }
+    }
+    else if (dy != 0) {
+        double m = (double) dx / (double) dy;
+        double b = x0 - m * y0;
+        if(dy < 0)
+            dy = -1;
+        else
+            dy = 1;
+        while (y0 != y1) {
+            y0 += dy;
+            x0 = round(m * y0 + b);
+            mat[x0][y0] = color;
+        }
+    }
+}
+
+void Image::draw_parabola(Point c, int p, int bound, int dir, int color) {
+	int x, y, cnt, d, p2, p4;
+	int xc = c.get_i();
+	int yc = c.get_j();
+	p2 = 2 * p;
+	p4 = 2 * p2;
+	x = 0, y = 0;
+	d = 1 - p;
+	cnt = 0;
+	while((y < p) && (cnt <= bound)) {
+		mat[y + yc][x + xc] = color;
+		mat[yc - y][x + xc] = color;
+		if(d >= 0) {
+			x += dir;
+			cnt++;
+			d -= p2;
+		}
+		y++;
+		d += 2 * y + 1;
+	}
+	if(d == 1) d = 1 - p4;
+	else d = 1 - p2;
+	while(cnt <= bound) {
+		mat[y + yc][x + xc] = color;
+		mat[yc - y][x + xc] = color;
+		if(d <= 0) {
+			y++;
+			d += 4 * y;
+		}
+		x += dir;
+		cnt++;
+		d -= p4;
+	}
 }
 
 void Image::print() {
