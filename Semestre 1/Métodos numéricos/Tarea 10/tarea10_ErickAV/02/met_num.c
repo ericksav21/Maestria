@@ -2,7 +2,7 @@
 
 double get_EPS() {
     double Eps = 1.0;
- 
+
     while (1.0 + Eps / 2.0 != 1.0)
         Eps /= 2.0;
 
@@ -54,36 +54,37 @@ double *resuelve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 
 double* generate_M(double *x, double *y, int n, double tol) {
 	//Generamos las hi's
-	//int m = n - 1, l = m - 1;
 	double *h = create_vector(n, double);
 	double *mu = create_vector(n, double);
 	double *lambda = create_vector(n, double);
 	double *d = create_vector(n - 2, double);
-	for(int i = 0; i < n; i++) h[i] = mu[i] = lambda[i] = 0;
-	for(int i = 1; i < n; i++) {
-		h[i] = x[i] - x[i - 1];
-	}
-	for(int i = 1; i < n - 1; i++) {
-		mu[i] = h[i] / (h[i] + h[i + 1]);
-		lambda[i] = h[i + 1] / (h[i] + h[i + 1]);
-		d[i - 1] = (6.0 / (h[i] + h[i + 1])) * ((y[i + 1] - y[i]) / h[i + 1] - (y[i] - y[i - 1]) / h[i]);
-	}
 
-	MAT3D *mat = create_mat_3d(n - 2);
-	for(int i = 1; i < n - 2; i++) {
-		mat->a[i] = mu[i + 1];
-		mat->b[i] = 2.0;
-		mat->c[i - 1] = lambda[i];
-	}
-	//mat->a[n - 1] = mu[n - 1];
-	mat->b[0] = mat->b[n - 3] = 2.0;
-	mat->c[0] = lambda[1];
+  for(int i = 0; i < n - 2; i++) d[i] = 0.0;
+  for(int i = 0; i < n; i++) h[i] = mu[i] = lambda[i] = 0.0;
+  for(int i = 1; i < n; i++) {
+    h[i] = x[i] - x[i - 1];
+  }
+  for(int i = 1; i < n - 1; i++) {
+    mu[i] = h[i] / (h[i] + h[i + 1]);
+    lambda[i] = h[i + 1] / (h[i] + h[i + 1]);
+    d[i - 1] = (6.0 / (h[i] + h[i + 1])) * ((y[i + 1] - y[i]) / h[i + 1] - (y[i] - y[i - 1]) / h[i]);
+  }
 
-	double *Maux = resuelve_m_tridiagonal(mat, d, tol);
-	double *M = create_vector(n, double);
-	for(int i = 1; i < n - 1; i++) {
-		M[i] = Maux[i - 1];
-	}
+  MAT3D *mat = create_mat_3d(n - 2);
+  for(int i = 1; i < n - 2; i++) {
+    mat->a[i] = mu[i + 1];
+    mat->b[i] = 2.0;
+    mat->c[i - 1] = lambda[i];
+  }
+  //mat->a[n - 1] = mu[n - 1];
+  mat->b[0] = mat->b[n - 3] = 2.0;
+  mat->c[0] = lambda[1];
+
+  double *Maux = resuelve_m_tridiagonal(mat, d, tol);
+  double *M = create_vector(n, double);
+  for(int i = 1; i < n - 1; i++) {
+    M[i] = Maux[i - 1];
+  }
 
 	mat = free_mat_3d(mat);
 	free(mat);
@@ -105,10 +106,10 @@ double evaluate_pol(double *x, double *y, double *M, double xm, int n) {
 		}
 	}
 	double hi = x[ii] - x[ii - 1];
-	double Cp = y[ii - 1] - (M[ii - 1] * hi * hi / 6.0);
+	double Cp = y[ii - 1] - M[ii - 1] * (pow(hi, 2) / 6.0);
 	double C = ((y[ii] - y[ii - 1]) / hi) - ((hi / 6.0) * (M[ii] - M[ii - 1]));
 
-	double Si = (M[ii - 1] * pow(x[ii] - xm, 3) / 6.0 * hi) + (M[ii] * pow(xm - x[ii - 1], 3) / 6.0 * hi);
+	double Si = M[ii - 1] * pow(x[ii] - xm, 3) / (6.0 * hi) + M[ii] * pow(xm - x[ii - 1], 3) / (6.0 * hi);
 	Si += (C * (xm - x[ii - 1])) + Cp;
 
 	return Si;

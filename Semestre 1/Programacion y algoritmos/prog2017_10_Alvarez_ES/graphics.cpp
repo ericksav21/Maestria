@@ -21,7 +21,7 @@ cairo_t* init_cairo(int width, int height, cairo_surface_t **surface, char *file
 
 	if(!is_png) {
 		cairo_ps_surface_dsc_begin_page_setup (*surface);
-    	cairo_ps_surface_dsc_comment (*surface, "%%PageOrientation: Portrait");
+    		cairo_ps_surface_dsc_comment (*surface, "%%PageOrientation: Portrait");
 	}
 	create_background(cr, width, height);
 
