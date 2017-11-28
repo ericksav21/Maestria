@@ -12,14 +12,13 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	Image img(500, 500, 255);
-	img.draw_parabola(Point(300, 250), 50, 300, -1, 0);
-	img.save("Test.pgm", false);
-	//Image img("GMF2_15.pgm");
-	//img.skeletonize();
+	Image img(500, 500, 0);
+
+	//img.draw_parabola(Point(300, 250), 50, 300, -1, 255);
+	//img.save("Test.pgm", false);
+	Detector d(img);
 	//Graphics g(img.get_width(), img.get_height(), "res.png");
 	//g.copy_img(img);
 	//g.save(false);
-	//img.save("Jeje.pgm", false);
 	return 0;
 }

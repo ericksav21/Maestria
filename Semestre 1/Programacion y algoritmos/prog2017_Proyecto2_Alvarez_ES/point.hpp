@@ -21,6 +21,7 @@ public:
 };
 
 class PointComparator {
+public:
 	bool operator()(const Point &a, const Point &b) {
 		return a.distance() < b.distance();
 	}
