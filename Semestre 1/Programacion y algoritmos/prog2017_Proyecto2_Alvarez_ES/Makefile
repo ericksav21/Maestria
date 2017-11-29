@@ -2,10 +2,13 @@ CPP=g++
 CFLAGS=-w -c
 LFLAGS=
 EXEC=main
+IMGDIR:=data
 CPPS:=$(wildcard *.cpp)
 OBJS:=$(patsubst %.cpp,%.o,$(CPPS))
+IMGS:=$(wildcard *.pgm)
 OBJDIR:=obj
 DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
+DIRIMGS:=$(addprefix $(IMGDIR)/,$(IMGS))
 
 $(EXEC): $(DIROBJS)
 	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lcairo -lm
@@ -21,6 +24,9 @@ debug:
 
 release:
 	$(MAKE) CFLAGS="-O2 -std=c++11 -w -c" LFLAGS="-O2 -std=c++11"
+
+run:
+	./main $(DIRIMGS)
 
 clean:
 	rm -f $(EXEC) $(DIROBJS)

@@ -1,5 +1,5 @@
-#ifndef DETECTOR_H
-#define DETECTOR_H
+#ifndef GENETIC_H
+#define GENETIC_H
 
 #include <iostream>
 #include <cstdio>
@@ -23,36 +23,38 @@
 
 using namespace std;
 
-class Detector {
+class Genetic {
 private:
 	vector<Point> white_points;
 	Image *img;
-	//Para el UMDA
+	//Para el Genético
 	int pop_size, no_generations;
-	double selection_rate;
-	int nbits;
+	double uniform_rate, mutation_rate;
+	int nbits, tournament_size;
 
 	vector<int> get_sub_vector(vector<int> v, int i, int j);
 	vector<int> to_binary(int n);
 	int to_int(vector<int> v);
 	void generate_points(vector<int> v, double &xc, double &yc, int &dir, double &p);
 	Image generate_parabola(int width, int height, double xc, double yc, int dir, double p);
-	vector<int> generate_bin(vector<double> P);
-	void generate_pop(vector<double> P, vector<vector<int> > &pop, int start);
-	vector<Individual> evaluate_pop(vector<vector<int> > pop);
-	void update_prob(vector<double> &P, vector<Individual> evaluated);
+	bool is_right_vector(vector<int> v);
+
+	//Genético
+	void generate_pop(vector<vector<int> > &pop);
+	vector<int> crossover(vector<int> v1, vector<int> v2);
+	vector<int> mutate(vector<int> v);
+	vector<Individual> evaluate_pop(vector<vector<int> > &pop);
+	vector<int> get_fittest(vector<vector<int> > pop_t, vector<Individual> &S);
+	vector<int> tournamet_selection(vector<vector<int> > &pop, vector<Individual> &S);
+	vector<vector<int> > evolve_pop(vector<vector<int> > &pop);
 
 	//Evaluadores
-	int weighted_points(Image a, Point c, int p, int dir);
 	int Hadamard(Image a, Image b);
 public:
-	Detector(Image img);
-	~Detector();
-	Image get_image();
-	vector<Point> get_white_points();
-	void print_white_points();
-	void set_UMDA_parameters(int pop_size, int no_generations, double selection_rate);
-	vector<Point> UMDA();
+	Genetic(Image img);
+	~Genetic();
+	void set_parameters(int pop_size, int no_generations, double uniform_rate, double mutation_rate);
+	void run();
 };
 
 #endif

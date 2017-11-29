@@ -209,8 +209,13 @@ void Image::draw_parabola(Point c, int p, int bound, int dir, int color) {
 	d = 1 - p;
 	cnt = 0;
 	while((y < p) && (cnt <= bound)) {
-		mat[y + yc][x + xc] = color;
-		mat[yc - y][x + xc] = color;
+		if((y + yc >= 0 && y + yc < height) &&
+		   (x + xc >= 0 && x + xc < width))
+			mat[y + yc][x + xc] = color;
+
+		if((yc - y >= 0 && yc - y < height) &&
+		   (x + xc >= 0 && x + xc < width))
+			mat[yc - y][x + xc] = color;
 		if(d >= 0) {
 			x += dir;
 			cnt++;
@@ -222,8 +227,14 @@ void Image::draw_parabola(Point c, int p, int bound, int dir, int color) {
 	if(d == 1) d = 1 - p4;
 	else d = 1 - p2;
 	while(cnt <= bound) {
-		mat[y + yc][x + xc] = color;
-		mat[yc - y][x + xc] = color;
+		if((y + yc >= 0 && y + yc < height) &&
+		   (x + xc >= 0 && x + xc < width))
+			mat[y + yc][x + xc] = color;
+
+		if((yc - y >= 0 && yc - y < height) &&
+		   (x + xc >= 0 && x + xc < width))
+			mat[yc - y][x + xc] = color;
+		
 		if(d <= 0) {
 			y++;
 			d += 4 * y;
