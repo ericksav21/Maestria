@@ -254,6 +254,19 @@ void Image::print() {
 	}
 }
 
+vector<Point> Image::get_white_points() {
+	vector<Point> res;
+	for(int i = 0; i < height; i++) {
+		for(int j = 0; j < width; j++) {
+			if(mat[i][j]) {
+				res.push_back(Point(i, j));
+			}
+		}
+	}
+
+	return res;
+}
+
 void Image::save(string files_name, bool use_path) {
 	if(use_path) {
 		stringstream ss;

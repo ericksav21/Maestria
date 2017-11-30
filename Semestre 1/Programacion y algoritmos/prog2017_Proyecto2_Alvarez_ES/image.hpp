@@ -34,6 +34,7 @@ public:
 	void draw_line(Point a, Point b, int color);
 	void draw_parabola(Point c, int p, int bound, int dir, int color);
 	void print();
+	vector<Point> get_white_points();
 	void save(string files_name, bool use_path);
 };
 

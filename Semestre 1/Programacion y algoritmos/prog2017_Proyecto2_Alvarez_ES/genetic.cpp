@@ -1,31 +1,10 @@
 #include "genetic.hpp"
 
-Genetic::Genetic(Image img) {
-	this->tournament_size = 5;
-	this->img = new Image(img.get_mat());
-	srand(time(NULL));
-
-	//Inicializar la lista de puntos blancos
-	for(int i = 0; i < img.get_height(); i++) {
-		for(int j = 0; j < img.get_width(); j++) {
-			if(img.get_val(i, j)) {
-				//Punto blanco
-				white_points.push_back(Point(i, j));
-			}
-		}
-	}
-
-	int n = white_points.size();
-	nbits = 0;
-	while(n > 0) {
-		nbits++;
-		n = n >> 1;
-	}
+Genetic::Genetic(Image img, bool verb) : Base(img, verb) {
+	this->tournament_size = 3;
 }
 
 Genetic::~Genetic() {
-	if(img)
-		delete img;
 }
 
 void Genetic::set_parameters(int pop_size, int no_generations, double uniform_rate, double mutation_rate) {
@@ -33,78 +12,11 @@ void Genetic::set_parameters(int pop_size, int no_generations, double uniform_ra
 	this->no_generations = no_generations;
 	this->uniform_rate = uniform_rate;
 	this->mutation_rate = mutation_rate;
-}
 
-int Genetic::Hadamard(Image a, Image b) {
-	int res = 0;
-	for(int i = 0; i < a.get_height(); i++) {
-		for(int j = 0; j < a.get_width(); j++) {
-			int val = a.get_val(i, j) * b.get_val(i, j);
-			if(val != 0) {
-				res++;
-			}
-		}
-	}
-
-	return res;
-}
-
-vector<int> Genetic::get_sub_vector(vector<int> v, int i, int j) {
-	vector<int> res;
-	for(int k = i; k <= j; k++)
-		res.push_back(v[k]);
-
-	return res;
-}
-
-vector<int> Genetic::to_binary(int n) {
-	vector<int> res;
-	string binary = bitset<12>(n).to_string();
-	for(int i = 0; i < binary.size(); i++) {
-		res.push_back(binary[i] - '0');
-	}
-
-	return res;
-}
-
-int Genetic::to_int(vector<int> v) {
-	int sum = 0, tmp = 1;
-	for(int i = 0; i < nbits; i++) {
-		sum += v[i] * tmp;
-		tmp *= 2;
-	}
-
-	return sum;
-}
-
-void Genetic::generate_points(vector<int> v, double &xc, double &yc, int &dir, double &p) {
-	int n1 = to_int(get_sub_vector(v, 0, nbits - 1));
-	int n2 = to_int(get_sub_vector(v, nbits, (nbits * 2) - 1));
-	int n3 = to_int(get_sub_vector(v, nbits * 2, (nbits * 3) - 1));
-
-	int xi = white_points[n1].get_i(), yi = white_points[n1].get_j();
-	int xj = white_points[n2].get_i(), yj = white_points[n2].get_j();
-	int xk = white_points[n3].get_i(), yk = white_points[n3].get_j();
-
-	//Generar los coeficientes
-	double den = (double)((yi - yj) * (yi - yk) * (yj - yk));
-	double A = (double)(yk * (xj - xi) + yj * (xi - xk) + yi * (xk - xj)) / den;
-	double B = (double)(pow(yk, 2) * (xi - xj) + pow(yj, 2) * (xk - xi) + pow(yi, 2) * (xj - xk)) / den;
-	double C = (double)(yj * yk * (yj - yk) * xi + yk * yi * (yk - yi) * xj + yi * yj * (yi - yj) * xk);
-	C /= den;
-
-	dir = (A > 0 ? 1 : -1);
-	xc = C - ((B * B) / (4.0 * A));
-	yc = -B / (2.0 * A);
-	p = 1.0 / (2.0 * A);
-}
-
-Image Genetic::generate_parabola(int width, int height, double xc, double yc, int dir, double p) {
-	int bound = width * 2;
-	Image res(width, height, 0);
-	res.draw_parabola(Point((int)xc, (int)yc), abs((int)p), bound, dir, 255);
-
-	return res;
+	cout << "Tamaño de población " << pop_size << endl;
+	cout << "Número de generaciones: " << no_generations << endl;
+	cout << "Porcentaje de cruce: " << uniform_rate << endl;
+	cout << "Porcentaje de mutación: " << mutation_rate << endl << endl;
 }
 
 bool Genetic::is_right_vector(vector<int> v) {
@@ -221,7 +133,7 @@ vector<Individual> Genetic::evaluate_pop(vector<vector<int> > &pop) {
 		generate_points(v_act, xc, yc, dir, p);
 
 		Image img_act = generate_parabola(img->get_width(), img->get_height(), xc, yc, dir, p);
-		int quality = Hadamard(*img, img_act);
+		double quality = Hadamard(*img, img_act);
 		ind_act.set_quality(quality);
 		res.push_back(ind_act);
 	}
@@ -235,7 +147,8 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > &pop) {
 	//Obtener el mejor elemento
 	vector<Individual> S = evaluate_pop(pop);
 	new_pop[0] = S[0].get_bv();
-	cout << S[0].get_quality() << endl;
+	if(verb)
+		cout << "Mejor Fitness: " << S[0].get_quality() << endl << endl;
 
 	//Cruza
 	for(int i = 1; i < pop_size; i++) {
@@ -253,31 +166,23 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > &pop) {
 }
 
 //Genético
-void Genetic::run() {
+void Genetic::run(string out) {
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	//Generar la población inicial
 	vector<vector<int> > pop(pop_size);
 	generate_pop(pop);
 
 	for(int i = 1; i <= no_generations; i++) {
-		cout << "Generación " << i << endl;
+		if(verb)
+			cout << "Generación " << i << endl;
 		vector<vector<int> > np = evolve_pop(pop);
 		pop.clear();
 		pop = np;
 	}
 
-	double xc, yc, p;
-	int dir;
-	generate_points(pop[0], xc, yc, dir, p);
+	save_img(pop[0], out);
 
-	char name[25];
-	sprintf(name, "Final.pgm");
-
-	Image img_act = generate_parabola(img->get_width(), img->get_height(), xc, yc, dir, p);
-	for(int i = 0; i < img->get_height(); i++) {
-		for(int j = 0; j < img->get_width(); j++) {
-			if(img->get_val(i, j))
-				img_act.set_val(i, j, 255);
-		}
-	}
-	img_act.save(string(name), false);
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+	cout << "Ejecución finalizada.\n" << "Tiempo transcurrido: " << time_span.count() << " segundos." << endl << endl;
 }

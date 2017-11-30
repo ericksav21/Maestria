@@ -1,16 +1,17 @@
 CPP=g++
-CFLAGS=-w -c
-LFLAGS=
+CFLAGS=-w -c -std=c++11
+LFLAGS=-std=c++11
 EXEC=main
 IMGDIR:=data
 CPPS:=$(wildcard *.cpp)
 OBJS:=$(patsubst %.cpp,%.o,$(CPPS))
-IMGS:=$(wildcard *.pgm)
+IMGS:=$(wildcard $(IMGDIR)/*.pgm)
 OBJDIR:=obj
+OUTPUTDIR:=out
 DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
-DIRIMGS:=$(addprefix $(IMGDIR)/,$(IMGS))
+DIRIMGS:=$(IMGS:$(IMGDIR)/%=%)
 
-$(EXEC): $(DIROBJS)
+$(EXEC): $(DIROBJS) | $(OUTPUTDIR)
 	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lcairo -lm
 
 $(OBJDIR)/%.o: %.cpp | $(OBJDIR)
@@ -19,14 +20,22 @@ $(OBJDIR)/%.o: %.cpp | $(OBJDIR)
 $(OBJDIR):
 	mkdir -p $@
 
+$(OUTPUTDIR):
+	mkdir -p $@
+
 debug:
 	$(MAKE) CFLAGS="-g -std=c++11 -w -c" LFLAGS="-g -std=c++11"
 
 release:
 	$(MAKE) CFLAGS="-O2 -std=c++11 -w -c" LFLAGS="-O2 -std=c++11"
 
-run:
-	./main $(DIRIMGS)
+run1:
+	rm -f out/*.png
+	sh runner.sh '1'
+
+run2:
+	rm -f out/*.png
+	sh runner.sh '2'
 
 clean:
 	rm -f $(EXEC) $(DIROBJS)

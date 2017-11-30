@@ -46,6 +46,15 @@ void Graphics::copy_img(Image img) {
 	}
 }
 
+void Graphics::copy_points(vector<Point> ppoints) {
+	cairo_set_source_rgb(cr, 1, 0, 0);
+	for(int i = 0; i < ppoints.size(); i++) {
+		Point c = ppoints[i];
+		cairo_rectangle (cr, c.get_j(), c.get_i(), 1, 1);
+		cairo_fill(cr);
+	}
+}
+
 void Graphics::save(bool use_path) {
 	string files_path;
 	if(use_path) {

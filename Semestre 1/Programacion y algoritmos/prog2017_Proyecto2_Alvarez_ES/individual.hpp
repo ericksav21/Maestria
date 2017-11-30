@@ -9,15 +9,15 @@ using namespace std;
 class Individual {
 private:
 	vector<int> bv;
-	int quality;
+	double quality;
 public:
 	Individual();
-	Individual(vector<int> bv, int quality);
+	Individual(vector<int> bv, double quality);
 	~Individual();
 	void set_bv(vector<int> bv);
-	void set_quality(int quality);
+	void set_quality(double quality);
 	vector<int> get_bv();
-	int get_quality() const;
+	double get_quality() const;
 };
 
 class IndividualComparator {
