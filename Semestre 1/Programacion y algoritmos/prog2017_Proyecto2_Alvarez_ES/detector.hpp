@@ -14,6 +14,7 @@
 #include <string>
 #include <cstring>
 #include <utility>
+#include <fstream>
 #include <sstream>
 
 #include "util.hpp"

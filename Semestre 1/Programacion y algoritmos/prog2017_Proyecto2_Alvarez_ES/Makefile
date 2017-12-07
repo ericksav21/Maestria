@@ -46,3 +46,5 @@ help:
 	@echo 'Comando: make release - Compila de manera optimizada.'
 	@echo 'Comando: make debug - Compila en modo debug.'
 	@echo 'Comando: make clean - Limpia todos los archivos generados por la compilación incluyendo el ejecutable.'
+	@echo 'Comando: make run1 - Realiza una ejecución del UMDA con las imágenes contenidas en la carpeta data y guarda los resultados en la carpeta out.'
+	@echo 'Comando: make run2 - Realiza una ejecución del AG con las imágenes contenidas en la carpeta data y guarda los resultados en la carpeta out.'
