@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	Horn_Schunck(img1, img2, &vx, &vy, 10000, 1.9);
+	Horn_Schunck(img1, img2, &vx, &vy, 10000, 1.5);
 
 	IMG *out = create_img(width, height);
 	quiver(out, vx, vy, width, height);

@@ -177,8 +177,8 @@ void Horn_Schunck(IMG *img1, IMG *img2, double ***vx, double ***vy, int iter, do
 void quiver(IMG *out, double **vx, double **vy, int width, int height) {
 	double l_max = -10;
 
-	for(int y = 0; y < height; y += 15) {
-		for(int x = 0; x < width; x += 15) {
+	for(int y = 0; y < height; y += 10) {
+		for(int x = 0; x < width; x += 10) {
 			double dx = vx[y][x];
 			double dy = vy[y][x];
 
@@ -188,8 +188,8 @@ void quiver(IMG *out, double **vx, double **vy, int width, int height) {
 		}
 	}
 
-	for(int y = 0; y < height; y += 15) {
-		for(int x = 0; x < width; x += 15) {
+	for(int y = 0; y < height; y += 10) {
+		for(int x = 0; x < width; x += 10) {
 			double dx = vx[y][x];
 			double dy = vy[y][x];
 
