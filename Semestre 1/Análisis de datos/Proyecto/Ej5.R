@@ -31,7 +31,7 @@ ej2 <- function(datos) {
   d2 <- duration[-len] #Tiene -2 valores pero sigue comenzando en i
   d22 <- d2[-length(d2)]
   
-  predictorB <- lm(w2 ~ d11 + d22 + w11, data=datos)
+  predictorB <- lm(w2 ~ d11 + d22 + w11)
   
   return(predictorB)
 }
@@ -48,7 +48,6 @@ vc1 <- function(datos) {
     gEntrenamiento <- subset(datos, id %in% lista[-i])
     
     modelo <- ej1(gEntrenamiento)$p
-    #mPredictor <- data.frame(duration = gPrueba$duration[-length(gPrueba$duration)], waiting = gPrueba$waiting[-1])
     predictor <- predict(modelo, gPrueba)
     ei <- (predictor - gPrueba$waiting)^2
     errores <- sqrt(mean(ei))

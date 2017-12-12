@@ -54,7 +54,7 @@ double** transpose_matrix(double **A, double **X, int nr, int nc) {
 	return X;
 }
 
-int** add_mat(int **A, int **B, int **X, int nr, int nc) {
+double** add_mat(double **A, double **B, double **X, int nr, int nc) {
 	for(int i = 0; i < nr; i++) {
 		for(int j = 0; j < nc; j++) {
 			X[i][j] = A[i][j] + B[i][j];

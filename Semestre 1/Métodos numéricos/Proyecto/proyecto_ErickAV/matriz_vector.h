@@ -34,7 +34,7 @@ void print_matrix_i(int **A, int nr, int nc);
 double** transpose_matrix(double **A, double **X, int nr, int nc);
 
 /* Suma dos matrices y guarda el resultado en X */
-int** add_mat(int **A, int **B, int **X, int nr, int nc);
+double** add_mat(double **A, double **B, double **X, int nr, int nc);
 
 /* Resta dos matrices y guarda el resultado en X */
 int** substract_mat(int **A, int **B, int **X, int nr, int nc);

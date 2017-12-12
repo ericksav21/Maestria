@@ -23,24 +23,15 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	Horn_Schunck(img1, img2, &vx, &vy, 50, 0.1);
+	Horn_Schunck(img1, img2, &vx, &vy, 10000, 1.9);
 
-	FILE *out1, *out2;
-	out1 = fopen("vx.txt", "w");
-	out2 = fopen("vy.txt", "w");
-	for(int i = 0; i < height; i++) {
-		for(int j = 0; j < width; j++) {
-			fprintf(out1, "%lf ", vx[i][j]);
-			fprintf(out2, "%lf ", vy[i][j]);
-		}
-		fprintf(out1, "\n");
-		fprintf(out2, "\n");
-	}
-	fclose(out1);
-	fclose(out2);
+	IMG *out = create_img(width, height);
+	quiver(out, vx, vy, width, height);
+	print_img(out, "out.pgm");
 
 	free_img(img1);
 	free_img(img2);
+	free_img(out);
 	free_matrix(vx);
 	free_matrix(vy);
 

@@ -66,7 +66,7 @@ ej2 <- function(AnoCHD, ACHD, h1, h2, rangoSBP) {
   return(pres)
 }
 
-path <- "/home/ericksav22/Documentos/Maestria/GIT/Semestre 1/Análisis de datos/Proyecto/SAheart.data"
+path <- "/home/e-082017-04/Documents/Maestria/GIT/Semestre 1/Análisis de datos/Proyecto/SAheart.data"
 data <- read.table(path, sep=",", head=T, row.names=1)
 
 #Parte 1 - Trabajar con grupos que no tienen CHD
