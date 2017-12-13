@@ -1,19 +1,57 @@
 #include <stdio.h>
+#include <string.h>
+#include <map>
 
-#include "image.h"
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+
+#include "parameter.h"
 #include "matriz_vector.h"
 #include "met_num.h"
 
+using namespace cv;
+using namespace std;
+
 int main(int argc, char **argv) {
-	if(argc < 3) {
-		printf("Error. Ejecuta: %s [Ruta imagen 1] [Ruta imagen 2]\n", argv[0]);
+	Parameter par(argc, argv);
+	if(argc < 5) {
+		if(argc >= 2 && string(argv[1]) == "--help") {
+			par.print_help();
+			return 0;
+		}
+		printf("Error. Ejecute %s --help para ver la ayuda del sistema.", argv[0]);
 		return 0;
 	}
+	map<string, string> parameters = par.process();
+	char img_path1[50], img_path2[50];
+	sprintf(img_path1, "%s/%s", PATH_IMG, parameters["file1"].c_str());
+	sprintf(img_path2, "%s/%s", PATH_IMG, parameters["file2"].c_str());
+	Mat img1 = imread(img_path1, 1);
+	Mat img2 = imread(img_path2, 1);
+	double lambda = stof(parameters["lambda"]);
 
-	IMG *img1 = read_img(argv[1]);
-	IMG *img2 = read_img(argv[2]);
-	int width = img1->width;
-	int height = img1->height;
+	Mat g_img1, g_img2;
+	int width = img1.cols;
+	int height = img1.rows;
+
+	cvtColor(img1, g_img1, CV_BGR2GRAY);
+	cvtColor(img2, g_img2, CV_BGR2GRAY);
+
+	Mat g1, g2;
+	GaussianBlur(g_img1, g1, Size(5, 5), 0, 0);
+	GaussianBlur(g_img2, g2, Size(5, 5), 0, 0);
+
+	int algo;
+	if(parameters["algo"] == "GS") algo = 0;
+	else if(parameters["algo"] == "GPF") algo = 1;
+	else {
+		printf("Error. No se reconoce el algoritmo.\n");
+		return 0;
+	}
+	double tol = (parameters.count("toler") ? stof(parameters["toler"]) : 0.1);
+	int iter = (parameters.count("iter") ? stoi(parameters["iter"]) : 5000);
+	double scale = (parameters.count("scale") ? stof(parameters["scale"]) : 1.0);
 
 	double **vx = create_matrix(height, width, double);
 	double **vy = create_matrix(height, width, double);
@@ -22,16 +60,12 @@ int main(int argc, char **argv) {
 			vx[i][j] = vy[i][j] = 0.0;
 		}
 	}
+	if(!algo)
+		Horn_Schunck(g1, g2, &vx, &vy, iter, lambda, tol);
+	else
+		Horn_Schunck2(g1, g2, &vx, &vy, iter, lambda, tol);
+	quiver(img2, vx, vy, width, height, scale);
 
-	Horn_Schunck(img1, img2, &vx, &vy, 10000, 1.5);
-
-	IMG *out = create_img(width, height);
-	quiver(out, vx, vy, width, height);
-	print_img(out, "out.pgm");
-
-	free_img(img1);
-	free_img(img2);
-	free_img(out);
 	free_matrix(vx);
 	free_matrix(vy);
 

@@ -1,26 +1,34 @@
 CPP=g++
-CFLAGS=-w -c
-LFLAGS=
+CFLAGS=-w -c -std=c++11
+LFLAGS=-std=c++11
 EXEC=main
 CPPS:=$(wildcard *.cpp)
 OBJS:=$(patsubst %.cpp,%.o,$(CPPS))
+IMGDIR:=images
+OUTDIR:=out
 OBJDIR:=obj
 DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
 
 $(EXEC): $(DIROBJS)
-	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lcairo -lm
+	$(CPP) $(LFLAGS) -o $@ $(DIROBJS) -lm `pkg-config --libs --cflags opencv`
 
 $(OBJDIR)/%.o: %.cpp | $(OBJDIR)
 	$(CPP) $(CFLAGS) $< -o $@
 
-$(OBJDIR):
+$(OBJDIR): $(OUTDIR)
+	mkdir -p $@
+
+$(OUTDIR): $(IMGDIR)
+	mkdir -p $@
+
+$(IMGDIR):
 	mkdir -p $@
 
 debug:
-	$(MAKE) CFLAGS="-g -w -c" LFLAGS="-g"
+	$(MAKE) CFLAGS="-g -std=c++11 -w -c" LFLAGS="-g -std=c++11"
 
 release:
-	$(MAKE) CFLAGS="-O2 -w -c" LFLAGS="-O2"
+	$(MAKE) CFLAGS="-O2 -std=c++11 -w -c" LFLAGS="-O2 -std=c++11"
 
 clean:
 	rm -f $(EXEC) $(DIROBJS)

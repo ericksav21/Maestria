@@ -134,7 +134,9 @@ void draw_line(IMG *img, int x0, int y0, int x1, int y1) {
     int dx = x1 - x0;
     int dy = y1 - y0;
 
-    img->mat[x0][y0] = 150;
+    if((x0 >= 0 && x0 < img->height) &&
+       (y0 >= 0 && y0 < img->width))
+    	img->mat[x0][y0] = 150;
     if (abs(dx) > abs(dy)) {	// pendiente < 1
         double m = (double) dy / (double) dx;
         double b = y0 - m * x0;
@@ -145,7 +147,9 @@ void draw_line(IMG *img, int x0, int y0, int x1, int y1) {
         while (x0 != x1) {
             x0 += dx;
             y0 = round(m * x0 + b);
-            img->mat[x0][y0] = 150;
+            if((x0 >= 0 && x0 < img->height) &&
+       			(y0 >= 0 && y0 < img->width))
+            	img->mat[x0][y0] = 150;
         }
     }
     else if (dy != 0) {		// pendiente >= 1
@@ -158,7 +162,9 @@ void draw_line(IMG *img, int x0, int y0, int x1, int y1) {
         while (y0 != y1) {
             y0 += dy;
             x0 = round(m * y0 + b);
-            img->mat[x0][y0] = 150;
+            if((x0 >= 0 && x0 < img->height) &&
+       			(y0 >= 0 && y0 < img->width))
+            	img->mat[x0][y0] = 150;
         }
     }
 }

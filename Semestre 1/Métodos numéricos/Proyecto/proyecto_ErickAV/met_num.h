@@ -3,24 +3,36 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
+
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 
 #include "structures.h"
 #include "memo.h"
 #include "matriz_vector.h"
 #include "image.h"
 
-double** pderivative_x(IMG *img);
+#define PATH_IMG "images"
+#define PATH_OUT "out"
 
-double** pderivative_y(IMG *img);
+using namespace cv;
 
-double** pderivative_t(IMG *img1, IMG *img2);
+double** pderivative_x(Mat img);
 
-void get_derivatives(IMG *img1, IMG *img2, double ***dx, double ***dy, double ***dt);
+double** pderivative_y(Mat img);
+
+double** pderivative_t(Mat img1, Mat img2);
+
+void get_derivatives(Mat img1, Mat img2, double ***dx, double ***dy, double ***dt);
 
 int check_convergence(double **vx, double **vy, double **vx1, double **vy1, int width, int height, double tol);
 
-void Horn_Schunck(IMG *img1, IMG *img2, double ***vx, double ***vy, int iter, double lambda);
+void Horn_Schunck(Mat img1, Mat img2, double ***vx, double ***vy, int iter, double lambda, double tol);
 
-void quiver(IMG *out, double **vx, double **vy, int width, int height);
+void Horn_Schunck2(Mat img1, Mat img2, double ***vx, double ***vy, int iter, double lambda, double tol);
+
+void quiver(Mat img, double **vx, double **vy, int width, int height, double scale);
 
 #endif
