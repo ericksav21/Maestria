@@ -1,0 +1,5 @@
+051_blow1Txtr1
+none
+falling
+high
+medium

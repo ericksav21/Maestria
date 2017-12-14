@@ -1,0 +1,5 @@
+013_Mayan1
+left
+none
+high
+large

@@ -1,0 +1,5 @@
+089_drop1Txtr1
+none
+falling
+high
+medium

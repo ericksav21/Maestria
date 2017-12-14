@@ -1,0 +1,5 @@
+026_Brickbox1t1
+left
+none
+high
+large

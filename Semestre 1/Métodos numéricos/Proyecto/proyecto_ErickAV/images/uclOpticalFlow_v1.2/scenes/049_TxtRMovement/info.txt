@@ -1,0 +1,5 @@
+049_TxtRMovement
+left
+none
+medium
+medium

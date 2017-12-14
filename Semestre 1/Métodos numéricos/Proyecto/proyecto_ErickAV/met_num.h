@@ -16,6 +16,7 @@
 
 #define PATH_IMG "images"
 #define PATH_OUT "out"
+#define PATH_TEST "test"
 
 using namespace cv;
 

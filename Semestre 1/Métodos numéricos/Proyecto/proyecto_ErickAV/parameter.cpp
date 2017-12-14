@@ -13,7 +13,7 @@ Parameter::~Parameter() {}
 void Parameter::print_help() {
 	cout << "Detector de flujo óptico, hecho por Erick Salvador Alvarez Valencia." << endl;
 	cout << "Ayuda del sistema:" << endl;
-	cout << "--file1 o -F1\t" << " Frame 1 (cualquier formato bitmap de imagen).";
+	cout << "--file1 o -F1\t" << " Frame 1 (cualquier formato bitmap de imagen)." << endl;
 	cout << "--file2 o -F2\t" << " Frame 2 (cualquier formato bitmap de imagen)." << endl;
 	cout << "--lambda o -L\t" << " Valor de lambda." << endl;
 	cout << "--algo o -A\t" << " Algoritmo que se usará para el procesamiento: 'Gauss-Seidel' o 'Gradiente paso fijo'." << endl;
@@ -47,6 +47,9 @@ map<string, string> Parameter::process() {
 		}
 		else if(p_act == "--scale" || p_act == "-S") {
 			res["scale"] = string(argv[++i]);
+		}
+		else if(p_act == "--test") {
+			res["test"] = string(argv[++i]);
 		}
 		else if(p_act == "--verbose" || p_act == "-V") {
 			res["verb"] = "1";	

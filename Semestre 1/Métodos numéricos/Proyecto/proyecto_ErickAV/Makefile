@@ -7,6 +7,7 @@ OBJS:=$(patsubst %.cpp,%.o,$(CPPS))
 IMGDIR:=images
 OUTDIR:=out
 OBJDIR:=obj
+TESTDIR:=test
 DIROBJS:=$(addprefix $(OBJDIR)/,$(OBJS))
 
 $(EXEC): $(DIROBJS)
@@ -21,7 +22,10 @@ $(OBJDIR): $(OUTDIR)
 $(OUTDIR): $(IMGDIR)
 	mkdir -p $@
 
-$(IMGDIR):
+$(IMGDIR): $(TESTDIR)
+	mkdir -p $@
+
+$(TESTDIR):
 	mkdir -p $@
 
 debug:

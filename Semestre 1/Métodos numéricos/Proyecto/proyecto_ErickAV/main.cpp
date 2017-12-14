@@ -9,6 +9,7 @@
 #include "parameter.h"
 #include "matriz_vector.h"
 #include "met_num.h"
+#include "test.h"
 
 using namespace cv;
 using namespace std;
@@ -65,6 +66,14 @@ int main(int argc, char **argv) {
 	else
 		Horn_Schunck2(g1, g2, &vx, &vy, iter, lambda, tol);
 	quiver(img2, vx, vy, width, height, scale);
+
+	if(parameters.count("test")) {
+		char test_file[50];
+		sprintf(test_file, "%s/%s", PATH_TEST, parameters["test"].c_str());
+		string tf(test_file);
+		Test t(tf);
+		t.run(vx, vy, width, height);
+	}
 
 	free_matrix(vx);
 	free_matrix(vy);

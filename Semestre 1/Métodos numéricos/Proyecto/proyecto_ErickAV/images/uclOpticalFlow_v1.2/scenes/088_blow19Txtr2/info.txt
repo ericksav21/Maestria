@@ -1,0 +1,5 @@
+088_blow19Txtr2
+none
+falling
+high
+medium

@@ -1,0 +1,5 @@
+125_street1Txtr1
+right
+falling
+high
+large

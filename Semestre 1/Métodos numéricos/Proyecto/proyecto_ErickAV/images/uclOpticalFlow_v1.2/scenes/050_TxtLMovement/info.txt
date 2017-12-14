@@ -1,0 +1,5 @@
+050_TxtLMovement
+right
+none
+medium
+medium

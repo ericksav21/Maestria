@@ -1,0 +1,5 @@
+014_Mayan2
+left
+none
+high
+medium
