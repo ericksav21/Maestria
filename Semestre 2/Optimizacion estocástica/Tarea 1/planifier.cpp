@@ -12,13 +12,19 @@
 using namespace std;
 
 #include "util.hpp"
+#include "log.hpp"
 
 int main(int argc, char **argv) {
+	Log l("log");
+	string msg;
 	if(argc < 3) {
-		cout << "Error. Ejecuta: " << string(argv[0]) << " [Tasks] [Machinefile]." << endl;
+		msg = "Error. Ejecuta: " + string(argv[0]) + " [Tasks] [Machinefile].";
+		l.write(msg, 3);
+		l.close();
 		return 0;
 	}
 
+	string path = "/home/user_demo/ErickAlvarez/";
 	queue<pair<string, string> > tasks = read_tasksfile(string(argv[1]));
 	vector<NODE> nodes = read_machinefile(string(argv[2]));
 	int free_nodes = nodes.size(), running_proc = 0;
@@ -49,7 +55,8 @@ int main(int argc, char **argv) {
 				}
 			}
 			else {
-				cout << "Error al crear un nuevo proceso.\n";
+				l.write("Error al crear un nuevo proceso.", 3);
+				l.close();
 				return -1;
 			}
 		}
@@ -57,15 +64,17 @@ int main(int argc, char **argv) {
 		//Proceso padre, esperar a que alguno termine
 		if(pid > 0) {
 			if(running_proc == 0 && tasks.empty()) {
-				cout << "Terminado.\n";
+				l.write("Sin más tareas por ejecutar.", 1);
 				break;
 			}
 			int wstatus;
-			cout << "Esperando...\n";
+			l.write("Esperando...", 1);
 			int cpid = waitpid(-1, &wstatus, 0);
-			cout << "Proceso hijo terminado con pid: " << cpid << ".\n";
+			msg = "Proceso hijo terminado con pid: " + int_to_str(cpid);
+			l.write(msg, 1);
 			if(WEXITSTATUS(wstatus) != 0) {
-				cout << "Aviso: un proceso terminó de manera anormal: " << WEXITSTATUS(wstatus) << "\n";
+				msg = "Aviso: un proceso terminó de manera anormal: " + int_to_str(WEXITSTATUS(wstatus));
+				l.write(msg, 2);
 			}
 			//Actualizar la lista de nodos
 			for(int i = 0; i < nodes.size(); i++) {
@@ -79,20 +88,25 @@ int main(int argc, char **argv) {
 		}
 		//Proceso hijo, ejecutar el programa
 		else {
-			/*string prog = "ssh " + node_act + " " + taks_act.first + " " + taks_act.second;
-			int e_res = execl("/bin/sh", "sh", "-c", prog.c_str(), (char *)NULL);
+			string prog = path + taks_act.first + " " + taks_act.second;
+			string prog_command = "ssh " + node_act + " " + prog;
+			msg = "Ejecutando proceso hijo: " + prog_command + " en nodo: " + node_act;
+			l.write(msg, 1);
+			int e_res = execl("/bin/sh", "sh", "-c", prog_command.c_str(), (char *)NULL);
+			usleep(wait_time / 2);
 
 			if(e_res == -1) {
+				l.close();
 				return -1;
 			}
 			else {
+				l.close();
 				return 0;
-			}*/
-			cout << "Ejecutando proceso hijo: " << node_act << " " << taks_act.first << " " << taks_act.second << endl;
-			usleep(wait_time);
+			}
 			break;
 		}
 	}
+	l.close();
 
 	return 0;
 }

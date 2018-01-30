@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <utility>
 #include <queue>
 
@@ -15,6 +16,8 @@ typedef struct node {
 	bool in_use;
 	int pid;
 } NODE;
+
+string int_to_str(int n);
 
 vector<NODE> read_machinefile(string file);
 

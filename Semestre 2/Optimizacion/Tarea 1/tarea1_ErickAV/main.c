@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
 	double **A;
 
 	A = read_matrix(files_name, &nr, &nc);
+	printf("Matriz A:\n");
 	print_matrix(A, nr, nr);
 	printf("\n");
 

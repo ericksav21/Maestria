@@ -1,5 +1,12 @@
 #include "util.hpp"
 
+string int_to_str(int n) {
+	stringstream ss;
+	ss << n;
+
+	return ss.str();
+}
+
 vector<NODE> read_machinefile(string file) {
 	vector<NODE> res;
 	ifstream ifs(file.c_str());

@@ -21,14 +21,12 @@ int cholesky(double **A, double ***L, int n, double tol) {
 					return 0;
 				}
 				(*L)[i][j] = sqrt(A[i][i] - aux);
-				//(*Lt)[i][j] = (*L)[i][j];
 			}
 			else {
 				if(fabs((*L)[j][j]) < tol) {
 					return 0;
 				}
 				(*L)[i][j] = (1.0 / (*L)[j][j]) * (A[i][j] - aux);
-				//(*Lt)[j][i] = (*L)[i][j];
 			}
 		}
 	}
@@ -44,7 +42,6 @@ double norm_1(double **A, int n) {
 		for(int j = 0; j < n; j++) {
 			aux += fabs(A[j][i]);
 		}
-		//printf("%lf\n", aux);
 		if(i == 0) {
 			res = aux;
 		}
@@ -68,7 +65,7 @@ void proc(double **A, int n) {
 	double norm = norm_1(As, n);
 	printf("Norma 1 de A - At: %g\n", norm);
 	if(norm > tol) {
-		printf("La matriz no es simétrica y se sustituirá por 1/2(A + A^t).\n");
+		printf("La matriz no es simétrica y se sustituirá por 1/2(A + A^t).\n\n");
 		A = add_mat(A, At, A, n, n);
 		A = scale_mat(A, A, n, n, 0.5);
 	}
@@ -87,18 +84,20 @@ void proc(double **A, int n) {
 		}
 		int res = cholesky(A, &L, n, tol);
 		if(res == 0) {
-			printf("No se pudo calcular la factorización de Cholesky. Perturbando la matriz.\n");
+			printf("No se pudo calcular la factorización de Cholesky. Se perturbará la matriz.\n");
 			for(int i = 0; i < n; i++) {
 				A[i][i] += lambda;
 			}
 		}
 		else {
-			printf("Factorización de Cholesky calculada en la iteración: %d.\n", cont);
+			printf("\nFactorización de Cholesky realizada correctamente, se tuvo que perturbar: %d veces.\n", cont);
 			break;
 		}
 		cont++;
 	}
 
+	printf("Matriz L:\n");
+	print_matrix(L, n, n);
 	double **Lt = create_matrix(n, n, double);
 	double **An = create_matrix(n, n, double);
 	Lt = transpose_matrix(L, Lt, n, n);
@@ -111,7 +110,7 @@ void proc(double **A, int n) {
 	An = substract_mat(A, An, An, n, n);
 	norm = norm_1(An, n);
 
-	printf("Norma 1 de A - LL^T: %g\n", norm);
+	printf("\nNorma 1 de A - LL^T: %g\n", norm);
 
 	free_matrix(At);
 	free_matrix(As);
