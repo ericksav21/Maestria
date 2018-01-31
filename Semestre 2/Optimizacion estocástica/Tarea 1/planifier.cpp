@@ -27,10 +27,10 @@ int main(int argc, char **argv) {
 	string path = "/home/user_demo/ErickAlvarez/";
 	queue<pair<string, string> > tasks = read_tasksfile(string(argv[1]));
 	vector<NODE> nodes = read_machinefile(string(argv[2]));
-	int free_nodes = nodes.size(), running_proc = 0;
+	int free_nodes = nodes.size(), running_proc = 0, cnt = 0;
 	int pid;
 	//2 segundos
-	int wait_time = 2000000;
+	int wait_time = 10000;
 	string node_act;
 	pair<string, string> taks_act;
 
@@ -44,6 +44,7 @@ int main(int argc, char **argv) {
 			if(pid >= 0) {
 				if(pid == 0) {
 					//Proceso hijo
+					l.close();
 					break;
 				}
 				else {
@@ -70,7 +71,8 @@ int main(int argc, char **argv) {
 			int wstatus;
 			l.write("Esperando...", 1);
 			int cpid = waitpid(-1, &wstatus, 0);
-			msg = "Proceso hijo terminado con pid: " + int_to_str(cpid);
+			cnt++;
+			msg = "Proceso hijo terminado con pid: " + int_to_str(cpid) + ", no. " + int_to_str(cnt);
 			l.write(msg, 1);
 			if(WEXITSTATUS(wstatus) != 0) {
 				msg = "Aviso: un proceso terminó de manera anormal: " + int_to_str(WEXITSTATUS(wstatus));
@@ -87,20 +89,22 @@ int main(int argc, char **argv) {
 			}
 		}
 		//Proceso hijo, ejecutar el programa
-		else {
+		else if(pid == 0) {
 			string prog = path + taks_act.first + " " + taks_act.second;
 			string prog_command = "ssh " + node_act + " " + prog;
-			msg = "Ejecutando proceso hijo: " + prog_command + " en nodo: " + node_act;
-			l.write(msg, 1);
+			/*msg = "Ejecutando proceso hijo: " + prog_command + " en nodo: " + node_act;
+			l.write(msg, 1);*/
 			int e_res = execl("/bin/sh", "sh", "-c", prog_command.c_str(), (char *)NULL);
-			usleep(wait_time / 2);
+			//usleep(wait_time / 2);
+			//msg = "Respuesta de execl: " + int_to_str(e_res);
+			//l.write(msg, 1);
 
 			if(e_res == -1) {
-				l.close();
+				//l.close();
 				return -1;
 			}
 			else {
-				l.close();
+				//l.close();
 				return 0;
 			}
 			break;
