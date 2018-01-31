@@ -15,9 +15,9 @@ using namespace std;
 #include "log.hpp"
 
 int main(int argc, char **argv) {
-	Log l("log");
-	string msg;
 	if(argc < 3) {
+		Log l("log");
+		string msg;
 		msg = "Error. Ejecuta: " + string(argv[0]) + " [Tasks] [Machinefile].";
 		l.write(msg, 3);
 		l.close();
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 	vector<NODE> nodes = read_machinefile(string(argv[2]));
 	int free_nodes = nodes.size(), running_proc = 0, cnt = 0;
 	int pid;
-	//2 segundos
+	//0.1 segundos
 	int wait_time = 10000;
 	string node_act;
 	pair<string, string> taks_act;
@@ -44,7 +44,6 @@ int main(int argc, char **argv) {
 			if(pid >= 0) {
 				if(pid == 0) {
 					//Proceso hijo
-					l.close();
 					break;
 				}
 				else {
@@ -56,6 +55,7 @@ int main(int argc, char **argv) {
 				}
 			}
 			else {
+				Log l("log");
 				l.write("Error al crear un nuevo proceso.", 3);
 				l.close();
 				return -1;
@@ -64,6 +64,8 @@ int main(int argc, char **argv) {
 
 		//Proceso padre, esperar a que alguno termine
 		if(pid > 0) {
+			Log l("log");
+			string msg;
 			if(running_proc == 0 && tasks.empty()) {
 				l.write("Sin más tareas por ejecutar.", 1);
 				break;
@@ -72,7 +74,7 @@ int main(int argc, char **argv) {
 			l.write("Esperando...", 1);
 			int cpid = waitpid(-1, &wstatus, 0);
 			cnt++;
-			msg = "Proceso hijo terminado con pid: " + int_to_str(cpid) + ", no. " + int_to_str(cnt);
+			msg = "Proceso hijo terminado con pid: " + int_to_str(cpid) + ", No: " + int_to_str(cnt);
 			l.write(msg, 1);
 			if(WEXITSTATUS(wstatus) != 0) {
 				msg = "Aviso: un proceso terminó de manera anormal: " + int_to_str(WEXITSTATUS(wstatus));
@@ -87,30 +89,22 @@ int main(int argc, char **argv) {
 					running_proc--;
 				}
 			}
+			l.close();
 		}
 		//Proceso hijo, ejecutar el programa
-		else if(pid == 0) {
+		else {
 			string prog = path + taks_act.first + " " + taks_act.second;
 			string prog_command = "ssh " + node_act + " " + prog;
-			/*msg = "Ejecutando proceso hijo: " + prog_command + " en nodo: " + node_act;
-			l.write(msg, 1);*/
 			int e_res = execl("/bin/sh", "sh", "-c", prog_command.c_str(), (char *)NULL);
-			//usleep(wait_time / 2);
-			//msg = "Respuesta de execl: " + int_to_str(e_res);
-			//l.write(msg, 1);
 
 			if(e_res == -1) {
-				//l.close();
 				return -1;
 			}
 			else {
-				//l.close();
 				return 0;
 			}
-			break;
 		}
 	}
-	l.close();
 
 	return 0;
 }
