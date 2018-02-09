@@ -11,7 +11,7 @@ Log::Log(string base_name) {
 	ss << base_name << (now->tm_year + 1900) << "-";
 	ss << (now->tm_mon + 1) << "-";
 	ss << now->tm_mday << "-";
-	ss << now->tm_hour << now->tm_min << ".txt";
+	ss << now->tm_hour << ".txt";
 	string name = ss.str();
 
 	file.open(name.c_str(), ofstream::out | ofstream::app);
