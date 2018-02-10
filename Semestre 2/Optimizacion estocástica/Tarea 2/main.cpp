@@ -15,14 +15,19 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
+	srand(time(0));
 	vector<GRID> instance = read_instance(argv[1]);
 	print_instance(instance);
-	vector<int> row = create_row(instance, 1);
+	print_instance(instance);
 
-	for(int i = 0; i < row.size(); i++) {
-		cout << row[i] << " ";
+	vector<vector<int> > table = reconstruct_sudoku(instance, false);
+	for(int i = 0; i < table.size(); i++) {
+		for(int j = 0; j < table.size(); j++) {
+			cout << table[i][j] << " ";
+		}
+		cout << endl;
 	}
-	cout << endl;
+	cout << fitness(instance) << endl;
 
 	return 0;
 }
