@@ -1,36 +1,34 @@
 #include "util.hpp"
 
-GRID new_grid() {
+int rand_in_range(int a, int b) {
+	return rand() % (b - a + 1) + a;
+}
+
+GRID new_grid(bool empty) {
 	GRID res;
-	for(int i = 1; i <= 9; i++) {
-		res.perm.push_back(i);
+	if(!empty) {
+		for(int i = 1; i <= 9; i++) {
+			res.perm.push_back(i);
+		}
 	}
 
 	return res;
 }
 
-vector<GRID> read_instance(char *files_name) {
-	vector<GRID> v;
+vector<vector<int> > read_instance(char *files_name) {
+	vector<vector<int> > table(9);
+	for(int i = 0; i < 9; i++) {
+		table[i].resize(9, 0);
+	}
+
 	ifstream ifs(files_name);
 	string line;
 	if(ifs.is_open()) {
-		for(int i = 0; i < 9; i++) {
-			GRID gact = new_grid();
-			v.push_back(gact);
-		}
-
 		int act;
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				ifs >> act;
-				if(act != 0) {
-					int id = GRID::get_grid_id(i, j);
-					v[id].perm.erase(remove(v[id].perm.begin(), v[id].perm.end(), act),
-									v[id].perm.end());
-
-					v[id].setted.push_back(act);
-					v[id].setted_pos.push_back(make_pair(i, j));
-				}
+				table[i][j] = (act != 0 ? act : -1);
 			}
 		}
 		ifs.close();
@@ -39,21 +37,113 @@ vector<GRID> read_instance(char *files_name) {
 		cout << "Error al abrir el archivo: " << string(files_name) << ".\n";
 	}
 
+	return table;
+}
+
+vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution) {
+	vector<vector<int> > res(9);
+	for(int i = 0; i < 9; i++) {
+		res[i].resize(9, -1);
+	}
+
+	//Números fijos
+	for(int g = 0; g < sudoku.size(); g++) {
+		for(int s = 0; s < sudoku[g].setted.size(); s++) {
+			pair<int, int> ppos = sudoku[g].setted_pos[s];
+			int i = ppos.first;
+			int j = ppos.second;
+
+			res[i][j] = sudoku[g].setted[s];
+		}
+	}
+
+	if(no_solution) {
+		return res;
+	}
+
+	//Permutaciones
+	vector<int> g_used(9, 0);
+	for(int i = 0; i < 9; i++) {
+		for(int j = 0; j < 9; j++) {
+			if(res[i][j] == -1) {
+				int gid = GRID::get_grid_id(i, j);
+				res[i][j] = sudoku[gid].perm[g_used[gid]];
+				g_used[gid]++;
+			}
+		}
+	}
+
+	return res;
+}
+
+vector<GRID> reconstruct_sudoku(vector<vector<int> > table) {
+	vector<GRID> v;
+	for(int i = 0; i < 9; i++) {
+		GRID gact = new_grid(false);
+		v.push_back(gact);
+	}
+
+	int act;
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			act = table[i][j];
+			if(act != -1) {
+				int id = GRID::get_grid_id(i, j);
+				v[id].perm.erase(remove(v[id].perm.begin(), v[id].perm.end(), act),
+								v[id].perm.end());
+
+				v[id].setted.push_back(act);
+				v[id].setted_pos.push_back(make_pair(i, j));
+			}
+		}
+	}
+
 	return v;
 }
 
-void print_instance(vector<GRID> instance) {
-	for(int i = 0; i < instance.size(); i++) {
-		cout << "Grid: " << (i + 1) << endl;
+vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku) {
+	vector<GRID> v;
+	for(int i = 0; i < 9; i++) {
+		GRID gact = new_grid(true);
+		v.push_back(gact);
+	}
+
+	int act;
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			act = table[i][j];
+			int g_id = GRID::get_grid_id(i, j);
+			bool is_default = false;
+			for(int s = 0; s < sudoku[g_id].setted.size(); s++) {
+				pair<int, int> ppos = sudoku[g_id].setted_pos[s];
+				if(i == ppos.first && j == ppos.second) {
+					is_default = true;
+					v[g_id].setted.push_back(act);
+					v[g_id].setted_pos.push_back(make_pair(i, j));
+					break;
+				}
+			}
+			if(!is_default) {
+				v[g_id].perm.push_back(act);
+			}
+		}
+	}
+
+	return v;
+}
+
+void print_sudoku(vector<GRID> instance) {
+	for(int g = 0; g < instance.size(); g++) {
+		cout << "Grid: " << (g + 1) << endl;
 		cout << "Permutación: ";
-		for(int j = 0; j < instance[i].perm.size(); j++) {
-			cout << instance[i].perm[j] << " ";
+		for(int j = 0; j < instance[g].perm.size(); j++) {
+			cout << instance[g].perm[j] << " ";
 		}
 		cout << endl;
 		cout << "Valores por defecto: ";
-		for(int j = 0; j < instance[i].setted.size(); j++) {
-			cout << instance[i].setted[j] << "(" << instance[i].setted_pos[j].first <<
-					", " << instance[i].setted_pos[j].second << ") ";
+		for(int j = 0; j < instance[g].setted.size(); j++) {
+			cout << instance[g].setted[j] << "(" << instance[g].setted_pos[j].first <<
+					", " << instance[g].setted_pos[j].second << ") ";
 		}
 		cout << endl << endl;
 	}

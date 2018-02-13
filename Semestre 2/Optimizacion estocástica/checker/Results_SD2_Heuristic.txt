@@ -1,0 +1,6 @@
+Fit min: 5
+Media heur: 9.947e-05
+Media local: 0.0104908
+Media total: 0.0105902
+Media fit heur: 253
+Media fit loc: 10
