@@ -1,0 +1,6 @@
+plot "samples.txt" using 1:2 title 'Muestra de puntos' w p, "points.txt" using 1:2 title 'Modelo generado' w l
+set terminal png nocrop enhanced size 1024,768
+set output 'Grafica.png'
+replot
+set term x11
+set output

@@ -1,11 +1,13 @@
-#setwd("/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 1")
-setwd("/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 1")
+library("GGally")
+setwd("/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 1")
+#setwd("/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 1")
 d <- read.table("hepatlon")
 
 print(d)
-p <- princomp(cbind(d$hurdles, d$highjump, d$shot, d$run200m, d$longjump, d$javelin, d$run800m))
+ggpairs(d[, -8], diag = list(continuous = "density"), axisLabels = "none")
+p <- princomp(d[, -8], cor = T)
 loadings(p)
 summary(p)
 biplot(p)
-
-plot(p$scores[, 1], d$score)
+plot(d$run800m, d$score, xlab = "Resultados de la carrera de 800 mts.", ylab = "Puntaje", title("Relación entre la carrera de 800 mts. y columnas Score"))
+plot(p$scores[, 1], d$score, xlab = "Primer CP", ylab = "Puntaje", title("Relación entre primer CP y columnas Score"))
