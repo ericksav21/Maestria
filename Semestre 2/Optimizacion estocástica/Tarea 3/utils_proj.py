@@ -20,6 +20,17 @@ def alphanum_key(s):
 def read_instance(path, base):
 	files = glob.glob(os.path.join(path, base + ".*"))
 	return sorted(files, key = alphanum_key)
+
+def precalculated_entropy(path, base):
+	f = open(os.path.join(path, base), "r")
+	entropy_set = []
+	while True:
+		line = f.readline()
+		if not line:
+			break
+		t, e = line.split(" ")
+		entropy_set.append((float(t.strip()), float(e.strip())))
+	return entropy_set
 			
 def data_entropy(path, base):
 	f = open(os.path.join(path, base), "r")
@@ -42,7 +53,7 @@ def data_entropy(path, base):
 			break
 		font_size = int(line.split("=")[1].strip())
 		pop = np.zeros((font_size, n), dtype = "int")
-		F = np.zeros((n, n), dtype = "int")
+		F = np.zeros((n, n), dtype = "float")
 
 		for i in range(font_size):
 			line = f.readline()
@@ -56,21 +67,26 @@ def data_entropy(path, base):
 			for j in range(font_size):
 				row = pop[j][i]
 				F[row][i] += 1
+			for j in range(n):
+				F[j][i] /= float(font_size)
 
-		#pop /= float(font_size * n)
+
 		Hi = np.zeros((n), dtype = "float")
 		for i in range(n):
 			res = 0.0
 			for j in range(n):
-				if float(F[j][i]) / float(font_size) > 0.0:
-					res += (float(F[j][i]) / float(font_size)) * log(float(F[j][i]) / float(font_size), n)
+				if F[j][i] > 0.0:
+					res += F[j][i] * log(F[j][i], n)
 			Hi[i] = -res
 
 		entropy_set.append((act_time, Hi.mean()))
-		print(Hi.mean())
+		#print(Hi.mean())
 		f.readline()
 
 	return fitness_set, entropy_set
 
 def make_plot(x, y, files_name):
-	yield
+	plt.clf()
+	plt.figure(figsize = (7, 7))
+	plt.plot(x, y)
+	plt.savefig(files_name, dpi = 100)
