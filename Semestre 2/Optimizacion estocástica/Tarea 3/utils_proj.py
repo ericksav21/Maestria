@@ -48,7 +48,8 @@ def data_fitness(path, base):
 	fitness_set = {}
 	#Máximo fitness de cada instancia
 	max_fit = []
-	n = 225
+	n = 400
+	#n = 225
 	runs = 30
 	for file in files:
 		if file.endswith("Evolution"):

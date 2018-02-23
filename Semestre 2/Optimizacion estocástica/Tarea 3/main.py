@@ -7,7 +7,8 @@ from matplotlib import pyplot as plt
 path = "/home/ericksav22/Documentos/Maestria/OptEst-Tarea3/"
 instance_dir = ["GECCO-contest", "instance_10_10_400_0.05_7", "instance_10_10_400_0.10_8",
 				"instance_10_10_400_0.15_9", "instance_15_15_400_0.05_4", "instance_15_15_400_0.10_5",
-				"instance_15_15_400_0.15_6"]
+				"instance_15_15_400_0.15_6", "instance_20_20_400_0.05_1", "instance_20_20_400_0.10_2",
+				"instance_20_20_400_0.15_3"]
 methods = ["CHC", "CLR_1", "CLR_5", "COMB", "DETCR", "Multi", "MultiDynamic", "RW", "SawToothGA", "SPOBCR"]
 
 def main():
@@ -18,7 +19,7 @@ def main():
 
 	base = sys.argv[1]
 	for method in methods:
-		_, fit = ut.data_fitness(os.path.join(path, instance_dir[6]), method)
+		_, fit = ut.data_fitness(os.path.join(path, instance_dir[9]), method)
 		file = open(method + ".bestfitness", "w")
 		for i in range(len(fit)):
 			file.write(str(fit[i]) + "\n")
