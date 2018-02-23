@@ -22,27 +22,40 @@ def read_instance(path, base):
 	return sorted(files, key = alphanum_key)
 
 def precalculated_entropy(path, base):
-	f = open(os.path.join(path, base), "r")
-	entropy_set = []
-	is_first = True
-	while True:
-		line = f.readline()
-		if is_first:
-			is_first = False
-			continue
-		if not line:
-			break
-		t, e = line.split(" ")
-		entropy_set.append((float(t.strip()), float(e.strip())))
-	return entropy_set
+	files = glob.glob(os.path.join(path, "*.entropyEvolution"))
+	for file in files:
+		f = open(file, "r")
+		x = []
+		y = []
+		is_first = True
+		while True:
+			line = f.readline()
+			if is_first:
+				is_first = False
+				continue
+			if not line:
+				break
+			t, ent = line.split(" ")
+			x.append(float(t))
+			y.append(float(ent))
+
+		f.close()
+		filtered = os.path.basename(file)
+		make_plot(x, y, str(filtered.split(".")[0]) + "_entropy")
 
 def data_fitness(path, base):
 	files = read_instance(path, base)
 	fitness_set = {}
-	n = 400
+	#Máximo fitness de cada instancia
+	max_fit = []
+	n = 225
+	runs = 30
 	for file in files:
+		if file.endswith("Evolution"):
+			continue
 		f = open(file, "r")
 		print("Fitness: " + str(f))
+		max_act = -1
 		while True:
 			line = f.readline()
 			if not line or line.startswith("MonoObjective"):
@@ -64,23 +77,28 @@ def data_fitness(path, base):
 				line = f.readline()
 				individuals = line.split(" ")
 				fitness = int(individuals[n])
-				if fitness > mmax:
-					mmax = fitness
+				mmax = max(mmax, fitness)
 
 			if act_time in fitness_set:
 				fitness_set[act_time] += mmax
 			else:
 				fitness_set[act_time] = mmax
 			f.readline()
+			max_act = max(max_act, mmax)
 
 		f.close()
+		max_fit.append(max_act)
 
-	return fitness_set
+	for k, _ in fitness_set.items():
+		fitness_set[k] /= float(runs)
+
+	return fitness_set, max_fit
 			
 def data_entropy(path, base):
 	files = read_instance(path, base)
 	entropy_set = {}
 	n = 400
+	runs = 30
 	for file in files:
 		f = open(file, "r")
 		print("Entropía: " + str(f))
@@ -132,6 +150,9 @@ def data_entropy(path, base):
 			f.readline()
 
 		f.close()
+
+	for k, _ in entropy_set.items():
+		entropy_set[k] /= float(runs)
 
 	return entropy_set
 
