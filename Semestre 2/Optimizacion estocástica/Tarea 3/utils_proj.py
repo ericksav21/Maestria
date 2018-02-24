@@ -162,4 +162,6 @@ def make_plot(x, y, files_name, title = ""):
 	plt.figure(figsize = (7, 7))
 	plt.plot(x, y)
 	plt.title(title)
+	plt.xlabel("Tiempo (horas)")
+	plt.ylabel("Fitness")
 	plt.savefig(files_name, dpi = 100)
