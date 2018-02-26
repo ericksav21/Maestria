@@ -20,7 +20,7 @@ def read_sets(path):
 
 	return sets, method_name
 
-def do_statistical_comp(sets, method_name):
+def do_statistical_comp(sets, method_name, instance):
 	n = len(method_name)
 	#0: Ganó, 1: Perdió, 2: Empató
 	table = []
@@ -35,6 +35,7 @@ def do_statistical_comp(sets, method_name):
 			check_means = False
 			is_tie = False
 			if apply_test(a1, a2, "shapiro"):
+				print("Normalidad encontrada en: " + method_name[i] + ", " + method_name[j] + ", instancia: " + instance)
 				if apply_test(a1, a2, "levene"):
 					if apply_test(a1, a2, "anova"):
 						is_tie = True

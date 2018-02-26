@@ -55,7 +55,7 @@ def data_fitness(path, base):
 		if file.endswith("Evolution"):
 			continue
 		f = open(file, "r")
-		print("Fitness: " + str(f))
+		print("Fitness: " + str(file))
 		max_act = -1
 		while True:
 			line = f.readline()
@@ -95,14 +95,16 @@ def data_fitness(path, base):
 
 	return fitness_set, max_fit
 			
-def data_entropy(path, base):
+def data_entropy(path, base, file_no = -1):
 	files = read_instance(path, base)
 	entropy_set = {}
 	n = 400
 	runs = 30
 	for file in files:
+		if file_no != -1 and int(file.split(".")[1]) != file_no:
+			continue
 		f = open(file, "r")
-		print("Entropía: " + str(f))
+		print("Entropía: " + str(file))
 		while True:
 			line = f.readline()
 			if not line or line.startswith("MonoObjective"):
@@ -152,16 +154,17 @@ def data_entropy(path, base):
 
 		f.close()
 
-	for k, _ in entropy_set.items():
-		entropy_set[k] /= float(runs)
+	if file_no == -1:
+		for k, _ in entropy_set.items():
+			entropy_set[k] /= float(runs)
 
 	return entropy_set
 
-def make_plot(x, y, files_name, title = ""):
+def make_plot(x, y, files_name, title = "", ylabel = ""):
 	plt.clf()
 	plt.figure(figsize = (7, 7))
 	plt.plot(x, y)
 	plt.title(title)
 	plt.xlabel("Tiempo (horas)")
-	plt.ylabel("Fitness")
+	plt.ylabel(ylabel)
 	plt.savefig(files_name, dpi = 100)

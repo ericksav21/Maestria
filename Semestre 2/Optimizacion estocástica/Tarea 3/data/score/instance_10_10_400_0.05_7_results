@@ -1,0 +1,10 @@
+CHC: 4 3 2 1
+CLR_1: 4 4 1 0
+CLR_5: 1 6 2 -5
+COMB: 6 1 2 5
+DETCR: 1 6 2 -5
+Multi: 6 1 2 5
+MultiDynamic: 9 0 0 9
+RW: 0 9 0 -9
+SPOBCR: 5 1 3 4
+SawToothGA: 1 6 2 -5
