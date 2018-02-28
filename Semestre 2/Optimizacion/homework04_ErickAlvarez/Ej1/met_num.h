@@ -9,10 +9,16 @@
 
 double get_EPS();
 
-double f(double x1, double x2);
+double f(double *x);
 
-double *get_gradient(double x1, double x2);
+void get_gradient(double *g, double *x);
 
-double **get_Hessian(double x1, double x2);
+void get_Hessian(double **H, double *x);
+
+double compute_alpha_1(double *gradient, double **Hessian, int n, double tol);
+
+double compute_alpha_2();
+
+double *gradient_descent(double *init, int n, int iter, int alpha_type);
 
 #endif
