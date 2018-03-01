@@ -23,4 +23,12 @@ void get_Hessian_2(MAT3D *mat, double *x, int n);
 
 double f_2(double *x, int n);
 
+/*Función 3*/
+
+void get_gradient_3(double *g, double *x, int n);
+
+void get_Hessian_3(double **H, double *x, int n);
+
+double f_3(double *x);
+
 #endif

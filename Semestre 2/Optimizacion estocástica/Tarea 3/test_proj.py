@@ -35,7 +35,7 @@ def do_statistical_comp(sets, method_name, instance):
 			check_means = False
 			is_tie = False
 			if apply_test(a1, a2, "shapiro"):
-				print("Normalidad encontrada en: " + method_name[i] + ", " + method_name[j] + ", instancia: " + instance)
+				#print("Normalidad encontrada en: " + method_name[i] + ", " + method_name[j] + ", instancia: " + instance)
 				if apply_test(a1, a2, "levene"):
 					if apply_test(a1, a2, "anova"):
 						is_tie = True

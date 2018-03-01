@@ -101,6 +101,8 @@ def data_entropy(path, base, file_no = -1):
 	n = 400
 	runs = 30
 	for file in files:
+		if file.split(".")[1] == "entropyEvolution":
+			continue
 		if file_no != -1 and int(file.split(".")[1]) != file_no:
 			continue
 		f = open(file, "r")
