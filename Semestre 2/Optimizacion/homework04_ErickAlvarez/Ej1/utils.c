@@ -1,5 +1,28 @@
 #include "utils.h"
 
+double *read_init_point(char *files_name, int *n) {
+	FILE *file;
+	file = fopen(files_name, "r");
+
+	double *x;
+	if(file) {
+		int nn;
+		fscanf(file, "%d", &nn);
+		(*n) = nn;
+		x = create_vector(nn, double);
+		for(int i = 0; i < nn; i++) {
+			fscanf(file, "%lf", &x[i]);
+		}
+
+		fclose(file);
+		return x;
+	}
+	else {
+		printf("Error: No se pudo abrir el archivo de entrada.\n");
+		return NULL;
+	}
+}
+
 /*----- Función 1 -----*/
 
 void get_gradient_1(double *g, double *x) {
@@ -96,4 +119,49 @@ double f_3(double *x) {
 	double p2 = 10.1 * (pow(x[1] - 1.0, 2) + pow(x[3] - 1.0, 2)) + 19.8 * (x[1] - 1.0) * (x[3] - 1.0);
 
 	return p1 + p2;
+}
+
+/*----- Función 4 -----*/
+void get_gradient_4(double *g, double *x, double *y, double lambda, int n) {
+	g[0] = 2.0 * (x[0] - y[0]) - 2.0 * lambda * (x[1] - x[0]);
+	g[n - 1] = 2.0 * (x[n - 1] - y[n - 1]) + 2.0 * lambda * (x[n - 1] - x[n - 2]);
+
+	for(int i = 1; i < n - 1; i++) {
+		g[i] = 2.0 * (x[i] - y[i]) + 2.0 * lambda * (x[i] - x[i - 1]) - 2.0 * lambda * (x[i + 1] - x[i]);
+	}
+}
+
+void get_Hessian_4(MAT3D *mat, double lambda, int n) {
+	double *a = create_vector(n, double);
+	double *b = create_vector(n, double);
+	double *c = create_vector(n, double);
+
+	for(int i = 0; i < n; i++) {
+		a[i] = c[i] = -2.0 * lambda;
+		b[i] = 2.0 + 4.0 * lambda;
+	}
+
+	a[0] = 0.0;
+	c[n - 1] = 0.0;
+	b[0] = b[n - 1] = 2.0 + 2.0 * lambda;
+
+	mat->a = copy_vector(a, mat->a, n);
+	mat->b = copy_vector(b, mat->b, n);
+	mat->c = copy_vector(c, mat->c, n);
+
+	free_vector(a);
+	free_vector(b);
+	free_vector(c);
+}
+
+double f_4(double *x, double *y, double lambda, int n) {
+	double res = 0.0;
+	for(int i = 0; i < n; i++) {
+		res += (x[i] - y[i]) * (x[i] - y[i]);
+		if(i < n - 1) {
+			res += lambda * (x[i + 1] - x[i]) * (x[i + 1] - x[i]);
+		}
+	}
+
+	return res;
 }

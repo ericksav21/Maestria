@@ -17,6 +17,45 @@ void mul_m_tridiagonal(MAT3D *mat, double *x, double *d, int n) {
 	}
 }
 
+double get_f(int type, double *x, double *y, double lambda, int n) {
+	if(type == 1) {
+		return f_1(x);
+	}
+	else if(type == 2) {
+		return f_2(x, n);
+	}
+	else if(type == 3) {
+		return f_3(x);
+	}
+	else {
+		return f_4(x, y, lambda, n);
+	}
+}
+
+void get_gradient(int type, double *g, double *x, double *y, double lambda, int n) {
+	if(type == 1) {
+		get_gradient_1(g, x);
+	}
+	else if(type == 2) {
+		get_gradient_2(g, x, n);
+	}
+	else if(type == 3) {
+		get_gradient_3(g, x, n);
+	}
+	else {
+		get_gradient_4(g, x, y, lambda, n);
+	}
+}
+
+void get_Hessian(int type, double **H, double *x, int n) {
+	if(type == 1) {
+		get_Hessian_1(H, x);
+	}
+	else if(type == 3) {
+		get_Hessian_3(H, x, n);
+	}
+}
+
 double compute_alpha_1(double *gradient, double **Hessian, int n, double tol) {
 	double *v_aux = create_vector(n, double);
 	double aux1 = inner_product(gradient, gradient, n);
@@ -51,7 +90,7 @@ double compute_alpha_1_3d(double *gradient, MAT3D *Hessian, int n, double tol) {
 
 double compute_alpha_2() {
 	//return 0.0001;
-	return 0.0001;
+	return 0.000505;
 }
 
 double compute_alpha_3(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol) {
@@ -70,11 +109,8 @@ double compute_alpha_3(double *gradient, double last_alpha, double f, double f_a
 	return num / den;
 }
 
-double *gradient_descent(double *init, int n, int iter, int alpha_type) {
+double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, int ex_no, double tol_x, double tol_f, double tol_g) {
 	//double tol = sqrt(get_EPS());
-	double tol_x = 1e-10;
-	double tol_f = 1e-12;
-	double tol_g = 1e-6;
 	double tol_a = pow(get_EPS(), 3.0 / 2.0);
 	double *x0 = create_vector(n, double);
 	double *x1 = create_vector(n, double);
@@ -87,116 +123,28 @@ double *gradient_descent(double *init, int n, int iter, int alpha_type) {
 	double *v_aux = create_vector(n, double);
 	double *gradient = create_vector(n, double);
 	double **Hessian = create_matrix(n, n, double);
-	double last_alpha = 0.001;
-	double f_aprox;
-
-	while(1) {
-		get_gradient_1(gradient, x0);
-		if(alpha_type == 1) {
-			get_Hessian_1(Hessian, x0);
-		}
-		printf("Iteración: %d\n", t + 1);
-
-		//Evaluar
-		double y = f_1(x0);
-		printf("f(x) = %g\n", y);
-		double gn = norm_2(gradient, n);
-		printf("Norma del gradiente: %g\n", gn);
-		if(gn < tol_g) {
-			printf("Gradiente aprox. a cero.\n");
-			break;
-		}
-
-		//Calcular alpha
-		double alpha = -1;
-		if(alpha_type == 1) {
-			alpha = compute_alpha_1(gradient, Hessian, n, tol_a);
-		}
-		else if(alpha_type == 2) {
-			alpha = compute_alpha_2();
-		}
-		else if(alpha_type == 3) {
-			v_aux = scale_vect(gradient, v_aux, n, last_alpha);
-			x1 = substract_vect(x0, v_aux, x1, n);
-			f_aprox = f_1(x1);
-			alpha = compute_alpha_3(gradient, last_alpha, y, f_aprox, n, tol_a);
-			last_alpha = alpha;
-		}
-
-		if(alpha == -1) {
-			break;
-		}
-		printf("Alpha: %g\n\n", alpha);
-
-		//Calcular actualización
-		gradient = scale_vect(gradient, gradient, n, alpha);
-		x1 = substract_vect(x0, gradient, x1, n);
-		v_aux = substract_vect(x0, x1, v_aux, n);
-
-		gn = norm_2(v_aux, n) / max(1.0, norm_2(x0, n));
-		double gn2 = fabs(f_1(x1) - f_1(x0)) / max(1.0, fabs(f_1(x0)));
-
-		if(gn < tol_x) {
-			printf("Xi+1 muy cercano a Xi.\n");
-			printf("||Xi+1 - Xi|| / ||Xi|| = %g\n", gn);
-			break;
-		}
-		if(gn2 < tol_f) {
-			printf("f(Xi+1) muy cercano a f(Xi).\n");
-			printf("|f(Xi+1) - f(Xi)| / |f(Xi)| = %g\n", gn2);
-			break;
-		}
-
-		t++;
-		if(t == iter) {
-			printf("Se alcanzó al número de iteraciones.\n");
-			break;
-		}
-		for(int i = 0; i < n; i++) {
-			x0[i] = x1[i];
-			printf("%lf ", x0[i]);
-		}
-		printf("\n");
-	}
-
-	free_vector(v_aux);
-	free_vector(x1);
-	free_vector(gradient);
-	free_matrix(Hessian);
-
-	return x0;
-}
-
-double *gradient_descent_2(double *init, int n, int iter, int alpha_type) {
-	//double tol = sqrt(get_EPS());
-	double tol_x = 1e-10;
-	double tol_f = 1e-12;
-	double tol_g = 1e-6;
-	double tol_a = pow(get_EPS(), 3.0 / 2.0);
-	double *x0 = create_vector(n, double);
-	double *x1 = create_vector(n, double);
-	int t = 0;
-
-	for(int i = 0; i < n; i++) {
-		x0[i] = init[i];
-	}
-
-	double *v_aux = create_vector(n, double);
-	double *gradient = create_vector(n, double);
 	double last_alpha = 0.001;
 	double f_aprox;
 
 	MAT3D *Hessian_3d = create_mat_3d(n);
 
 	while(1) {
-		get_gradient_2(gradient, x0, n);
-		if(alpha_type == 1) {
-			get_Hessian_2(Hessian_3d, x0, n);
+		get_gradient(ex_no, gradient, x0, yi, lambda, n);
+		if(strcmp(alpha_type, "StepHess") == 0) {
+			if(ex_no == 2) {
+				get_Hessian_2(Hessian_3d, x0, n);
+			}
+			else if(ex_no == 4) {
+				get_Hessian_4(Hessian_3d, lambda, n);
+			}
+			else {
+				get_Hessian(ex_no, Hessian, x0, n);
+			}
 		}
 		printf("Iteración: %d\n", t + 1);
 
 		//Evaluar
-		double y = f_2(x0, n);
+		double y = get_f(ex_no, x0, yi, lambda, n);
 		printf("f(x) = %g\n", y);
 		double gn = norm_2(gradient, n);
 		printf("Norma del gradiente: %g\n", gn);
@@ -207,16 +155,21 @@ double *gradient_descent_2(double *init, int n, int iter, int alpha_type) {
 
 		//Calcular alpha
 		double alpha = -1;
-		if(alpha_type == 1) {
-			alpha = compute_alpha_1_3d(gradient, Hessian_3d, n, tol_a);
+		if(strcmp(alpha_type, "StepHess") == 0) {
+			if(ex_no == 2 || ex_no == 4) {
+				alpha = compute_alpha_1_3d(gradient, Hessian_3d, n, tol_a);
+			}
+			else {
+				alpha = compute_alpha_1(gradient, Hessian, n, tol_a);
+			}
 		}
-		else if(alpha_type == 2) {
+		else if(strcmp(alpha_type, "StepFijo") == 0) {
 			alpha = compute_alpha_2();
 		}
-		else if(alpha_type == 3) {
+		else if(strcmp(alpha_type, "StepAprox") == 0) {
 			v_aux = scale_vect(gradient, v_aux, n, last_alpha);
 			x1 = substract_vect(x0, v_aux, x1, n);
-			f_aprox = f_2(x1, n);
+			f_aprox = get_f(ex_no, x1, yi, lambda, n);
 			alpha = compute_alpha_3(gradient, last_alpha, y, f_aprox, n, tol_a);
 			last_alpha = alpha;
 		}
@@ -232,7 +185,8 @@ double *gradient_descent_2(double *init, int n, int iter, int alpha_type) {
 		v_aux = substract_vect(x0, x1, v_aux, n);
 
 		gn = norm_2(v_aux, n) / max(1.0, norm_2(x0, n));
-		double gn2 = fabs(f_2(x1, n) - f_2(x0, n)) / max(1.0, fabs(f_2(x0, n)));
+		double ggn = get_f(ex_no, x0, yi, lambda, n);
+		double gn2 = fabs(get_f(ex_no, x1, yi, lambda, n) - ggn) / max(1.0, fabs(ggn));
 
 		if(gn < tol_x) {
 			printf("Xi+1 muy cercano a Xi.\n");
@@ -252,103 +206,7 @@ double *gradient_descent_2(double *init, int n, int iter, int alpha_type) {
 		}
 		for(int i = 0; i < n; i++) {
 			x0[i] = x1[i];
-		}
-	}
-
-	free_vector(v_aux);
-	free_vector(x1);
-	free_vector(gradient);
-	Hessian_3d = free_mat_3d(Hessian_3d);
-	free(Hessian_3d);
-
-	return x0;
-}
-
-double *gradient_descent_3(double *init, int n, int iter, int alpha_type) {
-	//double tol = sqrt(get_EPS());
-	double tol_x = 1e-10;
-	double tol_f = 1e-12;
-	double tol_g = 1e-6;
-	double tol_a = pow(get_EPS(), 3.0 / 2.0);
-	double *x0 = create_vector(n, double);
-	double *x1 = create_vector(n, double);
-	int t = 0;
-
-	for(int i = 0; i < n; i++) {
-		x0[i] = init[i];
-	}
-
-	double *v_aux = create_vector(n, double);
-	double *gradient = create_vector(n, double);
-	double **Hessian = create_matrix(n, n, double);
-	double last_alpha = 0.001;
-	double f_aprox;
-
-	while(1) {
-		get_gradient_3(gradient, x0, n);
-		if(alpha_type == 1) {
-			get_Hessian_3(Hessian, x0, n);
-		}
-		printf("Iteración: %d\n", t + 1);
-
-		//Evaluar
-		double y = f_3(x0);
-		printf("f(x) = %g\n", y);
-		double gn = norm_2(gradient, n);
-		printf("Norma del gradiente: %g\n", gn);
-		if(gn < tol_g) {
-			printf("Gradiente aprox. a cero.\n");
-			break;
-		}
-
-		//Calcular alpha
-		double alpha = -1;
-		if(alpha_type == 1) {
-			alpha = compute_alpha_1(gradient, Hessian, n, tol_a);
-		}
-		else if(alpha_type == 2) {
-			alpha = compute_alpha_2();
-		}
-		else if(alpha_type == 3) {
-			v_aux = scale_vect(gradient, v_aux, n, last_alpha);
-			x1 = substract_vect(x0, v_aux, x1, n);
-			f_aprox = f_3(x1);
-			alpha = compute_alpha_3(gradient, last_alpha, y, f_aprox, n, tol_a);
-			last_alpha = alpha;
-		}
-
-		if(alpha == -1) {
-			break;
-		}
-		printf("Alpha: %g\n\n", alpha);
-
-		//Calcular actualización
-		gradient = scale_vect(gradient, gradient, n, alpha);
-		x1 = substract_vect(x0, gradient, x1, n);
-		v_aux = substract_vect(x0, x1, v_aux, n);
-
-		gn = norm_2(v_aux, n) / max(1.0, norm_2(x0, n));
-		double gn2 = fabs(f_3(x1) - f_3(x0)) / max(1.0, fabs(f_3(x0)));
-
-		if(gn < tol_x) {
-			printf("Xi+1 muy cercano a Xi.\n");
-			printf("||Xi+1 - Xi|| / ||Xi|| = %g\n", gn);
-			break;
-		}
-		if(gn2 < tol_f) {
-			printf("f(Xi+1) muy cercano a f(Xi).\n");
-			printf("|f(Xi+1) - f(Xi)| / |f(Xi)| = %g\n", gn2);
-			break;
-		}
-
-		t++;
-		if(t == iter) {
-			printf("Se alcanzó al número de iteraciones.\n");
-			break;
-		}
-		for(int i = 0; i < n; i++) {
-			x0[i] = x1[i];
-			printf("%lf ", x0[i]);
+			//printf("%lf ", x0[i]);
 		}
 		printf("\n");
 	}
@@ -357,6 +215,75 @@ double *gradient_descent_3(double *init, int n, int iter, int alpha_type) {
 	free_vector(x1);
 	free_vector(gradient);
 	free_matrix(Hessian);
+	Hessian_3d = free_mat_3d(Hessian_3d);
+	free(Hessian_3d);
 
 	return x0;
+}
+
+void rosembrock_2(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g) {
+	int n;
+	double *x0 = read_init_point(files_name, &n);
+	double *y;
+	double lambda = 0.0;
+	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 1, tol_x, tol_f, tol_f);
+	print_vector(xk, n);
+
+	free_vector(x0);
+	free_vector(xk);
+}
+
+void rosembrock_n(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g) {
+	int n;
+	double *x0 = read_init_point(files_name, &n);
+	double *y;
+	double lambda = 0.0;
+	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 2, tol_x, tol_f, tol_f);
+	print_vector(xk, n);
+
+	free_vector(x0);
+	free_vector(xk);
+}
+
+void wood(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g) {
+	int n;
+	double *x0 = read_init_point(files_name, &n);
+	double *y;
+	double lambda = 0.0;
+	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 3, tol_x, tol_f, tol_f);
+	print_vector(xk, n);
+
+	free_vector(x0);
+	free_vector(xk);
+}
+
+void smoothing(char *alpha_type, double lambda, double tol_x, double tol_f, double tol_g) {
+	int n;
+	double *x0, *y;
+	
+	//Leer y
+	FILE *file;
+	file = fopen("yk.txt", "r");
+	if(!file) {
+		printf("No se pudieron leer los y's\n");
+		free_vector(x0);
+		return;
+	}
+	fscanf(file, "%d", &n);
+	x0 = create_vector(n, double);
+	y = create_vector(n, double);
+	for(int i = 0; i < n; i++) {
+		fscanf(file, "%lf", &y[i]);
+	}
+	for(int i = 0; i < n; i++) {
+		fscanf(file, "%lf", &x0[i]);
+	}
+	fclose(file);
+
+	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 4, tol_x, tol_f, tol_f);
+	print_vector(xk, n);
+
+	free_vector(x0);
+	free_vector(y);
+	free_vector(xk);
 }

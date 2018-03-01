@@ -28,3 +28,4 @@ Parámetros:
 	Nota: Los archivos deben estar en carpetas nombradas igual a las proporcionadas. Ej.: 'GECCO-contest', 'instance_10_10_400_0.05_7', etc.
 
 	Se generan los archivos con los scores calculados. Con cada método indicando cuántas victorias, derrotas y empates tuvo. También se incluye el score.
+	Como ejemplo puede usar los archivos ya generados que se incluyen en la carpeta 'data/best_fitness'.
