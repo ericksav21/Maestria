@@ -17,8 +17,9 @@ int main(int argc, char **argv) {
 	double lambda = 1000;
 	strcpy(files_name, argv[1]);
 	strcpy(alpha_type, argv[2]);
+	rosembrock_2(files_name, alpha_type, tol_x, tol_f, tol_g);
 	//smoothing(alpha_type, lambda, tol_x, tol_f, tol_g);
-	wood(files_name, alpha_type, tol_x, tol_f, tol_g);
+	//wood(files_name, alpha_type, tol_x, tol_f, tol_g);
 
 	return 0;
 }

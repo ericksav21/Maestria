@@ -111,6 +111,8 @@ double compute_alpha_3(double *gradient, double last_alpha, double f, double f_a
 
 double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, int ex_no, double tol_x, double tol_f, double tol_g) {
 	//double tol = sqrt(get_EPS());
+	FILE *results;
+	results = fopen("results.txt", "w");
 	double tol_a = pow(get_EPS(), 3.0 / 2.0);
 	double *x0 = create_vector(n, double);
 	double *x1 = create_vector(n, double);
@@ -121,6 +123,7 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 	}
 
 	double *v_aux = create_vector(n, double);
+	double *v_scaled = create_vector(n, double);
 	double *gradient = create_vector(n, double);
 	double **Hessian = create_matrix(n, n, double);
 	double last_alpha = 0.001;
@@ -162,6 +165,9 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 			else {
 				alpha = compute_alpha_1(gradient, Hessian, n, tol_a);
 			}
+			if(alpha < 0) {
+				alpha *= -1;
+			}
 		}
 		else if(strcmp(alpha_type, "StepFijo") == 0) {
 			alpha = compute_alpha_2();
@@ -180,8 +186,8 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		printf("Alpha: %g\n\n", alpha);
 
 		//Calcular actualización
-		gradient = scale_vect(gradient, gradient, n, alpha);
-		x1 = substract_vect(x0, gradient, x1, n);
+		v_scaled = scale_vect(gradient, v_scaled, n, alpha);
+		x1 = substract_vect(x0, v_scaled, x1, n);
 		v_aux = substract_vect(x0, x1, v_aux, n);
 
 		gn = norm_2(v_aux, n) / max(1.0, norm_2(x0, n));
@@ -206,17 +212,18 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		}
 		for(int i = 0; i < n; i++) {
 			x0[i] = x1[i];
-			//printf("%lf ", x0[i]);
 		}
 		printf("\n");
 	}
 
 	free_vector(v_aux);
+	free_vector(v_scaled);
 	free_vector(x1);
 	free_vector(gradient);
 	free_matrix(Hessian);
 	Hessian_3d = free_mat_3d(Hessian_3d);
 	free(Hessian_3d);
+	fclose(results);
 
 	return x0;
 }
