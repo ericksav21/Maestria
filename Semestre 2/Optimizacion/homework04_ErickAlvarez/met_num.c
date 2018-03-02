@@ -109,10 +109,13 @@ double compute_alpha_3(double *gradient, double last_alpha, double f, double f_a
 	return num / den;
 }
 
-double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, int ex_no, double tol_x, double tol_f, double tol_g) {
+/*
+	Método principal, descenso por gradiente usando diferentes alphas.
+*/
+double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, double fixed_alpha, int ex_no, double tol_x, double tol_f, double tol_g) {
 	//double tol = sqrt(get_EPS());
-	FILE *results;
-	results = fopen("results.txt", "w");
+	//FILE *results;
+	//results = fopen("Data_SL.txt", "w");
 	double tol_a = pow(get_EPS(), 3.0 / 2.0);
 	double *x0 = create_vector(n, double);
 	double *x1 = create_vector(n, double);
@@ -130,6 +133,11 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 	double f_aprox;
 
 	MAT3D *Hessian_3d = create_mat_3d(n);
+
+	double alpha = -1;
+	if(strcmp(alpha_type, "StepFijo") == 0) {
+		alpha = fixed_alpha;
+	}
 
 	while(1) {
 		get_gradient(ex_no, gradient, x0, yi, lambda, n);
@@ -157,7 +165,6 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		}
 
 		//Calcular alpha
-		double alpha = -1;
 		if(strcmp(alpha_type, "StepHess") == 0) {
 			if(ex_no == 2 || ex_no == 4) {
 				alpha = compute_alpha_1_3d(gradient, Hessian_3d, n, tol_a);
@@ -169,9 +176,6 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 				alpha *= -1;
 			}
 		}
-		else if(strcmp(alpha_type, "StepFijo") == 0) {
-			alpha = compute_alpha_2();
-		}
 		else if(strcmp(alpha_type, "StepAprox") == 0) {
 			v_aux = scale_vect(gradient, v_aux, n, last_alpha);
 			x1 = substract_vect(x0, v_aux, x1, n);
@@ -181,6 +185,7 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		}
 
 		if(alpha == -1) {
+			printf("No se indicó correctamente un método de selección del alpha.\n");
 			break;
 		}
 		printf("Alpha: %g\n\n", alpha);
@@ -190,13 +195,13 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		x1 = substract_vect(x0, v_scaled, x1, n);
 		v_aux = substract_vect(x0, x1, v_aux, n);
 
-		gn = norm_2(v_aux, n) / max(1.0, norm_2(x0, n));
+		double xn = norm_2(v_aux, n) / max(1.0, norm_2(x0, n));
 		double ggn = get_f(ex_no, x0, yi, lambda, n);
 		double gn2 = fabs(get_f(ex_no, x1, yi, lambda, n) - ggn) / max(1.0, fabs(ggn));
 
-		if(gn < tol_x) {
+		if(xn < tol_x) {
 			printf("Xi+1 muy cercano a Xi.\n");
-			printf("||Xi+1 - Xi|| / ||Xi|| = %g\n", gn);
+			printf("||Xi+1 - Xi|| / ||Xi|| = %g\n", xn);
 			break;
 		}
 		if(gn2 < tol_f) {
@@ -210,9 +215,13 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 			printf("Se alcanzó al número de iteraciones.\n");
 			break;
 		}
+		//fprintf(results, "%lf %lf %lf\n", x0[0], x0[1], y);
 		for(int i = 0; i < n; i++) {
 			x0[i] = x1[i];
 		}
+
+		//Imprimir el resultado de la ejecución en un archivo.
+		//fprintf(results, "Iteración: %d, Norma de las x's: %g, Norma del gradiente: %g, Valor de la función: %g\n", t, xn, gn, y);
 		printf("\n");
 	}
 
@@ -223,74 +232,71 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 	free_matrix(Hessian);
 	Hessian_3d = free_mat_3d(Hessian_3d);
 	free(Hessian_3d);
-	fclose(results);
+	//fclose(results);
 
 	return x0;
 }
 
-void rosembrock_2(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g) {
+void exec(char *files_name, char *method_name, char *alpha_type, double fixed_alpha, double lambda, int max_iter, double tol_x, double tol_f, double tol_g) {
 	int n;
-	double *x0 = read_init_point(files_name, &n);
 	double *y;
-	double lambda = 0.0;
-	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 1, tol_x, tol_f, tol_f);
-	print_vector(xk, n);
+	double *x0;
+	double *xk;
 
-	free_vector(x0);
-	free_vector(xk);
-}
+	if(strcmp(method_name, "rosembrock_2") == 0) {
+		x0 = read_init_point(files_name, &n);
+		xk = gradient_descent(x0, y, lambda, n, max_iter, alpha_type, fixed_alpha, 1, tol_x, tol_f, tol_f);
+		printf("\nVector resultante (x^*):\n");
+		print_vector(xk, n);
+	}
+	else if(strcmp(method_name, "rosembrock_n") == 0) {
+		x0 = read_init_point(files_name, &n);
+		xk = gradient_descent(x0, y, lambda, n, max_iter, alpha_type, fixed_alpha, 2, tol_x, tol_f, tol_f);
+		printf("\nVector resultante (x^*):\n");
+		print_vector(xk, n);
+	}
+	else if(strcmp(method_name, "wood") == 0) {
+		x0 = read_init_point(files_name, &n);
+		xk = gradient_descent(x0, y, lambda, n, max_iter, alpha_type, fixed_alpha, 3, tol_x, tol_f, tol_f);
+		printf("\nVector resultante (x^*):\n");
+		print_vector(xk, n);
+	}
+	else if(strcmp(method_name, "smoothing") == 0) {
+		//Leer y
+		double *xi = create_vector(n, double);
+		FILE *file;
+		file = fopen(files_name, "r");
+		if(!file) {
+			printf("No se pudieron leer los y's\n");
+			free_vector(x0);
+			return;
+		}
+		fscanf(file, "%d", &n);
+		x0 = create_vector(n, double);
+		y = create_vector(n, double);
+		for(int i = 0; i < n; i++) {
+			fscanf(file, "%lf", &y[i]);
+		}
+		for(int i = 0; i < n; i++) {
+			fscanf(file, "%lf", &x0[i]);
+		}
+		for(int i = 0; i < n; i++) {
+			fscanf(file, "%lf", &xi[i]);
+		}
+		fclose(file);
 
-void rosembrock_n(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g) {
-	int n;
-	double *x0 = read_init_point(files_name, &n);
-	double *y;
-	double lambda = 0.0;
-	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 2, tol_x, tol_f, tol_f);
-	print_vector(xk, n);
+		xk = gradient_descent(x0, y, lambda, n, max_iter, alpha_type, fixed_alpha, 4, tol_x, tol_f, tol_f);
+		printf("\nVector resultante (x^*):\n");
+		print_vector(xk, n);
 
-	free_vector(x0);
-	free_vector(xk);
-}
-
-void wood(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g) {
-	int n;
-	double *x0 = read_init_point(files_name, &n);
-	double *y;
-	double lambda = 0.0;
-	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 3, tol_x, tol_f, tol_f);
-	print_vector(xk, n);
-
-	free_vector(x0);
-	free_vector(xk);
-}
-
-void smoothing(char *alpha_type, double lambda, double tol_x, double tol_f, double tol_g) {
-	int n;
-	double *x0, *y;
-	
-	//Leer y
-	FILE *file;
-	file = fopen("yk.txt", "r");
-	if(!file) {
-		printf("No se pudieron leer los y's\n");
-		free_vector(x0);
+		free_vector(y);
+		free_vector(xi);
+	}
+	else {
+		printf("Método no identificado.\n");
 		return;
 	}
-	fscanf(file, "%d", &n);
-	x0 = create_vector(n, double);
-	y = create_vector(n, double);
-	for(int i = 0; i < n; i++) {
-		fscanf(file, "%lf", &y[i]);
-	}
-	for(int i = 0; i < n; i++) {
-		fscanf(file, "%lf", &x0[i]);
-	}
-	fclose(file);
-
-	double *xk = gradient_descent(x0, y, lambda, n, 100000, alpha_type, 4, tol_x, tol_f, tol_f);
-	print_vector(xk, n);
 
 	free_vector(x0);
-	free_vector(y);
 	free_vector(xk);
 }

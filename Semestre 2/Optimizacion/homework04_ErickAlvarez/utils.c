@@ -158,9 +158,9 @@ double f_4(double *x, double *y, double lambda, int n) {
 	double res = 0.0;
 	for(int i = 0; i < n; i++) {
 		res += (x[i] - y[i]) * (x[i] - y[i]);
-		if(i < n - 1) {
-			res += lambda * (x[i + 1] - x[i]) * (x[i + 1] - x[i]);
-		}
+	}
+	for(int i = 0; i < n - 1; i++) {
+		res += lambda * pow((x[i + 1] - x[i]), 2);
 	}
 
 	return res;

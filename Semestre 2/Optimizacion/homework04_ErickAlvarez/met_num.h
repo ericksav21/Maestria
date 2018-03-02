@@ -27,14 +27,8 @@ double compute_alpha_2();
 
 double compute_alpha_3(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol);
 
-double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, int ex_no, double tol_x, double tol_f, double tol_g);
+double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, double fixed_alpha, int ex_no, double tol_x, double tol_f, double tol_g);
 
-void rosembrock_2(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g);
-
-void rosembrock_n(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g);
-
-void wood(char *files_name, char *alpha_type, double tol_x, double tol_f, double tol_g);
-
-void smoothing(char *alpha_type, double lambda, double tol_x, double tol_f, double tol_g);
+void exec(char *files_name, char *method_name, char *alpha_type, double fixed_alpha, double lambda, int max_iter, double tol_x, double tol_f, double tol_g);
 
 #endif
