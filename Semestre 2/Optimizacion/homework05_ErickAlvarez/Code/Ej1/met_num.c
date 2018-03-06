@@ -56,7 +56,7 @@ void get_Hessian(int type, double **H, double *x, int n) {
 	}
 }
 
-double compute_alpha_1(double *gradient, double **Hessian, int n, double tol) {
+double step_hess(double *gradient, double **Hessian, int n, double tol) {
 	double *v_aux = create_vector(n, double);
 	double aux1 = inner_product(gradient, gradient, n);
 	v_aux = mul_mat_vector(Hessian, gradient, v_aux, n, n);
@@ -72,7 +72,7 @@ double compute_alpha_1(double *gradient, double **Hessian, int n, double tol) {
 	return aux1 / aux2;
 }
 
-double compute_alpha_1_3d(double *gradient, MAT3D *Hessian, int n, double tol) {
+double step_hess_3d(double *gradient, MAT3D *Hessian, int n, double tol) {
 	double *v_aux = create_vector(n, double);
 	double aux1 = inner_product(gradient, gradient, n);
 	mul_m_tridiagonal(Hessian, gradient, v_aux, n);
@@ -88,7 +88,7 @@ double compute_alpha_1_3d(double *gradient, MAT3D *Hessian, int n, double tol) {
 	return aux1 / aux2;
 }
 
-double compute_alpha_3(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol) {
+double step_aprox(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol) {
 	double *v_aux = create_vector(n, double);
 	double aux = inner_product(gradient, gradient, n);
 	double num = aux * last_alpha * last_alpha;
@@ -130,6 +130,105 @@ double backtracking(int ex_no, double *x, double *y, double *gradient, double la
 	return alpha;
 }
 
+double quadratic_interp(int ex_no, double *x, double *y, double *gradient, double lambda, double last_alpha, int n) {
+	double *dk = create_vector(n, double);
+	double *v_aux = create_vector(n, double);
+	double *v_aux2 = create_vector(n, double);
+
+	dk = scale_vect(gradient, dk, n, -1.0);
+	double c1 = 1e-4;
+	double alpha0 = last_alpha;
+	double b = inner_product(gradient, dk, n); //phi prima de cero
+	double c = get_f(ex_no, x, y, lambda, n); //phi de cero
+	v_aux = scale_vect(dk, v_aux, n, alpha0);
+	v_aux2 = add_vect(x, v_aux, v_aux2, n);
+
+	double phi_a = get_f(ex_no, v_aux2, y, lambda, n);
+	double num = -(alpha0 * alpha0) * b;
+	double den = 2.0 * (phi_a - b * alpha0 - c);
+	double alpha1 = num / den;
+
+	while(1) {
+		v_aux = scale_vect(dk, v_aux, n, alpha1);
+		v_aux2 = add_vect(x, v_aux, v_aux2, n);
+		double phi_a = get_f(ex_no, v_aux2, y, lambda, n);
+		if(phi_a <= c + c1 * alpha1 * b) {
+			break;
+		}
+		alpha0 = alpha1;
+		num = -(alpha0 * alpha0) * b;
+		den = 2.0 * (phi_a - b * alpha0 - c);
+		alpha1 = num / den;
+	}
+
+	free_vector(dk);
+	free_vector(v_aux);
+	free_vector(v_aux2);
+
+	return alpha1;
+}
+
+double cubic_interp(int ex_no, double *x, double *y, double *gradient, double lambda, double last_alpha, int n) {
+	double *dk = create_vector(n, double);
+	double *v_aux = create_vector(n, double);
+	double *v_aux2 = create_vector(n, double);
+
+	double c1 = 1e-4;
+	double alpha0 = last_alpha;
+	double alpha1 = quadratic_interp(ex_no, x, y, gradient, lambda, alpha0, n);
+
+	dk = scale_vect(gradient, dk, n, -1.0);
+	double c = inner_product(gradient, dk, n); //phi prima de cero
+	double d = get_f(ex_no, x, y, lambda, n); //phi de cero
+
+	//Phi de alpha cero
+	v_aux = scale_vect(dk, v_aux, n, alpha0);
+	v_aux2 = add_vect(x, v_aux, v_aux2, n);
+	double phi_a0 = get_f(ex_no, v_aux2, y, lambda, n);
+
+	//Phi de alpha uno
+	v_aux = scale_vect(dk, v_aux, n, alpha1);
+	v_aux2 = add_vect(x, v_aux, v_aux2, n);
+	double phi_a1 = get_f(ex_no, v_aux2, y, lambda, n);
+
+	//Calcular constantes a y b
+	double aux = 1.0 / (alpha1 * alpha1 * alpha0 * alpha0 * (alpha1 - alpha0));
+	double **mat = create_matrix(2, 2, double);
+	double *v1 = create_vector(2, double);
+	double *v2 = create_vector(2, double);
+	mat[0][0] = aux * (alpha0 * alpha0);
+	mat[0][1] = -aux * (alpha1 * alpha1);
+	mat[1][0] = -aux * (alpha0 * alpha0 * alpha0);
+	mat[1][1] = aux * alpha1 * alpha1 * alpha1;
+	v1[0] = phi_a1 - c * alpha1 - d;
+	v1[1] = phi_a0 - c * alpha0 - d;
+
+	v2 = mul_mat_vector(mat, v1, v2, 2, 2);
+	double a = v2[0];
+	double b = v2[1];
+
+	//Algoritmo de interpolación cúbica
+	double alpha2 = (-b + sqrt(b * b - 3.0 * a * c)) / (3.0 * a);
+	while(phi_a1 > d + c1 * alpha1 * c) {
+		alpha0 = alpha1;
+		alpha1 = alpha2;
+		alpha2 = (-b + sqrt(b * b - 3.0 * a * c)) / (3.0 * a);
+
+		v_aux = scale_vect(dk, v_aux, n, alpha1);
+		v_aux2 = add_vect(x, v_aux, v_aux2, n);
+		phi_a1 = get_f(ex_no, v_aux2, y, lambda, n);
+	}
+
+	free_vector(dk);
+	free_vector(v_aux);
+	free_vector(v_aux2);
+	free_vector(v1);
+	free_vector(v2);
+	free_matrix(mat);
+
+	return alpha2;
+}
+
 /*
 	Método principal, descenso por gradiente usando diferentes alphas.
 */
@@ -150,7 +249,7 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 	double *v_scaled = create_vector(n, double);
 	double *gradient = create_vector(n, double);
 	double **Hessian = create_matrix(n, n, double);
-	double last_alpha = 0.001, alpha_bt = 1.0;
+	double last_alpha = 0.001, alpha_bti = 1.0;
 	double f_aprox;
 
 	MAT3D *Hessian_3d = create_mat_3d(n);
@@ -188,10 +287,10 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		//Calcular alpha
 		if(strcmp(alpha_type, "StepHess") == 0) {
 			if(ex_no == 2 || ex_no == 4) {
-				alpha = compute_alpha_1_3d(gradient, Hessian_3d, n, tol_a);
+				alpha = step_hess_3d(gradient, Hessian_3d, n, tol_a);
 			}
 			else {
-				alpha = compute_alpha_1(gradient, Hessian, n, tol_a);
+				alpha = step_hess(gradient, Hessian, n, tol_a);
 			}
 			if(alpha < 0) {
 				alpha *= -1;
@@ -201,12 +300,20 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 			v_aux = scale_vect(gradient, v_aux, n, last_alpha);
 			x1 = substract_vect(x0, v_aux, x1, n);
 			f_aprox = get_f(ex_no, x1, yi, lambda, n);
-			alpha = compute_alpha_3(gradient, last_alpha, y, f_aprox, n, tol_a);
+			alpha = step_aprox(gradient, last_alpha, y, f_aprox, n, tol_a);
 			last_alpha = alpha;
 		}
 		else if(strcmp(alpha_type, "Backtracking") == 0) {
-			alpha = backtracking(ex_no, x0, yi, gradient, lambda, alpha_bt, n);
-			alpha_bt = alpha;
+			alpha = backtracking(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
+			alpha_bti = 2.0 * alpha;
+		}
+		else if(strcmp(alpha_type, "Quadratic") == 0) {
+			alpha = quadratic_interp(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
+			alpha_bti = alpha;
+		}
+		else if(strcmp(alpha_type, "Cubic") == 0) {
+			alpha = cubic_interp(ex_no, x0, yi, gradient, lambda, 1.0, n);
+			alpha_bti = 2.0 * alpha;
 		}
 		else {
 			printf("No se indicó correctamente un método de selección del alpha.\n");

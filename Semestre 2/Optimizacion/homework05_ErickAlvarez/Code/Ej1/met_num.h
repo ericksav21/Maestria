@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "memo.h"
 #include "matriz_vector.h"
@@ -19,13 +20,17 @@ void get_gradient(int type, double *g, double *x, double *y, double lambda, int 
 
 void get_Hessian(int type, double **H, double *x, int n);
 
-double compute_alpha_1(double *gradient, double **Hessian, int n, double tol);
+double step_hess(double *gradient, double **Hessian, int n, double tol);
 
-double compute_alpha_1_3d(double *gradient, MAT3D *Hessian, int n, double tol);
+double step_hess_3d(double *gradient, MAT3D *Hessian, int n, double tol);
 
-double compute_alpha_3(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol);
+double step_aprox(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol);
 
 double backtracking(int ex_no, double *x, double *y, double *gradient, double lambda, double last_alpha, int n);
+
+double quadratic_interp(int ex_no, double *x, double *y, double *gradient, double lambda, double last_alpha, int n);
+
+double cubic_interp(int ex_no, double *x, double *y, double *gradient, double lambda, double last_alpha, int n);
 
 double *gradient_descent(double *init, double *yi, double lambda, int n, int iter, char *alpha_type, double fixed_alpha, int ex_no, double tol_x, double tol_f, double tol_g);
 
