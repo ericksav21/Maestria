@@ -43,15 +43,15 @@ typedef struct grid {
 
 int rand_in_range(int a, int b);
 
-GRID new_grid(bool empty);
+GRID new_grid(bool empty, int n);
 
 vector<vector<int> > read_instance(char *files_name, int n);
 
-vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution, int n);
+vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution);
 
 vector<GRID> reconstruct_sudoku(vector<vector<int> > table, int n);
 
-vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku, int n);
+vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku);
 
 void print_sudoku(vector<GRID> instance);
 

@@ -305,15 +305,13 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		}
 		else if(strcmp(alpha_type, "Backtracking") == 0) {
 			alpha = backtracking(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
-			alpha_bti = 2.0 * alpha;
 		}
 		else if(strcmp(alpha_type, "Quadratic") == 0) {
 			alpha = quadratic_interp(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
-			alpha_bti = alpha;
+			alpha_bti = 2.0 * alpha;
 		}
 		else if(strcmp(alpha_type, "Cubic") == 0) {
 			alpha = cubic_interp(ex_no, x0, yi, gradient, lambda, 1.0, n);
-			alpha_bti = 2.0 * alpha;
 		}
 		else {
 			printf("No se indicó correctamente un método de selección del alpha.\n");

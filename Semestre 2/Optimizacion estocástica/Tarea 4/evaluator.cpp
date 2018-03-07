@@ -7,14 +7,15 @@ void random_solution(vector<GRID> &sudoku) {
 }
 
 int fitness(vector<GRID> sudoku) {
+	int n = sudoku.size();
 	int err = 0;
 	vector<vector<int> > table = reconstruct_table(sudoku, false);
-	vector<int> used_r(10, 0), used_c(10, 0);
+	vector<int> used_r(n + 1, 0), used_c(10, 0);
 	//Se aprovecha el doble for, para verificar fila y columna
-	for(int i = 0; i < 9; i++) {
+	for(int i = 0; i < n; i++) {
 		fill(used_r.begin(), used_r.end(), 0);
 		fill(used_c.begin(), used_c.end(), 0);
-		for(int j = 0; j < 9; j++) {
+		for(int j = 0; j < n; j++) {
 			if(used_r[table[i][j]]) {
 				err += used_r[table[i][j]];
 			}
@@ -23,7 +24,7 @@ int fitness(vector<GRID> sudoku) {
 			}
 			bool is_cons_r = false;
 			bool is_cons_c = false;
-			for(int g = 0; g < sudoku.size(); g++) {
+			for(int g = 0; g < n; g++) {
 				for(int s = 0; s < sudoku[g].setted.size(); s++) {
 					pair<int, int> ppos = sudoku[g].setted_pos[s];
 					if(i == ppos.first && j == ppos.second) {
@@ -46,13 +47,14 @@ int fitness(vector<GRID> sudoku) {
 
 vector<GRID> constructive_heuristic(vector<GRID> sudoku) {
 	//Construimos la tabla pero sin agregar las permutaciones
+	int n = sudoku.size();
 	vector<vector<int> > table = reconstruct_table(sudoku, true);
 	vector<pair<int, int> > rows_info;
 
 	//Ver cuáles filas tienen más espacios vacíos
-	for(int i = 0; i < 9; i++) {
+	for(int i = 0; i < n; i++) {
 		int cnt = 0;
-		for(int j = 0; j < 9; j++) {
+		for(int j = 0; j < n; j++) {
 			if(table[i][j] == -1) {
 				cnt++;
 			}
@@ -66,7 +68,7 @@ vector<GRID> constructive_heuristic(vector<GRID> sudoku) {
 		//Ver cuántas son las filas con menor número de huecos
 		int range = 0;
 		int mmin_r = rows_info[0].first;
-		vector<pair<int, int> >::iterator upper = upper_bound(rows_info.begin(), rows_info.end(), make_pair(mmin_r, 10));
+		vector<pair<int, int> >::iterator upper = upper_bound(rows_info.begin(), rows_info.end(), make_pair(mmin_r, n + 1));
 		if(upper - rows_info.begin() < rows_info.size()) {
 			range = (upper - rows_info.begin()) - 1;
 		}
@@ -74,15 +76,15 @@ vector<GRID> constructive_heuristic(vector<GRID> sudoku) {
 		//Elegir una fila al azar
 		int r_index = rand_in_range(0, range);
 		int row = rows_info[r_index].second;
-		vector<bool> setted_in_row(10, false);
-		for(int c = 0; c < 9; c++) {
+		vector<bool> setted_in_row(n + 1, false);
+		for(int c = 0; c < n; c++) {
 			if(table[row][c] != -1) setted_in_row[table[row][c]] = true;
 		}
-		for(int c = 0; c < 9; c++) {
-			vector<bool> setted_in_col(10, false);
+		for(int c = 0; c < n; c++) {
+			vector<bool> setted_in_col(n + 1, false);
 			if(table[row][c] == -1) {
 				fill(setted_in_col.begin(), setted_in_col.end(), false);
-				for(int r = 0; r < 9; r++) {
+				for(int r = 0; r < n; r++) {
 					if(table[r][c] != -1) setted_in_col[table[r][c]] = true;
 				}
 				int g_id = GRID::get_grid_id(row, c);
@@ -115,15 +117,18 @@ vector<GRID> constructive_heuristic(vector<GRID> sudoku) {
 }
 
 vector<GRID> local_search(vector<GRID> sudoku) {
-	bitset<9> grid_visited;
+	int n = sudoku.size();
+	vector<bool> grid_visited(n);
+	fill(grid_visited.begin(), grid_visited.end(), false);
+
 	int visited_cnt = 0;
 	int fitness_min = fitness(sudoku);
-	while(visited_cnt < 9) {
-		int r_grid = rand_in_range(0, 8);
-		while(grid_visited.test(r_grid)) {
-			r_grid = rand_in_range(0, 8);
+	while(visited_cnt < n) {
+		int r_grid = rand_in_range(0, n - 1);
+		while(grid_visited[r_grid]) {
+			r_grid = rand_in_range(0, n - 1);
 		}
-		grid_visited[r_grid] = 1;
+		grid_visited[r_grid] = false;
 		visited_cnt++;
 
 		//Generar los vecinos para el bloque seleccionado
@@ -143,7 +148,7 @@ vector<GRID> local_search(vector<GRID> sudoku) {
 			if(fitness_act < fitness_min) {
 				fitness_min = fitness_act;
 				visited_cnt = 0;
-				grid_visited.reset();
+				fill(grid_visited.begin(), grid_visited.end(), false);
 				break;
 			}
 			swap(sudoku[r_grid].perm[a], sudoku[r_grid].perm[b]);

@@ -21,8 +21,9 @@ int main(int argc, char **argv) {
 	clock_t ck_1, ck_2, ck_3;
 	ofstream file(argv[3]);
 
-	vector<vector<int> > instance = read_instance(argv[1]);
-	vector<GRID> sudoku = reconstruct_sudoku(instance);
+	int n = 9;
+	vector<vector<int> > instance = read_instance(argv[1], n);
+	vector<GRID> sudoku = reconstruct_sudoku(instance, n);
 	int initial_fitness = fitness(sudoku);
 	string init_type = string(argv[2]);
 

@@ -40,7 +40,8 @@ vector<vector<int> > read_instance(char *files_name, int n) {
 	return table;
 }
 
-vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution, int n) {
+vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution) {
+	int n = sudoku.size();
 	vector<vector<int> > res(n);
 	for(int i = 0; i < n; i++) {
 		res[i].resize(n, -1);
@@ -79,7 +80,7 @@ vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution, in
 vector<GRID> reconstruct_sudoku(vector<vector<int> > table, int n) {
 	vector<GRID> v;
 	for(int i = 0; i < n; i++) {
-		GRID gact = new_grid(false);
+		GRID gact = new_grid(false, n);
 		v.push_back(gact);
 	}
 
@@ -101,10 +102,11 @@ vector<GRID> reconstruct_sudoku(vector<vector<int> > table, int n) {
 	return v;
 }
 
-vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku, int n) {
+vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku) {
+	int n = sudoku.size();
 	vector<GRID> v;
 	for(int i = 0; i < n; i++) {
-		GRID gact = new_grid(true);
+		GRID gact = new_grid(true, n);
 		v.push_back(gact);
 	}
 

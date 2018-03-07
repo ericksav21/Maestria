@@ -1,6 +1,0 @@
-Fitness inicial: 592
-Fitness de la construcción inicial: 531
-Fitness de la búsqueda local: 9
-Tiempo heurística c. (seg): 7e-06
-Tiempo de la búsqueda local (seg): 0.028891
-Tiempo total (seg): 0.028898
