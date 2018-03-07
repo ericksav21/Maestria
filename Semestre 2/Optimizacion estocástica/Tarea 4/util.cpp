@@ -67,7 +67,7 @@ vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution) {
 	for(int i = 0; i < n; i++) {
 		for(int j = 0; j < n; j++) {
 			if(res[i][j] == -1) {
-				int gid = GRID::get_grid_id(i, j);
+				int gid = GRID::get_grid_id(i, j, n);
 				res[i][j] = sudoku[gid].perm[g_used[gid]];
 				g_used[gid]++;
 			}
@@ -89,7 +89,7 @@ vector<GRID> reconstruct_sudoku(vector<vector<int> > table, int n) {
 		for (int j = 0; j < n; j++) {
 			act = table[i][j];
 			if(act != -1) {
-				int id = GRID::get_grid_id(i, j);
+				int id = GRID::get_grid_id(i, j, n);
 				v[id].perm.erase(remove(v[id].perm.begin(), v[id].perm.end(), act),
 								v[id].perm.end());
 
@@ -114,7 +114,7 @@ vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku)
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
 			act = table[i][j];
-			int g_id = GRID::get_grid_id(i, j);
+			int g_id = GRID::get_grid_id(i, j, n);
 			bool is_default = false;
 			for(int s = 0; s < sudoku[g_id].setted.size(); s++) {
 				pair<int, int> ppos = sudoku[g_id].setted_pos[s];
@@ -132,6 +132,13 @@ vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku)
 	}
 
 	return v;
+}
+
+vector<vector<int> > get_cost_table(vector<GRID> sudoku, int grid_no) {
+	int n = sudoku.size();
+	table = reconstruct_table(vector<GRID> sudoku, bool no_solution);
+
+	return table;
 }
 
 void print_sudoku(vector<GRID> instance) {

@@ -87,7 +87,7 @@ vector<GRID> constructive_heuristic(vector<GRID> sudoku) {
 				for(int r = 0; r < n; r++) {
 					if(table[r][c] != -1) setted_in_col[table[r][c]] = true;
 				}
-				int g_id = GRID::get_grid_id(row, c);
+				int g_id = GRID::get_grid_id(row, c, n);
 				//Poner un dígito en caso de disponibilidad
 				bool able = false;
 				int digit;
@@ -118,6 +118,46 @@ vector<GRID> constructive_heuristic(vector<GRID> sudoku) {
 
 vector<GRID> local_search(vector<GRID> sudoku) {
 	int n = sudoku.size();
+	int fitness_min = fitness(sudoku);
+	vector<pair<int, pair<int, int> > > neighbors;
+
+	while(true) {
+		neighbors.clear();
+		for(int r_grid = 0; r_grid < n; r_grid++) {
+			//Generar los vecinos para el bloque seleccionado
+			int ns = sudoku[r_grid].perm.size();
+			for(int i = 0; i < ns - 1; i++) {
+				for(int j = i + 1; j < ns; j++) {
+					neighbors.push_back(make_pair(r_grid, make_pair(i, j)));
+				}
+			}
+		}
+		random_shuffle(neighbors.begin(), neighbors.end());
+		bool is_critical = true;
+		for(int k = 0; k < neighbors.size(); k++) {
+			int r_grid = neighbors[k].first;
+			int a = neighbors[k].second.first;
+			int b = neighbors[k].second.second;
+
+			swap(sudoku[r_grid].perm[a], sudoku[r_grid].perm[b]);
+			int fitness_act = fitness(sudoku);
+			if(fitness_act < fitness_min) {
+				fitness_min = fitness_act;
+				is_critical = false;
+				break;
+			}
+			swap(sudoku[r_grid].perm[a], sudoku[r_grid].perm[b]);
+		}
+		if(is_critical) {
+			break;
+		}
+	}
+
+	return sudoku;
+}
+
+/*vector<GRID> local_search(vector<GRID> sudoku) {
+	int n = sudoku.size();
 	vector<bool> grid_visited(n);
 	fill(grid_visited.begin(), grid_visited.end(), false);
 
@@ -128,7 +168,7 @@ vector<GRID> local_search(vector<GRID> sudoku) {
 		while(grid_visited[r_grid]) {
 			r_grid = rand_in_range(0, n - 1);
 		}
-		grid_visited[r_grid] = false;
+		grid_visited[r_grid] = true;
 		visited_cnt++;
 
 		//Generar los vecinos para el bloque seleccionado
@@ -156,4 +196,4 @@ vector<GRID> local_search(vector<GRID> sudoku) {
 	}
 
 	return sudoku;
-}
+}*/

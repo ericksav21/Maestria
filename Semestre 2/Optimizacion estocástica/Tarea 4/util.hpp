@@ -7,6 +7,7 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -21,7 +22,28 @@ typedef struct grid {
 		setted_pos.clear();
 	}
 
-	static int get_grid_id(int i, int j) {
+	static int get_grid_id(int i, int j, int n) {
+		int gs = sqrt(n);
+		int res = 0;
+		//Checar primera fila
+		for(int k = 1; k < gs; k++) {
+			if(j >= gs * k && j <= (gs * k) + (gs - 1)) {
+				res = k;
+				break;
+			}
+		}
+		//Checar las demás
+		for(int k = 1; k < gs; k++) {
+			if(i >= gs * k && i <= (gs * k) + (gs - 1)) {
+				res += gs * k;
+				break;
+			}
+		}
+
+		return res;
+	}
+
+	/*static int get_grid_id(int i, int j, int n) {
 		int res = 0;
 		if(j >= 3 && j <= 5) {
 			res = 1;
@@ -38,7 +60,7 @@ typedef struct grid {
 		}
 
 		return res;
-	}
+	}*/
 } GRID;
 
 int rand_in_range(int a, int b);
