@@ -43,6 +43,28 @@ typedef struct grid {
 		return res;
 	}
 
+	static pair<int, int> get_table_pos(int gid, int n) {
+		//Retorna la posición (i, j) del primer elemento de
+		//la grid con id 'gid'.
+		int gs = sqrt(n);
+		int p = gid % gs;
+		int x = 0, y = 0;
+		for(int i = 0; i < gs; i++) {
+			if(i == p) {
+				x = i * gs;
+				break;
+			}
+		}
+		for(int i = 0; i < gs; i++) {
+			if(gid < (i + 1) * gs) {
+				y = i * gs;
+				break;
+			}
+		}
+
+		return make_pair(y, x);
+	}
+
 	/*static int get_grid_id(int i, int j, int n) {
 		int res = 0;
 		if(j >= 3 && j <= 5) {
@@ -74,6 +96,12 @@ vector<vector<int> > reconstruct_table(vector<GRID> sudoku, bool no_solution);
 vector<GRID> reconstruct_sudoku(vector<vector<int> > table, int n);
 
 vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku);
+
+vector<vector<int> > get_cost_table(vector<GRID> sudoku, int gid);
+
+/*----- DP Section -----*/
+vector<pair<int, int> > set_bits_off(int k, int n);
+/*----- End DP Section -----*/
 
 void print_sudoku(vector<GRID> instance);
 

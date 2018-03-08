@@ -156,6 +156,34 @@ vector<GRID> local_search(vector<GRID> sudoku) {
 	return sudoku;
 }
 
+/*----- DP Section -----*/
+void local_search_dp(vector<GRID> sudoku, int gid) {
+	int INF = 2;
+	int ss = sudoku.size();
+	int N = sudoku[gid].perm.size();
+	vector<vector<int> > cost = get_cost_table(sudoku, gid);
+	int dp[N + 1][(int)pow(2, N) + 1];
+	memset(dp, 1000, sizeof(dp));
+
+	cout << dp[N][(int)pow(2, N) - 1] << endl;
+
+	for(int i = 1; i <= N; i++) {
+		for(int j = 0; j < (int)pow(2, N); j++) {
+			if(dp[i - 1][j] < INF) {
+				for(int k = 0; k < N; k++) {
+					if(j & (1 << k) == 0) {
+						int d = sudoku[gid].perm[k];
+						dp[i][j | (1 << k)] = min(dp[i - 1][j] + cost[k][i], dp[i][j | (1 << k)]);
+					}
+				}
+			}
+		}
+	}
+
+	cout << dp[N][(int)pow(2, N) - 1] << endl;
+}
+/*----- End DP Section -----*/
+
 /*vector<GRID> local_search(vector<GRID> sudoku) {
 	int n = sudoku.size();
 	vector<bool> grid_visited(n);

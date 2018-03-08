@@ -5,6 +5,7 @@
 #include <cmath>
 #include <ctime>
 #include <fstream>
+#include <utility>
 
 #include "util.hpp"
 #include "evaluator.hpp"
@@ -24,6 +25,7 @@ int main(int argc, char **argv) {
 	int n = 9;
 	vector<vector<int> > instance = read_instance(argv[1], n);
 	vector<GRID> sudoku = reconstruct_sudoku(instance, n);
+
 	int initial_fitness = fitness(sudoku);
 	string init_type = string(argv[2]);
 
@@ -32,6 +34,18 @@ int main(int argc, char **argv) {
 	if(init_type == "heuristic") {
 		//Heurística constructiva
 		constructed = constructive_heuristic(sudoku);
+		print_sudoku(sudoku);
+		vector<vector<int> > table = reconstruct_table(sudoku, false);
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				cout << table[i][j] << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
+		local_search_dp(sudoku, 2);
+		return 0;
+
 		ck_2 = clock();
 		solution = local_search(constructed);
 	}

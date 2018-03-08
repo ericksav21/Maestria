@@ -134,12 +134,107 @@ vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku)
 	return v;
 }
 
-vector<vector<int> > get_cost_table(vector<GRID> sudoku, int grid_no) {
+vector<vector<int> > get_cost_table(vector<GRID> sudoku, int gid) {
 	int n = sudoku.size();
-	table = reconstruct_table(vector<GRID> sudoku, bool no_solution);
+	int gs = sqrt(n);
+	vector<vector<int> > table = reconstruct_table(sudoku, false);
+	vector<vector<int> > res(n + 1, vector<int>(sudoku[gid].perm.size() + 1, 0));
+	pair<int, int> pinit = GRID::get_table_pos(gid, n);
+	int i_init = pinit.first, j_init = pinit.second;
 
-	return table;
+	//Iterar sobre el grid
+	int cid = 1;
+	for(int i = i_init; i < i_init + gs; i++) {
+		for(int j = j_init; j < j_init + gs; j++) {
+			bool is_default = false;
+
+			//Ver si la casilla (i, j) no tiene un número por defecto
+			for(int k = 0; k < sudoku[gid].setted_pos.size(); k++) {
+				pair<int, int> spos = sudoku[gid].setted_pos[k];
+				if(spos.first == i && spos.second == j) {
+					is_default = true;
+					break;
+				}
+			}
+			if(is_default) {
+				continue;
+			}
+			//En esta casilla podemos checar todas las combinaciones de números
+			//Iterar sobre los números de la permutación
+			for(int k = 0; k < sudoku[gid].perm.size(); k++) {
+				int d = sudoku[gid].perm[k];
+				int cost = 0;
+
+				//Iterar en la fila
+				for(int x = 0; x < n; x++) {
+					if(x == j) {
+						continue;
+					}
+					if(table[i][x] == d) {
+						//Checar si el dígito es por defecto
+						int gaux_id = GRID::get_grid_id(i, x, n);
+						if(gaux_id == gid) {
+							continue;
+						}
+						bool flag = false;
+						for(int t = 0; t < sudoku[gaux_id].setted.size(); t++) {
+							if(d == sudoku[gaux_id].setted[t]) {
+								flag = true;
+								break;
+							}
+						}
+						if(!flag)
+							cost++;
+						else
+							cost += 50;
+					}
+				}
+				//Iterar en la columna
+				for(int y = 0; y < n; y++) {
+					if(y == i) {
+						continue;
+					}
+					if(table[y][j] == d) {
+						//Checar si el dígito es por defecto
+						int gaux_id = GRID::get_grid_id(y, j, n);
+						if(gaux_id == gid) {
+							continue;
+						}
+						bool flag = false;
+						for(int t = 0; t < sudoku[gaux_id].setted.size(); t++) {
+							if(d == sudoku[gaux_id].setted[t]) {
+								flag = true;
+								break;
+							}
+						}
+						if(!flag)
+							cost++;
+						else
+							cost += 50;
+					}
+				}
+
+				res[d][cid] = cost;
+			}
+			cid++;
+		}
+	}
+
+	return res;
 }
+
+/*----- DP Section -----*/
+vector<pair<int, int> > set_bits_off(int k, int n) {
+	vector<pair<int, int> > res;
+	for(int i = 0; i < n; i++) {
+		if(k & (1 << i)) {
+			res.push_back(make_pair(k & ~(1 << i), i));
+		}
+	}
+
+	return res;
+}
+/*----- End DP Section -----*/
 
 void print_sudoku(vector<GRID> instance) {
 	for(int g = 0; g < instance.size(); g++) {

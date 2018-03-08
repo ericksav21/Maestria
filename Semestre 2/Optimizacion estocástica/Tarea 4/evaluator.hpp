@@ -9,6 +9,7 @@
 #include <vector>
 #include <utility>
 #include <bitset>
+#include <string.h>
 #include <algorithm>
 
 #include "util.hpp"
@@ -22,5 +23,11 @@ int fitness(vector<GRID> sudoku);
 vector<GRID> constructive_heuristic(vector<GRID> sudoku);
 
 vector<GRID> local_search(vector<GRID> sudoku);
+
+/*----- DP Section -----*/
+
+void local_search_dp(vector<GRID> sudoku, int gid);
+
+/*----- End DP Section -----*/
 
 #endif
