@@ -392,7 +392,7 @@ void exec(char *files_name, char *method_name, char *alpha_type, double fixed_al
 	}
 	else if(strcmp(method_name, "smoothing") == 0) {
 		//Leer y
-		double *xi = create_vector(n, double);
+		//double *xi = create_vector(n, double);
 		FILE *file;
 		file = fopen(files_name, "r");
 		if(!file) {
@@ -409,9 +409,9 @@ void exec(char *files_name, char *method_name, char *alpha_type, double fixed_al
 		for(int i = 0; i < n; i++) {
 			fscanf(file, "%lf", &x0[i]);
 		}
-		for(int i = 0; i < n; i++) {
+		/*for(int i = 0; i < n; i++) {
 			fscanf(file, "%lf", &xi[i]);
-		}
+		}*/
 		fclose(file);
 
 		xk = gradient_descent(x0, y, lambda, n, max_iter, alpha_type, fixed_alpha, 4, tol_x, tol_f, tol_f);
@@ -419,7 +419,7 @@ void exec(char *files_name, char *method_name, char *alpha_type, double fixed_al
 		print_vector(xk, n);
 
 		free_vector(y);
-		free_vector(xi);
+		//free_vector(xi);
 	}
 	else {
 		printf("Método no identificado.\n");
