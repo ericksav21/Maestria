@@ -34,25 +34,16 @@ int main(int argc, char **argv) {
 	if(init_type == "heuristic") {
 		//Heurística constructiva
 		constructed = constructive_heuristic(sudoku);
-		print_sudoku(sudoku);
-		vector<vector<int> > table = reconstruct_table(sudoku, false);
-		for(int i = 0; i < n; i++) {
-			for(int j = 0; j < n; j++) {
-				cout << table[i][j] << " ";
-			}
-			cout << endl;
-		}
 		cout << endl;
-		local_search_dp(sudoku, 2);
-		return 0;
 
 		ck_2 = clock();
-		solution = local_search(constructed);
+		solution = local_search_optimal(constructed);
+		cout << endl;
 	}
 	else if(init_type == "random") {
 		random_solution(sudoku);
 		ck_2 = clock();
-		solution = local_search(sudoku);
+		solution = local_search_optimal(sudoku);
 	}
 	else {
 		cout << "No se reconoció el tipo de inicialización.\n";

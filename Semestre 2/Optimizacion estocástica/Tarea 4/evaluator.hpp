@@ -26,7 +26,9 @@ vector<GRID> local_search(vector<GRID> sudoku);
 
 /*----- DP Section -----*/
 
-void local_search_dp(vector<GRID> sudoku, int gid);
+vector<int> local_search_dp(vector<GRID> sudoku, int gid);
+
+vector<GRID> local_search_optimal(vector<GRID> sudoku);
 
 /*----- End DP Section -----*/
 

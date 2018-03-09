@@ -157,71 +157,69 @@ vector<GRID> local_search(vector<GRID> sudoku) {
 }
 
 /*----- DP Section -----*/
-void local_search_dp(vector<GRID> sudoku, int gid) {
-	int INF = 2;
+vector<int> local_search_dp(vector<GRID> sudoku, int gid) {
+	int INF = 1000000;
 	int ss = sudoku.size();
 	int N = sudoku[gid].perm.size();
 	vector<vector<int> > cost = get_cost_table(sudoku, gid);
-	int dp[N + 1][(int)pow(2, N) + 1];
-	memset(dp, 1000, sizeof(dp));
+	vector<vector<pair<int, int> > > idx(N + 1, vector<pair<int, int> >((int)pow(2, N) + 1));
 
-	cout << dp[N][(int)pow(2, N) - 1] << endl;
+	int dp[N + 1][(int)pow(2, N) + 1];
+	for(int i = 0; i <= N; i++) {
+		for(int j = 0; j <= (int)pow(2, N); j++) {
+			dp[i][j] = INF;
+		}
+	}
+	dp[0][0] = 0;
 
 	for(int i = 1; i <= N; i++) {
 		for(int j = 0; j < (int)pow(2, N); j++) {
 			if(dp[i - 1][j] < INF) {
 				for(int k = 0; k < N; k++) {
-					if(j & (1 << k) == 0) {
+					if((j & (1 << k)) == 0) {
 						int d = sudoku[gid].perm[k];
-						dp[i][j | (1 << k)] = min(dp[i - 1][j] + cost[k][i], dp[i][j | (1 << k)]);
+						if(dp[i - 1][j] + cost[d][i] < dp[i][j | (1 << k)]) {
+							dp[i][j | (1 << k)] = dp[i - 1][j] + cost[d][i];
+							idx[i][j | (1 << k)] = make_pair(j, k);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	cout << dp[N][(int)pow(2, N) - 1] << endl;
+	vector<int> rep, repn;
+	int bfr = (int)pow(2, N) - 1;
+	for(int i = N; i >= 1; i--) {
+		rep.push_back(idx[i][bfr].second);
+		bfr = idx[i][bfr].first;
+	}
+	reverse(rep.begin(), rep.end());
+	for(int i = 0; i < rep.size(); i++) {
+		repn.push_back(sudoku[gid].perm[rep[i]]);
+	}
+
+	return repn;
 }
-/*----- End DP Section -----*/
 
-/*vector<GRID> local_search(vector<GRID> sudoku) {
+vector<GRID> local_search_optimal(vector<GRID> sudoku) {
 	int n = sudoku.size();
-	vector<bool> grid_visited(n);
-	fill(grid_visited.begin(), grid_visited.end(), false);
+	vector<int> grids(n);
+	for(int i = 0; i < n; i++) grids[i] = i;
 
-	int visited_cnt = 0;
-	int fitness_min = fitness(sudoku);
-	while(visited_cnt < n) {
-		int r_grid = rand_in_range(0, n - 1);
-		while(grid_visited[r_grid]) {
-			r_grid = rand_in_range(0, n - 1);
-		}
-		grid_visited[r_grid] = true;
-		visited_cnt++;
+	for(int k = 1; k <= 2; k++) {
+		random_shuffle(grids.begin(), grids.end());
 
-		//Generar los vecinos para el bloque seleccionado
-		int ns = sudoku[r_grid].perm.size();
-		vector<pair<int, int> > nperms;
-		for(int i = 0; i < ns - 1; i++) {
-			for(int j = i + 1; j < ns; j++) {
-				nperms.push_back(make_pair(i, j));
+		vector<int> bperm;
+		for(int i = 0; i < n; i++) {
+			int grid = grids[i];
+			bperm = local_search_dp(sudoku, grid);
+			for(int j = 0; j < bperm.size(); j++) {
+				sudoku[grid].perm[j] = bperm[j];
 			}
-		}
-		//Esto para elegir los vecinos de manera aleatoria
-		random_shuffle(nperms.begin(), nperms.end());
-		for(int i = 0; i < nperms.size(); i++) {
-			int a = nperms[i].first, b = nperms[i].second;
-			swap(sudoku[r_grid].perm[a], sudoku[r_grid].perm[b]);
-			int fitness_act = fitness(sudoku);
-			if(fitness_act < fitness_min) {
-				fitness_min = fitness_act;
-				visited_cnt = 0;
-				fill(grid_visited.begin(), grid_visited.end(), false);
-				break;
-			}
-			swap(sudoku[r_grid].perm[a], sudoku[r_grid].perm[b]);
 		}
 	}
 
 	return sudoku;
-}*/
+}
+/*----- End DP Section -----*/
