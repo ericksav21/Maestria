@@ -25,7 +25,6 @@ void read_files(char *fn_x, char *fn_y, double **mat_x, double *vec_y, int n1, i
 		i++;
 	}
 	(*m) = i;
-	printf("%d\n", i);
 
 	fclose(file_x);
 	fclose(file_y);
@@ -101,11 +100,11 @@ double f_3(double *x) {
 
 /*----- Función 4 -----*/
 //Función de interés para este problema
-void get_gradient_p(double *g, double *xi, double yi, double *beta, double beta0, int n) {
+void get_gradient_p(double *g, double *xi, double yi, double *beta, int n) {
 	//Parcial con respecto a beta_k
 	double aux1 = 0.0, pi = 0.0, ex = 0.0;
 	aux1 = inner_product(xi, beta, n);
-	ex = exp(-aux - beta0);
+	ex = exp(-aux1 - beta[n]);
 	pi = 1.0 / (1.0 + ex);
 
 	double par = 0.0;
@@ -118,10 +117,10 @@ void get_gradient_p(double *g, double *xi, double yi, double *beta, double beta0
 	g[n] = (-1.0) * par;
 }
 
-double f_p(double *xi, double yi, double *beta, double beta0, int n) {
+double f_p(double *xi, double yi, double *beta, int n) {
 	double aux1 = 0.0, pi = 0.0, ex = 0.0;
 	aux1 = inner_product(xi, beta, n);
-	ex = exp(-aux - beta0);
+	ex = exp(-aux1 - beta[n]);
 	pi = 1.0 / (1.0 + ex);
 
 	double res = 0.0;

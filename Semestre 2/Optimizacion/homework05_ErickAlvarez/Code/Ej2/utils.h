@@ -29,8 +29,8 @@ double f_3(double *x);
 
 /*Función Principal*/
 
-void get_gradient_p(double *g, double *xi, double yi, double *beta, double beta0, int n);
+void get_gradient_p(double *g, double *xi, double yi, double *beta, int n);
 
-double f_p(double *xi, double yi, double *beta, double beta0, int n);
+double f_p(double *xi, double yi, double *beta, int n);
 
 #endif
