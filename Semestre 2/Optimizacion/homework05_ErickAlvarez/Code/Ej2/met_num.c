@@ -52,162 +52,32 @@ void get_gradient(double *g, double **x, double *y, double *beta, int m, int n) 
 	free_vector(xi);
 }
 
-/*double step_hess(double *gradient, double **Hessian, int n, double tol) {
-	double *v_aux = create_vector(n, double);
-	double aux1 = inner_product(gradient, gradient, n);
-	v_aux = mul_mat_vector(Hessian, gradient, v_aux, n, n);
-	double aux2 = inner_product(gradient, v_aux, n);
-
-	if(fabs(aux2) < tol) {
-		printf("Error al generar el alpha: División entre cero.\n");
-		free_vector(v_aux);
-		return -1;
-	}
-
-	free_vector(v_aux);
-	return aux1 / aux2;
-}
-
-double step_aprox(double *gradient, double last_alpha, double f, double f_aprox, int n, double tol) {
-	double *v_aux = create_vector(n, double);
-	double aux = inner_product(gradient, gradient, n);
-	double num = aux * last_alpha * last_alpha;
-	double den = 2.0 * (f_aprox - f + last_alpha * aux);
-
-	if(fabs(den) < tol) {
-		printf("Error al generar el alpha: División entre cero.\n");
-		free_vector(v_aux);
-		return -1;
-	}
-
-	free_vector(v_aux);
-	return num / den;
-}*/
-
 double backtracking(double **x, double *y, double *beta, double *gradient, double last_alpha, int m, int n) {
 	double rho = 0.2;
 	double c1 = 1e-4;
 	double alpha = last_alpha;
-	double *dk = create_vector(n, double);
+	//double *dk = create_vector(n, double);
 	double *v_aux = create_vector(n, double);
 	double *v_aux2 = create_vector(n, double);
-	dk = scale_vect(gradient, dk, n, -1.0);
-	double bt = inner_product(gradient, dk, n);
+	//dk = scale_vect(gradient, dk, n, -1.0);
+	double bt = inner_product(gradient, gradient, n);
+	double fx = get_f(x, y, beta, m, n);
 
 	while(1) {
-		v_aux = scale_vect(dk, v_aux, n, alpha);
-		v_aux2 = add_vect(beta, v_aux, v_aux2, n);
-		if(get_f(x, y, v_aux2, m, n) <= get_f(x, y, beta, m, n) + (c1 * alpha * bt)) {
+		v_aux = scale_vect(gradient, v_aux, n, alpha);
+		v_aux2 = substract_vect(beta, v_aux, v_aux2, n);
+		if(get_f(x, y, v_aux2, m, n) <= (fx - (c1 * alpha * bt))) {
 			break;
 		}
 		alpha *= rho;
 	}
 
-	free_vector(dk);
+	//free_vector(dk);
 	free_vector(v_aux);
 	free_vector(v_aux2);
 	
 	return alpha;
 }
-
-/*double quadratic_interp(int ex_no, double *x, double *y, double *gradient, double lambda, double last_alpha, int n) {
-	double *dk = create_vector(n, double);
-	double *v_aux = create_vector(n, double);
-	double *v_aux2 = create_vector(n, double);
-
-	dk = scale_vect(gradient, dk, n, -1.0);
-	double c1 = 1e-4;
-	double alpha0 = last_alpha;
-	double b = inner_product(gradient, dk, n); //phi prima de cero
-	double c = get_f(ex_no, x, y, lambda, n); //phi de cero
-	v_aux = scale_vect(dk, v_aux, n, alpha0);
-	v_aux2 = add_vect(x, v_aux, v_aux2, n);
-
-	double phi_a = get_f(ex_no, v_aux2, y, lambda, n);
-	double num = -(alpha0 * alpha0) * b;
-	double den = 2.0 * (phi_a - b * alpha0 - c);
-	double alpha1 = num / den;
-
-	while(1) {
-		v_aux = scale_vect(dk, v_aux, n, alpha1);
-		v_aux2 = add_vect(x, v_aux, v_aux2, n);
-		double phi_a = get_f(ex_no, v_aux2, y, lambda, n);
-		if(phi_a <= c + c1 * alpha1 * b) {
-			break;
-		}
-		alpha0 = alpha1;
-		num = -(alpha0 * alpha0) * b;
-		den = 2.0 * (phi_a - b * alpha0 - c);
-		alpha1 = num / den;
-	}
-
-	free_vector(dk);
-	free_vector(v_aux);
-	free_vector(v_aux2);
-
-	return alpha1;
-}
-
-double cubic_interp(int ex_no, double *x, double y, double *gradient, double lambda, double last_alpha, int n) {
-	double *dk = create_vector(n, double);
-	double *v_aux = create_vector(n, double);
-	double *v_aux2 = create_vector(n, double);
-
-	double c1 = 1e-4;
-	double alpha0 = last_alpha;
-	double alpha1 = quadratic_interp(ex_no, x, y, gradient, lambda, alpha0, n);
-
-	dk = scale_vect(gradient, dk, n, -1.0);
-	double c = inner_product(gradient, dk, n); //phi prima de cero
-	double d = get_f(ex_no, x, y, lambda, n); //phi de cero
-
-	//Phi de alpha cero
-	v_aux = scale_vect(dk, v_aux, n, alpha0);
-	v_aux2 = add_vect(x, v_aux, v_aux2, n);
-	double phi_a0 = get_f(ex_no, v_aux2, y, lambda, n);
-
-	//Phi de alpha uno
-	v_aux = scale_vect(dk, v_aux, n, alpha1);
-	v_aux2 = add_vect(x, v_aux, v_aux2, n);
-	double phi_a1 = get_f(ex_no, v_aux2, y, lambda, n);
-
-	//Calcular constantes a y b
-	double aux = 1.0 / (alpha1 * alpha1 * alpha0 * alpha0 * (alpha1 - alpha0));
-	double **mat = create_matrix(2, 2, double);
-	double *v1 = create_vector(2, double);
-	double *v2 = create_vector(2, double);
-	mat[0][0] = aux * (alpha0 * alpha0);
-	mat[0][1] = -aux * (alpha1 * alpha1);
-	mat[1][0] = -aux * (alpha0 * alpha0 * alpha0);
-	mat[1][1] = aux * alpha1 * alpha1 * alpha1;
-	v1[0] = phi_a1 - c * alpha1 - d;
-	v1[1] = phi_a0 - c * alpha0 - d;
-
-	v2 = mul_mat_vector(mat, v1, v2, 2, 2);
-	double a = v2[0];
-	double b = v2[1];
-
-	//Algoritmo de interpolación cúbica
-	double alpha2 = (-b + sqrt(b * b - 3.0 * a * c)) / (3.0 * a);
-	while(phi_a1 > d + c1 * alpha1 * c) {
-		alpha0 = alpha1;
-		alpha1 = alpha2;
-		alpha2 = (-b + sqrt(b * b - 3.0 * a * c)) / (3.0 * a);
-
-		v_aux = scale_vect(dk, v_aux, n, alpha1);
-		v_aux2 = add_vect(x, v_aux, v_aux2, n);
-		phi_a1 = get_f(ex_no, v_aux2, y, lambda, n);
-	}
-
-	free_vector(dk);
-	free_vector(v_aux);
-	free_vector(v_aux2);
-	free_vector(v1);
-	free_vector(v2);
-	free_matrix(mat);
-
-	return alpha2;
-}*/
 
 /*
 	Método principal, descenso por gradiente usando diferentes alphas.
@@ -226,7 +96,7 @@ double *gradient_descent(double *init, double **xi, double *yi, int m, int n, in
 	double *v_aux = create_vector(n, double);
 	double *v_scaled = create_vector(n, double);
 	double *gradient = create_vector(n, double);
-	double last_alpha = 0.001, alpha_bti = 1.0;
+	double last_alpha = 0.001, alpha_bti = 2.0;
 	double f_aprox;
 
 	double alpha = -1;
@@ -246,24 +116,13 @@ double *gradient_descent(double *init, double **xi, double *yi, int m, int n, in
 		}
 
 		//Calcular alpha
-		/*if(strcmp(alpha_type, "StepAprox") == 0) {
-			v_aux = scale_vect(gradient, v_aux, n, last_alpha);
-			x1 = substract_vect(x0, v_aux, x1, n);
-			f_aprox = get_f(xi, yi, x1, n);
-			alpha = step_aprox(gradient, last_alpha, y, f_aprox, n, tol_a);
-			last_alpha = alpha;
-		}*/
 		if(strcmp(alpha_type, "Backtracking") == 0) {
 			alpha = backtracking(xi, yi, x0, gradient, alpha_bti, m, n);
 			alpha_bti = 2.0 * alpha;
 		}
-		/*else if(strcmp(alpha_type, "Quadratic") == 0) {
-			alpha = quadratic_interp(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
-			alpha_bti = 2.0 * alpha;
+		else if(strcmp(alpha_type, "Fixed") == 0) {
+			alpha = 0.00005;
 		}
-		else if(strcmp(alpha_type, "Cubic") == 0) {
-			alpha = cubic_interp(ex_no, x0, yi, gradient, lambda, 1.0, n);
-		}*/
 		else {
 			printf("No se indicó correctamente un método de selección del alpha.\n");
 			break;
@@ -300,9 +159,6 @@ double *gradient_descent(double *init, double **xi, double *yi, int m, int n, in
 		for(int i = 0; i < n; i++) {
 			x0[i] = x1[i];
 		}
-
-		//Imprimir el resultado de la ejecución en un archivo.
-		//fprintf(results, "Iteración: %d, Norma de las x's: %g, Norma del gradiente: %g, Valor de la función: %g\n", t, xn, gn, y);
 		printf("\n");
 	}
 
@@ -314,10 +170,11 @@ double *gradient_descent(double *init, double **xi, double *yi, int m, int n, in
 	return x0;
 }
 
-double make_test(double *beta, int n1, int n2, int n) {
+void make_test(char *test, double *beta, int n1, int n2, int n) {
 	//Obtener los datos de prueba
-	char tfn_x[] = "testX.csv";
-	char tfn_y[] = "testY.csv";
+	char tfn_x[30], tfn_y[30];
+	sprintf(tfn_x, "%sX.csv", test);
+	sprintf(tfn_y, "%sY.csv", test);
 
 	int m;
 	double **test_x = create_matrix(13000, 785, double);
@@ -352,27 +209,29 @@ double make_test(double *beta, int n1, int n2, int n) {
 		}
 		err += fabs(ind - test_y[i]);
 	}
-	printf("Error total: %lf\n", err);
+	printf("Número de equivocaciones: %lf\n", err);
 	err /= m;
 	printf("Error medio: %g\n", err);
 
 	free_matrix(test_x);
 	free_vector(test_y);
 	free_vector(xi);
-
-	return err;
 }
 
-void exec(char *trfn_x, char *trfn_y, int max_iter, double tol_x, double tol_f, double tol_g, char *alpha_type) {
+void exec(char *train, char *test, int max_iter, double tol_x, double tol_f, double tol_g, int n1, int n2, int ts) {
 	double **train_x = create_matrix(13000, 784, double);
 	double *train_y = create_vector(13000, double);
+	char trfn_x[30], trfn_y[30];
+	sprintf(trfn_x, "%sX.csv", train);
+	sprintf(trfn_y, "%sY.csv", train);
 
-	int m, n1 = 1, n2 = 8;
+	int m;
+	//int n1 = 1, n2 = 8;
 	printf("Leyendo los datos...\n");
 	read_files(trfn_x, trfn_y, train_x, train_y, n1, n2, &m);
 
 	//Tomar un subconjunto de los datos
-	int ts = 13000;
+	//int ts = 8000;
 	int ss = (m < ts ? m : ts);
 	double **strain_x = create_matrix(ss, 785, double);
 	double *strain_y = create_vector(ss, double);
@@ -400,6 +259,7 @@ void exec(char *trfn_x, char *trfn_y, int max_iter, double tol_x, double tol_f, 
 		beta[i] = 0.0;
 	}
 
+	char alpha_type[] = "Backtracking";
 	printf("Entrenando...\n");
 	betak = gradient_descent(beta, strain_x, strain_y, ss, n, max_iter, alpha_type, tol_x, tol_f, tol_g);
 	printf("\nResultante:\n");
@@ -408,7 +268,7 @@ void exec(char *trfn_x, char *trfn_y, int max_iter, double tol_x, double tol_f, 
 	}
 	printf("\n");
 
-	double err = make_test(betak, n1, n2, n);
+	make_test(test, betak, n1, n2, n);
 
 	free_matrix(strain_x);
 	free_vector(strain_y);

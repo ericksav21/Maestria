@@ -142,8 +142,17 @@ double quadratic_interp(int ex_no, double *x, double *y, double *gradient, doubl
 	double c = get_f(ex_no, x, y, lambda, n); //phi de cero
 	v_aux = scale_vect(dk, v_aux, n, alpha0);
 	v_aux2 = add_vect(x, v_aux, v_aux2, n);
-
 	double phi_a = get_f(ex_no, v_aux2, y, lambda, n);
+
+	//Condición de Armijo para Alpha_1
+	if(phi_a <= c + c1 * alpha0 * b) {
+		free_vector(dk);
+		free_vector(v_aux);
+		free_vector(v_aux2);
+
+		return alpha0;
+	}
+
 	double num = -(alpha0 * alpha0) * b;
 	double den = 2.0 * (phi_a - b * alpha0 - c);
 	double alpha1 = num / den;
@@ -191,6 +200,15 @@ double cubic_interp(int ex_no, double *x, double *y, double *gradient, double la
 	v_aux2 = add_vect(x, v_aux, v_aux2, n);
 	double phi_a1 = get_f(ex_no, v_aux2, y, lambda, n);
 
+	//Condición de Armijo para Alpha_1
+	if(phi_a1 <= d + c1 * alpha1 * c) {
+		free_vector(dk);
+		free_vector(v_aux);
+		free_vector(v_aux2);
+
+		return alpha1;
+	}
+
 	//Calcular constantes a y b
 	double aux = 1.0 / (alpha1 * alpha1 * alpha0 * alpha0 * (alpha1 - alpha0));
 	double **mat = create_matrix(2, 2, double);
@@ -209,6 +227,7 @@ double cubic_interp(int ex_no, double *x, double *y, double *gradient, double la
 
 	//Algoritmo de interpolación cúbica
 	double alpha2 = (-b + sqrt(b * b - 3.0 * a * c)) / (3.0 * a);
+	int t = 0;
 	while(phi_a1 > d + c1 * alpha1 * c) {
 		alpha0 = alpha1;
 		alpha1 = alpha2;
@@ -217,6 +236,7 @@ double cubic_interp(int ex_no, double *x, double *y, double *gradient, double la
 		v_aux = scale_vect(dk, v_aux, n, alpha1);
 		v_aux2 = add_vect(x, v_aux, v_aux2, n);
 		phi_a1 = get_f(ex_no, v_aux2, y, lambda, n);
+		t++;
 	}
 
 	free_vector(dk);
@@ -305,13 +325,15 @@ double *gradient_descent(double *init, double *yi, double lambda, int n, int ite
 		}
 		else if(strcmp(alpha_type, "Backtracking") == 0) {
 			alpha = backtracking(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
+			alpha_bti = 2.0 * alpha;
 		}
 		else if(strcmp(alpha_type, "Quadratic") == 0) {
 			alpha = quadratic_interp(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
 			alpha_bti = 2.0 * alpha;
 		}
 		else if(strcmp(alpha_type, "Cubic") == 0) {
-			alpha = cubic_interp(ex_no, x0, yi, gradient, lambda, 1.0, n);
+			alpha = cubic_interp(ex_no, x0, yi, gradient, lambda, alpha_bti, n);
+			alpha_bti = 2.0 * alpha;
 		}
 		else {
 			printf("No se indicó correctamente un método de selección del alpha.\n");
