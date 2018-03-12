@@ -1,0 +1,8 @@
+Ratio de éxito bl. sencilla: 0
+Ratio de éxito bl. óptima: 0
+Mejor fitness bl. sencilla: 6
+Mejor fitness bl. óptima: 2
+Media fitness bl. sencilla: 11.51
+Media fitness bl. óptima: 6.89
+Media tiempo bl. sencilla: 0.0441231
+Media tiempo bl. óptima: 0.00619681
