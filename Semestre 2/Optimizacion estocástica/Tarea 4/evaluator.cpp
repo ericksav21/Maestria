@@ -10,7 +10,7 @@ int fitness(vector<GRID> sudoku) {
 	int n = sudoku.size();
 	int err = 0;
 	vector<vector<int> > table = reconstruct_table(sudoku, false);
-	vector<int> used_r(n + 1, 0), used_c(10, 0);
+	vector<int> used_r(n + 1, 0), used_c(n + 1, 0);
 	//Se aprovecha el doble for, para verificar fila y columna
 	for(int i = 0; i < n; i++) {
 		fill(used_r.begin(), used_r.end(), 0);
@@ -206,8 +206,9 @@ vector<GRID> local_search_optimal(vector<GRID> sudoku) {
 	int n = sudoku.size();
 	vector<int> grids(n);
 	for(int i = 0; i < n; i++) grids[i] = i;
+	int fitness_min = fitness(sudoku);
 
-	for(int k = 1; k <= 2; k++) {
+	while(true) {
 		random_shuffle(grids.begin(), grids.end());
 
 		vector<int> bperm;
@@ -218,6 +219,12 @@ vector<GRID> local_search_optimal(vector<GRID> sudoku) {
 				sudoku[grid].perm[j] = bperm[j];
 			}
 		}
+		int fitness_act = fitness(sudoku);
+		//No hubo mejoras, es un óptimo local.
+		if(fitness_min == fitness_act) {
+			break;
+		}
+		fitness_min = fitness_act;
 	}
 
 	return sudoku;

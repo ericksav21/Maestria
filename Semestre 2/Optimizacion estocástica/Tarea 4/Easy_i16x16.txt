@@ -1,0 +1,8 @@
+Fitness inicial (sin construcción): 2952
+Fitness de la construcción inicial: 2491 (Aleatoria)
+Fitness de la búsqueda local (Sencilla): 145
+Fitness de la búsqueda local (Óptima): 14
+Tiempo de la construcción inicial. (seg): 0.0001
+Tiempo de la búsqueda local sencilla (seg): 1.36422
+Tiempo de la búsqueda local óptima (seg): 0.293537
+Tiempo total (seg): 1.65786

@@ -99,10 +99,8 @@ vector<GRID> reconstruct_sudoku(vector<vector<int> > table, vector<GRID> sudoku)
 
 vector<vector<int> > get_cost_table(vector<GRID> sudoku, int gid);
 
-/*----- DP Section -----*/
-vector<pair<int, int> > set_bits_off(int k, int n);
-/*----- End DP Section -----*/
-
 void print_sudoku(vector<GRID> instance);
+
+void print_table(vector<GRID> instance);
 
 #endif

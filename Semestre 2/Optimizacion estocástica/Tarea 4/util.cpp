@@ -223,19 +223,6 @@ vector<vector<int> > get_cost_table(vector<GRID> sudoku, int gid) {
 	return res;
 }
 
-/*----- DP Section -----*/
-vector<pair<int, int> > set_bits_off(int k, int n) {
-	vector<pair<int, int> > res;
-	for(int i = 0; i < n; i++) {
-		if(k & (1 << i)) {
-			res.push_back(make_pair(k & ~(1 << i), i));
-		}
-	}
-
-	return res;
-}
-/*----- End DP Section -----*/
-
 void print_sudoku(vector<GRID> instance) {
 	for(int g = 0; g < instance.size(); g++) {
 		cout << "Grid: " << (g + 1) << endl;
@@ -250,5 +237,19 @@ void print_sudoku(vector<GRID> instance) {
 					", " << instance[g].setted_pos[j].second << ") ";
 		}
 		cout << endl << endl;
+	}
+}
+
+void print_table(vector<GRID> instance) {
+	int n = instance.size();
+	vector<vector<int> > table = reconstruct_table(instance, false);
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < n; j++) {
+			cout << table[i][j];
+			if(j < n - 1) {
+				cout << " ";
+			}
+		}
+		cout << endl;
 	}
 }
