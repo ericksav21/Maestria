@@ -1,12 +1,16 @@
-setwd("/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 3/Ej3")
-#setwd("/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 1")
+#setwd("/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 3/Ej3")
+setwd("/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 3/Ej3")
 d <- read.table("hepatlon")
-set.seed(7)
 
-no_clusters <- 2
-nrm = data.frame(scale(d[, -8]))
-km <- kmeans(nrm, no_clusters, iter.max = 100)
-plot(nrm, col = (km$cluster + 1))
+data = d[1:7]
+data = scale(data)
+p = prcomp(data, center = TRUE, scale = TRUE)
+set.seed(7)
+biplot(p)
+
+no_clusters <- 4
+km <- kmeans(as.matrix(data), no_clusters, nstart = 20, iter.max = 100)
+print(km)
 
 #Número de grupos
 #wss <- rep(0, 6)
