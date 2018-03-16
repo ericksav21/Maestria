@@ -14,10 +14,18 @@ void get_gradient(double *g, double *x, int n);
 
 double get_f(double *x, int n);
 
-double* PU(double *g, MAT3D *H3D, int n);
+double* PU(double *g, double **H, int n);
 
-double* PB(double *g, MAT3D *H3D, int n);
+double* PB(double *g, double **H, int n);
 
-double mk(int type, double *x, double *p, double *g, double **H, MAT3D *H3D, int n);
+double mk(double *x, double *p, double *g, double **H, int n);
+
+double phi(double *x, double *ppk, double *g, double **H, int n);
+
+double *dogleg(double *pu, double *pb, double delta, int n);
+
+double *approx(double *x, double *g, double **H, double delta, int n);
+
+void r_confidence(double *init, int max_iter, int n);
 
 #endif

@@ -60,7 +60,21 @@ void get_gradient_2(double *g, double *x, int n) {
 	}
 }
 
-void get_Hessian_2(MAT3D *mat, double *x, int n) {
+void get_Hessian_2(double **H, double *x, int n) {
+	for(int i = 0; i < n; i++) {
+		if(i < n - 1) {
+			H[i + 1][i] = -400.0 * x[i];
+			H[i][i + 1] = -400.0 * x[i];
+		}
+		if(i > 0 && i < n - 1) {
+			H[i][i] = 202.0 - 400.0 * (x[i + 1] - 3.0 * x[i] * x[i]);
+		}
+	}
+	H[0][0] = -400.0 * (x[1] - 3.0 * x[0] * x[0]) + 2.0;
+	H[n - 1][n - 1] = 200.0;
+}
+
+/*void get_Hessian_2(MAT3D *mat, double *x, int n) {
 	double *a = create_vector(n, double);
 	double *b = create_vector(n, double);
 	double *c = create_vector(n, double);
@@ -91,7 +105,7 @@ void get_Hessian_2(MAT3D *mat, double *x, int n) {
 	free_vector(c);
 
 	return mat;
-}
+}*/
 
 double f_2(double *x, int n) {
 	double res = 0.0;
@@ -279,4 +293,31 @@ double *solve_m_tridiagonal(MAT3D *mat, double *d, double tol) {
 	free(aux);
 	free_vector(_d);
 	return x;
+}
+
+int cholesky(double **A, double ***L, double ***Lt, int n, double tol) {
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < (i + 1); j++) {
+			double aux = 0.0;
+			for(int k = 0; k < j; k++) {
+				aux += (*L)[i][k] * (*L)[j][k];
+			}
+			if(i == j) {
+				if(A[i][i] - aux < 0) {
+					return 0;
+				}
+				(*L)[i][j] = sqrt(A[i][i] - aux);
+				(*Lt)[i][j] = (*L)[i][j];
+			}
+			else {
+				if(fabs((*L)[j][j]) < tol) {
+					return 0;
+				}
+				(*L)[i][j] = 1.0 / (*L)[j][j] * (A[i][j] - aux);
+				(*Lt)[j][i] = (*L)[i][j];
+			}
+		}
+	}
+
+	return 1;
 }
