@@ -18,6 +18,8 @@ double* PU(double *g, double **H, int n);
 
 double* PB(double *g, double **H, int n);
 
+double* PC(double *g, double **H, double delta, int n);
+
 double mk(double *x, double *p, double *g, double **H, int n);
 
 double phi(double *x, double *ppk, double *g, double **H, int n);

@@ -41,6 +41,33 @@ double* PB(double *g, double **H, int n) {
 	return res;
 }
 
+double* PC(double *g, double **H, double delta, int n) {
+	double *hp = create_vector(n, double);
+	hp = mul_mat_vector(H, g, hp, n, n);
+	double ddk = inner_product(g, hp, n);
+	double norm_g = norm_2(g, n);
+	double tao;
+	if(ddk <= 0.0) {
+		tao = 1.0;
+	}
+	else {
+		double aux = pow(norm_g, 3.0) / (delta * ddk);
+		if(aux < 1.0) {
+			tao = aux;
+		}
+		else {
+			tao = 1.0;
+		}
+	}
+	double sc = -1.0 * (delta / norm_g);
+	double *res = create_vector(n, double);
+	res = scale_vect(g, res, n, sc);
+
+	free_vector(hp);
+
+	return res;
+}
+
 double mk(double *x, double *p, double *g, double **H, int n) {
 	double *hp = create_vector(n, double);
 	hp = mul_mat_vector(H, p, hp, n, n);
@@ -56,13 +83,10 @@ double mk(double *x, double *p, double *g, double **H, int n) {
 
 double phi(double *x, double *ppk, double *g, double **H, int n) {
 	double *ssk = create_vector(n, double);
-	double *zeros = create_vector(n, double);
-	for(int i = 0; i < n; i++) {
-		zeros[i] = 0.0;
-	}
 	ssk = add_vect(x, ppk, ssk, n);
+	double f_k = get_f(x, n);
 
-	double res = (get_f(x, n) - get_f(ssk, n)) / (mk(x, zeros, g, H, n) - mk(x, ppk, g, H, n));
+	double res = (f_k - get_f(ssk, n)) / (f_k - mk(x, ppk, g, H, n));
 
 	free_vector(ssk);
 
@@ -82,16 +106,10 @@ double *dogleg(double *pu, double *pb, double delta, int n) {
 
 	aux = norm_2(pu, n);
 	double c = aux * aux - delta * delta;
-	printf("%lf %lf %lf\n", a, b, c);
-
+	
 	double tao = (-b + sqrt(b * b - 4.0 * a * c)) / (2.0 * a);
-	if(tao >= 0.0 && tao <= 1) {
-		res = scale_vect(pu, res, n, tao);
-	}
-	else {
-		v_aux2 = scale_vect(v_aux, v_aux2, n, (1.0 - tao));
-		res = add_vect(pu, v_aux2, res, n);
-	}
+	v_aux2 = scale_vect(v_aux, v_aux2, n, tao);
+	res = add_vect(pu, v_aux2, res, n);
 
 	free_vector(v_aux);
 	free_vector(v_aux2);
@@ -107,11 +125,13 @@ double *approx(double *x, double *g, double **H, double delta, int n) {
 	double npb = norm_2(pb, n);
 	if(npb <= delta) {
 		free_vector(pu);
+		printf("PU\n");
 		return pb;
 	}
 	double **L = create_matrix(n, n, double);
 	double **Lt = create_matrix(n, n, double);
 	int def_pos = cholesky(H, &L, &Lt, n, tol);
+	printf("%d\n", def_pos);
 	free_matrix(L);
 	free_matrix(Lt);
 
@@ -119,16 +139,20 @@ double *approx(double *x, double *g, double **H, double delta, int n) {
 		double *dl = dogleg(pu, pb, delta, n);
 		free_vector(pu);
 		free_vector(pb);
+		printf("Dogleg\n");
 		return dl;
 	}
 
 	free_vector(pb);
+	free_vector(pu);
 
-	return pu;
+	printf("Cauchy\n");
+	return PC(g, H, delta, n);
 }
 
 void r_confidence(double *init, int max_iter, int n) {
-	double deltaM = 1.0, delta = 0.4, nabla = 0.1;
+	double deltaM = 10.0, delta = 7.0, nabla = 0.2;
+	double tolG = 1e-8;
 	int t = 0;
 	double *x0 = create_vector(n, double);
 	double *x1 = create_vector(n, double);
@@ -150,19 +174,15 @@ void r_confidence(double *init, int max_iter, int n) {
 		get_Hessian_2(H, x0, n);
 
 		double gn = norm_2(gradient, n);
-		printf("\nNorma del gradiente: %d\n", (int)gn);
+		printf("\nNorma del gradiente: %g\n", gn);
+		if(gn < tolG) {
+			break;
+		}
 		
 		//Solución aproximada
 		double *pk = approx(x0, gradient, H, delta, n);
 		double phi_k = phi(x0, pk, gradient, H, n);
-		if(phi_k > nabla) {
-			printf("Actualización...\n");
-			x1 = add_vect(x0, pk, x1, n);
-			for(int i = 0; i < n; i++) {
-				x0[i] = x1[i];
-			}
-		}
-		else if(phi_k < 0.25) {
+		if(phi_k < 0.25) {
 			delta *= 0.25;
 		}
 		else {
@@ -171,13 +191,24 @@ void r_confidence(double *init, int max_iter, int n) {
 				delta = (2.0 * delta < deltaM ? 2.0 * delta : deltaM);
 			}
 		}
+		if(phi_k > nabla) {
+			printf("Actualización...\n");
+			x1 = add_vect(x0, pk, x1, n);
+			for(int i = 0; i < n; i++) {
+				x0[i] = x1[i];
+			}
+		}
 
 		printf("Delta: %g\n", delta);
 		if(t == max_iter) {
 			break;
 		}
 		t++;
+		free_vector(pk);
 	}
+
+	print_vector(x0, n);
+	printf("\n");
 
 	free_vector(x0);
 	free_vector(x1);
