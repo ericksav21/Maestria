@@ -1,0 +1,7 @@
+Fitness inicial (sin construcción): 899
+Fitness de la construcción inicial: 358 (Heurística)
+Fitness de la metaheurística de trayectoria: 0
+Tiempo de la construcción inicial. (seg): 0.000123
+Tiempo de la metaheurística de trayectoria (seg): 1800
+Tiempo total (seg): 1800
+

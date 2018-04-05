@@ -1,0 +1,6 @@
+plot "results_wood_frpr.txt" using 1:2 title 'Valor de la función' w l, "results_cvx2_fr.txt" using 1:3 title 'Norma del gradiente' w l, "results_cvx2_fr.txt" using 1:4 title 'Norma de la dirección' w l
+set terminal png nocrop enhanced size 1024,768
+set output 'Resg_cvx2_frpr.png'
+replot
+set term x11
+set output

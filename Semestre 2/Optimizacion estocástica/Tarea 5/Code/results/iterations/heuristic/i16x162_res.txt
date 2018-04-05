@@ -1,0 +1,814 @@
+Iteración: 1
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 643 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000194
+Tiempo de la metaheurística de trayectoria (seg): 88.3266
+Tiempo total (seg): 88.3268
+
+Iteración: 2
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1136 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 88.0723
+Tiempo total (seg): 88.0724
+
+Iteración: 3
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 936 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.1686
+Tiempo total (seg): 88.1687
+
+Iteración: 4
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 939 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000212
+Tiempo de la metaheurística de trayectoria (seg): 87.9177
+Tiempo total (seg): 87.9179
+
+Iteración: 5
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 793 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000211
+Tiempo de la metaheurística de trayectoria (seg): 87.7464
+Tiempo total (seg): 87.7466
+
+Iteración: 6
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 843 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.7512
+Tiempo total (seg): 87.7513
+
+Iteración: 7
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1091 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.9172
+Tiempo total (seg): 87.9173
+
+Iteración: 8
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 645 (Heurística)
+Fitness de la metaheurística de trayectoria: 15
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.7492
+Tiempo total (seg): 87.7493
+
+Iteración: 9
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1033 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.6291
+Tiempo total (seg): 87.6292
+
+Iteración: 10
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 782 (Heurística)
+Fitness de la metaheurística de trayectoria: 6
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 87.8952
+Tiempo total (seg): 87.8953
+
+Iteración: 11
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 991 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.1133
+Tiempo total (seg): 87.1134
+
+Iteración: 12
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 737 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 88.1444
+Tiempo total (seg): 88.1445
+
+Iteración: 13
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 648 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.988
+Tiempo total (seg): 87.9881
+
+Iteración: 14
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 738 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.6771
+Tiempo total (seg): 87.6772
+
+Iteración: 15
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 691 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000209
+Tiempo de la metaheurística de trayectoria (seg): 88.1825
+Tiempo total (seg): 88.1827
+
+Iteración: 16
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 742 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.5654
+Tiempo total (seg): 88.5655
+
+Iteración: 17
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 742 (Heurística)
+Fitness de la metaheurística de trayectoria: 6
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 86.9482
+Tiempo total (seg): 86.9483
+
+Iteración: 18
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1134 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 88.205
+Tiempo total (seg): 88.2051
+
+Iteración: 19
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 791 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.6095
+Tiempo total (seg): 87.6097
+
+Iteración: 20
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 448 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000214
+Tiempo de la metaheurística de trayectoria (seg): 86.854
+Tiempo total (seg): 86.8542
+
+Iteración: 21
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 735 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.1181
+Tiempo total (seg): 88.1182
+
+Iteración: 22
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 894 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000129
+Tiempo de la metaheurística de trayectoria (seg): 88.3661
+Tiempo total (seg): 88.3662
+
+Iteración: 23
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 840 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 87.4198
+Tiempo total (seg): 87.4199
+
+Iteración: 24
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 686 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.00021
+Tiempo de la metaheurística de trayectoria (seg): 87.8029
+Tiempo total (seg): 87.8031
+
+Iteración: 25
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 786 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.9522
+Tiempo total (seg): 87.9524
+
+Iteración: 26
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 944 (Heurística)
+Fitness de la metaheurística de trayectoria: 5
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.6415
+Tiempo total (seg): 87.6416
+
+Iteración: 27
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 788 (Heurística)
+Fitness de la metaheurística de trayectoria: 6
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.4402
+Tiempo total (seg): 88.4403
+
+Iteración: 28
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 690 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.6102
+Tiempo total (seg): 87.6103
+
+Iteración: 29
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 637 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.7401
+Tiempo total (seg): 87.7403
+
+Iteración: 30
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 885 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.423
+Tiempo total (seg): 87.4231
+
+Iteración: 31
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 746 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.1566
+Tiempo total (seg): 87.1567
+
+Iteración: 32
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 694 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.00021
+Tiempo de la metaheurística de trayectoria (seg): 87.6936
+Tiempo total (seg): 87.6938
+
+Iteración: 33
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 642 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.3977
+Tiempo total (seg): 87.3978
+
+Iteración: 34
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 948 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.8762
+Tiempo total (seg): 87.8764
+
+Iteración: 35
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 899 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 88.1277
+Tiempo total (seg): 88.1278
+
+Iteración: 36
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1291 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.6546
+Tiempo total (seg): 87.6547
+
+Iteración: 37
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 592 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.7946
+Tiempo total (seg): 87.7947
+
+Iteración: 38
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 933 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.3357
+Tiempo total (seg): 87.3359
+
+Iteración: 39
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 885 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.7137
+Tiempo total (seg): 87.7138
+
+Iteración: 40
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 745 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.0985
+Tiempo total (seg): 88.0986
+
+Iteración: 41
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 741 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.1408
+Tiempo total (seg): 87.1409
+
+Iteración: 42
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 730 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.3752
+Tiempo total (seg): 87.3753
+
+Iteración: 43
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 885 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.6852
+Tiempo total (seg): 87.6853
+
+Iteración: 44
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 880 (Heurística)
+Fitness de la metaheurística de trayectoria: 5
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.2346
+Tiempo total (seg): 87.2347
+
+Iteración: 45
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 688 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.9489
+Tiempo total (seg): 87.9491
+
+Iteración: 46
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 687 (Heurística)
+Fitness de la metaheurística de trayectoria: 7
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 88.3527
+Tiempo total (seg): 88.3528
+
+Iteración: 47
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1035 (Heurística)
+Fitness de la metaheurística de trayectoria: 2
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.5858
+Tiempo total (seg): 87.5859
+
+Iteración: 48
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 792 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.2081
+Tiempo total (seg): 88.2082
+
+Iteración: 49
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 842 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000129
+Tiempo de la metaheurística de trayectoria (seg): 86.8703
+Tiempo total (seg): 86.8705
+
+Iteración: 50
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 842 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.4629
+Tiempo total (seg): 87.463
+
+Iteración: 51
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 628 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.00021
+Tiempo de la metaheurística de trayectoria (seg): 88.0051
+Tiempo total (seg): 88.0053
+
+Iteración: 52
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 991 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.7868
+Tiempo total (seg): 87.7869
+
+Iteración: 53
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 493 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.6328
+Tiempo total (seg): 87.6329
+
+Iteración: 54
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 784 (Heurística)
+Fitness de la metaheurística de trayectoria: 17
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.0675
+Tiempo total (seg): 88.0676
+
+Iteración: 55
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 437 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.00013
+Tiempo de la metaheurística de trayectoria (seg): 87.7197
+Tiempo total (seg): 87.7198
+
+Iteración: 56
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 890 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.6052
+Tiempo total (seg): 87.6053
+
+Iteración: 57
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 887 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.7174
+Tiempo total (seg): 88.7175
+
+Iteración: 58
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 693 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000129
+Tiempo de la metaheurística de trayectoria (seg): 87.6667
+Tiempo total (seg): 87.6669
+
+Iteración: 59
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 639 (Heurística)
+Fitness de la metaheurística de trayectoria: 5
+Tiempo de la construcción inicial. (seg): 0.000121
+Tiempo de la metaheurística de trayectoria (seg): 87.7423
+Tiempo total (seg): 87.7424
+
+Iteración: 60
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1040 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000211
+Tiempo de la metaheurística de trayectoria (seg): 87.7263
+Tiempo total (seg): 87.7265
+
+Iteración: 61
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 690 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000128
+Tiempo de la metaheurística de trayectoria (seg): 87.9597
+Tiempo total (seg): 87.9598
+
+Iteración: 62
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1139 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.6175
+Tiempo total (seg): 87.6177
+
+Iteración: 63
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 785 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.4352
+Tiempo total (seg): 87.4353
+
+Iteración: 64
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 985 (Heurística)
+Fitness de la metaheurística de trayectoria: 6
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.3365
+Tiempo total (seg): 87.3366
+
+Iteración: 65
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 790 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 88.0972
+Tiempo total (seg): 88.0973
+
+Iteración: 66
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 640 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.6067
+Tiempo total (seg): 87.6068
+
+Iteración: 67
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 693 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.0569
+Tiempo total (seg): 88.057
+
+Iteración: 68
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 993 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.6751
+Tiempo total (seg): 87.6752
+
+Iteración: 69
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 1032 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.5913
+Tiempo total (seg): 88.5914
+
+Iteración: 70
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 732 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.9392
+Tiempo total (seg): 87.9393
+
+Iteración: 71
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 582 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.0899
+Tiempo total (seg): 88.09
+
+Iteración: 72
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 894 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.9138
+Tiempo total (seg): 87.914
+
+Iteración: 73
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 986 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 86.742
+Tiempo total (seg): 86.7421
+
+Iteración: 74
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 935 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000212
+Tiempo de la metaheurística de trayectoria (seg): 87.0058
+Tiempo total (seg): 87.006
+
+Iteración: 75
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 843 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.6598
+Tiempo total (seg): 87.6599
+
+Iteración: 76
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 945 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 88.2712
+Tiempo total (seg): 88.2713
+
+Iteración: 77
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 942 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.00021
+Tiempo de la metaheurística de trayectoria (seg): 87.6904
+Tiempo total (seg): 87.6906
+
+Iteración: 78
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 748 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 88.4485
+Tiempo total (seg): 88.4486
+
+Iteración: 79
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 888 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.0744
+Tiempo total (seg): 88.0745
+
+Iteración: 80
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 688 (Heurística)
+Fitness de la metaheurística de trayectoria: 11
+Tiempo de la construcción inicial. (seg): 0.00012
+Tiempo de la metaheurística de trayectoria (seg): 86.7661
+Tiempo total (seg): 86.7662
+
+Iteración: 81
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 993 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.00021
+Tiempo de la metaheurística de trayectoria (seg): 87.1647
+Tiempo total (seg): 87.1649
+
+Iteración: 82
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 786 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.5541
+Tiempo total (seg): 87.5543
+
+Iteración: 83
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 736 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 87.2192
+Tiempo total (seg): 87.2193
+
+Iteración: 84
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 738 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.2854
+Tiempo total (seg): 87.2856
+
+Iteración: 85
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 852 (Heurística)
+Fitness de la metaheurística de trayectoria: 13
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 87.8716
+Tiempo total (seg): 87.8717
+
+Iteración: 86
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 984 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.5798
+Tiempo total (seg): 87.58
+
+Iteración: 87
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 884 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.1096
+Tiempo total (seg): 88.1097
+
+Iteración: 88
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 742 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.1727
+Tiempo total (seg): 88.1728
+
+Iteración: 89
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 593 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000118
+Tiempo de la metaheurística de trayectoria (seg): 88.1134
+Tiempo total (seg): 88.1135
+
+Iteración: 90
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 692 (Heurística)
+Fitness de la metaheurística de trayectoria: 12
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.6368
+Tiempo total (seg): 87.6369
+
+Iteración: 91
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 793 (Heurística)
+Fitness de la metaheurística de trayectoria: 2
+Tiempo de la construcción inicial. (seg): 0.00021
+Tiempo de la metaheurística de trayectoria (seg): 86.9713
+Tiempo total (seg): 86.9715
+
+Iteración: 92
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 895 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000119
+Tiempo de la metaheurística de trayectoria (seg): 87.2204
+Tiempo total (seg): 87.2205
+
+Iteración: 93
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 886 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.4972
+Tiempo total (seg): 87.4973
+
+Iteración: 94
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 539 (Heurística)
+Fitness de la metaheurística de trayectoria: 9
+Tiempo de la construcción inicial. (seg): 0.000116
+Tiempo de la metaheurística de trayectoria (seg): 88.3881
+Tiempo total (seg): 88.3882
+
+Iteración: 95
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 845 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 86.1583
+Tiempo total (seg): 86.1584
+
+Iteración: 96
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 743 (Heurística)
+Fitness de la metaheurística de trayectoria: 10
+Tiempo de la construcción inicial. (seg): 0.000212
+Tiempo de la metaheurística de trayectoria (seg): 87.3984
+Tiempo total (seg): 87.3986
+
+Iteración: 97
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 887 (Heurística)
+Fitness de la metaheurística de trayectoria: 7
+Tiempo de la construcción inicial. (seg): 0.000117
+Tiempo de la metaheurística de trayectoria (seg): 87.0069
+Tiempo total (seg): 87.007
+
+Iteración: 98
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 540 (Heurística)
+Fitness de la metaheurística de trayectoria: 14
+Tiempo de la construcción inicial. (seg): 0.000209
+Tiempo de la metaheurística de trayectoria (seg): 84.9905
+Tiempo total (seg): 84.9907
+
+Iteración: 99
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 635 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000209
+Tiempo de la metaheurística de trayectoria (seg): 84.9631
+Tiempo total (seg): 84.9634
+
+Iteración: 100
+Fitness inicial (sin construcción): 2399
+Fitness de la construcción inicial: 936 (Heurística)
+Fitness de la metaheurística de trayectoria: 8
+Tiempo de la construcción inicial. (seg): 0.000209
+Tiempo de la metaheurística de trayectoria (seg): 84.9583
+Tiempo total (seg): 84.9585
+
+
+Radio de éxito: 0
+
+Tiempo promedio: 87.6359
+
+Tiempo mínimo: 10
+
+Tiempo máximo: 88.7174
+
+Fitness promedio: 10.32
+
+Fitness mínimo: 2
+
+Fitness máximo: 17

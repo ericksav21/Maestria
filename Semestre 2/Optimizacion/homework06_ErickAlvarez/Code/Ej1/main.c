@@ -9,6 +9,10 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
+	if(argc < 2) {
+		printf("Error. Ejecuta: %s [Punto inicial].\n", argv[0]);
+		return 0;
+	}
 	srand(time(NULL));
 	int n;
 	double *x0 = read_init_point(argv[1], &n);

@@ -1,0 +1,120 @@
+Tiempo: 120.001
+Fitness: 38
+Temperatura: 6.767
+
+Tiempo: 240.005
+Fitness: 39
+Temperatura: 6.53399
+
+Tiempo: 360.004
+Fitness: 42
+Temperatura: 6.30099
+
+Tiempo: 480.004
+Fitness: 32
+Temperatura: 6.06799
+
+Tiempo: 600
+Fitness: 38
+Temperatura: 5.835
+
+Tiempo: 720.004
+Fitness: 29
+Temperatura: 5.60199
+
+Tiempo: 840.002
+Fitness: 39
+Temperatura: 5.369
+
+Tiempo: 960.002
+Fitness: 27
+Temperatura: 5.136
+
+Tiempo: 1080
+Fitness: 40
+Temperatura: 4.90299
+
+Tiempo: 1200
+Fitness: 42
+Temperatura: 4.67
+
+Tiempo: 1320
+Fitness: 36
+Temperatura: 4.43699
+
+Tiempo: 1440
+Fitness: 33
+Temperatura: 4.20399
+
+Tiempo: 1560
+Fitness: 39
+Temperatura: 3.97099
+
+Tiempo: 1680
+Fitness: 33
+Temperatura: 3.738
+
+Tiempo: 1800
+Fitness: 32
+Temperatura: 3.505
+
+Tiempo: 1920
+Fitness: 33
+Temperatura: 3.27199
+
+Tiempo: 2040
+Fitness: 31
+Temperatura: 3.039
+
+Tiempo: 2160.01
+Fitness: 34
+Temperatura: 2.80599
+
+Tiempo: 2280
+Fitness: 27
+Temperatura: 2.573
+
+Tiempo: 2400.01
+Fitness: 26
+Temperatura: 2.33999
+
+Tiempo: 2520
+Fitness: 36
+Temperatura: 2.10699
+
+Tiempo: 2640
+Fitness: 25
+Temperatura: 1.87399
+
+Tiempo: 2760
+Fitness: 23
+Temperatura: 1.64099
+
+Tiempo: 2880
+Fitness: 26
+Temperatura: 1.40799
+
+Tiempo: 3000
+Fitness: 25
+Temperatura: 1.17499
+
+Tiempo: 3120
+Fitness: 16
+Temperatura: 0.941997
+
+Tiempo: 3240
+Fitness: 15
+Temperatura: 0.709
+
+Tiempo: 3360
+Fitness: 10
+Temperatura: 0.476
+
+Tiempo: 3480
+Fitness: 2
+Temperatura: 0.242995
+
+Tiempo: 3600
+Fitness: 2
+Temperatura: 0.00999903
+
