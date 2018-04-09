@@ -1,0 +1,15 @@
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD1.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD1.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD1.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD1.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD1.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD2.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD2.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD2.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD2.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD2.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD3.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD3.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD3.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD3.txt res.txt 3600.0 15.0
+/home/user_demo/ErickAlvarez/Tarea6/main 9 /home/user_demo/ErickAlvarez/Tarea6/instances/SD3.txt res.txt 3600.0 15.0
