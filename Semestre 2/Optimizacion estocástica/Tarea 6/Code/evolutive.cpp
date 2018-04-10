@@ -132,25 +132,25 @@ vector<vector<GRID> > Evolutive::evolve_pop(vector<vector<GRID> > pop) {
 		double p = (double)rand() / (double)RAND_MAX;
 		if(p <= crossover_rate) {
 			vector<vector<GRID> > sons = crossover(p1, p2);
-			new_pop.push_back(local_search_optimal(mutation(sons[0])));
+			new_pop.push_back(local_search(mutation(sons[0])));
 			cnt++;
 			if(cnt >= d) {
 				break;
 			}
-			new_pop.push_back(local_search_optimal(mutation(sons[1])));
+			new_pop.push_back(local_search(mutation(sons[1])));
 			cnt++;
 			if(cnt >= d) {
 				break;
 			}
 		}
 		else {
-			vector<GRID> p1_m = local_search_optimal(mutation(p1));
+			vector<GRID> p1_m = local_search(mutation(p1));
 			new_pop.push_back(p1_m);
 			cnt++;
 			if(cnt >= d) {
 				break;
 			}
-			vector<GRID> p2_m = local_search_optimal(mutation(p2));
+			vector<GRID> p2_m = local_search(mutation(p2));
 			new_pop.push_back(p2_m);
 			cnt++;
 			if(cnt >= d) {
@@ -228,7 +228,7 @@ void Evolutive::run() {
 	best_fitness = INT_MAX;
 	vector<vector<GRID> > pop = generate_pop();
 	for(int i = 0; i < pop.size(); i++) {
-		pop[i] = local_search_optimal(pop[i]);
+		pop[i] = local_search(pop[i]);
 	}
 	clock_t ck_1 = clock();
 	double register_event_time = 5.0, reg_evt_time_act = register_event_time;
