@@ -21,7 +21,7 @@ using namespace std;
 class Genetic {
 private:
 	string func_type;
-	double mutation_rate = 0.05, crossover_rate = 0.8;
+	double mutation_rate = 0.01, crossover_rate = 0.8;
 	int tournament_size = 2, pop_size;
 	int a, b;
 	int no_evaluations;

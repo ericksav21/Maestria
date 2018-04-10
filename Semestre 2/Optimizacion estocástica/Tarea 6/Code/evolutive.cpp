@@ -231,16 +231,16 @@ void Evolutive::run() {
 		pop[i] = local_search_optimal(pop[i]);
 	}
 	clock_t ck_1 = clock();
-	double register_event_time = 60.0, reg_evt_time_act = register_event_time;
+	double register_event_time = 5.0, reg_evt_time_act = register_event_time;
 	ofstream file(files_name.c_str());
 	int cnt = 1;
 	while(true) {
-		cout << "Generación: " << cnt++ << endl;
+		//cout << "Generación: " << cnt << endl;
 		vector<vector<GRID> > ev_pop = evolve_pop(pop);
 		vector<Individual> new_pop = multi_dyn(ev_pop, pop_size, ck_1);
 		sort(new_pop.begin(), new_pop.end(), IndividualComparator());
 		best_fitness = new_pop[0].get_fitness();
-		cout << "Mejor fitness de la generación: " << best_fitness << endl;
+		//cout << "Mejor fitness de la generación: " << best_fitness << endl;
 		pop.clear();
 		for(int i = 0; i < new_pop.size(); i++) {
 			pop.push_back(new_pop[i].get_sudoku());
@@ -267,6 +267,7 @@ void Evolutive::run() {
 		if(current_time > end_time) {
 			break;
 		}
+		cnt++;
 	}
 
 	file.close();
