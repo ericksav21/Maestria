@@ -1,10 +1,12 @@
 #include "evolutive.hpp"
 
-Evolutive::Evolutive(vector<GRID> sudoku, int pop_size, double DI, double end_time) {
+Evolutive::Evolutive(vector<GRID> sudoku, int pop_size, double DI, double end_time, string files_name) {
 	this->sudoku = sudoku;
 	this->pop_size = pop_size;
 	this->DI = DI;
 	this->end_time = end_time;
+	this->files_name = files_name;
+	this->files_name.replace(this->files_name.size() - 4, 4, "_info.txt");
 }
 
 Evolutive::~Evolutive() {}
@@ -23,20 +25,25 @@ vector<vector<GRID> > Evolutive::generate_pop() {
 	return pop;
 }
 
-vector<GRID> Evolutive::crossover(vector<GRID> p1, vector<GRID> p2) {
+vector<vector<GRID> > Evolutive::crossover(vector<GRID> p1, vector<GRID> p2) {
 	int d = p1.size();
-	vector<GRID> son(d);
+	vector<GRID> son1(d), son2(d);
 	for(int i = 0; i < d; i++) {
 		double p = (double)rand() / (double)RAND_MAX;
 		if(p < 0.5) {
-			son[i] = p1[i];
+			son1[i] = p1[i];
+			son2[i] = p2[i];
 		}
 		else {
-			son[i] = p2[i];
+			son1[i] = p2[i];
+			son2[i] = p1[i];
 		}
 	}
 
-	return son;
+	vector<vector<GRID> > res;
+	res.push_back(son1);
+	res.push_back(son2);
+	return res;
 }
 
 vector<GRID> Evolutive::mutation(vector<GRID> sudoku) {
@@ -119,14 +126,36 @@ vector<vector<GRID> > Evolutive::evolve_pop(vector<vector<GRID> > pop) {
 		new_pop.push_back(pop[i]);
 	}
 	int cnt = 0;
-	while(cnt < d) {
+	while(true) {
 		vector<GRID> p1 = tournamentSelection(pop);
 		vector<GRID> p2 = tournamentSelection(pop);
 		double p = (double)rand() / (double)RAND_MAX;
 		if(p <= crossover_rate) {
-			vector<GRID> son = mutation(crossover(p1, p2));
-			new_pop.push_back(local_search(son));
+			vector<vector<GRID> > sons = crossover(p1, p2);
+			new_pop.push_back(local_search_optimal(mutation(sons[0])));
 			cnt++;
+			if(cnt >= d) {
+				break;
+			}
+			new_pop.push_back(local_search_optimal(mutation(sons[1])));
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}
+		}
+		else {
+			vector<GRID> p1_m = local_search_optimal(mutation(p1));
+			new_pop.push_back(p1_m);
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}
+			vector<GRID> p2_m = local_search_optimal(mutation(p2));
+			new_pop.push_back(p2_m);
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}
 		}
 	}
 
@@ -160,35 +189,35 @@ vector<Individual> Evolutive::multi_dyn(vector<vector<GRID> > pop, int n, clock_
 		vector<pair<int, int> > DCN = get_DCN(current_members, new_pop);
 		ck_2 = clock();
 		double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
-		int D = (int)(DI - DI * (current_time / end_time));
-		//Penalizar individuos con DCN menor que D
-		vector<pair<int, int> > penalized;
-		for(int i = 0; i < current_members.size(); i++) {
-			if(DCN[i].first < D) {
-				penalized.push_back(make_pair(i, current_members[i].get_fitness()));
-				current_members[i].set_fitness(INT_MAX);
-			}
-		}
+		int D = (int)ceil(DI - DI * (current_time / end_time));
+		
 		//Calcular frente de pareto
 		vector<int> pareto_front;
 		sort(DCN.begin(), DCN.end());
 		int fitness_max = INT_MAX;
 		for(int i = DCN.size() - 1; i >= 0; i--) {
 			int idx = DCN[i].second;
+
+			if(DCN[i].first < D) {
+				continue;
+			}
 			if(current_members[idx].get_fitness() < fitness_max) {
 				pareto_front.push_back(idx);
 				fitness_max = current_members[idx].get_fitness();
 			}
 		}
-		random_shuffle(pareto_front.begin(), pareto_front.end());
-		int idx_to_add = pareto_front[0];
-		new_pop.push_back(current_members[idx_to_add]);
 
-		//Quitar la penalización
-		for(int i = 0; i < penalized.size(); i++) {
-			int idx = penalized[i].first;
-			current_members[idx].set_fitness(penalized[i].second);
+		random_shuffle(pareto_front.begin(), pareto_front.end());
+		//Ver si el frente de pareto está vacío
+		int idx_to_add;
+		if(pareto_front.size() == 0) {
+			//Tomar el más alejado
+			idx_to_add = DCN[DCN.size() - 1].second;
 		}
+		else {
+			idx_to_add = pareto_front[0];
+		}
+		new_pop.push_back(current_members[idx_to_add]);
 		current_members.erase(current_members.begin() + idx_to_add);
 	}
 
@@ -199,17 +228,19 @@ void Evolutive::run() {
 	best_fitness = INT_MAX;
 	vector<vector<GRID> > pop = generate_pop();
 	for(int i = 0; i < pop.size(); i++) {
-		pop[i] = local_search(pop[i]);
+		pop[i] = local_search_optimal(pop[i]);
 	}
 	clock_t ck_1 = clock();
+	double register_event_time = 60.0, reg_evt_time_act = register_event_time;
+	ofstream file(files_name.c_str());
 	int cnt = 1;
 	while(true) {
-		//cout << "Generación: " << cnt++ << endl;
+		cout << "Generación: " << cnt++ << endl;
 		vector<vector<GRID> > ev_pop = evolve_pop(pop);
 		vector<Individual> new_pop = multi_dyn(ev_pop, pop_size, ck_1);
 		sort(new_pop.begin(), new_pop.end(), IndividualComparator());
 		best_fitness = new_pop[0].get_fitness();
-		//cout << "Mejor fitness de la generación: " << best_fitness << endl;
+		cout << "Mejor fitness de la generación: " << best_fitness << endl;
 		pop.clear();
 		for(int i = 0; i < new_pop.size(); i++) {
 			pop.push_back(new_pop[i].get_sudoku());
@@ -219,12 +250,27 @@ void Evolutive::run() {
 		}
 		clock_t ck_2 = clock();
 		double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
+		if(current_time > reg_evt_time_act) {
+			//cout << "Datos registrados al tiempo: " << time_act << endl;
+			file << "Tiempo: " << current_time << endl;
+			for(int x = 0; x < pop.size(); x++) {
+				for(int y = 0; y < pop[x].size(); y++) {
+					for(int z = 0; z < pop[x][y].perm.size(); z++) {
+						file << pop[x][y].perm[z] << " ";
+					}
+				}
+				file << endl;
+			}
+			file << best_fitness << endl << endl;
+			reg_evt_time_act += register_event_time;
+		}
 		if(current_time > end_time) {
 			break;
 		}
-		cnt++;
 	}
-	cout << "Terminado . Mejor fitness encontrado: " << best_fitness << endl;
+
+	file.close();
+	cout << "Terminado. Mejor fitness encontrado: " << best_fitness << endl;
 	cout << "Número de generaciones: " << cnt << endl;
 	clock_t ck_2 = clock();
 	double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;

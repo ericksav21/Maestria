@@ -1,0 +1,2 @@
+Terminado . Mejor fitness encontrado: 0
+Tiempo transcurrido (seg): -0.005429

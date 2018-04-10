@@ -37,8 +37,8 @@ int fitness(vector<GRID> sudoku) {
 				if(is_cons_r && is_cons_c) break;
 			}
 
-			used_r[table[i][j]] += (is_cons_r ? 50 : 1);
-			used_c[table[j][i]] += (is_cons_c ? 50 : 1);
+			used_r[table[i][j]] += (is_cons_r ? 100 : 1);
+			used_c[table[j][i]] += (is_cons_c ? 100 : 1);
 		}
 	}
 
@@ -260,20 +260,23 @@ vector<GRID> simulated_annealing(vector<GRID> sudoku, SA_DATA data) {
 	vector<pair<int, pair<int, int> > > neighbors;
 
 	string f_n = data.files_name;
-	ofstream file(f_n.c_str());
+	//ofstream file(f_n.c_str());
 	double t_max = data.t_max, t_min = data.t_min;
 	double t_act = t_max;
 	double rho = data.rho;
+	int iter_max = data.iter_max;
 	clock_t ck_1, ck_2;
 	double time_act = 0.0, time_max = data.time_max;
+	int iter_act = 0;
 
 	//Lapso de tiempo en segundos para registrar la información de la iteración.
 	double register_event_time = 120.0, reg_evt_time_act = register_event_time;
 
 	ck_1 = clock();
-	cout << "Iniciado recocido simulado..." << endl;
+	//cout << "Iniciado recocido simulado..." << endl;
 
-	while(time_act <= time_max) {
+	while(iter_act <= iter_max) {
+	//while(time_act <= time_max) {
 		neighbors.clear();
 		neighbors = get_neighbors(sudoku);
 		//Cantidad de vecinos por la cual nos vamos a mover antes de terminar el estado de equilibrio
@@ -316,18 +319,20 @@ vector<GRID> simulated_annealing(vector<GRID> sudoku, SA_DATA data) {
 		//Actualizar la temperatura
 		ck_2 = clock();
 		time_act = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
-		t_act = t_max - (t_max - t_min) * (time_act / time_max);
+		iter_act++;
+		//t_act = t_max - (t_max - t_min) * (time_act / time_max);
+		t_act = t_max - (t_max - t_min) * ((double)iter_act / (double)iter_max);
 
-		if(time_act > reg_evt_time_act) {
+		/*if(time_act > reg_evt_time_act) {
 			cout << "Datos registrados al tiempo: " << time_act << endl;
 			file << "Tiempo: " << time_act << endl;
 			file << "Fitness: " << fitness(sudoku) << endl;
 			file << "Temperatura: " << t_act << endl << endl;
 			reg_evt_time_act += register_event_time;
-		}
+		}*/
 	}
-	cout << "Archivo " << f_n << " generado." << endl;
-	file.close();
+	//cout << "Archivo " << f_n << " generado." << endl;
+	//file.close();
 
 	return sudoku;
 }

@@ -21,8 +21,8 @@ using namespace std;
 class Genetic {
 private:
 	string func_type;
-	double mutation_rate = 0.05;
-	int tournament_size = 30, pop_size;
+	double mutation_rate = 0.05, crossover_rate = 0.8;
+	int tournament_size = 2, pop_size;
 	int a, b;
 	int no_evaluations;
 	int var_size = 15;
@@ -35,7 +35,7 @@ private:
 	vector<vector<int> > generate_pop();
 	vector<int> get_fittest(vector<vector<int> > pop, vector<Individual> s);
 	vector<int> tournament_selection(vector<vector<int> > pop, vector<Individual> s);
-	vector<int> crossover(vector<int> v1, vector<int> v2);
+	vector<vector<int> > crossover(vector<int> v1, vector<int> v2);
 	vector<int> mutation(vector<int> bv);
 	vector<double> phenotype_mapping(vector<int> ind);
 	vector<Individual> evaluate_pop(vector<vector<int> > pop);

@@ -41,6 +41,7 @@ typedef struct sa_data {
 	string files_name;
 	double t_max, t_min;
 	double time_max, rho;
+	int iter_max;
 } SA_DATA;
 
 SA_DATA new_sa_data(string files_name, double t_max, double t_min, double time_max, double rho);

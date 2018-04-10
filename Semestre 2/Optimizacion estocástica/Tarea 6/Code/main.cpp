@@ -36,12 +36,12 @@ int main(int argc, char **argv) {
 	vector<GRID> solution;
 	cout << "Procesando..." << endl << endl;
 
-	Evolutive ev(sudoku, 100, DI, time_length);
+	Evolutive ev(sudoku, 100, DI, time_length, out_file);
 	ev.run();
 	int best_fitness = ev.get_best_fitness();
-	ck_2 = clock_t();
+	ck_2 = clock();
 	double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
-	
+
 	ofstream file(out_file.c_str());
 	file << "Terminado . Mejor fitness encontrado: " << best_fitness << endl;
 	file << "Tiempo transcurrido (seg): " << current_time << endl;

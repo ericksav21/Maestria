@@ -90,26 +90,31 @@ vector<int> Genetic::tournament_selection(vector<vector<int> > pop, vector<Indiv
 	return get_fittest(candidates, s);
 }
 
-vector<int> Genetic::crossover(vector<int> v1, vector<int> v2) {
+vector<vector<int> > Genetic::crossover(vector<int> v1, vector<int> v2) {
 	int d = v1.size();
 	int co_point = rand_in_range(1, d - 2);
-	vector<int> res(d, 0);
+	vector<vector<int> > res(2, vector<int>(d, 0));
+	//vector<int> res(d, 0);
 	double p = (double)rand() / (double)RAND_MAX;
 
-	for(int i = 0; i < co_point; i++) {
-		if(p < 0.5) {
-			res[i] = v1[i];
+	if(p < 0.5) {
+		for(int i = 0; i < co_point; i++) {
+			res[0][i] = v1[i];
+			res[1][i] = v2[i];
 		}
-		else {
-			res[i] = v2[i];
+		for(int i = co_point; i < d; i++) {
+			res[0][i] = v2[i];
+			res[1][i] = v1[i];
 		}
 	}
-	for(int i = co_point; i < d; i++) {
-		if(p < 0.5) {
-			res[i] = v2[i];
+	else {
+		for(int i = 0; i < co_point; i++) {
+			res[0][i] = v2[i];
+			res[1][i] = v1[i];
 		}
-		else {
-			res[i] = v1[i];
+		for(int i = co_point; i < d; i++) {
+			res[0][i] = v1[i];
+			res[1][i] = v2[i];
 		}
 	}
 
@@ -167,10 +172,32 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 	}
 
 	//Cruza
-	for(int i = same_ind_no; i < pop_size; i++) {
+	int cnt = same_ind_no;
+	while(true) {
 		vector<int> p1 = tournament_selection(pop_act, S);
 		vector<int> p2 = tournament_selection(pop_act, S);
-		new_pop[i] = mutation(crossover(p1, p2));
+		double p = (double)rand() / (double)RAND_MAX;
+		if(p <= crossover_rate) {
+			vector<vector<int> > sons = crossover(p1, p2);
+			new_pop[cnt++] = mutation(sons[0]);
+			if(cnt == pop_size) {
+				break;
+			}
+			new_pop[cnt++] = mutation(sons[1]);
+			if(cnt == pop_size) {
+				break;
+			}
+		}
+		else {
+			new_pop[cnt++] = mutation(p1);
+			if(cnt == pop_size) {
+				break;
+			}
+			new_pop[cnt++] = mutation(p2);
+			if(cnt == pop_size) {
+				break;
+			}
+		}
 	}
 
 	best_fitness = S[0].get_fitness();
