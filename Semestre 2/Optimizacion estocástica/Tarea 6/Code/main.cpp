@@ -48,9 +48,11 @@ int main(int argc, char **argv) {
 	file.close();
 	cout << "Terminado: " << string(argv[2]) << endl;
 
-	/*cout << "Solución encontrada:" << endl;
-	print_table(solution);
-	cout << endl;*/
+	if(best_fitness == 0) {
+		cout << endl << "Solución encontrada:" << endl;
+		print_table(ev.get_sol());
+		cout << endl;
+	}
 
 	return 0;
 }

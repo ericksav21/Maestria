@@ -4,22 +4,18 @@ Use el comando 'make help' sin comillas para ver todas las opciones.
 
 Para ejecutar:
 Una vez compilado use el comando './main' sin comillas
--El programa recibe ocho argumentos:
+-El programa recibe cinco argumentos:
 	*Un entero, el tamaño del sudoku.
-	*Un string, el nombre del archivo que contiene la instancia del sudoku.
-	*un string, el tipo de inicialización (heuristic, random).
-	*Un string, el nombre del archivo de salida (para los resultados).
-	*Un flotante, el valor de la temperatura máxima (inicial).
-	*Un flotante, el valor de la temperatura mínima (final).
-	*Un flotante, el tiempo de durará la ejecución.
-	*Un flotante, el valor de rho entre 0 y 1 para el estado de equilibrio (porcentaje de vecinos a tratar).
+	*Un string, el nombre de la instancia.
+	*Un string, el nombre del archivo de salida.
+	*Un flotante, el tiempo límite de la ejecución en segundos.
+	*Un flotante, el valor de DI.
 
-Ejemplos de ejecución:
-./main 9 Easy1.txt random Easy1_res.txt 9 0.05 300 0.8
-./main 16 i16x161.txt heuristic i16x161_res.txt 10 0.01 1200 0.8
-
-El programa generará dos archivos de texto con los resultados de la ejecución y el progreso del fitness y la temperatura capturado cada 2 minutos.
+Ejemplo de ejecución:
+./main 9 instances/Easy1.txt Easy_res.txt 300.0 20.0
 
 Notas:
-*El programa imprimirá el sudoku encontrado.
-*Se incluyen las instancias con las que se trabajó así como todos los resultados obtenidos con respecto a las mismas.
+*El programa ejecutará el algoritmo memético a la instancia seleccionada con los parámetros indicados y generará archivos de salida con el nombre especificado.
+*Para los archivos de salida se generará uno con los resultados finales y otro con la información de la población capturada cada 5 segundos.
+*Se recomienda ampliamente compilar el programa de manera optimizada con el comando 'make release' sin comillas, esto para que las ejecuciones sean mucho más rápidas.
+*El programa además imprimirá en consola la información de las generaciones además del mejor fitness encontrado en cada generación y de haber resulto el sudoku se imprimirá la solución encontrada.

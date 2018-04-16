@@ -30,7 +30,7 @@ private:
 	double crossover_rate = 0.8, mutation_rate = 0.01, DI;
 	double end_time;
 	int best_fitness;
-	vector<GRID> sudoku;
+	vector<GRID> sudoku, sol;
 	string files_name;
 
 	vector<vector<GRID> > generate_pop();
@@ -46,6 +46,7 @@ public:
 	Evolutive(vector<GRID> sudoku, int pop_size, double DI, double end_time, string files_name);
 	~Evolutive();
 	int get_best_fitness();
+	vector<GRID> get_sol();
 	void run();
 };
 
