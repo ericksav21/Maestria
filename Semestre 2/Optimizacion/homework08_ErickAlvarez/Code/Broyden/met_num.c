@@ -70,6 +70,10 @@ void broyden(double *x0, void (*func_ptr)(double*, double*), void (*j_ptr)(doubl
 
 		Func = scale_vect(Func, Func, n, -1.0);
 		double *x1 = LU_solver(Jac, Func, n);
+		if(x1 == NULL) {
+			printf("Error al resolver el sistema de ecuaciones con LU.\n");
+			break;
+		}
 		for(int i = 0; i < n; i++) {
 			x0[i] = x0[i] + x1[i];
 		}

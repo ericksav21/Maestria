@@ -175,7 +175,18 @@ double* LU_solver(double **A, double *d, int n) {
 	int c = factorize_LU(A, &L, &U, n, tol);
 	if(c) {
 		b = solve_mlower(L, d, n, n, tol);
+		if(b == NULL) {
+			free_matrix(L);
+			free_matrix(U);
+			return NULL;
+		}
 		x = solve_mupper(U, b, n, n, tol);
+		if(x == NULL) {
+			free_matrix(L);
+			free_matrix(U);
+			free_vector(b);
+			return NULL;
+		}
 	}
 
 	free_vector(b);
