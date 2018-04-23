@@ -8,8 +8,8 @@ import matplotlib.image as mpimg
 import matplotlib.cm as cm
 import cv2
 
-path_data = "/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Procesamiento de señales/Tarea 10/dataset/"
-#path_data = "/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Procesamiento de señales/Tarea 10/dataset/"
+#path_data = "/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Procesamiento de señales/Tarea 10/dataset/"
+path_data = "/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Procesamiento de señales/Tarea 10/dataset/"
 input_dir = path_data.replace("/dataset/", "/input/")
 out_dir = path_data.replace("/dataset/", "/output/")
 
@@ -33,7 +33,7 @@ def main():
 		edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
 
 		laplacian = cv2.Laplacian(gray, cv2.CV_64F)
-		cv2.imwrite(os.path.join(out_dir, "img_output_" + str(cnt) + os.path.splitext(file)[1]), laplacian)
+		cv2.imwrite(os.path.join(out_dir, "img_output_" + str(cnt) + os.path.splitext(file)[1]), edges)
 		#cv2.imwrite(os.path.join(out_dir, os.path.basename(file)), edges, (cv2.IMWRITE_PXM_BINARY, 0))
 		cnt += 1
 
