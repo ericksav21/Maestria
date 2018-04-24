@@ -98,3 +98,15 @@ double bin_to_real(vector<int> bin, int a, int b) {
 	}
 	return (double)a + (double)res * part;
 }
+
+double get_median(vector<double> v) {
+	vector<double> aux = v;
+	sort(aux.begin(), aux.end());
+	int mid = aux.size() / 2;
+	if(aux.size() % 2 == 0) {
+		return (aux[mid] + aux[mid - 1]) / 2.0;
+	}
+	else {
+		return aux[mid];
+	}
+}

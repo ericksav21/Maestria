@@ -36,4 +36,6 @@ int rand_in_range(int a, int b);
 
 double bin_to_real(vector<int> bin, int a, int b);
 
+double get_median(vector<double> v);
+
 #endif

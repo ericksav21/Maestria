@@ -21,7 +21,7 @@ using namespace std;
 class Genetic {
 private:
 	string func_type;
-	double mutation_rate = 0.01, crossover_rate = 0.85;
+	double mutation_rate = 0.01, crossover_rate = 0.8, crossover_var_rate = 1.0;
 	int tournament_size = 2, pop_size;
 	int a, b;
 	int no_generations;
@@ -29,7 +29,10 @@ private:
 	int dim = 10;
 	int fitness_cnt;
 	int cross_type;
-	double best_fitness;
+	double best_fitness, mean_fitness;
+	//Para generación de hijos completa
+	vector<int> par_generations;
+	int capture_offspring;
 
 	void print_pop(vector<vector<int> > pop);
 	double get_f(vector<double> x);
@@ -38,6 +41,9 @@ private:
 	vector<int> tournament_selection(vector<vector<int> > pop);
 	vector<vector<int> > crossover_1p(vector<int> v1, vector<int> v2);
 	vector<vector<int> > crossover_2p(vector<int> v1, vector<int> v2);
+	void crossover_1p_complete(vector<int> v1, vector<int> v2);
+	void crossover_2p_complete(vector<int> v1, vector<int> v2);
+
 	vector<int> mutation(vector<int> bv);
 	vector<double> phenotype_mapping(vector<int> ind);
 	vector<Individual> evaluate_pop(vector<vector<int> > pop);

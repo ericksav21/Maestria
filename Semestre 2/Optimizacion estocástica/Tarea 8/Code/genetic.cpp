@@ -7,7 +7,11 @@ Genetic::Genetic(int pop_size, int a, int b, int no_generations, string func_typ
 	this->no_generations = no_generations;
 	this->func_type = func_type;
 	this->cross_type = cross_type;
-	this->mutation_rate = 1.0 / (double)(var_size * dim);
+	this->mutation_rate = 1.0 / (double)(var_size);
+
+	this->par_generations.push_back(5);
+	this->par_generations.push_back(no_generations >> 1);
+	this->par_generations.push_back(no_generations - 5);
 }
 
 Genetic::~Genetic() {}
@@ -85,7 +89,7 @@ vector<int> Genetic::tournament_selection(vector<vector<int> > pop) {
 		ind1 = rand_in_range(0, pop.size() - 1);
 		ind2 = rand_in_range(0, pop.size() - 1);
 	}
-	//cout << ind1 << " " << ind2 << endl;
+
 	candidates[0] = pop[ind1];
 	candidates[1] = pop[ind2];
 
@@ -100,17 +104,38 @@ vector<int> Genetic::tournament_selection(vector<vector<int> > pop) {
 }
 
 vector<vector<int> > Genetic::crossover_1p(vector<int> v1, vector<int> v2) {
-	int d = v1.size();
-	int co_point = rand_in_range(1, d - 2);
-	vector<vector<int> > res(2, vector<int>(d, 0));
+	vector<vector<int> > res(2);
 
-	for(int i = 0; i < co_point; i++) {
-		res[0][i] = v1[i];
-		res[1][i] = v2[i];
-	}
-	for(int i = co_point; i < d; i++) {
-		res[0][i] = v2[i];
-		res[1][i] = v1[i];
+	//Iterar sobre la dimensión
+	for(int j = 0; j < dim; j++) {
+		//En esta parte se obtiene la variable j.
+		vector<int> v_aux1(var_size, 0);
+		vector<int> v_aux2(var_size, 0);
+		for(int k = 0; k < var_size; k++) {
+			v_aux1[k] = v1[var_size * j + k];
+			v_aux2[k] = v2[var_size * j + k];
+		}
+		//Ver si se cruza esta variable
+		double p = (double)rand() / (double)RAND_MAX;
+		if(p > crossover_var_rate) {
+			//No se cruza
+			for(int k = 0; k < var_size; k++) {
+				res[0].push_back(v_aux1[k]);
+				res[1].push_back(v_aux2[k]);
+			}
+			continue;
+		}
+		//Decidir el punto de corte
+		int cu_point = rand_in_range(1, var_size - 2);
+		//Actualizar los hijos
+		for(int k = 0; k < cu_point; k++) {
+			res[0].push_back(v_aux1[k]);
+			res[1].push_back(v_aux2[k]);
+		}
+		for(int k = cu_point; k < var_size; k++) {
+			res[0].push_back(v_aux2[k]);
+			res[1].push_back(v_aux1[k]);
+		}
 	}
 
 	return res;
@@ -118,25 +143,78 @@ vector<vector<int> > Genetic::crossover_1p(vector<int> v1, vector<int> v2) {
 
 vector<vector<int> > Genetic::crossover_2p(vector<int> v1, vector<int> v2) {
 	int d = v1.size();
-	vector<vector<int> > res(2, vector<int>(d, 0));
-	//Seleccionar pivotes
-	int left = rand_in_range(1, d - 3);
-	int right = rand_in_range(left, d - 2);
-
-	for(int i = 0; i < left; i++) {
-		res[0][i] = v1[i];
-		res[1][i] = v2[i];
-	}
-	for(int i = left; i < right; i++) {
-		res[0][i] = v2[i];
-		res[1][i] = v1[i];
-	}
-	for(int i = right; i < d; i++) {
-		res[0][i] = v1[i];
-		res[1][i] = v2[i];
+	vector<vector<int> > res(2);
+	//Iterar sobre la dimensión
+	for(int j = 0; j < dim; j++) {
+		//En esta parte se obtiene la variable j.
+		vector<int> v_aux1(var_size, 0);
+		vector<int> v_aux2(var_size, 0);
+		for(int k = 0; k < var_size; k++) {
+			v_aux1[k] = v1[var_size * j + k];
+			v_aux2[k] = v2[var_size * j + k];
+		}
+		//Ver si se cruza esta variable
+		double p = (double)rand() / (double)RAND_MAX;
+		if(p > crossover_var_rate) {
+			//No se cruza
+			for(int k = 0; k < var_size; k++) {
+				res[0].push_back(v_aux1[k]);
+				res[1].push_back(v_aux2[k]);
+			}
+			continue;
+		}
+		//Decidir los punto de corte
+		int left = rand_in_range(1, var_size - 3);
+		int right = rand_in_range(left, var_size - 2);
+		//Actualizar los hijos
+		for(int k = 0; k < left; k++) {
+			res[0].push_back(v_aux1[k]);
+			res[1].push_back(v_aux2[k]);
+		}
+		for(int k = left; k < right; k++) {
+			res[0].push_back(v_aux2[k]);
+			res[1].push_back(v_aux1[k]);
+		}
+		for(int k = right; k < var_size; k++) {
+			res[0].push_back(v_aux1[k]);
+			res[1].push_back(v_aux2[k]);
+		}
 	}
 
 	return res;
+}
+
+void Genetic::crossover_1p_complete(vector<int> v1, vector<int> v2) {
+	ofstream fout;
+	fout.open("offspring_1p.txt", ios::out | ios::app);
+
+	//Iterar sobre la dimensión
+	vector<vector<int> > v_aux1(2, vector<int>(var_size, 0));
+	vector<vector<int> > v_aux2(2, vector<int>(var_size, 0));
+	//Guardar a los padres
+	vector<double> p1 = phenotype_mapping(v1);
+	vector<double> p2 = phenotype_mapping(v2);
+	fout << p1[0] << " " << p1[1] << " " << 1 << " " << capture_offspring << endl;
+	fout << p2[0] << " " << p2[1] << " " << 1 << " " << capture_offspring << endl;
+
+	for(int j = 0; j < dim; j++) {
+		for(int k = 0; k < var_size; k++) {
+			v_aux1[j][k] = v1[var_size * j + k];
+			v_aux2[j][k] = v2[var_size * j + k];
+		}
+	}
+	for(int i = 1; i < var_size - 1; i++) {
+		for(int j = 1; j < var_size - 1; j++) {
+			
+		}
+	}
+
+	fout.close();
+}
+
+void Genetic::crossover_2p_complete(vector<int> v1, vector<int> v2) {
+	ofstream fout;
+	fout.open("offspring_2p.txt", ios::out | ios::app);
 }
 
 vector<int> Genetic::mutation(vector<int> bv) {
@@ -144,7 +222,6 @@ vector<int> Genetic::mutation(vector<int> bv) {
 	for(int i = 0; i < bv.size(); i++) {
 		double p = (double)rand() / (double)RAND_MAX;
 		if(p <= mutation_rate) {
-			//cout << p << " " << mutation_rate << endl;
 			res[i] = (res[i] == 1 ? 0 : 1);
 		}
 	}
@@ -188,6 +265,11 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 	while(true) {
 		vector<int> p1 = tournament_selection(pop_act);
 		vector<int> p2 = tournament_selection(pop_act);
+		if(capture_offspring) {
+			crossover_1p_complete(p1, p2);
+			crossover_1p_complete(p1, p2);
+			capture_offspring = 0;
+		}
 		double p = (double)rand() / (double)RAND_MAX;
 		if(p <= crossover_rate) {
 			vector<vector<int> > sons;
@@ -208,11 +290,11 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 			}
 		}
 		else {
-			new_pop[cnt++] = mutation(p1);
+			new_pop[cnt++] = p1;
 			if(cnt == pop_size) {
 				break;
 			}
-			new_pop[cnt++] = mutation(p2);
+			new_pop[cnt++] = p2;
 			if(cnt == pop_size) {
 				break;
 			}
@@ -225,12 +307,18 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 		int ind = rand_in_range(0, pop_size - 1);
 		new_pop[ind] = best_par;
 		best_fitness = S_par[0].get_fitness();
-		cout << "Mejor fitness de la generación: " << S_par[0].get_fitness() << endl;
+		//cout << "Mejor fitness de la generación: " << S_par[0].get_fitness() << endl;
 	}
 	else {
 		best_fitness = S_off[0].get_fitness();
-		cout << "Mejor fitness de la generación: " << S_off[0].get_fitness() << endl;
+		//cout << "Mejor fitness de la generación: " << S_off[0].get_fitness() << endl;
 	}
+	/*for(int i = 0; i < new_pop.size(); i++) {
+		vector<double> x = phenotype_mapping(new_pop[i]);
+		double fitness = get_f(x);
+		mean_fitness += fitness;
+	}
+	mean_fitness /= (double)new_pop.size();*/
 
 	return new_pop;
 }
@@ -251,13 +339,24 @@ void Genetic::run(int no) {
 	pop = generate_pop();
 
 	int cnt = 1;
+	//ofstream fout("sphere_ev.txt");
 	while(best_fitness >= tol && cnt <= no_generations) {
-		cout << "Generación " << cnt << endl;
+		mean_fitness = 0.0;
+		//cout << "Generación " << cnt << endl;
+		capture_offspring = 0;
+		for(int k = 0; k < par_generations.size(); k++) {
+			if(cnt == par_generations[k]) {
+				capture_offspring = cnt;
+				break;
+			}
+		}
 		vector<vector<int> > new_pop = evolve_pop(pop);
 		pop.clear();
 		pop = new_pop;
+		//fout << cnt << " " << mean_fitness << " " << best_fitness << endl;
 		cnt++;
 	}
+	//fout.close();
 
 	cout << "Terminado. Mejor fitness encontrado: " << best_fitness << endl;
 	cout << "Número de generaciones: " << cnt - 1 << endl;

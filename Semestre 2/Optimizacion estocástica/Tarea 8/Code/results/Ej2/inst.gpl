@@ -1,0 +1,6 @@
+plot "sphere_ev.txt" using 1:2 title 'Valor medio aptitud de la poblacion' w l, "sphere_ev.txt" using 1:3 title 'Mejor aptitud de la poblacion' w l
+set terminal png nocrop enhanced size 1024,768
+set output 'Grafica.png'
+replot
+set term x11
+set output
