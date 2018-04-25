@@ -1,10 +1,17 @@
-setwd("/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 5/Ej2")
-#setwd("/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 5/Ej2")
+#setwd("/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 5/Ej2")
+setwd("/home/e-082017-04/Documents/Maestria/GIT/Semestre 2/Reconocimiento de patrones/Tarea 5/Ej2")
 library("class")
 library("nnet")
+library("GGally")
+library("ggplot2")
 
 data <- as.data.frame(read.table("data.txt", sep = ",", header = FALSE))
 colnames(data) <- c("Variance", "Skewness", "Kurtosis", "Entropy", "Label")
+
+summary(data[1 : 4])
+summary(data[data[, 5] == 1, ])
+summary(data[data[, 5] == 0, ])
+ggpairs(data[1 : 4], diag = list(continuous = "density"), axisLabels = "none")
 
 no_tests <- 30
 train_data_per <- 0.75
@@ -29,7 +36,7 @@ for(t in 1:no_tests) {
   #Hacer un K-NN
   knn_pred <- knn(train = train_set, test = test_set, cl = train_labels, k = 2)
   #Hacer una NN
-  n_net <- nnet(train_labels_nn~Variance+Skewness+Kurtosis+Entropy, size = 3, softmax = T, data = train_set)
+  n_net <- nnet(train_labels_nn~Variance+Skewness+Kurtosis+Entropy, size = 4, softmax = T, data = train_set)
   nn_pred <- predict(n_net, test_set)
   
   same_vals_knn <- 0
@@ -46,12 +53,14 @@ for(t in 1:no_tests) {
       same_vals_knn <- same_vals_knn + 1
     }
   }
-  avg_acc_knn <- avg_acc_knn + (same_vals_knn / length(test_labels))
-  avg_acc_nn <- avg_acc_nn + (same_vals_nn / length(test_labels))
+  prec_knn <- same_vals_knn / (same_vals_knn + length(test_labels) - same_vals_knn)
+  prec_nn <- same_vals_nn / (same_vals_nn + length(test_labels) - same_vals_nn)
+  avg_acc_knn <- avg_acc_knn + prec_knn
+  avg_acc_nn <- avg_acc_nn + prec_nn
   
   print(sprintf("Iteración: %d.", t))
-  print(sprintf("Knn - No. de datos correctamente predichos: %d, No. de datos totales: %d.\n", same_vals_knn, length(test_labels)))
-  print(sprintf("NN - No. de datos correctamente predichos: %d, No. de datos totales: %d.\n", same_vals_nn, length(test_labels)))
+  print(sprintf("Knn - No. de datos correctamente predichos: %d, No. de datos totales: %d, precisión: %f.\n", same_vals_knn, length(test_labels), prec_knn))
+  print(sprintf("NN - No. de datos correctamente predichos: %d, No. de datos totales: %d, precisión: %f.\n", same_vals_nn, length(test_labels), prec_nn))
   print("")
 }
 

@@ -205,7 +205,10 @@ void Genetic::crossover_1p_complete(vector<int> v1, vector<int> v2) {
 	}
 	for(int i = 1; i < var_size - 1; i++) {
 		for(int j = 1; j < var_size - 1; j++) {
-			
+			vector<int> son;
+			for(int k = 0; k < dim; k++) {
+				
+			}
 		}
 	}
 
