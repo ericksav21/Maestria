@@ -19,7 +19,7 @@ def make_plot(x, y, files_name, title = "", ylabel = ""):
 	plt.savefig(files_name, dpi = 100)
 
 def main():
-	file = "offspring_2p.txt"
+	file = "offspring_1p.txt"
 	f = open(file, "r")
 	v1 = []
 	v2 = []
@@ -46,6 +46,7 @@ def main():
 
 	plt.xlabel("X1")
 	plt.ylabel("X2")
+	plt.ylim((-700, 700))
 	plt.savefig("Grafica", dpi = 100)
 
 

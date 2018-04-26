@@ -20,18 +20,20 @@ int main(int argc, char **argv) {
 
 	int var_size = 18;
 	int dim = 2;
+	//Hacer que los padres queden en el eje 'Y'
 	vector<int> p1, p2;
 	for(int i = 0; i < (var_size * dim); i++) {
 		p1.push_back(1);
-		p2.push_back(0);
+		p2.push_back(1);
 	}
-	for(int i = 19; i < (var_size * dim); i++) {
-		p2[i] = 1;
+	for(int i = 18; i < (var_size * dim); i++) {
+		p2[i] = 0;
 	}
-	p1[18] = 0;
+	p1[0] = 0;
+	p2[0] = 0;
 
-	//crossover_1p_complete(p1, p2);
-	crossover_2p_complete(p1, p2);
+	crossover_1p_complete(p1, p2);
+	//crossover_2p_complete(p1, p2);
 
 	return 0;
 }

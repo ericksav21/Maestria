@@ -1,7 +1,7 @@
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -600 600 1 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f1
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 2 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f2
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 3 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f3
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 4 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f4
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 5 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f5
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -600 600 6 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f6
-/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 7 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f7
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -600 600 f1 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f1
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 f2 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f2
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 f3 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f3
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 f4 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f4
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 f5 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f5
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -600 600 f6 2 50 /home/user_demo/ErickAlvarez/Tarea8/results/f6
+/home/user_demo/ErickAlvarez/Tarea8/main 100 -20 20 f7  50 /home/user_demo/ErickAlvarez/Tarea8/results/f7

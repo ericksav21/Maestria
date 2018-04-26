@@ -306,7 +306,7 @@ void Genetic::run(int no) {
 	//ofstream fout("sphere_ev.txt");
 	while(best_fitness >= tol && cnt <= no_generations) {
 		mean_fitness = 0.0;
-		cout << "Generación " << cnt << endl;
+		//cout << "Generación " << cnt << endl;
 		vector<vector<int> > new_pop = evolve_pop(pop);
 		pop.clear();
 		pop = new_pop;
