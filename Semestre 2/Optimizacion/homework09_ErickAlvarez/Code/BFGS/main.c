@@ -9,18 +9,25 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
-	if(argc < 3) {
-		printf("Error. Ejecuta: %s [Vector inicial] [Número de iteraciones].\n", argv[0]);
+	if(argc < 4) {
+		printf("Error. Ejecuta: %s [Nombre del archivo] [Número de iteraciones] [Tolerancia].\n", argv[0]);
 		return 0;
 	}
-	int v1 = atoi(argv[1]);
+	char files_name[30];
+	strcpy(files_name, argv[1]);
 	int iter_max = atoi(argv[2]);
-	double tol = sqrt(get_EPS());
+	double tol = atof(argv[3]);
 
-	double *x0 = create_vector(3, double);
-	init_x0(x0, v1);
-	newton(x0, F, J, iter_max, tol);
+	int n;
+	double *x0 = read_init_point(files_name, &n);
+	double **H = create_matrix(n, n, double);
+	get_Hessian(H, x0, n);
+	double **H_inv = get_inverse(H, n);
+
+	BFGS(x0, rosenbrock, get_gradient, H_inv, n, iter_max, tol);
 
 	free_vector(x0);
+	free_matrix(H);
+	free_matrix(H_inv);
 	return 0;
 }

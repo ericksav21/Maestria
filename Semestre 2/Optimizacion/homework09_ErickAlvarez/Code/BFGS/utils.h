@@ -10,6 +10,8 @@
 
 double get_EPS();
 
+double *read_init_point(char *files_name, int *n);
+
 /*----- Functions -----*/
 double rosenbrock(double *x, int n);
 

@@ -9,6 +9,24 @@ double get_EPS() {
 	return Eps;
 }
 
+double *read_init_point(char *files_name, int *n) {
+	FILE *in;
+	in = fopen(files_name, "r");
+	int d;
+	fscanf(in, "%d", &d);
+	(*n) = d;
+	double *res = create_vector(d, double);
+	for(int i = 0; i < d; i++) {
+		double aux;
+		fscanf(in, "%lf", &aux);
+		res[i] = aux;
+	}
+
+	fclose(in);
+
+	return res;
+}
+
 /*----- Functions -----*/
 double rosenbrock(double *x, int n) {
 	double res = 0.0;
@@ -231,7 +249,7 @@ double* LU_solver(double **A, double *d, int n) {
 double** get_inverse(double **A, int n) {
 	double **X = create_matrix(n, n, double);
 	double *e = create_vector(n, double);
-	double tol = sqrt(DBL_EPSILON);
+	double tol = 1e-6;
 	for(int i = 0; i < n; i++) {
 		e[i] = 0.0;
 	}
