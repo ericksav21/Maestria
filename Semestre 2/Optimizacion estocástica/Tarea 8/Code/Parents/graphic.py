@@ -6,9 +6,6 @@ import glob, re
 from math import *
 from matplotlib import pyplot as plt
 
-#Cambiar el path
-path_data = "/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Optimizacion estocástica/Tarea 7/Code/data/f7/"
-
 def make_plot(x, y, files_name, title = "", ylabel = ""):
 	plt.clf()
 	plt.figure(figsize = (7, 7))

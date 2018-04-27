@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 	p2[0] = 0;
 
 	crossover_1p_complete(p1, p2);
-	//crossover_2p_complete(p1, p2);
+	crossover_2p_complete(p1, p2);
 
 	return 0;
 }

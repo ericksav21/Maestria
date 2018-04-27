@@ -271,11 +271,11 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 		int ind = rand_in_range(0, pop_size - 1);
 		new_pop[ind] = best_par;
 		best_fitness = S_par[0].get_fitness();
-		//cout << "Mejor fitness de la generación: " << S_par[0].get_fitness() << endl;
+		cout << "Mejor fitness de la generación: " << S_par[0].get_fitness() << endl;
 	}
 	else {
 		best_fitness = S_off[0].get_fitness();
-		//cout << "Mejor fitness de la generación: " << S_off[0].get_fitness() << endl;
+		cout << "Mejor fitness de la generación: " << S_off[0].get_fitness() << endl;
 	}
 	for(int i = 0; i < new_pop.size(); i++) {
 		vector<double> x = phenotype_mapping(new_pop[i]);
@@ -303,10 +303,11 @@ void Genetic::run(int no) {
 	pop = generate_pop();
 
 	int cnt = 1;
+	//Estas líneas comentadas corresponden a lo pedido en el ejercicio 2.
 	//ofstream fout("sphere_ev.txt");
 	while(best_fitness >= tol && cnt <= no_generations) {
 		mean_fitness = 0.0;
-		//cout << "Generación " << cnt << endl;
+		cout << "Generación " << cnt << endl;
 		vector<vector<int> > new_pop = evolve_pop(pop);
 		pop.clear();
 		pop = new_pop;
