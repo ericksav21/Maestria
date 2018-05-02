@@ -29,19 +29,25 @@ int main(int argc, char **argv) {
 		y[i] = data[i][1];
 	}
 	//Punto inicial
-	int n = 4, m = nr;
+	int n = 5, m = nr;
 	double *p0 = create_vector(n, double);
+	double *pk = create_vector(n, double);
 	p0[0] = p0[1] = 0.0;
 	p0[2] = 15.0;
 	p0[3] = -2.0;
 	p0[4] = 1.0;
-	LM(p0, x, y, n, m, ri_adj, J_adj, v, iter_max, tol);
-	write_output(x, y, p0, m);
+	for(int i = 0; i < n; i++) {
+		pk[i] = p0[i];
+	}
+
+	LM(pk, x, y, n, m, ri_adj, J_adj, v, iter_max, tol);
+	write_output(x, y, p0, pk, m);
 
 	free_matrix(data);
 	free_vector(x);
 	free_vector(y);
 	free_vector(p0);
+	free_vector(pk);
 	
 	return 0;
 }

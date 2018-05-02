@@ -37,7 +37,7 @@ void print_matrix(double **A, int nr, int nc) {
 
 double** transpose_matrix(double **A, double **X, int nr, int nc) {
 	for(int i = 0; i < nr; i++) {
-		for(int j = 0; j < nr; j++) {
+		for(int j = 0; j < nc; j++) {
 			X[j][i] = A[i][j];
 		}
 	}

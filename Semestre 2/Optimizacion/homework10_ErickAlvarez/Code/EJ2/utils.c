@@ -27,11 +27,12 @@ double *read_init_point(char *files_name, int *n) {
 	return res;
 }
 
-void write_output(double *d_x, double *d_y, double *p, int m) {
+void write_output(double *d_x, double *d_y, double *p0, double *pk, int m) {
 	FILE *out = fopen("res.txt", "w");
 	for(int i = 0; i < m; i++) {
-		double val = p[0] * d_x[i] + p[1] + p[2] * exp(p[3] * pow(d_x[i] - p[4], 2));
-		fprintf(out, "%g %g %g\n", d_x[i], d_y[i], val);
+		double val0 = p0[0] * d_x[i] + p0[1] + p0[2] * exp(p0[3] * pow(d_x[i] - p0[4], 2));
+		double valk = pk[0] * d_x[i] + pk[1] + pk[2] * exp(pk[3] * pow(d_x[i] - pk[4], 2));
+		fprintf(out, "%g %g %g %g\n", d_x[i], d_y[i], val0, valk);
 	}
 	printf("Archivo res.txt generado.\n");
 
@@ -48,36 +49,11 @@ void ri_adj(double *x, double *y, double *p, double *r, int n, int m) {
 void J_adj(double *x, double *p, double **J, int n, int m) {
 	for(int i = 0; i < m; i++) {
 		J[i][0] = x[i];
-		J[i][1] = J[i][2] = 1.0;
+		J[i][1] = 1.0;
 		double aux1 = pow(x[i] - p[4], 2);
-		J[i][3] = exp(p[3] * aux1) * aux1;
-		J[i][4] = -2.0 * exp(p[3] * aux1) * p[3] * (x[i] - p[4]);
-	}
-}
-
-//m = n
-void ri_rosenbrock(double *x, double *y, int n, int m) {
-	int k = n / 2;
-	for(int i = 1; i <= k; i++) {
-		int idx1 = 2 * i - 1;
-		int idx2 = 2 * i;
-		y[idx1 - 1] = 10.0 * (x[idx2 - 1] - (x[idx1 - 1] * x[idx1 - 1]));
-		y[idx2 - 1] = 1.0 - x[idx1 - 1];
-	}
-}
-
-void J_rosenbrock(double *x, double **J, int n, int m) {
-	for(int i = 0; i < n; i++) {
-		for(int j = 0; j < n; j++) {
-			J[i][j] = 0.0;
-		}
-	}
-	for(int i = 0; i < n; i++) {
-		if(i % 2 == 0) {
-			J[i][i] = -20.0 * x[i];
-			J[i + 1][i] = -1.0;
-			J[i][i + 1] = 10.0;
-		}
+		J[i][2] = exp(p[3] * aux1);
+		J[i][3] = p[2] * exp(p[3] * aux1) * aux1;
+		J[i][4] = -2.0 * p[2] * p[3] * exp(p[3] * aux1) * (x[i] - p[4]);
 	}
 }
 
