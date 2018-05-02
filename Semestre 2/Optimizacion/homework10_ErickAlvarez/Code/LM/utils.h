@@ -13,13 +13,9 @@ double get_EPS();
 double *read_init_point(char *files_name, int *n);
 
 /*----- Functions -----*/
-double rosenbrock(double *x, int n);
+void ri_rosenbrock(double *x, double *y, int n, int m);
 
-void get_gradient(double *g, double *x, int n);
-
-void get_Hessian(double **H, double *x, int n);
-
-void Hessian_aprox(double **H, double *x, double h, int n);
+void J_rosenbrock(double *x, double **J, int n, int m);
 
 /*----- LU -----*/
 double *solve_mlower(double **A, double *b, int nr, int nc, double tol);

@@ -28,71 +28,30 @@ double *read_init_point(char *files_name, int *n) {
 }
 
 /*----- Functions -----*/
-double rosenbrock(double *x, int n) {
-	double res = 0.0;
-	for(int i = 0; i < n - 1; i++) {
-		res += (100.0 * pow((x[i + 1] - x[i] * x[i]), 2) + pow(1.0 - x[i], 2));
-	}
-
-	return res;
-}
-
-void get_gradient(double *g, double *x, int n) {
-	g[0] = -400.0 * x[0] * (x[1] - x[0] * x[0]) - 2.0 * (1.0 - x[0]);
-	g[n - 1] = 200.0 * (x[n - 1] - x[n - 2] * x[n - 2]);
-
-	for(int i = 1; i < n - 1; i++) {
-		g[i] = 200.0 * (x[i] - x[i - 1] * x[i - 1]) - 400.0 * x[i] * (x[i + 1] - x[i] * x[i]) - 2.0 * (1.0 - x[i]);
+//m = n
+void ri_rosenbrock(double *x, double *y, int n, int m) {
+	int k = n / 2;
+	for(int i = 1; i <= k; i++) {
+		int idx1 = 2 * i - 1;
+		int idx2 = 2 * i;
+		y[idx1 - 1] = 10.0 * (x[idx2 - 1] - (x[idx1 - 1] * x[idx1 - 1]));
+		y[idx2 - 1] = 1.0 - x[idx1 - 1];
 	}
 }
 
-void get_Hessian(double **H, double *x, int n) {
-	for(int i = 0; i < n; i++) {
-		if(i < n - 1) {
-			H[i + 1][i] = -400.0 * x[i];
-			H[i][i + 1] = -400.0 * x[i];
-		}
-		if(i > 0 && i < n - 1) {
-			H[i][i] = 202.0 - 400.0 * x[i + 1] + 1200.0 * x[i] * x[i];
-		}
-	}
-	H[0][0] = -400.0 * (x[1] - 3.0 * x[0] * x[0]) + 2.0;
-	H[n - 1][n - 1] = 200.0;
-}
-
-//Hessiano por diferencias finitas
-void Hessian_aprox(double **H, double *x, double h, int n) {
-	double *x_aux_1 = create_vector(n, double);
-	double *x_aux_2 = create_vector(n, double);
-	double *x_aux_3 = create_vector(n, double);
-	for(int i = 0; i < n; i++) {
-		x_aux_1[i] = x[i];
-		x_aux_2[i] = x[i];
-		x_aux_3[i] = x[i];
-	}
-
-	double rx = rosenbrock(x, n);
+void J_rosenbrock(double *x, double **J, int n, int m) {
 	for(int i = 0; i < n; i++) {
 		for(int j = 0; j < n; j++) {
-			x_aux_1[i] += h;
-			x_aux_1[j] += h;
-			x_aux_2[i] += h;
-			x_aux_3[j] += h;
-
-			double val = rosenbrock(x_aux_1, n) - rosenbrock(x_aux_2, n) - rosenbrock(x_aux_3, n)
-						+ rx;
-			val /= (h * h);
-			H[i][j] = val;
-
-			x_aux_1[i] -= h;
-			x_aux_1[j] -= h;
-			x_aux_2[i] -= h;
-			x_aux_3[j] -= h;
+			J[i][j] = 0.0;
 		}
 	}
-	free_vector(x_aux_1);
-	free_vector(x_aux_2);
-	free_vector(x_aux_3);
+	for(int i = 0; i < n; i++) {
+		if(i % 2 == 0) {
+			J[i][i] = -20.0 * x[i];
+			J[i + 1][i] = -1.0;
+			J[i][i + 1] = 10.0;
+		}
+	}
 }
 
 /*----- LU -----*/
