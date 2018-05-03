@@ -21,6 +21,7 @@ private:
 	int iter_max;
 	double linf, lsup;
 	double cr = 0.9, F = 0.2;
+	double tol = 1e-3;
 	string func_type;
 
 	double get_f(vector<double> x);

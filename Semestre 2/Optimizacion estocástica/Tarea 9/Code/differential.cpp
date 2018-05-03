@@ -62,6 +62,8 @@ vector<pair<vector<double>, double > > Differential::generate_pop() {
 void Differential::run() {
 	//Generar la población
 	vector<pair<vector<double>, double > > pop = generate_pop();
+	double best = DBL_MAX;
+	int idx = -1;
 	for(int i = 0; i < iter_max; i++) {
 		for(int j = 0; j < pop.size(); j++) {
 			//Generar los 3 índices distintos
@@ -95,8 +97,6 @@ void Differential::run() {
 				pop[j].second = feval;
 			}
 		}
-		double best = DBL_MAX;
-		int idx = -1;
 		for(int j = 0; j < pop.size(); j++) {
 			if(pop[j].second < best) {
 				best = pop[j].second;
@@ -104,5 +104,14 @@ void Differential::run() {
 			}
 		}
 		cout << "Mejor fitness de la población: " << best << ", idx: " << idx << endl;
+		if(best < tol) {
+			break;
+		}
 	}
+	cout << "Terminado:" << endl;
+	vector<double> x_res = pop[idx].first;
+	for(int i = 0; i < x_res.size(); i++) {
+		cout << x_res[i] << " ";
+	}
+	cout << endl;
 }
