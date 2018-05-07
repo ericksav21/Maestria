@@ -4,14 +4,14 @@ Usar el comando 'make' sin comillas, éste generará los archivos objeto en la c
 Para ejecutar:
 Usar el comando './main' sin comillas en la terminal. En conjunto con el comando se reciben los siguientes argumentos:
 
--Un string: El nombre del archivo donde se encuentra el punto inicial.
+-Un string: El nombre del archivo binario donde se encuentra la matriz de datos xi yi.
 -Un entero: El número de iteraciones máximas para el algoritmo.
 -Un flotante: La tolerancia que se aplicará a la norma del gradiente.
--Un entero: El tipo de Hessiana. 1: Hessiana analítica. 2: Hessiana aproximada
+-Un flotante: El valor de v.
 
-Ejemplo de ejecución: ./main rosenbrock_2.txt 1000 1e-3 1
+Ejemplo de ejecución: ./main datos10.bin 1000 1e-3 1.25
 
-*El programa aplicará el método BFGS con los parámetros indicados e imprimirá como resultados los valores solicitados en la descripción de la tarea, esto lo hará por cada iteración hasta llegar al punto final.
-*Se anexan los archivos que contienen los puntos iniciales pedidos en la descripción de la tarea, tanto para la dimensión 2 como la 100.
-*El valor de "h" se puede modificar en el archivo main.c en la línea 29.
-*La implementación del método BFGS fue hecha como se indica en la clase 18.
+*El programa aplicará el método LM con los parámetros indicados e imprimirá como resultados los valores solicitados en la descripción de la tarea, así como el vector resultante.
+*Se generará el archivo res.txt en donde se encuentran los datos para generar la gráfica, la cual contiene la nube de puntos xi, yi, el valor de yi generado por la función basada en el punto incial y el valor de yi generado por la función basada con el punto encontrado por el algoritmo.
+*Se adjuntará la gráfica generada por el archivo res.txt pero de igual manera para generarla es necesario tener GNUPlot instalado y correr en consola el comando 'gnuplot inst.gpl' donde inst.gpl se adjunta en conjunto con los demás archivos.
+*Se anexan el archivo datos10.bin proporcionado en la tarea.
