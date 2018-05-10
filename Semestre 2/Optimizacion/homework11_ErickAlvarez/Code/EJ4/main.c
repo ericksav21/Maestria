@@ -10,8 +10,8 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
-	if(argc < 5) {
-		printf("Error. Ejecuta: %s [Nombre del archivo] [Número de iteraciones] [Tolerancia] [V].\n", argv[0]);
+	if(argc < 6) {
+		printf("Error. Ejecuta: %s [Nombre del archivo] [Número de iteraciones] [Tolerancia] [V] [h].\n", argv[0]);
 		return 0;
 	}
 	char files_name[30];
@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
 	int iter_max = atoi(argv[2]);
 	double tol = atof(argv[3]);
 	double v = atof(argv[4]);
+	double h = atof(argv[5]);
 
 	int nr, nc;
 	double **data = read_matrix(files_name, &nr, &nc);
@@ -40,7 +41,6 @@ int main(int argc, char **argv) {
 		pk[i] = p0[i];
 	}
 
-	double h = 0.001;
 	LM(pk, x, y, n, m, ri_adj, J_adj_aprox, v, iter_max, tol, h);
 	write_output(x, y, p0, pk, m);
 
