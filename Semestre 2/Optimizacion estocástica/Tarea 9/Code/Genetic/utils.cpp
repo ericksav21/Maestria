@@ -86,3 +86,27 @@ double rastrigin(vector<double> x) {
 int rand_in_range(int a, int b) {
 	return rand() % (b - a + 1) + a;
 }
+
+double bin_to_real(vector<int> bin, int a, int b) {
+	int d = bin.size();
+	int res = 0;
+	double part = (double)(b - a) / (pow(2.0, d) - 1.0);
+	int dec = 1;
+	for(int i = d - 1; i >= 0; i--) {
+		res += dec * bin[i];
+		dec *= 2;
+	}
+	return (double)a + (double)res * part;
+}
+
+double get_median(vector<double> v) {
+	vector<double> aux = v;
+	sort(aux.begin(), aux.end());
+	int mid = aux.size() / 2;
+	if(aux.size() % 2 == 0) {
+		return (aux[mid] + aux[mid - 1]) / 2.0;
+	}
+	else {
+		return aux[mid];
+	}
+}
