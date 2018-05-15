@@ -3,6 +3,7 @@
 #include <cfloat>
 #include <string>
 #include <algorithm>
+#include <unistd.h>
 
 #include "utils.hpp"
 #include "differential.hpp"
@@ -32,9 +33,10 @@ int main(int argc, char **argv) {
 		de.run();
 		double act = de.get_best();
 		data.push_back(act);
-		avg += best;
+		avg += act;
 		best = min(best, act);
 		worst = max(worst, act);
+		sleep(1.5);
 	}
 	avg /= (double)no_exec;
 	//Obtener la desviación estándar

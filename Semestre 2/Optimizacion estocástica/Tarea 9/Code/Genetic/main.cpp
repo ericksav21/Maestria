@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 		cout << "Función " << func_type << ", iteración: " << i << endl;
 		srand(time(NULL));
 
-		int no_generations = (int)ceil(150000.0 / (double)pop_size);
+		int no_generations = 150000;
 		Genetic g(pop_size, a, b, no_generations, func_type, cross_type);
 		g.run(i);
 		double err_act = g.get_bets_fitness();

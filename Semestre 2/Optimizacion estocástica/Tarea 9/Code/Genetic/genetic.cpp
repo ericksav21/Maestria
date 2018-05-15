@@ -7,7 +7,8 @@ Genetic::Genetic(int pop_size, int a, int b, int no_generations, string func_typ
 	this->no_generations = no_generations;
 	this->func_type = func_type;
 	this->cross_type = cross_type;
-	this->mutation_rate = 1.0 / (double)(var_size);
+	this->mutation_rate = 1.0 / (double)(var_size * dim);
+	this->scheme = "";
 }
 
 Genetic::~Genetic() {}
@@ -271,11 +272,11 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 		int ind = rand_in_range(0, pop_size - 1);
 		new_pop[ind] = best_par;
 		best_fitness = S_par[0].get_fitness();
-		cout << "Mejor fitness de la generación: " << S_par[0].get_fitness() << endl;
+		//cout << "Mejor fitness de la generación: " << S_par[0].get_fitness() << endl;
 	}
 	else {
 		best_fitness = S_off[0].get_fitness();
-		cout << "Mejor fitness de la generación: " << S_off[0].get_fitness() << endl;
+		//cout << "Mejor fitness de la generación: " << S_off[0].get_fitness() << endl;
 	}
 	for(int i = 0; i < new_pop.size(); i++) {
 		vector<double> x = phenotype_mapping(new_pop[i]);
@@ -287,12 +288,42 @@ vector<vector<int> > Genetic::evolve_pop(vector<vector<int> > pop_act) {
 	return new_pop;
 }
 
+void Genetic::count_schemes(vector<vector<int> > pop) {
+	int n = pop.size();
+	int m = var_size;
+	for(int i = 0; i < n; i++) {
+		bool match = true;
+		for(int j = 0; j < m; j++) {
+			if(scheme[j] == '*') {
+				continue;
+			}
+			int aux = scheme[j] - '0';
+			if(aux != pop[i][j]) {
+				match = false;
+				break;
+			}
+		}
+		if(match) {
+			schemes_cnt++;
+		}
+	}
+}
+
 double Genetic::get_fitness_cnt() {
 	return fitness_cnt;
 }
 
 double Genetic::get_bets_fitness() {
 	return best_fitness;
+}
+
+void Genetic::add_scheme(string scheme) {
+	this->scheme = scheme;
+	schemes_cnt = 0;
+}
+
+void Genetic::get_schemes_cnt() {
+	return schemes_cnt;
 }
 
 void Genetic::run(int no) {
@@ -307,7 +338,7 @@ void Genetic::run(int no) {
 	//ofstream fout("sphere_ev.txt");
 	while(best_fitness >= tol && cnt <= no_generations) {
 		mean_fitness = 0.0;
-		cout << "Generación " << cnt << endl;
+		//cout << "Generación " << cnt << endl;
 		vector<vector<int> > new_pop = evolve_pop(pop);
 		pop.clear();
 		pop = new_pop;

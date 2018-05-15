@@ -30,7 +30,7 @@ def gen_points2():
 
 def gen_points3():
 	p1 = gen_points(100)
-	p2 = np.random.multivariate_normal([-0.1, -0.1], [[1.0, 0], [0, 1.0]], 3)
+	p2 = np.random.multivariate_normal([6, 6], [[1.0, 0], [0, 1.0]], 1)
 	#p2 = np.random.multivariate_normal([5, 5], [[0.3, 0], [0, 0.3]], 10)
 	X = np.concatenate((p1, p2), axis = 0)
 
@@ -86,7 +86,7 @@ def er(xi, W, delta):
 def g_PCA(x, W, n, p):
 	t = 0
 	sz = len(x)
-	delta = 0.0001
+	delta = 0.001
 	tol = 1e-8
 	Wm = W
 	last_Wm = W
@@ -106,10 +106,13 @@ def g_PCA(x, W, n, p):
 			C = C + aux
 		#C = C / (sz - 1.0)
 		last_S, V = LA.eig(C)
+		print(last_S)
 		Wm = V
 		norm = (inf_n(Wm - last_Wm) / max(1.0, inf_n(Wm)))
-		print(norm)
-		if t == 10:
+		#print(norm)
+		print(Wm)
+		print("\n")
+		if t == 100:
 			break
 		t = t + 1
 		last_Wm = Wm
@@ -138,6 +141,8 @@ def main():
 	S1, V = S1[idx1], V[:, idx1]
 	idx2 = S2.argsort()[::-1]
 	S2, W = S2[idx2], W[:, idx2]
+	print(V)
+	print(W)
 
 	plt.plot(X[:, 0], X[:, 1], 'ro')
 	plt.quiver([0], [0], [V[0, 0]], [V[1, 0]], angles = 'xy', scale_units = 'xy', scale = 1, color = ['r'])

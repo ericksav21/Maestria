@@ -1,0 +1,4 @@
+/home/user_demo/ErickAlvarez/Tarea8/main 150 -20 20 f4 150000 30 /home/user_demo/ErickAlvarez/Tarea8/results/f4/
+/home/user_demo/ErickAlvarez/Tarea8/main 150 -20 20 f5 150000 30 /home/user_demo/ErickAlvarez/Tarea8/results/f5/
+/home/user_demo/ErickAlvarez/Tarea8/main 150 -600 600 f6 150000 30 /home/user_demo/ErickAlvarez/Tarea8/results/f6/
+/home/user_demo/ErickAlvarez/Tarea8/main 150 -20 20 f7 150000 30 /home/user_demo/ErickAlvarez/Tarea8/results/f7/

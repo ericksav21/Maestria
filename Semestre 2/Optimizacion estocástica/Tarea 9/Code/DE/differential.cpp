@@ -103,13 +103,18 @@ void Differential::run() {
 			cout << endl;*/
 			double feval = get_f(nnew);
 			//cout << feval << endl;
-			if(feval < pop[j].second) {
+			/*if(feval < pop[j].second) {
 				pop[j].first = nnew;
 				pop[j].second = feval;
+			}*/
+			if(feval < pop[j].second) {
+				new_pop.push_back(make_pair(nnew, feval));
 			}
-			//new_pop.push_back(make_pair(nnew, feval));
+			else {
+				new_pop.push_back(make_pair(pop[j].first, pop[j].second));
+			}
 		}
-		//pop = new_pop;
+		pop = new_pop;
 		for(int j = 0; j < pop.size(); j++) {
 			if(pop[j].second < best) {
 				best = pop[j].second;
