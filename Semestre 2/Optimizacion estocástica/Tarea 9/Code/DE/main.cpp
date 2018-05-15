@@ -11,8 +11,8 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	if(argc < 8) {
-		printf("Error. Ejecuta: %s [Tamaño de población] [Linf] [Lsup] [Tipo de función] [Iter max] [No ejec] [Dir. de salida].\n", argv[0]);
+	if(argc < 9) {
+		printf("Error. Ejecuta: %s [Tamaño de población] [Linf] [Lsup] [Tipo de función] [Iter max] [No ejec] [CR] [Dir. de salida].\n", argv[0]);
 		return 0;
 	}
 
@@ -22,14 +22,17 @@ int main(int argc, char **argv) {
 	string func_type = string(argv[4]);
 	int iter_max = atoi(argv[5]);
 	int no_exec = atoi(argv[6]);
-	string out_dir = string(argv[7]);
+	double cr = atof(argv[7]);
+	string out_dir = string(argv[8]);
 
 	double best = DBL_MAX, worst = DBL_MIN;
 	double avg = 0.0, sd = 0.0;
 	vector<double> data;
 	for(int i = 0; i < no_exec; i++) {
 		srand(time(NULL));
+		cout << "Función " << func_type << ", iteración: " << i << endl;
 		Differential de(pop_size, linf, lsup, func_type, iter_max);
+		de.set_CR(cr);
 		de.run();
 		double act = de.get_best();
 		data.push_back(act);

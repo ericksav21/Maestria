@@ -40,7 +40,20 @@ int main(int argc, char **argv) {
 
 		int no_generations = 100;
 		Genetic g(pop_size, a, b, no_generations, func_type, cross_type);
+
+		//Agregar el esquema a monitorear
+		//g.add_scheme("0****1111111111111");
+		//g.add_scheme("100000000****000000");
+		//g.add_scheme("100000000****000001");
+		//g.add_scheme("0111****11111111110");
+		g.add_scheme("0**111101111101***");
 		g.run(i);
+		vector<int> scheme = g.get_schemes_cnt();
+		ofstream fout("sphere_sc6.txt");
+		for(int i = 0; i < scheme.size(); i++) {
+			fout << (i + 1) << " " << scheme[i] << endl;
+		}
+		fout.close();
 
 		double err_act = g.get_bets_fitness();
 		best_fitness = min(best_fitness, err_act);

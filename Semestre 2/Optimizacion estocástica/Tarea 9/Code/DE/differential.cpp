@@ -59,6 +59,10 @@ vector<pair<vector<double>, double > > Differential::generate_pop() {
 	return pop;
 }
 
+void Differential::set_CR(double cr) {
+	this->cr = cr;
+}
+
 double Differential::get_best() {
 	return this->best;
 }
@@ -121,11 +125,11 @@ void Differential::run() {
 				idx = j;
 			}
 		}
-		cout << "Iteración " << (i + 1) << endl;
-		cout << "Mejor fitness de la población: " << best << ", idx: " << idx << endl << endl;
-		if(best < tol) {
+		//cout << "Iteración " << (i + 1) << endl;
+		//cout << "Mejor fitness de la población: " << best << ", idx: " << idx << endl << endl;
+		/*if(best < tol) {
 			break;
-		}
+		}*/
 	}
 	cout << "Terminado:" << endl;
 	vector<double> x_res = pop[idx].first;

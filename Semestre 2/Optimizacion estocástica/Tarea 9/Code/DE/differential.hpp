@@ -17,10 +17,10 @@
 
 class Differential {
 private:
-	int pop_size, dim = 10;
+	int pop_size, dim = 30;
 	int iter_max;
 	double linf, lsup;
-	double cr = 0.9, F = 0.8;
+	double cr = 0.1, F = 0.75;
 	double tol = 1e-3;
 	double best;
 	string func_type;
@@ -32,6 +32,7 @@ public:
 	Differential(int pop_size, double linf, double lsup, string func_type, int iter_max);
 	~Differential();
 	double get_best();
+	void set_CR(double CR);
 	void run();
 };
 

@@ -26,7 +26,7 @@ private:
 	int a, b;
 	int no_generations;
 	int var_size = 18;
-	int dim = 10;
+	int dim = 2;
 	int fitness_cnt;
 	vector<int> schemes_cnt;
 	int cross_type;

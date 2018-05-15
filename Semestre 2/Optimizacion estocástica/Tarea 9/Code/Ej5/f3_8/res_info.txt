@@ -1,0 +1,5 @@
+Promedio de error: 76.3692
+Desviación estándar del error: 13.6811
+Mediana del error: 74.7903
+Mejor fitness encontrado: 51.1937
+Peor fitness encontrado: 100.576
