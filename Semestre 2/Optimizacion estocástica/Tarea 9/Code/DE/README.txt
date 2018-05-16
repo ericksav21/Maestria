@@ -9,16 +9,16 @@ Una vez compilado use el comando './main' sin comillas
 	*Un entero, el límite inferior del dominio de la función.
 	*Un entero, el límite superior del dominio de la función.
 	*Un string, el nombre de la función. Las funciones vienen numeradas de acuerdo a la descripción de la tarea: f1, f2, f3, f4, f5, f6 y f7.
-	*Un entero, el tipo de cruze usado por el algoritmo. 1: Cruza de un punto, 2: Cruza de dos puntos.
-	*Un entero, el número máximo de generaciones que hará el genético por ejecución.
+	*Un entero, el número de generaciones máximas que realizará el algoritmo.
 	*Un entero, el número de ejecuciones que se realizará con el algoritmo a la función indicada, para cada ejecución se usa una nueva semilla aleatoria.
+	*Un flotante, la probabilidad de cruza.
 	*Un string, el directorio donde se almacenarán los archivos de salida, ej: results/
 
 Ejemplo de ejecución:
-./main 200 -600 600 f1 2 15 1 results/
+./main 200 -20 20 f1 150000 1 0.8 results/
 
 Notas:
-*El programa ejecutará el algoritmo genético a la función indicada con los parámetros indicados y generará archivos de salida en el directorio especificado.
+*El programa ejecutará la evolución diferencial a la función indicada con los parámetros indicados y generará archivos de salida en el directorio especificado.
 *Para los archivos de salida se generará uno con la información de las N ejecuciones pedida en la tarea para el ejercicio 1.
 *Se recomienda ampliamente compilar el programa de manera optimizada con el comando 'make release' sin comillas, esto para que las ejecuciones sean mucho más rápidas.
 *El programa además imprimirá en consola la información de las generaciones además del mejor fitness encontrado en conjunto con el vector real que generó dicho fitness.

@@ -335,8 +335,6 @@ void Genetic::run(int no) {
 	pop = generate_pop();
 
 	int cnt = 1;
-	//Estas líneas comentadas corresponden a lo pedido en el ejercicio 2.
-	//ofstream fout("sphere_ev.txt");
 	while(cnt <= no_generations) {
 		//Verificar esquema
 		if(scheme.size() > 0) {
@@ -348,23 +346,15 @@ void Genetic::run(int no) {
 		vector<vector<int> > new_pop = evolve_pop(pop);
 		pop.clear();
 		pop = new_pop;
-		//fout << cnt << " " << mean_fitness << " " << best_fitness << endl;
 		cnt++;
-		/*if(best_fitness < tol) {
-			break;
-		}*/
 	}
-	//fout.close();
 
 	cout << "Terminado. Mejor fitness encontrado: " << best_fitness << endl;
 	cout << "Número de generaciones: " << cnt - 1 << endl;
 	cout << "Vector encontrado:" << endl;
-	for(int i = 0; i < pop[0].size(); i++) {
-		cout << pop[0][i] << " ";
-	}
-	/*vector<double> x = phenotype_mapping(pop[0]);
+	vector<double> x = phenotype_mapping(pop[0]);
 	for(int i = 0; i < x.size(); i++) {
 		cout << x[i] << " ";
-	}*/
+	}
 	cout << endl;
 }

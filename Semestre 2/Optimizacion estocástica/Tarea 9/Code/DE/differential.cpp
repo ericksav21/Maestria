@@ -101,16 +101,7 @@ void Differential::run() {
 				}
 			}
 
-			/*for(int x = 0; x < nnew.size(); x++) {
-				cout << nnew[x] << " ";
-			}
-			cout << endl;*/
 			double feval = get_f(nnew);
-			//cout << feval << endl;
-			/*if(feval < pop[j].second) {
-				pop[j].first = nnew;
-				pop[j].second = feval;
-			}*/
 			if(feval < pop[j].second) {
 				new_pop.push_back(make_pair(nnew, feval));
 			}
@@ -125,11 +116,8 @@ void Differential::run() {
 				idx = j;
 			}
 		}
-		//cout << "Iteración " << (i + 1) << endl;
-		//cout << "Mejor fitness de la población: " << best << ", idx: " << idx << endl << endl;
-		/*if(best < tol) {
-			break;
-		}*/
+		cout << "Iteración " << (i + 1) << endl;
+		cout << "Mejor fitness de la población: " << best << ", idx: " << idx << endl << endl;
 	}
 	cout << "Terminado:" << endl;
 	vector<double> x_res = pop[idx].first;

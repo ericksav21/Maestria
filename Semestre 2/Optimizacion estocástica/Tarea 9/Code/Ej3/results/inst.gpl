@@ -1,6 +1,0 @@
-plot "sphere_sc6.txt" using 1:2 title 'Número de instancias del esquema' w l
-set terminal png nocrop enhanced size 1024,768
-set output 'Grafica5.png'
-replot
-set term x11
-set output

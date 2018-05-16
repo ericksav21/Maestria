@@ -17,8 +17,8 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	if(argc < 8) {
-		cout << "Error. Ejecute: " << string(argv[0]) << " [Tamaño de la población] [a] [b] [Función] [Tipo de cruza] [No. de ejecuciones] [Dir. de salida]" << endl;
+	if(argc < 9) {
+		cout << "Error. Ejecute: " << string(argv[0]) << " [Tamaño de la población] [a] [b] [Función] [Tipo de cruza] [No. de generaciones] [No. de ejecuciones] [Dir. de salida]" << endl;
 		return 0;
 	}
 	int pop_size = atoi(argv[1]);
@@ -26,8 +26,9 @@ int main(int argc, char **argv) {
 	int b = atoi(argv[3]);
 	string func_type = string(argv[4]);
 	int cross_type = atoi(argv[5]);
-	int no_exec = atoi(argv[6]);
-	string out_dir = string(argv[7]);
+	int no_generations = atoi(argv[6]);
+	int no_exec = atoi(argv[7]);
+	string out_dir = string(argv[8]);
 
 	double err_av = 0.0, err_sd = 0.0;
 	vector<double> err_vect;
@@ -38,18 +39,17 @@ int main(int argc, char **argv) {
 		cout << "Función " << func_type << ", iteración: " << i << endl;
 		srand(time(NULL));
 
-		int no_generations = 100;
 		Genetic g(pop_size, a, b, no_generations, func_type, cross_type);
 
-		//Agregar el esquema a monitorear
-		//g.add_scheme("0****1111111111111");
+		//Agregar el esquema a monitorear. Se adjuntan los ejemplos realizados en la tarea.
+		g.add_scheme("0****1111111111111");
 		//g.add_scheme("100000000****000000");
 		//g.add_scheme("100000000****000001");
 		//g.add_scheme("0111****11111111110");
-		g.add_scheme("0**111101111101***");
+		//g.add_scheme("0**111101111101***");
 		g.run(i);
 		vector<int> scheme = g.get_schemes_cnt();
-		ofstream fout("sphere_sc6.txt");
+		ofstream fout("info_scheme.txt");
 		for(int i = 0; i < scheme.size(); i++) {
 			fout << (i + 1) << " " << scheme[i] << endl;
 		}

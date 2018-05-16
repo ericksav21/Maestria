@@ -17,8 +17,8 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	if(argc < 8) {
-		cout << "Error. Ejecute: " << string(argv[0]) << " [Tamaño de la población] [a] [b] [Función] [Tipo de cruza] [No. de ejecuciones] [Dir. de salida]" << endl;
+	if(argc < 9) {
+		cout << "Error. Ejecute: " << string(argv[0]) << " [Tamaño de la población] [a] [b] [Función] [Tipo de cruza] [No. de generaciones] [No. de ejecuciones] [Dir. de salida]" << endl;
 		return 0;
 	}
 	int pop_size = atoi(argv[1]);
@@ -26,8 +26,9 @@ int main(int argc, char **argv) {
 	int b = atoi(argv[3]);
 	string func_type = string(argv[4]);
 	int cross_type = atoi(argv[5]);
-	int no_exec = atoi(argv[6]);
-	string out_dir = string(argv[7]);
+	int no_generations = atoi(argv[6]);
+	int no_exec = atoi(argv[7]);
+	string out_dir = string(argv[8]);
 
 	double err_av = 0.0, err_sd = 0.0;
 	vector<double> err_vect;
@@ -38,7 +39,6 @@ int main(int argc, char **argv) {
 		cout << "Función " << func_type << ", iteración: " << i << endl;
 		srand(time(NULL));
 
-		int no_generations = 100;
 		Genetic g(pop_size, a, b, no_generations, func_type, cross_type);
 		g.run(i);
 
@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 	fout << "Mejor fitness encontrado: " << best_fitness << endl;
 	fout << "Peor fitness encontrado: " << worst_fitness << endl;
 	fout.close();
-	cout << "Terminado. Archivo res_info.txt generado.\n";
+	cout << "\nTerminado. Archivo res_info.txt generado.\n";
 
 	return 0;
 }
