@@ -6,7 +6,6 @@
 #include "memo.h"
 #include "matriz_vector.h"
 #include "utils.h"
-#include "reader.h"
 #include "met_num.h"
 
 int main(int argc, char **argv) {
