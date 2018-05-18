@@ -10,23 +10,21 @@
 #include "met_num.h"
 
 int main(int argc, char **argv) {
-	/*if(argc < 6) {
-		printf("Error. Ejecuta: %s [Nombre del archivo] [Número de iteraciones] [Tolerancia] [V] [h].\n", argv[0]);
+	if(argc < 6) {
+		printf("Error. Ejecuta: %s [Nombre del archivo] [Mu_0] [Tau] [Tau_0] [Dx].\n", argv[0]);
 		return 0;
 	}
 	char files_name[30];
 	strcpy(files_name, argv[1]);
-	int iter_max = atoi(argv[2]);
-	double tol = atof(argv[3]);
-	double v = atof(argv[4]);
-	double h = atof(argv[5]);*/
+	double mu = atof(argv[2]);
+	double tau = atof(argv[3]);
+	double tau_0 = atof(argv[4]);
+	double dx = atof(argv[5]);
 
-	int n = 2;
+	int n;
 	int m = 4;
-	double *x = create_vector(n, double);
-	x[0] = -15.0;
-	x[1] = -10.0;
-	QP(x, n, m, 0.1, 0.005, 1.0, 0.0001);
+	double *x = read_init_point(files_name, &n);
+	QP(x, n, m, tau_0, tau, mu, dx);
 
 	free_vector(x);
 	

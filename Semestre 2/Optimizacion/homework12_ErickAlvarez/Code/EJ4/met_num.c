@@ -114,14 +114,14 @@ double* conjugate_gradient(double *init, int n, int m, int iter, double tol_g, d
 		k++;
 
 		//Imprimir datos
-		printf("Iteración %d:\nAlpha: %g\n||g_k||:%g\n||xk+1 - xk||:%g\n|f_k+1 - f_k|:%g\n\n", k, alpha_k, gn, xn_dif, fn_dif);
+		printf("Iteración %d:\nAlpha: %g\n||g_k||: %g\n||xk+1 - xk||: %g\n|f_k+1 - f_k|: %g\n\n", k, alpha_k, gn, xn_dif, fn_dif);
 		if(k == iter) {
 			printf("Se alcanzó el límite de iteraciones.\n");
 			break;
 		}
 	}
 
-	printf("Gradiente conjugado terminado en %d iteraciones.\n", k + 1);
+	printf("Gradiente conjugado terminado en %d iteraciones.\n\n", k + 1);
 
 	free_vector(x1);
 	free_vector(gradient);
@@ -139,7 +139,7 @@ void QP(double *init, int n, int m, double tao_k, double tao, double mu, double 
 	double *h = create_vector(m, double);
 	double *h_aux = create_vector(m, double);
 
-	double mu_factor = 1.5;
+	double mu_factor = 3.0;
 	int max_iter = 10000;
 	for(int i = 0; i < n; i++) {
 		xk[i] = init[i];
@@ -158,11 +158,6 @@ void QP(double *init, int n, int m, double tao_k, double tao, double mu, double 
 		double p = inner_product(h_aux, h_aux, m);
 		double f_eval = Q(xk, mu, n, m);
 
-		printf("\nP = %g\n", p);
-		printf("Q = %g\n", f_eval);
-		printf("X:\n");
-		print_vector(xk, n);
-		printf("\n");
 		if(p < tao) {
 			printf("Algoritmo de penalización cuadrática terminado.\n");
 			break;
@@ -170,11 +165,16 @@ void QP(double *init, int n, int m, double tao_k, double tao, double mu, double 
 		i++;
 		mu *= mu_factor;
 		tao_k = 1.0 / (double)i;
-		printf("Tao_k = %g\n", tao_k);
 	}
 
+	printf("Número de iteraciones realizadas: %d\n", i);
 	printf("Vector resultante:\n");
 	print_vector(xk, n);
+	printf("f(x): %g\n", get_f(xk, n));
+	get_h(xk, h, m);
+	for(int j = 0; j < m; j++) {
+		printf("h(x)_%d: %g\n", (j + 1), h[j]);
+	}
 
 	free_vector(xk);
 	free_vector(h);
