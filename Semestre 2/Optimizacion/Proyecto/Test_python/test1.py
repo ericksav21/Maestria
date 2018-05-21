@@ -95,7 +95,7 @@ def main():
 	print(gm)
 
 	plt.plot(x, y, 'ro')
-	plt.plot(sm_x, sm_y, 'bs')
+	plt.plot(sm_x, sm_y, 'bs', color = 'g')
 	plt.plot(gm[0], gm[1], 'bs')
 	plt.axis([-2, 7, -2, 7])
 	plt.show()
