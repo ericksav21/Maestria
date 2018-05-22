@@ -32,6 +32,19 @@ gsl_matrix *readMatrix(char *cfile) {
     return(mat);
 }
 
+gsl_matrix *readMatrix_txt(char *cfile) {
+    gsl_matrix *mat;
+    int         nr, nc;
+    FILE       *f1 = fopen(cfile, "r");
+
+    if(!f1) return(NULL);
+    fscanf(f1, "%d %d", &nr, &nc);
+    mat = gsl_matrix_alloc(nr, nc);
+    gsl_matrix_fscanf(f1, mat);
+    fclose(f1);
+    return(mat);
+}
+
 
 // Lectura del vector en el archivo cfile.
 // Devuelve NULL si no se pudo abrir el archivo.
@@ -105,18 +118,31 @@ double normError(gsl_matrix *matA, gsl_vector *vecx, gsl_vector *vecb) {
 int main(int argc, char **argv) {
   char files_name[30];
   strcpy(files_name, argv[1]);
-  gsl_matrix *matA = readMatrix(files_name);
-  int sz = (int)matA->size1;
-  gsl_matrix *mat2;
+  //gsl_matrix *matA = readMatrix(files_name);
+  gsl_matrix *matA = readMatrix_txt(files_name);
+  int sz = (int)matA->size2;
+  gsl_matrix *mat2, *mat3;
   mat2 = gsl_matrix_alloc(sz, sz);
+  mat3 = gsl_matrix_alloc(sz, sz);
   gsl_vector *vec1 = gsl_vector_alloc(sz);
   gsl_vector *vec2 = gsl_vector_alloc(sz);
   printf("Tamaño de la matriz: %d x %d\n\n", (int)matA->size1, (int)matA->size2);
   printMatrix(matA);
   printf("\n");
 
-  gsl_linalg_SV_decomp(matA, mat2, vec1, vec2);
+  /*gsl_linalg_SV_decomp(matA, mat2, vec1, vec2);
   printMatrix(matA);
+  printf("\n");
+  printMatrix(mat2);
+  printf("\n");
+  printVector(vec1);*/
+
+  gsl_linalg_SV_decomp_jacobi(matA, mat2, vec1);
+  printMatrix(matA);
+  printf("\n");
+  printMatrix(mat2);
+  printf("\n");
+  printVector(vec1);
 
   return 0;
 }

@@ -19,6 +19,7 @@ nSamps = size(dataSamps,1);
 
 meanMat = repmat(meanSamps,[nSamps,1]);
 dataSampsZM = dataSamps - meanMat;
+disp(dataSamps)
 objFunc = sum(diag(dataSampsZM*dataSampsZM').^(p));
 
 index = 0;
