@@ -1,6 +1,6 @@
 CPP=g++
-CFLAGS=-w -c
-LFLAGS=
+CFLAGS=-w -std=c++11 -c
+LFLAGS=-std=c++11
 EXEC=main
 CPPS:=$(wildcard *.cpp)
 OBJS:=$(patsubst %.cpp,%.o,$(CPPS))
@@ -17,10 +17,10 @@ $(OBJDIR):
 	mkdir -p $@
 
 debug:
-	$(MAKE) CFLAGS="-g -w -c" LFLAGS="-g"
+	$(MAKE) CFLAGS="-g -std=c++11 -w -c" LFLAGS="-g -std=c++11"
 
 release:
-	$(MAKE) CFLAGS="-O2 -w -c" LFLAGS="-O2"
+	$(MAKE) CFLAGS="-O2 -std=c++11 -w -c" LFLAGS="-O2 -std=c++11"
 
 clean:
 	rm -f $(EXEC) $(DIROBJS)

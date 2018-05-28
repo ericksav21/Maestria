@@ -138,7 +138,7 @@ public:
     MaxStdDev = 10,
     MinStdDev = 11,
     Dim = 12, Dimension = 12,
-    Lambda = 13, SampleSize = 13, PopSize = 15,
+    Lambda = 13, SampleSize = 13, PopSize = 20,
     Sigma = 14
   };
 

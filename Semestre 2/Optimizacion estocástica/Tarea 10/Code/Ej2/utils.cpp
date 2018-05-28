@@ -48,7 +48,7 @@ int statistical_test(vector<double> d1, vector<double> d2, double alpha) {
 		double mx = get_mean(x);
 		double my = get_mean(y);
 		phi.push_back(fabs(mx - my));
-		cout << "Phi_i: " << phi[i] << endl;
+		//cout << "Phi_i: " << phi[i] << endl;
 	}
 	int cnt = 0;
 	for(int i = 0; i < phi.size(); i++) {
@@ -59,9 +59,16 @@ int statistical_test(vector<double> d1, vector<double> d2, double alpha) {
 	double p_val = (double)cnt / (double)m;
 	cout << "P value: " << p_val << endl;
 	if(p_val > alpha) {
-		cout << "Se acepta H0" << endl;
+		cout << "Se acepta H0" << endl << endl;
+		return 0;
 	}
 	else {
-		cout << "Se rechaza H0" << endl;
+		cout << "Se rechaza H0" << endl << endl;
+		if(m1 < m2) {
+			return 1;
+		}
+		else {
+			return 2;
+		}
 	}
 }

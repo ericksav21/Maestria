@@ -1,0 +1,14 @@
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -600 600 f1 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/10/f1
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -20 20 f2 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/10/f2
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -20 20 f3 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/10/f3
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -20 20 f4 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/10/f4
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -20 20 f5 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/10/f5
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -600 600 f6 10000 30 0.9 /home/user_demo/ErickAlvarez/Tarea10/results/10/f6
+/home/user_demo/ErickAlvarez/Tarea10/main 10 -20 20 f7 10000 30 0.5 /home/user_demo/ErickAlvarez/Tarea10/results/10/f7
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -600 600 f1 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/30/f1
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -20 20 f2 5000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/30/f2
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -20 20 f3 5000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/30/f3
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -20 20 f4 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/30/f4
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -20 20 f5 10000 30 0.8 /home/user_demo/ErickAlvarez/Tarea10/results/30/f5
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -600 600 f6 10000 30 0.3 /home/user_demo/ErickAlvarez/Tarea10/results/30/f6
+/home/user_demo/ErickAlvarez/Tarea10/main 30 -20 20 f7 10000 30 0.9 /home/user_demo/ErickAlvarez/Tarea10/results/30/f7

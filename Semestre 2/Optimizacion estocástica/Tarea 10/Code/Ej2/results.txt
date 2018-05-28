@@ -1,0 +1,7 @@
+Función 1: Algoritmo 1 mejor que algoritmo 2.
+Función 2: Algoritmo 1 mejor que algoritmo 2.
+Función 3: Algoritmo 1 mejor que algoritmo 2.
+Función 4: Algoritmo 1 mejor que algoritmo 2.
+Función 5: Algoritmo 1 mejor que algoritmo 2.
+Función 6: Algoritmo 1 mejor que algoritmo 2.
+Función 7: Algoritmo 1 mejor que algoritmo 2.

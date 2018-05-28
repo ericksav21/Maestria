@@ -45,6 +45,13 @@ int main(int argc, char **argv) {
 	}
 	sd = sqrt(sd / (double)no_exec);
 	string files_name = out_dir + "/res_info.txt";
+	string files_name_2 = out_dir + "/best.txt";
+	ofstream fout_1(files_name_2.c_str());
+	for(int i = 0; i < data.size(); i++) {
+		fout_1 << data[i] << endl;
+	}
+	fout_1.close();
+
 	ofstream fout(files_name.c_str());
 	fout << "Promedio de error: " << avg << endl;
 	fout << "Desviación estándar del error: " << sd << endl;
@@ -52,7 +59,7 @@ int main(int argc, char **argv) {
 	fout << "Mejor fitness encontrado: " << best << endl;
 	fout << "Peor fitness encontrado: " << worst << endl;
 	fout.close();
-	cout << "\nTerminado. Archivo res_info.txt generado.\n";
+	//cout << "\nTerminado. Archivo res_info.txt generado.\n";
 
 	return 0;
 }

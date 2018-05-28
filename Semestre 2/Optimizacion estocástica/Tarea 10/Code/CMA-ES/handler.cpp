@@ -124,6 +124,7 @@ double exec(int dim, string ftype, int eval_max, double linf, double lsup, doubl
 	CMAES<double> evo;
 	double *arFunvals, *const*pop, *xfinal;
 	int iter_max = (eval_max * dim) / evo.PopSize;
+	cout << "Dimensión: " << dim << endl;
 	cout << "Número de evaluaciones máximo: " << (eval_max * dim) << endl;
 	cout << "Número de generaciones máximo: " << iter_max << endl;
 
@@ -153,15 +154,15 @@ double exec(int dim, string ftype, int eval_max, double linf, double lsup, doubl
 		evo.updateDistribution(arFunvals);
 		cnt++;
 	}
-	std::cout << "Algoritmo terminado:" << std::endl << evo.getStopMessage();
+	//std::cout << "Algoritmo terminado:" << std::endl << evo.getStopMessage();
 	//evo.writeToFile(CMAES<double>::WKResume, "resumeevo1.dat"); // write resumable state of CMA-ES
 
 	// get best estimator for the optimum, xmean
 	xfinal = evo.getNew(CMAES<double>::XMean);
-	for(int i = 0; i < dim; i++) {
+	/*for(int i = 0; i < dim; i++) {
 		cout << xfinal[i] << " ";
 	}
-	cout << endl << "Error: " << evo.get(CMAES<double>::Fitness) << endl;
+	cout << endl << "Error: " << evo.get(CMAES<double>::Fitness) << endl;*/
 
 	// do something with final solution and finally release memory
 	delete[] xfinal;
