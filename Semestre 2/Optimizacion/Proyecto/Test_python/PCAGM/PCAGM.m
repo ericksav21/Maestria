@@ -49,7 +49,7 @@ while flag == 0
     S = trainDataZM' * A;
     [eigVectors,~,~] = svd(S,0);
     U = eigVectors(:,1:nFeatsPCA);
-    disp(S)
+    %disp(S)
     
     residue = ComptResidualErrors(trainDataZM,U);
     objFunc = sum(residue.^(p));
@@ -75,6 +75,7 @@ end
 function errors = ComptResidualErrors(trainDataZM,U)
 
 trainDataProj =  trainDataZM * U;
+disp(trainDataProj * trainDataProj')
 R = (trainDataZM*trainDataZM') - (trainDataProj*trainDataProj');
 errors = diag(R);
 

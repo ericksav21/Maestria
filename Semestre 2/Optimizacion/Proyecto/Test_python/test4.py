@@ -118,10 +118,10 @@ def diagonal(M):
 	return U, S
 
 def computeResiduals(Xgc, U):
-	Xgc_aux = np.array(Xgc, dtype = np.longdouble)
-	U_aux = np.array(U, dtype = np.longdouble)
-	XProj = np.longdouble(Xgc_aux.dot(U_aux))
-	R = np.longdouble(np.subtract(Xgc_aux.dot(Xgc_aux.T), XProj.dot(XProj.T)))
+	Xgc_aux = np.array(Xgc, dtype = np.float)
+	U_aux = np.array(U, dtype = np.float)
+	XProj = Xgc_aux.dot(U_aux)
+	R = np.subtract(Xgc_aux.dot(Xgc_aux.T), XProj.dot(XProj.T))
 	#R = Xgc.dot(Xgc.T) - XProj.dot(XProj.T)
 	errors = np.diag(R)
 
@@ -149,7 +149,7 @@ def g_PCA(X, gm, noEig, p):
 	maxIter = 100
 	rat = 1.0
 	tol = 1e-5
-	delta = 1e-13
+	delta = 1e-10
 
 	U = PCA(X, noEig)
 	Xgc = X.copy()
@@ -157,9 +157,9 @@ def g_PCA(X, gm, noEig, p):
 	M_aux[:, 0] *= gm[0]
 	M_aux[:, 1] *= gm[1]
 	Xgc -= M_aux
-	residue = np.longdouble(computeResiduals(Xgc, U))
-	#residue = residue + delta
-	v_aux = np.longdouble(np.float_power(residue, p))
+	residue = computeResiduals(Xgc, U)
+	#residue = residue + delta * np.ones(np.size(residue), dtype = 'float')
+	v_aux = np.float_power(residue + delta * np.ones(np.size(residue), dtype = 'float'), p)
 	objF = np.sum(v_aux)
 
 	minRes = residue.mean()
@@ -173,19 +173,19 @@ def g_PCA(X, gm, noEig, p):
 		lst_objF = objF
 		print("Iter: ", cnt)
 
-		residue = residue + eps * np.ones(np.size(residue), dtype = 'float')
+		residue = residue + delta * np.ones(np.size(residue), dtype = 'float')
 		alphas = np.power(residue, p - 1.0)
 		A = np.sqrt(np.diag(alphas))
-		S = np.float64(Xgc.T.dot(A))
+		S = Xgc.T.dot(A)
 		Un, _, _ = LA.svd(S, full_matrices = False)
 		U = Un[:, 0 : noEig].copy()
 
 		residue = computeResiduals(Xgc, U)
 		#residue = residue + delta
-		v_aux = np.longdouble(np.float_power(residue + eps, p))
+		v_aux = np.float_power(residue + delta * np.ones(np.size(residue), dtype = 'float'), p)
 		objF = np.sum(v_aux)
 
-		if lst_objF - objF < tol:
+		'''if lst_objF - objF < tol:
 			print(1)
 			flag = True
 		elif objF >= lst_objF:
@@ -196,7 +196,9 @@ def g_PCA(X, gm, noEig, p):
 			print(3)
 			flag = True
 		else:
-			print(4)
+			print(4)'''
+		if cnt == 10000:
+			break
 
 	return U
 
@@ -226,7 +228,7 @@ def main():
 					 [3.15527909e+00, 3.19645919e+00],
 					 [3.26713497e+00, 3.01798668e+00]]
 					)'''
-	p = 0.2
+	p = 0.3
 	(x, y) = (X[:, 0], X[:, 1])
 	sm_x = np.mean(x)
 	sm_y = np.mean(y)

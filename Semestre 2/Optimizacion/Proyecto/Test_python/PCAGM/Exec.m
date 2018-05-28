@@ -32,12 +32,12 @@ function [U] = Exec()
     [U,nIters,eTime] = PCAGM(trainData, generalizedSampMean, 2, p)
     %disp(generalizedSampMean)
     %disp(mean(trainData))
-    plot(trainData(:, 1), trainData(:, 2), '*')
-    hold on
-    plotv(U, '-')
-    plotv(W_PCA, '--')
-    hold off
-    disp(U)
+    %plot(trainData(:, 1), trainData(:, 2), '*')
+    %hold on
+    %plotv(U, '-')
+    %plotv(W_PCA, '--')
+    %hold off
+    %disp(U)
 end
 
 function [W_PCA,eTime] = PCA(trainData,nFeatsPCA)
