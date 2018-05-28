@@ -76,6 +76,9 @@ function errors = ComptResidualErrors(trainDataZM,U)
 
 trainDataProj =  trainDataZM * U;
 R = (trainDataZM*trainDataZM') - (trainDataProj*trainDataProj');
+disp(trainDataProj);
+disp(U);
+disp('Jaja saludos');
 errors = diag(R);
 
 end

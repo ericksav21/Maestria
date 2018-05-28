@@ -28,16 +28,16 @@ function [U] = Exec()
 				 3.15527909e+00, 3.19645919e+00;
 				 3.26713497e+00, 3.01798668e+00]
     [generalizedSampMean,eTime,nIters] = GeneralizedSampleMean(trainData, p)
-    [W_PCA,eTime] = PCA(trainData, 2)
+    %[W_PCA,eTime] = PCA(trainData, 2)
     [U,nIters,eTime] = PCAGM(trainData, generalizedSampMean, 2, p)
     %disp(generalizedSampMean)
     %disp(mean(trainData))
-    plot(trainData(:, 1), trainData(:, 2), '*')
-    hold on
-    plotv(U, '-')
-    plotv(W_PCA, '--')
-    hold off
-    disp(U)
+    %plot(trainData(:, 1), trainData(:, 2), '*')
+    %hold on
+    %plotv(U, '-')
+    %plotv(W_PCA, '--')
+    %hold off
+    %disp(U)
 end
 
 function [W_PCA,eTime] = PCA(trainData,nFeatsPCA)
@@ -59,6 +59,7 @@ function [W_PCA,eTime] = PCA(trainData,nFeatsPCA)
         S = (trainData-meanMat)'*(trainData-meanMat)/nTrain;
         W = diagonal(S);
         W_PCA = W(:,1:nFeatsPCA);
+        disp('Holi');
     end
 
     eTime = etime(clock,t0);
