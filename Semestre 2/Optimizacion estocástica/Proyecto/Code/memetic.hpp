@@ -20,7 +20,6 @@ private:
 	Graph *g;
 	int k;
 
-	void update_capacities(vector<int> &cap, vector<int> p, int node_j, int c_act, bool subs);
 	vector<int> generate_ind();
 
 public:

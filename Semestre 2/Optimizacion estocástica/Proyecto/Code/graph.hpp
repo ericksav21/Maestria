@@ -41,8 +41,11 @@ typedef struct Graph {
 } Graph;
 
 typedef struct DSU {
+	DSU(int n);
+	~DSU();
+
 	int n;
-	vector<int> p;
+	vector<int> p, sz;
 	int find(int x);
 	void make_union(int x, int y);
 	bool same_cmp(int x, int y);
@@ -59,7 +62,5 @@ Graph read_graph(string files_name);
 Graph *copy_graph(Graph g);
 
 int rand_in_range(int a, int b);
-
-DSU create_DSU(int n);
 
 #endif

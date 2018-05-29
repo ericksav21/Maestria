@@ -14,19 +14,17 @@ Memetic::~Memetic() {
 	delete g;
 }
 
-void Memetic::update_capacities(vector<int> &cap, vector<int> p, int node_j, int c_act, bool subs) {
-	if(subs)
-		cap[node_j] -= c_act;
-	else
-		cap[node_j] += c_act;
-	if(node_j == 0) {
-		return;
+/*vector<int> Memetic::generate_ind() {
+	vector<int> p(g->no_nodes, 0);
+	vector<int> S, U, capacity(g->no_nodes, k);
+	int root = 0;
+	//Colocar el nodo raíz
+	S.push_back(root);
+	for(int i = 1; i < g->no_nodes; i++) {
+		U.push_back(i);
+		capacity[i] = k - g->node_list[i];
 	}
-
-	int bfr = p[node_j];
-	int c_new = g->node_list[bfr];
-	update_capacities(cap, p, bfr, c_new, subs);
-}
+}*/
 
 vector<int> Memetic::generate_ind() {
 	vector<int> p(g->no_nodes, 0);

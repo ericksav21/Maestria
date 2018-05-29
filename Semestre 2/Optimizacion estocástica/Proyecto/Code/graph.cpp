@@ -113,24 +113,27 @@ void DSU::make_union(int x, int y) {
 	int rx = find(x);
 	int ry = find(y);
 
-	if(rx == ry) {
-		return;
+	if(sz[rx] < sz[ry]) {
+		p[rx] = p[ry];
+		sz[ry] += sz[rx];
 	}
-
-	p[rx] = ry;
+	else {
+		p[ry] = p[rx];
+		sz[rx] += sz[ry];
+	}
 }
 
 bool DSU::same_cmp(int x, int y) {
 	return find(x) == find(y);
 }
 
-DSU create_DSU(int n) {
-	DSU res;
-	res.n = n + 1;
-	res.p.resize(n + 1);
-	for(int i = 0; i <= n; i++) {
-		res.p[i] = i;
+DSU::DSU(int n) {
+	this->n = n;
+	p.resize(n, 0);
+	sz.resize(n, 1);
+	for(int i = 0; i < n; i++) {
+		p[i] = i;
 	}
-
-	return res;
 }
+
+DSU::~DSU() {}
