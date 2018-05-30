@@ -118,10 +118,8 @@ def diagonal(M):
 	return U, S
 
 def computeResiduals(Xgc, U):
-	Xgc_aux = np.array(Xgc, dtype = np.float)
-	U_aux = np.array(U, dtype = np.float)
-	XProj = Xgc_aux.dot(U_aux)
-	R = np.subtract(Xgc_aux.dot(Xgc_aux.T), XProj.dot(XProj.T))
+	XProj = Xgc.dot(U)
+	R = np.subtract(Xgc.dot(Xgc.T), XProj.dot(XProj.T))
 	#R = Xgc.dot(Xgc.T) - XProj.dot(XProj.T)
 	errors = np.diag(R)
 
@@ -148,7 +146,7 @@ def PCA(X, noEig):
 def g_PCA(X, gm, noEig, p):
 	maxIter = 100
 	rat = 1.0
-	tol = 1e-10
+	tol = 1e-5
 	delta = 1e-10
 
 	U = PCA(X, noEig)
@@ -163,7 +161,7 @@ def g_PCA(X, gm, noEig, p):
 	v_aux = np.float_power(residue, p)
 	objF = np.sum(v_aux)
 
-	minRes = residue.mean()
+	minRes = residue.min()
 	eps = rat * minRes
 	flag = False
 	cnt = 0
@@ -229,7 +227,7 @@ def main():
 					 [3.15527909e+00, 3.19645919e+00],
 					 [3.26713497e+00, 3.01798668e+00]]
 					)'''
-	p = 0.9
+	p = 0.3
 	(x, y) = (X[:, 0], X[:, 1])
 	sm_x = np.mean(x)
 	sm_y = np.mean(y)

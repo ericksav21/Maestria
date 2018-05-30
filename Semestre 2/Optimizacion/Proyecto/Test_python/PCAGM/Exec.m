@@ -1,7 +1,7 @@
 function [U] = Exec()
     mu = [0, 0]
     sigma = [0.5, 0; 0, 0.5]
-    p = 0.2
+    p = 0.3
     %trainData = mvnrnd(mu, sigma, 100)
     %trainData = [trainData; mvnrnd([4, 4], [0.3, 0; 0, 0.3])]
     %trainData = genPoints()
@@ -29,7 +29,7 @@ function [U] = Exec()
 				 3.26713497e+00, 3.01798668e+00]
     [generalizedSampMean,eTime,nIters] = GeneralizedSampleMean(trainData, p)
     %[W_PCA,eTime] = PCA(trainData, 2)
-    [U,nIters,eTime] = PCAGM(trainData, generalizedSampMean, 2, p)
+    [U,nIters,eTime] = PCAGM(trainData, generalizedSampMean, 1, p)
     %disp(generalizedSampMean)
     %disp(mean(trainData))
     %plot(trainData(:, 1), trainData(:, 2), '*')
