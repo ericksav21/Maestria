@@ -28,25 +28,23 @@ Edge create_edge(Node a, Node b, int cost) {
 	return res;
 }
 
-Graph::Graph(int no_nodes) {
-	this->no_nodes = no_nodes + 1;
-	node_list.resize(no_nodes + 1, 0);
-	adj.resize(no_nodes + 1, vector<pair<int, int> >(0));
+Graph::Graph(int no_nodes, int node_cost) {
+	this->no_nodes = no_nodes;
+	this->node_cost = node_cost;
+	adj.resize(no_nodes, vector<pair<int, int> >(0));
 }
 
 Graph::~Graph() {}
 
-void Graph::add_node(int from_id, int to_id, int from_weight, int to_weight, int cost) {
-	Node from_node = create_node(from_weight, from_id);
-	Node to_node = create_node(to_weight, to_id);
+void Graph::add_node(int from_id, int to_id, int cost) {
+	Node from_node = create_node(node_cost, from_id);
+	Node to_node = create_node(node_cost, to_id);
 	Edge new_edge = create_edge(from_node, to_node, cost);
 
 	//Añadir de forma no dirigida
 	adj[from_id].push_back(make_pair(to_id, cost));	
 	adj[to_id].push_back(make_pair(from_id, cost));
 	edge_list.push_back(new_edge);
-	node_list[from_id] = from_weight;
-	node_list[to_id] = to_weight;
 }
 
 void Graph::print_adj() {
@@ -65,12 +63,6 @@ void Graph::print_adj() {
 	}
 }
 
-void Graph::print_weights() {
-	for(int i = 0; i < node_list.size(); i++) {
-		cout << "Nodo " << (i) << ", peso: " << node_list[i] << endl;
-	}
-}
-
 Graph read_graph(string files_name) {
 	ifstream f;
 	f.open(files_name.c_str());
@@ -78,20 +70,44 @@ Graph read_graph(string files_name) {
 	int u, v, w;
 
 	f >> no_nodes >> no_edges;
-	Graph res(no_nodes);
+	Graph res(no_nodes, 1);
 	for(int i = 0; i < no_edges; i++) {
 		f >> u >> v >> w;
-		res.add_node(u, v, 1, 1, w);
+		res.add_node(u, v, w);
 	}
 
 	f.close();
 	return res;
 }
 
+Graph read_graph_2(string files_name) {
+	ifstream f;
+	f.open(files_name.c_str());
+	int no_nodes, node_cost;
+	int w;
+
+	f >> no_nodes >> node_cost;
+	cout << no_nodes << " " << node_cost << endl;
+	Graph res(no_nodes, node_cost);
+	for(int i = 0; i < no_nodes; i++) {
+		for(int j = 0; j < no_nodes; j++) {
+			f >> w;
+			if(j <= i) {
+				continue;
+			}
+			res.add_node(i, j, w);
+		}
+	}
+
+	return res;
+}
+
 Graph *copy_graph(Graph g) {
-	Graph *res = new Graph(g.no_nodes - 1);
+	//Se resta 1 para que al final el grado copia no quede
+	//con dos nodos extra.
+	//Graph *res = new Graph(g.no_nodes - 1, g.node_cost);
+	Graph *res = new Graph(g.no_nodes, g.node_cost);
 	res->adj = g.adj;
-	res->node_list = g.node_list;
 	res->edge_list = g.edge_list;
 
 	return res;
@@ -125,6 +141,10 @@ void DSU::make_union(int x, int y) {
 
 bool DSU::same_cmp(int x, int y) {
 	return find(x) == find(y);
+}
+
+int DSU::tree_size(int x) {
+	return sz[find(x)];
 }
 
 DSU::DSU(int n) {

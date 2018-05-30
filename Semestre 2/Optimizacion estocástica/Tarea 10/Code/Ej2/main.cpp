@@ -28,6 +28,10 @@ int main(int argc, char **argv) {
 		vector<double> d1 = read_file(files_name_1);
 		vector<double> d2 = read_file(files_name_2);
 		int res = statistical_test(d1, d2, 0.05);
+		vector<double> ci_1 = confidence_interval(d1);
+		vector<double> ci_2 = confidence_interval(d2);
+
+		cout << ci_1[0] << " " << ci_1[1] << endl;
 		fout << "Función " << i << ": ";
 		if(res == 0) {
 			fout << "Algoritmos son iguales.";

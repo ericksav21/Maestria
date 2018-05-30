@@ -11,7 +11,7 @@ def gen_points(n):
 	while True:
 		xi = np.random.rand(1, 1)
   		yi = np.random.rand(1, 1)
-  		if ((xi - cx1) ** 2 / 0.5) + ((yi - cy1) ** 2 / 0.1) <= 1:
+  		if ((xi - cx1) ** 2 / 0.9) + ((yi - cy1) ** 2 / 0.1) <= 1:
   			X[cnt, 0] = xi
   			X[cnt, 1] = yi
   			cnt += 1
@@ -29,9 +29,9 @@ def gen_points2():
 	return X
 
 def gen_points3():
-	p1 = gen_points(20)
+	p1 = gen_points(100)
 	#p2 = np.random.multivariate_normal([4, 4], [[1.0, 0], [0, 1.0]], 1)
-	p2 = np.random.multivariate_normal([3, 3], [[0.3, 0], [0, 0.3]], 2)
+	p2 = np.random.multivariate_normal([1, 1], [[0.3, 0], [0, 0.3]], 5)
 	X = np.concatenate((p1, p2), axis = 0)
 
 	return X
@@ -148,7 +148,7 @@ def PCA(X, noEig):
 def g_PCA(X, gm, noEig, p):
 	maxIter = 100
 	rat = 1.0
-	tol = 1e-5
+	tol = 1e-10
 	delta = 1e-10
 
 	U = PCA(X, noEig)
@@ -159,7 +159,8 @@ def g_PCA(X, gm, noEig, p):
 	Xgc -= M_aux
 	residue = computeResiduals(Xgc, U)
 	#residue = residue + delta * np.ones(np.size(residue), dtype = 'float')
-	v_aux = np.float_power(residue + delta * np.ones(np.size(residue), dtype = 'float'), p)
+	#v_aux = np.float_power(residue + delta * np.ones(np.size(residue), dtype = 'float'), p)
+	v_aux = np.float_power(residue, p)
 	objF = np.sum(v_aux)
 
 	minRes = residue.mean()
@@ -173,7 +174,7 @@ def g_PCA(X, gm, noEig, p):
 		lst_objF = objF
 		print("Iter: ", cnt)
 
-		residue = residue + delta * np.ones(np.size(residue), dtype = 'float')
+		residue = residue + eps * np.ones(np.size(residue), dtype = 'float')
 		alphas = np.power(residue, p - 1.0)
 		A = np.sqrt(np.diag(alphas))
 		S = Xgc.T.dot(A)
@@ -185,7 +186,7 @@ def g_PCA(X, gm, noEig, p):
 		v_aux = np.float_power(residue + delta * np.ones(np.size(residue), dtype = 'float'), p)
 		objF = np.sum(v_aux)
 
-		'''if lst_objF - objF < tol:
+		if lst_objF - objF < tol:
 			print(1)
 			flag = True
 		elif objF >= lst_objF:
@@ -196,9 +197,9 @@ def g_PCA(X, gm, noEig, p):
 			print(3)
 			flag = True
 		else:
-			print(4)'''
-		if cnt == 10000:
-			break
+			print(4)
+		#if cnt == 10000:
+		#	break
 
 	return U
 
@@ -228,7 +229,7 @@ def main():
 					 [3.15527909e+00, 3.19645919e+00],
 					 [3.26713497e+00, 3.01798668e+00]]
 					)'''
-	p = 0.3
+	p = 0.9
 	(x, y) = (X[:, 0], X[:, 1])
 	sm_x = np.mean(x)
 	sm_y = np.mean(y)
@@ -237,7 +238,7 @@ def main():
 	Y[:, 0] -= sm_x
 	Y[:, 1] -= sm_y
 	W = PCA(X, 2)
-	V = g_PCA(X, gm, 2, p)
+	V = g_PCA(X, gm, 1, p)
 	print("PCA")
 	print(W)
 	print(V)

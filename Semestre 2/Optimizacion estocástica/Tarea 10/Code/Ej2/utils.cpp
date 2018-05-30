@@ -28,6 +28,23 @@ int rand_in_range(int a, int b) {
 	return rand() % (b - a + 1) + a;
 }
 
+vector<double> confidence_interval(vector<double> a) {
+	int m = 1000;
+	double alpha = 0.05;
+	vector<double> samp;
+	for(int i = 0; i < m; i++) {
+		int r = rand_in_range(0, a.size() - 1);
+		samp.push_back(a[r]);
+	}
+	sort(samp.begin(), samp.end());
+	int k = floor(alpha * m);
+	double z_low = samp[k];
+	double z_up = samp[m - k];
+	vector<double> res = {z_low, z_up};
+
+	return res;
+}
+
 int statistical_test(vector<double> d1, vector<double> d2, double alpha) {
 	double m1 = get_mean(d1);
 	double m2 = get_mean(d2);
@@ -36,14 +53,20 @@ int statistical_test(vector<double> d1, vector<double> d2, double alpha) {
 
 	int m = 5000;
 	int v_sz = 1000;
-	vector<double> phi;
+	vector<double> phi, c;
+	c.insert(c.end(), d1.begin(), d1.end());
+	c.insert(c.end(), d2.begin(), d2.end());
 	for(int i = 0; i < m; i++) {
-		vector<double> x, y;
-		for(int j = 0; j < v_sz; j++) {
-			int r1 = rand_in_range(0, d1.size() - 1);
-			int r2 = rand_in_range(0, d2.size() - 1);
-			x.push_back(d1[r1]);
-			y.push_back(d1[r2]);
+		vector<double> samp, x, y;
+		for(int j = 0; j < c.size(); j++) {
+			int r = rand_in_range(0, c.size() - 1);
+			samp.push_back(c[r]);
+		}
+		for(int j = 0; j < d1.size(); j++) {
+			x.push_back(samp[j]);
+		}
+		for(int j = d1.size() + 1; j < c.size(); j++) {
+			y.push_back(samp[j]);
 		}
 		double mx = get_mean(x);
 		double my = get_mean(y);

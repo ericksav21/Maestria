@@ -27,16 +27,14 @@ typedef struct Edge{
 } Edge;
 
 typedef struct Graph {
-	int no_nodes;
+	int no_nodes, node_cost;
 	vector<vector<pair<int, int> > > adj;
-	vector<int> node_list;
 	vector<Edge> edge_list;
 
-	Graph(int no_nodes);
+	Graph(int no_nodes, int node_cost);
 	~Graph();
-	void add_node(int from_id, int to_id, int from_weight, int to_weight, int cost);
+	void add_node(int from_id, int to_id, int cost);
 	void print_adj();
-	void print_weights();
 
 } Graph;
 
@@ -49,6 +47,7 @@ typedef struct DSU {
 	int find(int x);
 	void make_union(int x, int y);
 	bool same_cmp(int x, int y);
+	int tree_size(int x);
 } DSU;
 
 Node create_node(int weight, int id);
@@ -58,6 +57,8 @@ Edge create_edge(Node a, Node b, int cost);
 void initializate_graph(int no_nodes);
 
 Graph read_graph(string files_name);
+
+Graph read_graph_2(string files_name);
 
 Graph *copy_graph(Graph g);
 

@@ -18,12 +18,13 @@ using namespace std;
 class Memetic {
 private:
 	Graph *g;
-	int k;
+	//Máxima capacidad de los subárboles y peso de los nodos.
+	int k, c;
 
 	vector<int> generate_ind();
 
 public:
-	Memetic(Graph g, int k);
+	Memetic(Graph g, int k, int c);
 	~Memetic();
 	
 };
