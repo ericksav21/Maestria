@@ -1,76 +1,38 @@
+# -*- coding: utf-8 -*-
+
 import numpy as np
 from numpy import linalg as LA
 import os, sys, glob
 import matplotlib.pyplot as plt
 
-import test4
+import utils, optimization
 
-def gen_points_no_out():
-	n = 100
-	X = np.zeros((n, 2), dtype = 'float')
-	cnt = 0
-	for i in range(100):
-		xi = np.random.normal(0, 1, 1)
-		yi = xi + np.random.normal(0, 0.5 ** 2, 1)
-		X[cnt, 0] = xi
-		X[cnt, 1] = yi
-		cnt += 1
+#Este es la primer prueba del paper, donde se compara el algoritmo de la media generalizada
+#con la media normal, al ejecutar el codigo se llamarán ambos algoritmos y se mostrara en una grafica
+#los resultados obtenidos donde el punto verde es la media normal y el azul es la media generalida.
 
-	return X
-
-def gen_points_ex():
-	n = 110
-	X = np.zeros((n, 2), dtype = 'float')
-	cnt = 0
-	for i in range(100):
-		xi = np.random.normal(0, 1, 1)
-		yi = xi + np.random.normal(0, 0.5 ** 2, 1)
-		X[cnt, 0] = xi
-		X[cnt, 1] = yi
-		cnt += 1
-	for i in range(10):
-		xi = np.random.normal(0, 1)
-		yi = xi + np.random.normal(0, 3 ** 2, 1)
-		X[cnt, 0] = xi
-		X[cnt, 1] = yi
-		cnt += 1
-
-	return X
-
-
+#Los puntos son generados en base a una distribucion bivariada gaussiana con media 0 y matriz de covarianza de 0.5
+#para los inliers y media 5 y matriz de covarianza de 0.3 para los outliers.
 def main():
-	p = 0.3
-	X = gen_points_ex()
-	X_wo = gen_points_no_out()
+	p1 = np.random.multivariate_normal([0, 0], [[0.5, 0], [0, 0.5]], 100)
+	p2 = np.random.multivariate_normal([5, 5], [[0.3, 0], [0, 0.3]], 10)
+	data = np.concatenate((p1, p2), axis = 0)
+	(x, y) = (p1[:, 0], p1[:, 1])
+	x = np.append(x, p2[:, 0])
+	y = np.append(y, p2[:, 1])
 
-	(x, y) = (X[:, 0], X[:, 1])
 	sm_x = np.mean(x)
 	sm_y = np.mean(y)
-	gm = test4.gen_mean(X, sm_x, sm_y, p)
-	Y = X.copy()
-	Y[:, 0] -= sm_x
-	Y[:, 1] -= sm_y
-	W = test4.PCA(X, 1)
-	W_wo = test4.PCA(X_wo, 1)
-	W_0 = np.matrix('0.86607; 0.49991', dtype = 'float')
+	m_d = np.array([sm_x, sm_y], dtype = 'float')
+	p = 0.3
+	gm = optimization.gen_mean(data, m_d, p)
+	print(gm)
 
-	f_eval, V = test4.g_PCA(X, gm, 1, W_0, p)
-	PCA_fn = test4.PCA_J_fn(X, W)
-	idx = 0
-	mmax = 10000000
-	for i in range(len(f_eval)):
-		if(f_eval[i] < mmax):
-			mmax = f_eval[i]
-			idx = i
-
-	print(W_wo)
-	print(V)
-	print(PCA_fn)
-	plt.plot(f_eval, color = 'g')
-	plt.plot(idx, PCA_fn, 'ro')
+	plt.plot(x, y, 'ro')
+	plt.plot(sm_x, sm_y, 'bs', color = 'g')
+	plt.plot(gm[0], gm[1], 'bs')
+	plt.axis([-2, 7, -2, 7])
 	plt.show()
-
-	return 0
 
 if __name__ == '__main__':
 	main()
