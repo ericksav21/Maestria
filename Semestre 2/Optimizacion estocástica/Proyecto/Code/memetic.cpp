@@ -9,6 +9,10 @@ Memetic::Memetic(Graph g, int k, int c) {
 		cout << v[i] << " ";
 	}
 	cout << endl;
+	if(v[0] != -1) {
+		int fit = fitness(v, 0);
+		cout << "Fitness: " << fit << endl;
+	}
 }
 
 Memetic::~Memetic() {
@@ -111,10 +115,40 @@ vector<int> Memetic::generate_ind() {
 
 		//Si S está vacío ya no se puede generar el árbol
 		if(S.size() == 0) {
+			for(int i = 0; i < p.size(); i++) {
+				p[i] = -1;
+			}
 			cout << "No se pudo generar un individuo factible del grafo." << endl;
 			break;
 		}
 	}
 
 	return p;
+}
+
+int Memetic::fitness(vector<int> ind, int root) {
+	int cnt = 0;
+	queue<int> q;
+	q.push(root);
+
+	while(!q.empty()) {
+		int u = q.front();
+		q.pop();
+
+		for(int i = 0; i < ind.size(); i++) {
+			//Si el padre del nodo i es el nodo u
+			if(i != u && ind[i] == u) {
+				//Obtener el costo de la arista entre u e i
+				for(int x = 0; x < g->adj[u].size(); x++) {
+					if(g->adj[u][x].first == i) {
+						cnt += g->adj[u][x].second;
+						break;
+					}
+				}
+				q.push(i);
+			}
+		}
+	}
+
+	return cnt;
 }

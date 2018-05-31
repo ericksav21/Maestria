@@ -30,13 +30,24 @@ def make_clustering(X, labels, k):
 			v_max_3 = X[i, :].copy()
 
 	init_v = np.matrix([v_max_1, v_max_2, v_max_3], dtype = 'float')
-	kmeans = KMeans(n_clusters = k, init = init_v)
+	kmeans = KMeans(n_clusters = k, init = 'k-means++', n_init = 30, max_iter = 500, tol = 1e-5)
 	kmeans = kmeans.fit(X)
 	p_labels = kmeans.predict(X)
 
-	print(labels)
-	print(p_labels)
+	#9 es a 2, 0 es a 3, 1 es a 8
+	tp, fp = 0, 0
+	for i in range(labels.shape[0]):
+		if labels[i, 0] == 9 and p_labels[i] == 2:
+			tp += 1
+		elif labels[i, 0] == 3 and p_labels[i] == 0:
+			tp += 1
+		elif labels[i, 0] == 8 and p_labels[i] == 1:
+			tp += 1
+		else:
+			fp += 1
 
+	prec = float(tp) / float(tp + fp)
+	print("Precision de la clasificacion: ", prec)
 
 def main():
 	x_train, t_train, _, _ = mnist.load()
@@ -57,8 +68,8 @@ def main():
 			cnt += 1
 		idx += 1
 
-	m = 50
-	p = 0.3
+	m = 250
+	p = 0.1
 	W_PCA = optimization.PCA(data, m)
 
 	data_proj_PCA = data.dot(W_PCA)
@@ -72,6 +83,7 @@ def main():
 
 	k = 3
 	make_clustering(data_proj_PCA, labels, 3)
+	make_clustering(data_proj_PCAGM, labels, 3)
 
 if __name__ == '__main__':
 	main()

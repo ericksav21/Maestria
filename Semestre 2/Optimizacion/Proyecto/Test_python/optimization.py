@@ -108,7 +108,7 @@ def PCA(X, noEig):
 	return W_PCA
 
 def PCAGM(X, gm, noEig, U_0, p):
-	maxIter = 100
+	maxIter = 1000
 	rat = 1.0
 	tol = 1e-5
 	delta = 1e-10

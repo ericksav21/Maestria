@@ -26,6 +26,7 @@ private:
 public:
 	Memetic(Graph g, int k, int c);
 	~Memetic();
+	int fitness(vector<int> ind, int root);
 	
 };
 
