@@ -30,7 +30,7 @@ int rand_in_range(int a, int b) {
 
 vector<double> confidence_interval(vector<double> a) {
 	int m = 1000;
-	double alpha = 0.05;
+	double alpha = 0.025;
 	vector<double> samp;
 	for(int i = 0; i < m; i++) {
 		int r = rand_in_range(0, a.size() - 1);

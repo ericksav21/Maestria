@@ -31,7 +31,11 @@ int main(int argc, char **argv) {
 		vector<double> ci_1 = confidence_interval(d1);
 		vector<double> ci_2 = confidence_interval(d2);
 
+		cout << "Intervalo de confianza para el primer algoritmo:" << endl;
 		cout << ci_1[0] << " " << ci_1[1] << endl;
+		cout << "\nIntervalo de confianza para el segundo algoritmo:" << endl;
+		cout << ci_2[0] << " " << ci_2[1] << endl << endl;
+		
 		fout << "Función " << i << ": ";
 		if(res == 0) {
 			fout << "Algoritmos son iguales.";
