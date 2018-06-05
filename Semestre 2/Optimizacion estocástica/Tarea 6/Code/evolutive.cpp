@@ -1,5 +1,13 @@
 #include "evolutive.hpp"
 
+bool pairCompare(const pair<int, Individual>& firstElem, const pair<int, Individual>& secondElem) {
+  return firstElem.first < secondElem.first;
+}
+
+bool pairCompareByInd(const pair<int, Individual>& firstElem, const pair<int, Individual>& secondElem) {
+  return firstElem.second.get_fitness() < secondElem.second.get_fitness();
+}
+
 Evolutive::Evolutive(vector<GRID> sudoku, int pop_size, double DI, double end_time, string files_name) {
 	this->sudoku = sudoku;
 	this->pop_size = pop_size;
@@ -29,7 +37,7 @@ vector<GRID> Evolutive::get_sol() {
 	return this->sol;
 }
 
-vector<vector<GRID> > Evolutive::crossover(vector<GRID> p1, vector<GRID> p2) {
+vector<vector<GRID> > Evolutive::crossover(vector<GRID> &p1, vector<GRID> &p2) {
 	int d = p1.size();
 	vector<GRID> son1(d), son2(d);
 	for(int i = 0; i < d; i++) {
@@ -50,7 +58,7 @@ vector<vector<GRID> > Evolutive::crossover(vector<GRID> p1, vector<GRID> p2) {
 	return res;
 }
 
-vector<GRID> Evolutive::mutation(vector<GRID> sudoku) {
+vector<GRID> Evolutive::mutation(vector<GRID> &sudoku) {
 	int d = sudoku.size();
 	vector<GRID> son = sudoku;
 	for(int i = 0; i < d; i++) {
@@ -74,17 +82,18 @@ vector<GRID> Evolutive::mutation(vector<GRID> sudoku) {
 	return son;
 }
 
-vector<GRID> Evolutive::tournamentSelection(vector<vector<GRID> > pop) {
-	vector<int> ind(pop.size());
-	for(int i = 0; i < pop.size(); i++) {
-		ind[i] = i;
+vector<GRID> Evolutive::tournamentSelection(vector<vector<GRID> > &pop) {
+	int ind1 = rand_in_range(0, pop.size() - 1);
+	int ind2 = ind1;
+	while(ind2 == ind1) {
+		ind2 = rand_in_range(0, pop.size() - 1);
 	}
-	random_shuffle(ind.begin(), ind.end());
-	if(fitness(pop[ind[0]]) < fitness(pop[ind[1]])) {
-		return pop[ind[0]];
+
+	if(fitness(pop[ind1]) < fitness(pop[ind2])) {
+		return pop[ind1];
 	}
 	else {
-		return pop[ind[1]];
+		return pop[ind2];
 	}
 }
 
@@ -109,20 +118,20 @@ int Evolutive::hamming(vector<GRID> v1, vector<GRID> v2) {
 	return cnt;
 }
 
-vector<Individual> Evolutive::evaluate_pop(vector<vector<GRID> > pop) {
-	vector<Individual> new_pop;
+vector<pair<int, Individual> > Evolutive::evaluate_pop(vector<vector<GRID> > &pop) {
+	vector<pair<int, Individual> > new_pop;
 	for(int i = 0; i < pop.size(); i++) {
 		vector<GRID> v_act = pop[i];
 		int fit = fitness(v_act);
 		Individual ind(v_act, fit);
-		new_pop.push_back(ind);
+		new_pop.push_back(make_pair(INT_MAX, ind));
 	}
-	sort(new_pop.begin(), new_pop.end(), IndividualComparator());
+	sort(new_pop.begin(), new_pop.end(), pairCompareByInd);
 
 	return new_pop;
 }
 
-vector<vector<GRID> > Evolutive::evolve_pop(vector<vector<GRID> > pop) {
+vector<vector<GRID> > Evolutive::evolve_pop(vector<vector<GRID> > &pop) {
 	int d = pop.size();
 	vector<vector<GRID> > new_pop;
 
@@ -166,8 +175,15 @@ vector<vector<GRID> > Evolutive::evolve_pop(vector<vector<GRID> > pop) {
 	return new_pop;
 }
 
-vector<pair<int, int> > Evolutive::get_DCN(vector<Individual> current_members, vector<Individual> new_pop) {
-	vector<pair<int, int> > res;
+void Evolutive::get_DCN(vector<pair<int, Individual> > &current_members, vector<Individual> &new_pop) {
+	for(int i = 0; i < current_members.size(); i++) {
+		int d_act = hamming(current_members[i].second.get_sudoku(), new_pop[new_pop.size() - 1].get_sudoku());
+		if(d_act < current_members[i].first) {
+			current_members[i].first = d_act;
+		}
+	}
+
+	/*vector<pair<int, int> > res;
 	for(int i = 0; i < current_members.size(); i++) {
 		int d_min = INT_MAX;
 		for(int j = 0; j < new_pop.size(); j++) {
@@ -179,49 +195,48 @@ vector<pair<int, int> > Evolutive::get_DCN(vector<Individual> current_members, v
 		res.push_back(make_pair(d_min, i));
 	}
 
-	return res;
+	return res;*/
 }
 
-vector<Individual> Evolutive::multi_dyn(vector<vector<GRID> > pop, int n, clock_t ck_1) {
-	vector<Individual> current_members = evaluate_pop(pop);
+vector<Individual> Evolutive::multi_dyn(vector<vector<GRID> > &pop, int n, clock_t ck_1) {
+	vector<pair<int, Individual> > current_members = evaluate_pop(pop);
 	vector<Individual> new_pop;
-	new_pop.push_back(current_members[0]);
+	new_pop.push_back(current_members[0].second);
 	current_members.erase(current_members.begin());
 	clock_t ck_2;
 
 	while(new_pop.size() < n) {
-		vector<pair<int, int> > DCN = get_DCN(current_members, new_pop);
+		get_DCN(current_members, new_pop);
 		ck_2 = clock();
 		double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
 		int D = (int)ceil(DI - DI * (current_time / end_time));
-		
+
 		//Calcular frente de pareto
 		vector<int> pareto_front;
-		sort(DCN.begin(), DCN.end());
+		sort(current_members.begin(), current_members.end(), pairCompare);
 		int fitness_max = INT_MAX;
-		for(int i = DCN.size() - 1; i >= 0; i--) {
-			int idx = DCN[i].second;
-
-			if(DCN[i].first < D) {
+		for(int i = current_members.size() - 1; i >= 0; i--) {
+			if(current_members[i].first < D) {
 				continue;
 			}
-			if(current_members[idx].get_fitness() < fitness_max) {
-				pareto_front.push_back(idx);
-				fitness_max = current_members[idx].get_fitness();
+			if(current_members[i].second.get_fitness() < fitness_max) {
+				pareto_front.push_back(i);
+				fitness_max = current_members[i].second.get_fitness();
 			}
 		}
 
-		random_shuffle(pareto_front.begin(), pareto_front.end());
 		//Ver si el frente de pareto está vacío
 		int idx_to_add;
 		if(pareto_front.size() == 0) {
 			//Tomar el más alejado
-			idx_to_add = DCN[DCN.size() - 1].second;
+			idx_to_add = current_members.size() - 1;
 		}
 		else {
-			idx_to_add = pareto_front[0];
+			int idx_aux = rand_in_range(0, pareto_front.size() - 1);
+			idx_to_add = pareto_front[idx_aux];
 		}
-		new_pop.push_back(current_members[idx_to_add]);
+		new_pop.push_back(current_members[idx_to_add].second);
+		//cout << "Borrar: " << idx_to_add << " " << DCN_act[idx_to_rem].second << endl;
 		current_members.erase(current_members.begin() + idx_to_add);
 	}
 

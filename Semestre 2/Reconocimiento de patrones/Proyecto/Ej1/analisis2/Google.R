@@ -33,7 +33,7 @@ access_token_secret="uTH8Jm7uABtcj9HXy3Ns5xJPDI0DRYUmYpmAMXYKEBJDR"
 setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
 
 PointsCoutry1 = read.table("Points", head=1)
-#PointsCoutry2 = read.table("Points", head=1)
+PointsCoutry2 = read.table("Points", head=1)
 #names(PointsCoutry1)=c("Origin", "Destine")
 #names(PointsCoutry2)=c("Origin", "Destine")
 
@@ -207,61 +207,47 @@ generateRandomPoint <- function(latitude, longitude, radius, n) {
 #}
 ###Guardar los headers....
 
-##for( i in 1:NUMBER_RANDOMPOINT)
-##{
-##	lat = "39.851429"
-##        lon = "-98.580085"
-##	orig = paste(as.numeric(lat),as.numeric(lon), sep=",")#:"19.303215,-99.150506" ##Center of EUA
-##	newpoint =   paste(generateRandomPoint(as.numeric(lat), as.numeric(lon),RANDOM_KM,1), collapse=",")
-##	row=data.frame(newpoint,orig )
-##	names(row) = names(PointsCoutry1)
-##	PointsCoutry1 = rbind(PointsCoutry1, row)#paste(newpoint[1], newpoint[2], sep=",") ))
-##
-##	lat = "23.9197222"
-##        lon = "-102.16250000000001"
-##	orig = paste(lat, lon, sep=",")#:"19.303215,-99.150506" ##Center of EUA
-##	newpoint =   paste(generateRandomPoint(as.numeric(lat),as.numeric(lon),RANDOM_KM,1), collapse=",")
-##	row=data.frame(newpoint,orig )
-##	names(row) = names(PointsCoutry2)
-##	PointsCoutry2 = rbind(PointsCoutry2, row)#paste(newpoint[1], newpoint[2], sep=",") ))
-##
-##}
-for( i in 1:length(PointsCoutry1[,1]))
+for( i in 1:NUMBER_RANDOMPOINT)
 {
-	lat = PointsCoutry1$lat
-        lon = PointsCoutry1$lon
+  lat = "40.704404"
+  lon = "-73.878401"
+	#lat = "39.851429"
+  #lon = "-98.580085"
 	orig = paste(as.numeric(lat),as.numeric(lon), sep=",")#:"19.303215,-99.150506" ##Center of EUA
-	dest = paste(generateRandomPoint(as.numeric(lat),as.numeric(lon), PointsCoutry1$km,1), collapse=",")
+	newpoint =   paste(generateRandomPoint(as.numeric(lat), as.numeric(lon),RANDOM_KM,1), collapse=",")
+	row=data.frame(newpoint,orig )
+	names(row) = names(PointsCoutry1)
+	PointsCoutry1 = rbind(PointsCoutry1, row)#paste(newpoint[1], newpoint[2], sep=",") ))
 
-	value = GenerateSaveInfo(orig, dest)
-        write.table(value, append=TRUE, col.names=FALSE, paste(i, ".txt",sep=""), row.names=FALSE )
-        write.table(names(value), "names.txt")
-	#print(names(value))
-	#value = GenerateSaveInfo(PointsCoutry2$Origin[i], PointsCoutry2$Destine[i])
-        #write.table( value, append=TRUE, col.names=FALSE, "MEXICO.txt", row.names=FALSE )
-	print(orig)
-	print(dest)
+	lat = "23.9197222"
+        lon = "-102.16250000000001"
+	orig = paste(lat, lon, sep=",")#:"19.303215,-99.150506" ##Center of EUA
+	newpoint =   paste(generateRandomPoint(as.numeric(lat),as.numeric(lon),RANDOM_KM,1), collapse=",")
+	row=data.frame(newpoint,orig )
+	names(row) = names(PointsCoutry2)
+	PointsCoutry2 = rbind(PointsCoutry2, row)#paste(newpoint[1], newpoint[2], sep=",") ))
 
 }
+for( i in 1:length(PointsCoutry1[,1]))
+   {
+	value = GenerateSaveInfo(PointsCoutry1$Origin[i], PointsCoutry1$Destine[i])
+        write.table( value, append=TRUE, col.names=FALSE, "EUA.txt", row.names=FALSE )
+        write.table(names(value), "names.txt")
+	print(names(value))
+	value = GenerateSaveInfo(PointsCoutry2$Origin[i], PointsCoutry2$Destine[i])
+        write.table( value, append=TRUE, col.names=FALSE, "MEXICO.txt", row.names=FALSE )
+   }
+
 TIME = as.numeric(as.POSIXct(Sys.time())) 
-cont=1
-while(cont < 10)
+while(1)
 {
-#   Sys.sleep(UPDATE_SLEEP-as.numeric(as.numeric(as.POSIXct(Sys.time()))-TIME))
+   Sys.sleep(UPDATE_SLEEP-as.numeric(as.numeric(as.POSIXct(Sys.time()))-TIME))
    for( i in 1:length(PointsCoutry1[,1]))
    {
-	lat = PointsCoutry1$lat
-        lon = PointsCoutry1$lon
-	orig = paste(as.numeric(lat),as.numeric(lon), sep=",")#:"19.303215,-99.150506" ##Center of EUA
-	dest = paste(generateRandomPoint(as.numeric(lat),as.numeric(lon), PointsCoutry1$m,1), collapse=",")
-	value = GenerateSaveInfo(orig, dest)
-        write.table( value, append=TRUE, col.names=FALSE, paste(i, ".txt",sep=""), row.names=FALSE )
-        write.table(names(value), "names.txt")
-     # write.table(GenerateSaveInfo(PointsCoutry1$Origin[i], PointsCoutry1$Destine[i]) , append=TRUE, col.names=FALSE, "EUA.txt", row.names=FALSE )
-     # write.table(GenerateSaveInfo(PointsCoutry2$Origin[i], PointsCoutry2$Destine[i]) , append=TRUE, col.names=FALSE, "MEXICO.txt", row.names=FALSE )
+      write.table(GenerateSaveInfo(PointsCoutry1$Origin[i], PointsCoutry1$Destine[i]) , append=TRUE, col.names=FALSE, "EUA.txt", row.names=FALSE )
+      write.table(GenerateSaveInfo(PointsCoutry2$Origin[i], PointsCoutry2$Destine[i]) , append=TRUE, col.names=FALSE, "MEXICO.txt", row.names=FALSE )
    }
    TIME = as.numeric(as.POSIXct(Sys.time())) 
-   cont = cont+1
 }
 
 

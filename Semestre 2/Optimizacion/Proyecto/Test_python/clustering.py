@@ -43,7 +43,7 @@ def make_clustering(X, labels, k):
 			tp += 1
 		elif labels[i, 0] == 8 and p_labels[i] == 1:
 			tp += 1
-		else:
+		elif labels[i, 0] == 9 or labels[i, 0] == 3 or labels[i, 0] == 8:
 			fp += 1
 
 	prec = float(tp) / float(tp + fp)

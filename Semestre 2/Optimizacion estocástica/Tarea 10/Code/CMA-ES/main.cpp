@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
 	fout << "Mejor fitness encontrado: " << best << endl;
 	fout << "Peor fitness encontrado: " << worst << endl;
 	fout.close();
-	//cout << "\nTerminado. Archivo res_info.txt generado.\n";
+	cout << "\nTerminado. Archivo res_info.txt generado.\n";
 
 	return 0;
 }

@@ -1,0 +1,3 @@
+-Para ejecutar el código se requieren las librerías "caret" y "GGally".
+-Cambiar el directorio del archivo en datos, esto se hace en la línea 7.
+-Simplemente ejecutar todo el código y este generará la matriz de correlación así como ejecutará los modelos propuestos tanto de regresión logística como de redes neuronales.

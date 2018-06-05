@@ -1,7 +1,0 @@
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -600 600 f1 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f1
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -20 20 f2 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f2
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -20 20 f3 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f3
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -20 20 f4 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f4
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -20 20 f5 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f5
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -600 600 f6 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f6
-/home/user_demo/ErickAlvarez/Tarea9/main 100 -20 20 f7 3000 30 0.5 /home/user_demo/ErickAlvarez/Tarea9/results/30/f7

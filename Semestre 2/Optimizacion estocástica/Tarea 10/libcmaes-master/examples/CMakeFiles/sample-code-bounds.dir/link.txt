@@ -1,1 +1,0 @@
-/usr/bin/c++   -fopenmp  -O3 -DNDEBUG   CMakeFiles/sample-code-bounds.dir/sample-code-bounds.cc.o  -o sample-code-bounds -rdynamic ../src/libcmaes.so.0.0.0 -Wl,-rpath,"/home/ericksav22/Documentos/Maestria/GIT/Semestre 2/Optimizacion estocástica/Tarea 10/libcmaes-master/src" 

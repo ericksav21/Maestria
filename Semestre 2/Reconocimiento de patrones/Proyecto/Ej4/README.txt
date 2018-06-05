@@ -1,0 +1,3 @@
+-Para ejecutar el código se requiere la librería "pscl".
+-Cambiar el directorio del archivo en datos, esto se hace en la línea 6.
+-Simplemente ejecutar todo el código y este ejecutará los modelos propuestos para trabajar con los datos del AZT con regresión logística, así como el resumen de los mismos.

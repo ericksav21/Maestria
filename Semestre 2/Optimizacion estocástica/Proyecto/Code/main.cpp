@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 	Graph g = read_graph(files_name);
 	//Graph g = read_graph_2(files_name);
 	//g.print_adj();
-	Memetic m(g, 5, 1);
+	Memetic m(g, 5, 1, g.no_nodes - 1);
 
 	return 0;
 }

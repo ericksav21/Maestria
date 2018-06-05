@@ -87,7 +87,7 @@ Graph read_graph_2(string files_name) {
 	int w;
 
 	f >> no_nodes >> node_cost;
-	cout << no_nodes << " " << node_cost << endl;
+	//cout << no_nodes << " " << node_cost << endl;
 	Graph res(no_nodes, node_cost);
 	for(int i = 0; i < no_nodes; i++) {
 		for(int j = 0; j < no_nodes; j++) {

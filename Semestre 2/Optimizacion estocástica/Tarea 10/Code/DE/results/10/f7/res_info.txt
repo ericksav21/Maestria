@@ -1,5 +1,0 @@
-Promedio de error: 5.40235e-08
-Desviación estándar del error: 2.90925e-07
-Mediana del error: 0
-Mejor fitness encontrado: 0
-Peor fitness encontrado: 1.6207e-06

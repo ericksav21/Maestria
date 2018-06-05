@@ -1,0 +1,3 @@
+-Para ejecutar el código se requiere la librería "caret".
+-Cambiar el directorio del archivo en datos, esto se hace en la línea 6.
+-Simplemente ejecutar todo el código y este ejecutará los modelos propuestos para trabajar con los datos de SPAM, así como generará las matrices de confusión y las gráficas de los modelos en la fase de entrenamiento.
