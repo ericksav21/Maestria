@@ -36,8 +36,11 @@ def main():
 		y_PCA[i] = optimization.PCA_J_fn(Y, W_aux)
 		y_PCAGM[i] = optimization.PCAGM_J_fn(X, W_aux, p)
 
-	plt.plot(angle, y_PCA, color = 'g')
-	plt.plot(angle, y_PCAGM, color = 'b')
+	plt.plot(angle, y_PCA, color = 'g', label = 'Funcion de costo de PCA')
+	plt.plot(angle, y_PCAGM, color = 'b', label = 'Funcion de costo de PCA robusto')
+	plt.legend(bbox_to_anchor = (0., 1.02, 1., .102), loc = 3, ncol = 2, mode = "expand", borderaxespad = 0.)
+	plt.xlabel('Angulo')
+	plt.ylabel('Valor de la funcion de costo')
 	plt.show()
 
 

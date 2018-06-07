@@ -68,8 +68,8 @@ def main():
 			cnt += 1
 		idx += 1
 
-	m = 250
-	p = 0.1
+	m = 300
+	p = 0.4
 	W_PCA = optimization.PCA(data, m)
 
 	data_proj_PCA = data.dot(W_PCA)

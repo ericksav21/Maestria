@@ -38,6 +38,12 @@ summary(glm_model_1)
 glm_pred_1 <- predict(glm_model_1, test)
 confusionMatrix(glm_pred_1, test_labels)
 
+#Modelo como lo sugiere el ejercicio
+glm_model_ex <- train(highpm10 ~ time + winddirection + temp2m + cars, data = train, method = "glm", trControl = t_control, family = "binomial")
+summary(glm_model_ex)
+glm_pred_ex <- predict(glm_model_ex, test)
+confusionMatrix(glm_pred_ex, test_labels)
+
 #Modelo con los dos parámetros más importantes del anterior y uno adicional
 glm_model_2 <- train(highpm10 ~ cars + winddirection + temp2m, data = train, method = "glm", trControl = t_control, family = "binomial")
 summary(glm_model_2)
