@@ -1,31 +1,44 @@
 #include "memetic.hpp"
 
-Memetic::Memetic(Graph g, int k, int c, int root) {
+Memetic::Memetic(Graph g, int k, int c, int root, int pop_size, double DI, double crossover_rate, double mutation_rate, double end_time) {
 	this->g = copy_graph(g);
 	this->k = k;
 	this->c = c;
 	this->root = root;
-	/*vector<int> v = generate_ind();
-	for(int i = 0; i < v.size(); i++) {
-		cout << v[i] << " ";
+	this->pop_size = pop_size;
+	this->DI = DI;
+	this->crossover_rate = crossover_rate;
+	this->mutation_rate = mutation_rate;
+	this->end_time = end_time;
+
+	/*vector<int> v1(this->g->no_nodes, -1), v2(this->g->no_nodes, -1);
+	while(v1[0] == -1) {
+		v1 = generate_ind();
+	}
+	while(v2[0] == -1) {
+		v2 = generate_ind();
+	}
+	for(int i = 0; i < v1.size(); i++) {
+		cout << v1[i] << " ";
 	}
 	cout << endl;
-	if(v[0] != -1) {
-		int fit = fitness(v);
-		cout << "Fitness: " << fit << endl;
-	}*/
-	vector<int> p = {9, 8, 3, 9, 3, 4, 5, 0, 9, 9};
-	vector<int> q = {9, 2, 3, 9, 6, 6, 7, 0, 9, 9};
-	//vector<int> r = crossover(p, q);
-	vector<int> r = mutation(p);
-	for(int i = 0; i < r.size(); i++) {
-		cout << r[i] << " ";
+	for(int i = 0; i < v2.size(); i++) {
+		cout << v2[i] << " ";
 	}
 	cout << endl;
+	vector<int> son = crossover(v1, v2);
+	for(int i = 0; i < son.size(); i++) {
+		cout << son[i] << " ";
+	}
+	cout << endl;*/
 }
 
 Memetic::~Memetic() {
 	delete g;
+}
+
+void Memetic::set_filesname(string files_name) {
+	this->files_name = files_name;
 }
 
 vector<int> Memetic::generate_ind() {
@@ -130,7 +143,7 @@ vector<int> Memetic::generate_ind() {
 			for(int i = 0; i < p.size(); i++) {
 				p[i] = -1;
 			}
-			cout << "No se pudo generar un individuo factible del grafo." << endl;
+			//cout << "No se pudo generar un individuo factible del grafo." << endl;
 			break;
 		}
 	}
@@ -165,91 +178,162 @@ int Memetic::fitness(vector<int> &ind) {
 	return cnt;
 }
 
+DSU Memetic::get_dsu(vector<int> &p) {
+	DSU res(g->no_nodes);
+	stack<int> st;
+	st.push(root);
+	while(!st.empty()) {
+		int node_act = st.top();
+		st.pop();
+		if(p[node_act] != root) {
+			res.make_union(node_act, p[node_act]);
+		}
+		for(int i = 0; i < p.size(); i++) {
+			if(p[i] == node_act && i != root) {
+				st.push(i);
+			}
+		}
+	}
+
+	return res;
+}
+
+bool Memetic::ind_in_pop(vector<vector<int> > &pop, vector<int> &ind) {
+	for(int i = 0; i < pop.size(); i++) {
+		bool res = true;
+		for(int j = 0; j < pop[i].size(); j++) {
+			if(pop[i][j] != ind[i]) {
+				res = false;
+				break;
+			}
+		}
+		if(res) {
+			return true;
+		}
+	}
+}
+
+int Memetic::dfs_cnt(vector<int> &p, int node_init) {
+	stack<int> st;
+	st.push(node_init);
+	int cnt = 0;
+	while(!st.empty()) {
+		int node_act = st.top();
+		st.pop();
+		cnt++;
+		for(int i = 0; i < p.size(); i++) {
+			if(p[i] == node_act && i != root) {
+				st.push(i);
+			}
+		}
+	}
+
+	return cnt;
+}
+
 vector<int> Memetic::crossover(vector<int> &p, vector<int> &q) {
 	int n = p.size();
 	vector<int> r(n, -1);
 	vector<int> U;
-	DSU dsu(g->no_nodes);
 	queue<int> no_connected;
+	DSU dsu_r(g->no_nodes);
 
 	for(int i = 0; i < n; i++) {
 		if(p[i] == q[i]) {
 			r[i] = p[i];
+			if(p[i] != root) {
+				dsu_r.make_union(i, p[i]);
+			}
 		}
-		else {
+	}
+	for(int i = 0; i < r.size(); i++) {
+		if(r[i] == -1) {
 			U.push_back(i);
 		}
 	}
 
+	DSU dsu_aux_p = get_dsu(p);
+	DSU dsu_aux_q = get_dsu(q);
 	while(U.size() > 0) {
 		int r_s = rand_in_range(0, U.size() - 1);
 		int node_i = U[r_s];
 		int r_aux = rand_in_range(0, 1);
 		int node_j;
-		bool slc = false;
+
+		bool can_connect = false;
 		if(r_aux == 0) {
 			node_j = p[node_i];
-			slc = true;
+			if(!dsu_aux_p.same_cmp(node_i, node_j)) {
+				//Ver si son adyacentes en el grafo
+				bool is_ady = false;
+				for(int x = 0; x < g->adj[node_j].size(); x++) {
+					if(g->adj[node_j][x].first == node_i) {
+						is_ady = true;
+						break;
+					}
+				}
+				if(is_ady) {
+					//Verificar capacidades
+					if(node_j == root || dsu_r.tree_size(node_j) * c + dsu_r.tree_size(node_i) * c <= k) {
+						//Se pueden conectar
+						r[node_i] = node_j;
+						dsu_r.make_union(node_i, node_j);
+						can_connect = true;
+					}
+				}
+			}
 		}
-		else {
+		else if(!can_connect) {
 			node_j = q[node_i];
-		}
-		bool can_connect = false;
-		//Si los nodos no se encuentran conectados
-		if(!dsu.same_cmp(node_i, node_j)) {
-			//Ver que no hayan problemas de capacidades
-			if(node_j == root) {
-				r[node_i] = node_j;
-				can_connect = true;
-			}
-			else if(dsu.tree_size(node_j) * c + c <= k) {
-				r[node_i] = node_j;
-				dsu.make_union(node_i, node_j);
-				can_connect = true;
-			}
-		}
-		if(!can_connect) {
-			//Tomar el otro nodo padre e intentar hacer lo mismo
-			node_j = (slc ? q[node_i] : p[node_i]);
-
-			//Si los nodos no se encuentran conectados
-			if(!dsu.same_cmp(node_i, node_j)) {
-				//Ver que no hayan problemas de capacidades
-				if(node_j == root) {
-					r[node_i] = node_j;
-					can_connect = true;
+			if(!dsu_aux_q.same_cmp(node_i, node_j)) {
+				//Ver si son adyacentes en el grafo
+				bool is_ady = false;
+				for(int x = 0; x < g->adj[node_j].size(); x++) {
+					if(g->adj[node_j][x].first == node_i) {
+						is_ady = true;
+						break;
+					}
 				}
-				else if(dsu.tree_size(node_j) * c + c <= k) {
-					r[node_i] = node_j;
-					dsu.make_union(node_i, node_j);
-					can_connect = true;
+				if(is_ady) {
+					//Verificar capacidades
+					if(node_j == root || dsu_r.tree_size(node_j) * c + dsu_r.tree_size(node_i) * c <= k) {
+						//Se pueden conectar
+						r[node_i] = node_j;
+						dsu_r.make_union(node_i, node_j);
+						can_connect = true;
+					}
 				}
-			}
-			if(!can_connect) {
-				no_connected.push(node_i);
 			}
 		}
 		U.erase(U.begin() + r_s);
+		//Si no se pudieron conectar
+		if(!can_connect) {
+			no_connected.push(node_i);
+		}
 	}
 
 	//Procesar los nodos que no se pudieron conectar
-	double alpha = 0.8;
+	double alpha = 0.5;
 	while(!no_connected.empty()) {
 		int node_i = no_connected.front();
 		no_connected.pop();
 		vector<pair<int, int> > vp;
-		for(int j = 0; j < g->no_nodes; j++) {
-			for(int x = 0; x < g->adj[node_i].size(); x++) {
-				if(g->adj[node_i][x].first == j && !dsu.same_cmp(node_i, j)) {
-					if(j == root || dsu.tree_size(j) * c + c <= k) {
-						vp.push_back(make_pair(g->adj[node_i][x].second, j));
+
+		for(int node_j = 0; node_j < p.size(); node_j++) {
+			if(!dsu_r.same_cmp(node_i, node_j)) {
+				for(int x = 0; x < g->adj[node_j].size(); x++) {
+					if(g->adj[node_j][x].first == node_i) {
+						if(node_j == root || dsu_r.tree_size(node_j) * c + dsu_r.tree_size(node_i) * c <= k) {
+							vp.push_back(make_pair(g->adj[node_j][x].second, node_j));
+						}
 						break;
 					}
 				}
 			}
 		}
+
 		if(vp.size() == 0) {
-			cout << "No se pudo encontrar un hijo factible." << endl;
+			//cout << "No se pudo encontrar un hijo factible." << endl;
 			for(int i = 0; i < p.size(); i++) {
 				r[i] = p[i];
 			}
@@ -261,7 +345,7 @@ vector<int> Memetic::crossover(vector<int> &p, vector<int> &q) {
 		int node_j = vp[r_aux].second; 
 		r[node_i] = node_j;
 		if(node_j != root) {
-			dsu.make_union(node_i, node_j);
+			dsu_r.make_union(node_i, node_j);
 		}
 	}
 
@@ -279,18 +363,15 @@ vector<int> Memetic::mutation(vector<int> &p) {
 	while(node_i == root) {
 		node_i = rand_in_range(0, n - 1);
 	}
-	cout << node_i << endl;
 
 	vector<int> st;
 	vector<int> S;
 	DSU dsu(g->no_nodes);
 	st.push_back(root);
-	cout << "Raiz: " << root << endl;
 
 	//Run DFS
 	while(st.size() > 0) {
 		int node_act = st.back();
-		cout << node_act << endl;
 		st.pop_back();
 		S.push_back(node_act);
 		if(p[node_act] != root) {
@@ -300,17 +381,20 @@ vector<int> Memetic::mutation(vector<int> &p) {
 			if(i == node_i) {
 				continue;
 			}
-			if(p[i] == node_act && node_act != root) {
+			if(p[i] == node_act && i != root) {
 				st.push_back(i);
 			}
 		}
 	}
-	return r;
 
 	st.clear();
 	st.push_back(node_i);
 	int tree_cnt = 0;
 	while(st.size() > 0) {
+		/*for(int i = 0; i < p.size(); i++) {
+			cout << p[i] << " ";
+		}
+		cout << endl;*/
 		int node_act = st.back();
 		st.pop_back();
 		tree_cnt++;
@@ -320,16 +404,6 @@ vector<int> Memetic::mutation(vector<int> &p) {
 			}
 		}
 	}
-
-	cout << "S:" << endl;
-	for(int i = 0; i < S.size(); i++) {
-		cout << S[i] << " ";
-	}
-	cout << endl << "DSU:" << endl;
-	for(int i = 0; i < p.size(); i++) {
-		cout << i << ": " << dsu.tree_size(i) << endl;
-	}
-	cout << endl << tree_cnt << endl;
 
 	int idx_to_rem;
 	for(int i = 0; i < S.size(); i++) {
@@ -356,24 +430,289 @@ vector<int> Memetic::mutation(vector<int> &p) {
 		}
 
 		//Ver si no se violan restricciones de capacidad
-		if(can_connect && dsu.tree_size(node_j) * c + tree_cnt * c <= k) {
-			//Hacer la union
-			nnodes.push_back(make_pair(weight, node_j));
+		if(can_connect) {
+			if(node_j == root || dsu.tree_size(node_j) * c + tree_cnt * c <= k) {
+				//Se pueden conectar!
+				nnodes.push_back(make_pair(weight, node_j));
+			}
 		}
 		S.erase(S.begin() + idx_aux);
 	}
 
-	if(S.size() == 0) {
-		cout << "No se pudo encontrar una mutación factible." << endl;
+	if(nnodes.size() == 0) {
+		//cout << "No se pudo encontrar una mutación factible." << endl;
 		return r;
 	}
 
 	sort(nnodes.begin(), nnodes.end());
-	double alpha = 0.8;
+	double alpha = 0.5;
 	int spl_sz = (int)(nnodes.size() * alpha);
 	int r_aux = rand_in_range(0, spl_sz);
 	int node_j = nnodes[r_aux].second;
 
 	r[node_i] = node_j;
 	return r;
+}
+
+vector<vector<int> > Memetic::generate_pop() {
+	vector<vector<int> > pop;
+	int cnt = 0;
+	while(cnt < pop_size) {
+		vector<int> ind = generate_ind();
+		if(ind[0] == -1) {
+			continue;
+		}
+		pop.push_back(ind);
+		cnt++;
+	}
+
+	return pop;
+}
+
+vector<int> Memetic::tournament_selection(vector<vector<int> > &pop) {
+	int ind1 = rand_in_range(0, pop.size() - 1);
+	int ind2 = ind1;
+	while(ind2 == ind1) {
+		ind2 = rand_in_range(0, pop.size() - 1);
+	}
+
+	if(fitness(pop[ind1]) < fitness(pop[ind2])) {
+		return pop[ind1];
+	}
+	else {
+		return pop[ind2];
+	}
+}
+
+int Memetic::hamming(vector<int> v1, vector<int> v2) {
+	vector<int> j1, j2;
+	int d = v1.size();
+	int cnt = 0;
+	for(int i = 0; i < d; i++) {
+		if(v1[i] != v2[i]) {
+			cnt++;
+		}
+	}
+
+	return cnt;
+}
+
+vector<pair<int, vector<int> > > Memetic::evaluate_pop(vector<vector<int> > &pop) {
+	vector<pair<int, vector<int> > > new_pop;
+	for(int i = 0; i < pop.size(); i++) {
+		vector<int> v_act = pop[i];
+		int fit = fitness(v_act);
+		//new_pop.push_back(make_pair(INT_MAX, v_act));
+		new_pop.push_back(make_pair(fit, v_act));
+	}
+	sort(new_pop.begin(), new_pop.end(), pairCompare);
+	for(int i = 0; i < pop.size(); i++) {
+		new_pop[i].first = INT_MAX;
+	}
+
+	return new_pop;
+}
+
+vector<vector<int> > Memetic::evolve_pop(vector<vector<int> > &pop) {
+	int d = pop.size();
+	vector<vector<int> > new_pop;
+
+	for(int i = 0; i < d; i++) {
+		new_pop.push_back(pop[i]);
+	}
+	int cnt = 0;
+	while(true) {
+		vector<int> p1 = tournament_selection(pop);
+		vector<int> p2 = tournament_selection(pop);
+		double pc = (double)rand() / (double)RAND_MAX;
+
+		if(pc <= crossover_rate) {
+			vector<int> son1 = crossover(p1, p2);
+			double pm = (double)rand() / (double)RAND_MAX;
+			if(pm <= mutation_rate) {
+				vector<int> mut_act = mutation(son1);
+				if(ind_in_pop(new_pop, mut_act)) {
+					continue;
+				}
+				//cout << 1 << endl;
+				new_pop.push_back(mutation(son1));
+			}
+			else {
+				if(ind_in_pop(new_pop, son1)) {
+					continue;
+				}
+				//cout << 1 << endl;
+				new_pop.push_back(son1);
+			}
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}
+
+			/*vector<int> son2 = crossover(p1, p2);
+			pm = (double)rand() / (double)RAND_MAX;
+			if(pm <= mutation_rate) {
+				new_pop.push_back(mutation(son2));
+			}
+			else {
+				new_pop.push_back(son2);
+			}
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}*/
+		}
+		else {
+			double pm = (double)rand() / (double)RAND_MAX;
+			if(pm <= mutation_rate) {
+				new_pop.push_back(mutation(p1));
+			}
+			else {
+				new_pop.push_back(p1);
+			}
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}
+
+			pm = (double)rand() / (double)RAND_MAX;
+			if(pm <= mutation_rate) {
+				new_pop.push_back(mutation(p2));
+			}
+			else {
+				new_pop.push_back(p2);
+			}
+			cnt++;
+			if(cnt >= d) {
+				break;
+			}
+		}
+	}
+
+	return new_pop;
+}
+
+void Memetic::get_DCN(vector<pair<int, vector<int> > > &current_members, vector<vector<int> > &new_pop) {
+	for(int i = 0; i < current_members.size(); i++) {
+		int d_act = hamming(current_members[i].second, new_pop[new_pop.size() - 1]);
+		if(d_act < current_members[i].first) {
+			current_members[i].first = d_act;
+		}
+	}
+}
+
+vector<vector<int> > Memetic::multi_dyn(vector<vector<int> > &pop, int n, clock_t ck_1) {
+	vector<pair<int, vector<int> > > current_members = evaluate_pop(pop);
+	vector<vector<int> > new_pop;
+	new_pop.push_back(current_members[0].second);
+	current_members.erase(current_members.begin());
+	clock_t ck_2;
+
+	while(new_pop.size() < n) {
+		get_DCN(current_members, new_pop);
+		ck_2 = clock();
+		double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
+		int D = (int)ceil(DI - DI * (current_time / end_time));
+
+		//Calcular frente de pareto
+		vector<int> pareto_front;
+		sort(current_members.begin(), current_members.end(), pairCompare);
+		int fitness_max = INT_MAX;
+		for(int i = current_members.size() - 1; i >= 0; i--) {
+			if(current_members[i].first < D) {
+				continue;
+			}
+			int fit_act = fitness(current_members[i].second);
+			if(fit_act < fitness_max) {
+				pareto_front.push_back(i);
+				fitness_max = fit_act;
+			}
+		}
+
+		//Ver si el frente de pareto está vacío
+		int idx_to_add;
+		if(pareto_front.size() == 0) {
+			//Tomar el más alejado
+			idx_to_add = current_members.size() - 1;
+		}
+		else {
+			int idx_aux = rand_in_range(0, pareto_front.size() - 1);
+			idx_to_add = pareto_front[idx_aux];
+		}
+		new_pop.push_back(current_members[idx_to_add].second);
+		//cout << "Borrar: " << idx_to_add << " " << DCN_act[idx_to_rem].second << endl;
+		current_members.erase(current_members.begin() + idx_to_add);
+	}
+
+	return new_pop;
+}
+
+void Memetic::run() {
+	best_fitness = INT_MAX;
+	cout << "Generando población" << endl;
+	vector<vector<int> > pop = generate_pop();
+	cout << "Población generada" << endl;
+	vector<pair<int, vector<int> > > pop_act;
+
+	clock_t ck_1 = clock();
+	double register_event_time = 5.0, reg_evt_time_act = register_event_time;
+	//ofstream file(files_name.c_str());
+	int cnt = 1;
+	while(true) {
+		vector<vector<int> > ev_pop = evolve_pop(pop);
+		vector<vector<int> > new_pop = multi_dyn(ev_pop, pop_size, ck_1);
+
+		pop_act.clear();
+		for(int i = 0; i < new_pop.size(); i++) {
+			pop_act.push_back(make_pair(fitness(new_pop[i]), new_pop[i]));
+		}
+		sort(pop_act.begin(), pop_act.end(), pairCompare);
+
+		if(cnt % 500 == 0) {
+			best_fitness = pop_act[0].first;
+			cout << "Generación: " << cnt << endl;
+			cout << "Mejor fitness de la generación: " << best_fitness << endl;
+		}
+		pop.clear();
+		for(int i = 0; i < pop_act.size(); i++) {
+			pop.push_back(pop_act[i].second);
+		}
+
+		clock_t ck_2 = clock();
+		double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
+		/*if(current_time > reg_evt_time_act) {
+			//cout << "Datos registrados al tiempo: " << time_act << endl;
+			file << "Tiempo: " << current_time << endl;
+			for(int x = 0; x < pop.size(); x++) {
+				for(int y = 0; y < pop[x].size(); y++) {
+					for(int z = 0; z < pop[x][y].perm.size(); z++) {
+						file << pop[x][y].perm[z] << " ";
+					}
+				}
+				file << endl;
+			}
+			file << best_fitness << endl << endl;
+			reg_evt_time_act += register_event_time;
+		}*/
+		if(current_time > end_time) {
+			break;
+		}
+		cnt++;
+	}
+
+	//file.close();
+	string res_name = files_name + "res.txt";
+	ofstream f(res_name.c_str());
+	f << "BF: " << best_fitness << endl;
+	f << "GN: " << cnt << endl;
+	f.close();
+	cout << "Terminado. Mejor fitness encontrado: " << best_fitness << endl;
+	cout << "Número de generaciones: " << cnt << endl;
+	clock_t ck_2 = clock();
+	double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
+	cout << "Tiempo transcurrido (seg): " << current_time << endl << endl;
+}
+
+bool pairCompare(const pair<int, vector<int> >& firstElem, const pair<int, vector<int> >& secondElem) {
+  return firstElem.first < secondElem.first;
 }
