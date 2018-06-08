@@ -16,7 +16,8 @@ Memetic::Memetic(Graph g, int k, int c, int root) {
 	}*/
 	vector<int> p = {9, 8, 3, 9, 3, 4, 5, 0, 9, 9};
 	vector<int> q = {9, 2, 3, 9, 6, 6, 7, 0, 9, 9};
-	vector<int> r = crossover(p, q);
+	//vector<int> r = crossover(p, q);
+	vector<int> r = mutation(p);
 	for(int i = 0; i < r.size(); i++) {
 		cout << r[i] << " ";
 	}
@@ -269,33 +270,67 @@ vector<int> Memetic::crossover(vector<int> &p, vector<int> &q) {
 
 vector<int> Memetic::mutation(vector<int> &p) {
 	int n = p.size();
-	vector<int> r(n, -1), r_aux(n, -1);
+	vector<int> r(n, -1);
 	for(int i = 0; i < n; i++) {
-		r[i] = r_aux[i] = p[i];
+		r[i] = p[i];
 	}
 
 	int node_i = root;
 	while(node_i == root) {
 		node_i = rand_in_range(0, n - 1);
 	}
+	cout << node_i << endl;
 
-	stack<int> st;
+	vector<int> st;
 	vector<int> S;
-	st.push(root);
+	DSU dsu(g->no_nodes);
+	st.push_back(root);
+	cout << "Raiz: " << root << endl;
+
 	//Run DFS
-	while(!st.empty()) {
-		int node_act = st.top();
-		st.pop();
+	while(st.size() > 0) {
+		int node_act = st.back();
+		cout << node_act << endl;
+		st.pop_back();
 		S.push_back(node_act);
+		if(p[node_act] != root) {
+			dsu.make_union(node_act, p[node_act]);
+		}
 		for(int i = 0; i < n; i++) {
 			if(i == node_i) {
 				continue;
 			}
-			if(p[i] == node_act) {
-				st.push(i);
+			if(p[i] == node_act && node_act != root) {
+				st.push_back(i);
 			}
 		}
 	}
+	return r;
+
+	st.clear();
+	st.push_back(node_i);
+	int tree_cnt = 0;
+	while(st.size() > 0) {
+		int node_act = st.back();
+		st.pop_back();
+		tree_cnt++;
+		for(int i = 0; i < n; i++) {
+			if(p[i] == node_act && node_act != root) {
+				st.push_back(i);
+			}
+		}
+	}
+
+	cout << "S:" << endl;
+	for(int i = 0; i < S.size(); i++) {
+		cout << S[i] << " ";
+	}
+	cout << endl << "DSU:" << endl;
+	for(int i = 0; i < p.size(); i++) {
+		cout << i << ": " << dsu.tree_size(i) << endl;
+	}
+	cout << endl << tree_cnt << endl;
+
 	int idx_to_rem;
 	for(int i = 0; i < S.size(); i++) {
 		if(S[i] == p[node_i]) {
@@ -304,8 +339,41 @@ vector<int> Memetic::mutation(vector<int> &p) {
 		}
 	}
 	S.erase(S.begin() + idx_to_rem);
+	vector<pair<int, int> > nnodes;
 	while(S.size() > 0) {
-		ind idx_aux = rand_in_range(0, S.size() - 1);
+		int idx_aux = rand_in_range(0, S.size() - 1);
+		int node_j = S[idx_aux];
 
+		//Ver si los nodos están conectados en el grafo
+		bool can_connect = false;
+		int weight = -1;
+		for(int x = 0; x < g->adj[node_j].size(); x++) {
+			if(g->adj[node_j][x].first == node_i) {
+				can_connect = true;
+				weight = g->adj[node_j][x].second;
+				break;
+			}
+		}
+
+		//Ver si no se violan restricciones de capacidad
+		if(can_connect && dsu.tree_size(node_j) * c + tree_cnt * c <= k) {
+			//Hacer la union
+			nnodes.push_back(make_pair(weight, node_j));
+		}
+		S.erase(S.begin() + idx_aux);
 	}
+
+	if(S.size() == 0) {
+		cout << "No se pudo encontrar una mutación factible." << endl;
+		return r;
+	}
+
+	sort(nnodes.begin(), nnodes.end());
+	double alpha = 0.8;
+	int spl_sz = (int)(nnodes.size() * alpha);
+	int r_aux = rand_in_range(0, spl_sz);
+	int node_j = nnodes[r_aux].second;
+
+	r[node_i] = node_j;
+	return r;
 }

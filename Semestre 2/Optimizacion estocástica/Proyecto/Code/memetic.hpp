@@ -25,6 +25,7 @@ private:
 
 	vector<int> generate_ind();
 	vector<int> crossover(vector<int> &p, vector<int> &q);
+	vector<int> mutation(vector<int> &p);
 
 public:
 	Memetic(Graph g, int k, int c, int root);
