@@ -1,0 +1,3 @@
+BF: 1635
+GN: 11009
+Tiempo transcurrido: 3600.18

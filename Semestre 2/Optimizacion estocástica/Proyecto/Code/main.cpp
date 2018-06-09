@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 	//Graph g = read_graph(files_name);
 	Graph g = read_graph_2(files_name);
 	//g.print_adj();
-	//Memetic m(g, 3, 1, g.no_nodes - 1, 100, 10.0, 0.99, 0.5, 600.0);
+	//Memetic m(g, 3, 1, g.no_nodes - 1, 100, 10.0, 0.99, 0.5, 10.0);
 	Memetic m(g, q, c, g.no_nodes - 1, pop_size, D, cr, mr, end_time);
 	m.set_filesname(out_dir);
 	m.run();

@@ -531,36 +531,15 @@ vector<vector<int> > Memetic::evolve_pop(vector<vector<int> > &pop) {
 			double pm = (double)rand() / (double)RAND_MAX;
 			if(pm <= mutation_rate) {
 				vector<int> mut_act = mutation(son1);
-				if(ind_in_pop(new_pop, mut_act)) {
-					continue;
-				}
-				//cout << 1 << endl;
 				new_pop.push_back(mutation(son1));
 			}
 			else {
-				if(ind_in_pop(new_pop, son1)) {
-					continue;
-				}
-				//cout << 1 << endl;
 				new_pop.push_back(son1);
 			}
 			cnt++;
 			if(cnt >= d) {
 				break;
 			}
-
-			/*vector<int> son2 = crossover(p1, p2);
-			pm = (double)rand() / (double)RAND_MAX;
-			if(pm <= mutation_rate) {
-				new_pop.push_back(mutation(son2));
-			}
-			else {
-				new_pop.push_back(son2);
-			}
-			cnt++;
-			if(cnt >= d) {
-				break;
-			}*/
 		}
 		else {
 			double pm = (double)rand() / (double)RAND_MAX;
@@ -668,8 +647,8 @@ void Memetic::run() {
 		}
 		sort(pop_act.begin(), pop_act.end(), pairCompare);
 
+		best_fitness = pop_act[0].first;
 		if(cnt % 500 == 0) {
-			best_fitness = pop_act[0].first;
 			cout << "Generación: " << cnt << endl;
 			cout << "Mejor fitness de la generación: " << best_fitness << endl;
 		}
@@ -701,16 +680,18 @@ void Memetic::run() {
 	}
 
 	//file.close();
-	string res_name = files_name + "res.txt";
-	ofstream f(res_name.c_str());
-	f << "BF: " << best_fitness << endl;
-	f << "GN: " << cnt << endl;
-	f.close();
 	cout << "Terminado. Mejor fitness encontrado: " << best_fitness << endl;
 	cout << "Número de generaciones: " << cnt << endl;
 	clock_t ck_2 = clock();
 	double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
 	cout << "Tiempo transcurrido (seg): " << current_time << endl << endl;
+
+	string res_name = files_name + "res.txt";
+	ofstream f(res_name.c_str());
+	f << "BF: " << best_fitness << endl;
+	f << "GN: " << cnt << endl;
+	f << "Tiempo transcurrido: " << current_time << endl;
+	f.close();
 }
 
 bool pairCompare(const pair<int, vector<int> >& firstElem, const pair<int, vector<int> >& secondElem) {
