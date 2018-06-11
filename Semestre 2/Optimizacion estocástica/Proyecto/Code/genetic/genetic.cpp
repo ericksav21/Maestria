@@ -316,7 +316,7 @@ vector<int> Genetic::mutation(vector<int> &p) {
 	DSU dsu(g->no_nodes);
 	st.push_back(root);
 
-	//Run DFS
+	//Hacer DFS
 	while(st.size() > 0) {
 		int node_act = st.back();
 		st.pop_back();
@@ -338,10 +338,6 @@ vector<int> Genetic::mutation(vector<int> &p) {
 	st.push_back(node_i);
 	int tree_cnt = 0;
 	while(st.size() > 0) {
-		/*for(int i = 0; i < p.size(); i++) {
-			cout << p[i] << " ";
-		}
-		cout << endl;*/
 		int node_act = st.back();
 		st.pop_back();
 		tree_cnt++;

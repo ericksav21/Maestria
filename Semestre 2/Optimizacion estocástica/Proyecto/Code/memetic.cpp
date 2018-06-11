@@ -10,27 +10,6 @@ Memetic::Memetic(Graph g, int k, int c, int root, int pop_size, double DI, doubl
 	this->crossover_rate = crossover_rate;
 	this->mutation_rate = mutation_rate;
 	this->end_time = end_time;
-
-	/*vector<int> v1(this->g->no_nodes, -1), v2(this->g->no_nodes, -1);
-	while(v1[0] == -1) {
-		v1 = generate_ind();
-	}
-	while(v2[0] == -1) {
-		v2 = generate_ind();
-	}
-	for(int i = 0; i < v1.size(); i++) {
-		cout << v1[i] << " ";
-	}
-	cout << endl;
-	for(int i = 0; i < v2.size(); i++) {
-		cout << v2[i] << " ";
-	}
-	cout << endl;
-	vector<int> son = crossover(v1, v2);
-	for(int i = 0; i < son.size(); i++) {
-		cout << son[i] << " ";
-	}
-	cout << endl;*/
 }
 
 Memetic::~Memetic() {
@@ -213,24 +192,6 @@ bool Memetic::ind_in_pop(vector<vector<int> > &pop, vector<int> &ind) {
 	}
 }
 
-int Memetic::dfs_cnt(vector<int> &p, int node_init) {
-	stack<int> st;
-	st.push(node_init);
-	int cnt = 0;
-	while(!st.empty()) {
-		int node_act = st.top();
-		st.pop();
-		cnt++;
-		for(int i = 0; i < p.size(); i++) {
-			if(p[i] == node_act && i != root) {
-				st.push(i);
-			}
-		}
-	}
-
-	return cnt;
-}
-
 vector<int> Memetic::crossover(vector<int> &p, vector<int> &q) {
 	int n = p.size();
 	vector<int> r(n, -1);
@@ -369,7 +330,7 @@ vector<int> Memetic::mutation(vector<int> &p) {
 	DSU dsu(g->no_nodes);
 	st.push_back(root);
 
-	//Run DFS
+	//Hacer DFS
 	while(st.size() > 0) {
 		int node_act = st.back();
 		st.pop_back();
@@ -391,10 +352,6 @@ vector<int> Memetic::mutation(vector<int> &p) {
 	st.push_back(node_i);
 	int tree_cnt = 0;
 	while(st.size() > 0) {
-		/*for(int i = 0; i < p.size(); i++) {
-			cout << p[i] << " ";
-		}
-		cout << endl;*/
 		int node_act = st.back();
 		st.pop_back();
 		tree_cnt++;
@@ -502,7 +459,6 @@ vector<pair<int, vector<int> > > Memetic::evaluate_pop(vector<vector<int> > &pop
 	for(int i = 0; i < pop.size(); i++) {
 		vector<int> v_act = pop[i];
 		int fit = fitness(v_act);
-		//new_pop.push_back(make_pair(INT_MAX, v_act));
 		new_pop.push_back(make_pair(fit, v_act));
 	}
 	sort(new_pop.begin(), new_pop.end(), pairCompare);
@@ -619,7 +575,6 @@ vector<vector<int> > Memetic::multi_dyn(vector<vector<int> > &pop, int n, clock_
 			idx_to_add = pareto_front[idx_aux];
 		}
 		new_pop.push_back(current_members[idx_to_add].second);
-		//cout << "Borrar: " << idx_to_add << " " << DCN_act[idx_to_rem].second << endl;
 		current_members.erase(current_members.begin() + idx_to_add);
 	}
 
@@ -634,8 +589,6 @@ void Memetic::run() {
 	vector<pair<int, vector<int> > > pop_act;
 
 	clock_t ck_1 = clock();
-	double register_event_time = 5.0, reg_evt_time_act = register_event_time;
-	//ofstream file(files_name.c_str());
 	int cnt = 1;
 	while(true) {
 		vector<vector<int> > ev_pop = evolve_pop(pop);
@@ -648,10 +601,8 @@ void Memetic::run() {
 		sort(pop_act.begin(), pop_act.end(), pairCompare);
 
 		best_fitness = pop_act[0].first;
-		if(cnt % 500 == 0) {
-			cout << "Generación: " << cnt << endl;
-			cout << "Mejor fitness de la generación: " << best_fitness << endl;
-		}
+		cout << "Generación: " << cnt << endl;
+		cout << "Mejor fitness de la generación: " << best_fitness << endl << endl;
 		pop.clear();
 		for(int i = 0; i < pop_act.size(); i++) {
 			pop.push_back(pop_act[i].second);
@@ -659,28 +610,18 @@ void Memetic::run() {
 
 		clock_t ck_2 = clock();
 		double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
-		/*if(current_time > reg_evt_time_act) {
-			//cout << "Datos registrados al tiempo: " << time_act << endl;
-			file << "Tiempo: " << current_time << endl;
-			for(int x = 0; x < pop.size(); x++) {
-				for(int y = 0; y < pop[x].size(); y++) {
-					for(int z = 0; z < pop[x][y].perm.size(); z++) {
-						file << pop[x][y].perm[z] << " ";
-					}
-				}
-				file << endl;
-			}
-			file << best_fitness << endl << endl;
-			reg_evt_time_act += register_event_time;
-		}*/
 		if(current_time > end_time) {
 			break;
 		}
 		cnt++;
 	}
 
-	//file.close();
 	cout << "Terminado. Mejor fitness encontrado: " << best_fitness << endl;
+	cout << "Individuo:" << endl;
+	for(int i = 0; i < pop[0].size(); i++) {
+		cout << pop[0][i] << " ";
+	}
+	cout << endl;
 	cout << "Número de generaciones: " << cnt << endl;
 	clock_t ck_2 = clock();
 	double current_time = double(ck_2 - ck_1) / CLOCKS_PER_SEC;
@@ -688,8 +629,8 @@ void Memetic::run() {
 
 	string res_name = files_name + "res.txt";
 	ofstream f(res_name.c_str());
-	f << "BF: " << best_fitness << endl;
-	f << "GN: " << cnt << endl;
+	f << "Mejor fitness: " << best_fitness << endl;
+	f << "Número de generaciones: " << cnt << endl;
 	f << "Tiempo transcurrido: " << current_time << endl;
 	f.close();
 }

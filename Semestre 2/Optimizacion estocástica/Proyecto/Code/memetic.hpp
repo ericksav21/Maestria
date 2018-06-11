@@ -31,7 +31,6 @@ private:
 	string files_name;
 
 	DSU get_dsu(vector<int> &p);
-	int dfs_cnt(vector<int> &p, int node_init);
 	bool ind_in_pop(vector<vector<int> > &pop, vector<int> &ind);
 	vector<int> generate_ind();
 	vector<int> crossover(vector<int> &p, vector<int> &q);

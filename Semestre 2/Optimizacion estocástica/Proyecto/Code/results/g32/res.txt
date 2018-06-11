@@ -1,3 +1,0 @@
-BF: 723
-GN: 37279
-Tiempo transcurrido: 3600.01

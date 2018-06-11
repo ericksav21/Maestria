@@ -1,0 +1,2 @@
+-Aquí se contienen las instancias usadas para probar el algoritmo. Las que terminan en "_8" son las que contienen grafos de 80 nodos, las demás son de 40.
+-En cada instancia se da el número de nodos y posteriormente la matriz de adyacencia del grafo.
