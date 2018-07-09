@@ -12,7 +12,7 @@ class ColorNet(object):
 	def __init__(self, phase, no_classes):
 		self.phase = phase
 		self.no_classes = no_classes
-		self.alpha = 1.0 / 300.0
+		# W = tf.get_variable("W", shape=[784, 256], initializer=tf.contrib.layers.xavier_initializer())
 		self._config = {
 			# Low level features network
 			'low_1_w': tf.Variable(tf.truncated_normal([3, 3, 1, 64]), name = 'low_1_w'),
@@ -90,15 +90,14 @@ class ColorNet(object):
 
 	def _set_conv2d_layer(self, input, f, b, s, name = None):
 		conv = tf.nn.conv2d(input, filter = f, strides = s, padding = "SAME", name = name)
-		#bn = tf.contrib.layers.batch_norm(conv, activation_fn = tf.nn.relu, decay = 0.9, updates_collections = None, is_training = self.phase)
 		bn = tf.nn.bias_add(conv, b)
+		bn = tf.contrib.layers.batch_norm(bn, center = True, scale = True, is_training = self.phase)
 		bn = tf.nn.relu(bn)
 		return bn
 
 	def _set_fc_layer(self, x, b, name = None):
 		dense = tf.layers.dense(inputs = x, units = b, activation = tf.nn.relu, use_bias = True, name = name)
-		#logits = tf.contrib.layers.fully_connected(inputs = x, num_outputs = b, activation_fn = tf.nn.relu)
-
+		dense = tf.contrib.layers.batch_norm(dense, center = True, scale = True, is_training = self.phase)
 		return dense
 
 	#Capa de fusión propuesta por el paper
@@ -116,7 +115,8 @@ class ColorNet(object):
 		fused_input = tf.reshape(fused_input, [-1, 512])
 
 		# [batch * H/8 * W/8, 512] x [512, 256] -> [batch * H/8 * W/8, 256]
-		fused_activation = tf.matmul(fused_input, self._config['fuse_1_w'], name = name)
+		fused_activation = tf.add(tf.matmul(fused_input, self._config['fuse_1_w']), self._config['fuse_1_b'], name = name)
+		fused_activation = tf.contrib.layers.batch_norm(fused_activation, center = True, scale = True, is_training = self.phase)
 
         # [batch * H/8 * W/8, 256] -> [batch, H/8, W/8, 256]
 		fused_activation = tf.reshape(fused_activation, [
@@ -124,8 +124,7 @@ class ColorNet(object):
 			tf.shape(mid_feat)[1],
 			tf.shape(mid_feat)[2], -1])
 
-		fused_activation = tf.nn.bias_add(fused_activation, self._config['fuse_1_b'])
-		return tf.nn.relu(fused_activation)
+		return fused_activation
 
 	def _up_sample(self, x):
 		return tf.image.resize_images(x,
@@ -156,7 +155,7 @@ class ColorNet(object):
 		gl_logits = self._set_conv2d_layer(gl_logits, self._config['glo_3_w'], self._config['glo_3_b'], self.two_stride, name = 'global_c3')
 		gl_logits = self._set_conv2d_layer(gl_logits, self._config['glo_4_w'], self._config['glo_4_b'], self.one_stride, name = 'global_c4')
 		
-		# (batch, 4, 4, 512) -> (batch, 4 * 4 * 512)
+		# (batch, 4, 4, 512) -> (batch, 7 * 7 * 512)
 		gl_flat = tf.reshape(gl_logits, [-1, 7 * 7 * 512], name = 'global_fl1')
 		gl_logits = self._set_fc_layer(gl_flat, self._config['glo_5_b'], name = 'global_fc1')
 		gl_logits_r1 = self._set_fc_layer(gl_logits, self._config['glo_6_b'], name = 'global_fc2')
@@ -167,7 +166,8 @@ class ColorNet(object):
 	def classification_level_feat_nn(self, x):
 		class_logits = self._set_fc_layer(x, self._config['class_1_b'], name = 'class_fc1')
 		#Poner una capa densa con función de activación lineal
-		class_logits = tf.layers.dense(inputs = class_logits, units = self._config['class_2_b'], use_bias = True, name = 'class_fc2')
+		class_logits = tf.layers.dense(inputs = class_logits, units = self._config['class_2_b'], activation = None, use_bias = True, name = 'class_fc2')
+		class_logits = tf.contrib.layers.batch_norm(class_logits, center = True, scale = True, is_training = self.phase)
 
 		return class_logits
 
@@ -183,6 +183,7 @@ class ColorNet(object):
 		#Esta capa se hace a mano dado que se tiene que usar otra función de activación
 		color_logits = tf.nn.conv2d(color_logits, filter = self._config['col_5_w'], strides = self.one_stride, padding = "SAME", name = 'color_c5')
 		color_logits = tf.nn.bias_add(color_logits, self._config['col_5_b'])
+		color_logits = tf.contrib.layers.batch_norm(color_logits, center = True, scale = True, is_training = self.phase)
 		color_logits = tf.nn.sigmoid(color_logits)
 
 		color_out = self._up_sample(color_logits)

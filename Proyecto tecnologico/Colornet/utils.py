@@ -68,10 +68,10 @@ def random_crop(img, width, height):
 	return img
 
 class TrainGenerator(object):
-	IMG_TRAIN_PATH = "D:/Tensorflow/GG/"
-	IMG_TEST_PATH = "D:/Tensorflow/GT/"
+	IMG_TRAIN_PATH = "C:/Users/erick/OneDrive/Documentos/Erick/Tensorflow/Proyecto/Colorization/Train/"
+	IMG_TEST_PATH = "C:/Users/erick/OneDrive/Documentos/Erick/Tensorflow/Proyecto/Colorization/Test/"
 	RESULTS_PATH = "D:/Tensorflow/results/"
-	MODELS_PATH = "C:/Users/erick/OneDrive/Documentos/Erick/Tensorflow/Proyecto/models/"
+	MODELS_PATH = "C:/Users/erick/OneDrive/Documentos/Erick/Tensorflow/Proyecto/ColornetV2/models/"
 	USELESS_IMG = "D:/Tensorflow/useless/"
 
 	def __init__(self):
@@ -99,7 +99,7 @@ class TrainGenerator(object):
 					n_label = cnt_class
 					dict_class[label] = cnt_class
 					cnt_class += 1
-				images.append([parent + "\\" + filename, str(n_label)])
+				images.append([parent + "/" + filename, str(n_label)])
 
 		print("Len:", len(images))
 		print("No. Etiquetas:", cnt_class)
