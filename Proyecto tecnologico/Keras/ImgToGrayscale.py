@@ -5,15 +5,16 @@ from matplotlib import pyplot as plt
 import os
 import random
 
-TEST_PATH = 'C:/Users/erick/OneDrive/Documentos/Erick/Tensorflow/Proyecto/Keras/Test3/Ab/'
+IMG_PATH = 'Set images path'
 
+#This script is used for convert 3-Channel RGB images to grayscale images inside a folder.
 def main():
 	X = []
 	i = 1
-	for filename in os.listdir(TEST_PATH):
-		image_act = imread(TEST_PATH + filename)
+	for filename in os.listdir(IMG_PATH):
+		image_act = imread(IMG_PATH + filename)
 		image_gray = rgb2gray(image_act)
-		imsave(TEST_PATH + "test_img_" + str(i) + ".jpg", image_gray)
+		imsave(IMG_PATH + "test_img_" + str(i) + ".jpg", image_gray)
 		i = i + 1
 
 if __name__ == '__main__':
