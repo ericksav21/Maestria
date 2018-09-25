@@ -7,6 +7,7 @@
 #include <vector>
 #include <stack>
 #include <algorithm>
+#include <utility>
 
 using namespace std;
 
@@ -22,6 +23,10 @@ void compute_parents(Tree &t);
 
 int lca_naive(Tree &t, int u, int v);
 
-void euler_tour(Tree &t, vector<int> &path, int node);
+void preprocess_lca(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences);
+
+int lca_optimized(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int u, int v);
+
+void euler_tour(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int node, int lvl);
 
 #endif

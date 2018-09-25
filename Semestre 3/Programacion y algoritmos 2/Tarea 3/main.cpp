@@ -17,12 +17,7 @@ int main() {
 	compute_parents(t);
 	cin >> a >> b;
 	cout << lca_naive(t, a, b) << "\n";
-	vector<int> path;
-	euler_tour(t, path, t.root);
-	for(int i = 0; i < path.size(); i++) {
-		cout << path[i] << " ";
-	}
-	cout << "\n";
+	lca_optimized(t, a, b);
 
 	return 0;
 }

@@ -47,11 +47,31 @@ int lca_naive(Tree &t, int u, int v) {
 	return lca;
 }
 
-void euler_tour(Tree &t, vector<int> &path, int node) {
-	path.push_back(node);
+void preprocess_lca(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences) {
+	int n = t.n;
+	euler_tour(t, path, occurences, t.root, 0);
+
+	for(int i = 0; i < path.size(); i++) {
+		cout << path[i].first << " " << path[i].second << "\n";
+	}
+	cout << "\n";
+	for(int i = 0; i < n; i++) {
+		cout << i << ": " << occurences[i] << "\n";
+	}
+}
+
+int lca_optimized(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int u, int v) {
+
+	return 0;
+}
+
+void euler_tour(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int node, int lvl) {
+	path.push_back(make_pair(lvl, node));
+	if(occurences[node] == -1) occurences[node] = path.size() - 1;
 	for(int i = 0; i < t.adj[node].size(); i++) {
 		int children = t.adj[node][i];
-		euler_tour(t, path, children);
-		path.push_back(node);
+		euler_tour(t, path, children, lvl + 1);
+		path.push_back(make_pair(lvl, node));
+		if(occurences[node] == -1) occurences[node] = path.size() - 1;
 	}
 }
