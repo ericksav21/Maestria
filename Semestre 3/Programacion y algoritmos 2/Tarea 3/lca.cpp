@@ -25,6 +25,26 @@ void compute_parents(Tree &t) {
 	}
 }
 
+Tree generate_random_tree(int n) {
+	vector<int> arr(n), used;
+	for(int i = 0; i < n; i++) {
+		arr[i] = i;
+	}
+	Tree t = create_tree(n);
+	random_shuffle(arr.begin(), arr.end());
+	int idx = 0;
+
+	used.push_back(arr[idx++]);
+	while(idx < n) {
+		int r = rand() % idx;
+		t.adj[used[r]].push_back(arr[idx]);
+		used.push_back(arr[idx++]);
+	}
+	compute_parents(t);
+
+	return t;
+}
+
 int lca_naive(Tree &t, int u, int v) {
 	int n = t.n, lca = -1;
 	bool vis[n];
@@ -47,22 +67,42 @@ int lca_naive(Tree &t, int u, int v) {
 	return lca;
 }
 
-void preprocess_lca(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences) {
-	int n = t.n;
-	euler_tour(t, path, occurences, t.root, 0);
+vector<vector<int> > table;
 
-	for(int i = 0; i < path.size(); i++) {
-		cout << path[i].first << " " << path[i].second << "\n";
+void preprocess_st(vector<pair<int, int> > &path) {
+	int sz = path.size();
+	table.resize(sz + 5, vector<int>(sz + 5, 0));
+	for(int i = 0; i < sz; i++) {
+		table[i][0] = i;
 	}
-	cout << "\n";
-	for(int i = 0; i < n; i++) {
-		cout << i << ": " << occurences[i] << "\n";
+	for(int j = 1; (1 << j) <= sz; j++) {
+		for(int i = 0; i + (1 << j) - 1 < sz; i++) {
+			if(path[table[i][j - 1]].first < path[table[i + (1 << (j - 1))][j - 1]].first) {
+				table[i][j] = table[i][j - 1];
+			}
+			else {
+				table[i][j] = table[i + (1 << (j - 1))][j - 1];
+			}
+		}
 	}
 }
 
-int lca_optimized(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int u, int v) {
+int lca_optimized(vector<pair<int, int> > &path, vector<int> &occurences, int l, int r) {
+	int res = -1;
+	if(occurences[l] > occurences[r]) {
+		swap(l, r);
+	}
+	int lq = occurences[l], rq = occurences[r];
+	int k = (int)log2(rq - lq + 1);
 
-	return 0;
+	if(path[table[lq][k]].first <= path[table[rq - (1 << k) + 1][k]].first) {
+		res = table[lq][k];
+	}
+	else {
+		res = table[rq - (1 << k) + 1][k];
+	}
+
+	return path[res].second;
 }
 
 void euler_tour(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int node, int lvl) {
@@ -70,7 +110,7 @@ void euler_tour(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences,
 	if(occurences[node] == -1) occurences[node] = path.size() - 1;
 	for(int i = 0; i < t.adj[node].size(); i++) {
 		int children = t.adj[node][i];
-		euler_tour(t, path, children, lvl + 1);
+		euler_tour(t, path, occurences, children, lvl + 1);
 		path.push_back(make_pair(lvl, node));
 		if(occurences[node] == -1) occurences[node] = path.size() - 1;
 	}
