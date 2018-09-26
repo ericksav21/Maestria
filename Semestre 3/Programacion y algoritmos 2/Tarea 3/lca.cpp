@@ -5,6 +5,7 @@ Tree create_tree(int n) {
 	res.n = n;
 	res.adj.resize(n);
 	res.parent.resize(n);
+	for(int i = 0; i < n; i++) res.parent[i] = i;
 	res.root = -1;
 
 	return res;
@@ -23,26 +24,6 @@ void compute_parents(Tree &t) {
 			break;
 		}
 	}
-}
-
-Tree generate_random_tree(int n) {
-	vector<int> arr(n), used;
-	for(int i = 0; i < n; i++) {
-		arr[i] = i;
-	}
-	Tree t = create_tree(n);
-	random_shuffle(arr.begin(), arr.end());
-	int idx = 0;
-
-	used.push_back(arr[idx++]);
-	while(idx < n) {
-		int r = rand() % idx;
-		t.adj[used[r]].push_back(arr[idx]);
-		used.push_back(arr[idx++]);
-	}
-	compute_parents(t);
-
-	return t;
 }
 
 int lca_naive(Tree &t, int u, int v) {
@@ -71,7 +52,8 @@ vector<vector<int> > table;
 
 void preprocess_st(vector<pair<int, int> > &path) {
 	int sz = path.size();
-	table.resize(sz + 5, vector<int>(sz + 5, 0));
+	int k = (int)log2(sz);
+	table.resize(sz + 5, vector<int>(k + 5, 0));
 	for(int i = 0; i < sz; i++) {
 		table[i][0] = i;
 	}
