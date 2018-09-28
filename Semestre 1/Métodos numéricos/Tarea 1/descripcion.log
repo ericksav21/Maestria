@@ -1,0 +1,3396 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.9.27)  27 SEP 2018 01:11
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**descripcion.tex
+(./descripcion.tex
+LaTeX2e <2018-04-01> patch level 5
+(d:/texlive/2018/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(d:/texlive/2018/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks14
+\pgfutil@tempdima=\dimen103
+\pgfutil@tempdimb=\dimen104
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)
+) (d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box26
+
+(d:/texlive/2018/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(d:/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(d:/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(d:/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(d:/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(d:/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(d:/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen105
+\Gin@req@width=\dimen106
+)
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks16
+\pgfkeys@temptoks=\toks17
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks18
+))
+\pgf@x=\dimen107
+\pgf@y=\dimen108
+\pgf@xa=\dimen109
+\pgf@ya=\dimen110
+\pgf@xb=\dimen111
+\pgf@yb=\dimen112
+\pgf@xc=\dimen113
+\pgf@yc=\dimen114
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count88
+\c@pgf@countb=\count89
+\c@pgf@countc=\count90
+\c@pgf@countd=\count91
+\t@pgf@toka=\toks19
+\t@pgf@tokb=\toks20
+\t@pgf@tokc=\toks21
+ (d:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count92
+\pgfsyssoftpath@bigbuffer@items=\count93
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (d:/texlive/2018/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(d:/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen115
+\pgfmath@count=\count94
+\pgfmath@box=\box27
+\pgfmath@toks=\toks22
+\pgfmath@stack@operand=\toks23
+\pgfmath@stack@operation=\toks24
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.te
+x)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric
+.code.tex)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.t
+ex)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.co
+de.tex)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.te
+x)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithm
+etics.code.tex)))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count95
+))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen116
+\pgf@picmaxx=\dimen117
+\pgf@picminy=\dimen118
+\pgf@picmaxy=\dimen119
+\pgf@pathminx=\dimen120
+\pgf@pathmaxx=\dimen121
+\pgf@pathminy=\dimen122
+\pgf@pathmaxy=\dimen123
+\pgf@xx=\dimen124
+\pgf@xy=\dimen125
+\pgf@yx=\dimen126
+\pgf@yy=\dimen127
+\pgf@zx=\dimen128
+\pgf@zy=\dimen129
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.cod
+e.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen130
+\pgf@path@lasty=\dimen131
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.te
+x
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen132
+\pgf@shorten@start@additional=\dimen133
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box28
+\pgf@hbox=\box29
+\pgf@layerbox@main=\box30
+\pgf@picture@serial@count=\count96
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code
+.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen134
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.c
+ode.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen135
+\pgf@pt@y=\dimen136
+\pgf@pt@temp=\dimen137
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.co
+de.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen138
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen139
+\pgf@sys@shading@range@num=\count97
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box31
+))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code
+.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box32
+)
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.st
+y
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen140
+\pgf@nodesepend=\dimen141
+)
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.st
+y
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+)) (d:/texlive/2018/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(d:/texlive/2018/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen142
+\pgffor@skip=\dimen143
+\pgffor@stack=\toks25
+\pgffor@toks=\toks26
+))
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.co
+de.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count98
+\pgfplotmarksize=\dimen144
+)
+\tikz@lastx=\dimen145
+\tikz@lasty=\dimen146
+\tikz@lastxsaved=\dimen147
+\tikz@lastysaved=\dimen148
+\tikzleveldistance=\dimen149
+\tikzsiblingdistance=\dimen150
+\tikz@figbox=\box33
+\tikz@figbox@bg=\box34
+\tikz@tempbox=\box35
+\tikz@tempbox@bg=\box36
+\tikztreelevel=\count99
+\tikznumberofchildren=\count100
+\tikznumberofcurrentchild=\count101
+\tikz@fig@count=\count102
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count103
+\pgfmatrixcurrentcolumn=\count104
+\pgf@matrix@numberofcolumns=\count105
+)
+\tikz@expandcount=\count106
+
+(d:/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
+brarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+(d:/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(d:/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(d:/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks27
+\ex@=\dimen151
+))
+(d:/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen152
+)
+(d:/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count107
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count108
+\leftroot@=\count109
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count110
+\DOTSCASE@=\count111
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box37
+\strutbox@=\box38
+\big@size=\dimen153
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count112
+\c@MaxMatrixCols=\count113
+\dotsspace@=\muskip10
+\c@parentequation=\count114
+\dspbrk@lvl=\count115
+\tag@help=\toks28
+\row@=\count116
+\column@=\count117
+\maxfields@=\count118
+\andhelp@=\toks29
+\eqnshift@=\dimen154
+\alignsep@=\dimen155
+\tagshift@=\dimen156
+\tagwidth@=\dimen157
+\totwidth@=\dimen158
+\lineht@=\dimen159
+\@envbody=\toks30
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks31
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+(d:/texlive/2018/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(d:/texlive/2018/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(d:/texlive/2018/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(d:/texlive/2018/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
+
+(d:/texlive/2018/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen160
+\captionmargin@=\dimen161
+\captionwidth=\dimen162
+\caption@tempdima=\dimen163
+\caption@indent=\dimen164
+\caption@parindent=\dimen165
+\caption@hangindent=\dimen166
+)
+\c@ContinuedFloat=\count119
+)
+\c@KVtest=\count120
+\sf@farskip=\skip46
+\sf@captopadj=\dimen167
+\sf@capskip=\skip47
+\sf@nearskip=\skip48
+\c@subfigure=\count121
+\c@subfigure@save=\count122
+\c@lofdepth=\count123
+\c@subtable=\count124
+\c@subtable@save=\count125
+\c@lotdepth=\count126
+\sf@top=\skip49
+\sf@bottom=\skip50
+)
+(d:/texlive/2018/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count127
+\float@exts=\toks32
+\float@box=\box39
+\@float@everytoks=\toks33
+\@floatcapt=\box40
+)
+(d:/texlive/2018/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+
+(d:/texlive/2018/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@ALC@unique=\count128
+\c@ALC@line=\count129
+\c@ALC@rem=\count130
+\c@ALC@depth=\count131
+\ALC@tlm=\skip51
+\algorithmicindent=\skip52
+)
+(d:/texlive/2018/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2017/07/18 v5.2 algorithms environments
+\c@AlgoLine=\count132
+\algocf@hangindent=\skip53
+
+(d:/texlive/2018/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count133
+)
+(d:/texlive/2018/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+(d:/texlive/2018/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+\skiptotal=\skip54
+\skiplinenumber=\skip55
+\skiprule=\skip56
+\skiphlne=\skip57
+\skiptext=\skip58
+\skiplength=\skip59
+\algomargin=\skip60
+\skipalgocfslide=\skip61
+\algowidth=\dimen168
+\inoutsize=\dimen169
+\inoutindent=\dimen170
+\interspacetitleruled=\dimen171
+\interspacealgoruled=\dimen172
+\interspacetitleboxruled=\dimen173
+\algocf@ruledwidth=\skip62
+\algocf@inoutbox=\box41
+\algocf@inputbox=\box42
+\AlCapSkip=\skip63
+\AlCapHSkip=\skip64
+\algoskipindent=\skip65
+\algocf@nlbox=\box43
+\algocf@hangingbox=\box44
+\algocf@untilbox=\box45
+\algocf@skipuntil=\skip66
+\algocf@capbox=\box46
+\algocf@lcaptionbox=\skip67
+\algoheightruledefault=\skip68
+\algoheightrule=\skip69
+\algotitleheightruledefault=\skip70
+\algotitleheightrule=\skip71
+\c@algocfline=\count134
+\c@algocfproc=\count135
+\c@algocf=\count136
+\algocf@algoframe=\box47
+\algocf@algobox=\box48
+)
+(d:/texlive/2018/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/04/06 v1.3b Input encoding file
+\inpenc@prehook=\toks34
+\inpenc@posthook=\toks35
+)
+(d:/texlive/2018/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2018/09/02 3.23 The Babel package
+
+(d:/texlive/2018/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2018/09/02 3.23 Babel switching mechanism
+)
+(d:/texlive/2018/texmf-dist/tex/generic/babel-spanish/spanish.ldf
+Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
+
+(d:/texlive/2018/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2018/09/02 3.23 Babel common definitions
+\babel@savecnt=\count137
+\U@D=\dimen174
+
+(d:/texlive/2018/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count138
+)
+\es@quottoks=\toks36
+\es@quotdepth=\count139
+Package babel Info: Making " an active character on input line 561.
+Package babel Info: Making . an active character on input line 662.
+Package babel Info: Making < an active character on input line 707.
+Package babel Info: Making > an active character on input line 707.
+))
+(d:/texlive/2018/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks37
+\thm@bodyfont=\toks38
+\thm@headfont=\toks39
+\thm@notefont=\toks40
+\thm@headpunct=\toks41
+\thm@preskip=\skip72
+\thm@postskip=\skip73
+\thm@headsep=\skip74
+\dth@everypar=\toks42
+)
+No file descripcion.aux.
+\openout1 = `descripcion.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+ABD: EveryShipout initializing macros
+(d:/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count140
+\scratchdimen=\dimen175
+\scratchbox=\box49
+\nofMPsegments=\count141
+\nofMParguments=\count142
+\everyMPshowfont=\toks43
+\MPscratchCnt=\count143
+\MPscratchDim=\dimen176
+\MPnumerator=\count144
+\makeMPintoPDFobject=\count145
+\everyMPtoPDFconversion=\toks44
+) (d:/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(d:/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(d:/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(d:/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(d:/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Info: Redefining \. on input line 21.
+LaTeX Info: Redefining \% on input line 21.
+
+
+LaTeX Warning: File `cimat_logo.png' not found on input line 23.
+
+
+! Package pdftex.def Error: File `cimat_logo.png' not found: using draft settin
+g.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 ...cludegraphics[scale=0.6]{cimat_logo.png}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 52.
+(d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 52.
+
+(d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+[1
+
+{d:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+
+ []
+
+
+! LaTeX Error: Environment comment undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 \begin{comment}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.79 ...000000000000000000000000000000000000000*2^
+                                                  -52
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.80 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (123.27998pt too wide) in paragraph at lines 78--80
+[]\OT1/cmr/m/n/12 Em: De-ci-mal Bi-na-rio 2.22044604925031308085e-16 1.00000000
+00000000000000000000000000000000000000000000*2$[]52$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.82 ...000000000000000000000000000000000000001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.83 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (105.40953pt too wide) in paragraph at lines 81--83
+[]\OT1/cmr/m/n/12 A: De-ci-mal Bi-na-rio 1.00000000000000022204e+00 1.000000000
+0000000000000000000000000000000000000000001*2$[]$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.85 ...111111111111111111111111111111111111111*2^
+                                                  -1
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.86 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (107.93596pt too wide) in paragraph at lines 84--86
+[]\OT1/cmr/m/n/12 B: De-ci-mal Bi-na-rio 9.99999999999999888978e-01 1.111111111
+1111111111111111111111111111111111111111111*2$[]1$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.88 ...000000000000000000000000000000000000000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.89 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (102.48013pt too wide) in paragraph at lines 87--89
+[]\OT1/cmr/m/n/12 2: De-ci-mal Bi-na-rio 1.00000000000000000000e+00 1.000000000
+0000000000000000000000000000000000000000000*2$[]$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.90 ...001111001100110011111110011101111001101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.92 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 90--92
+[]\OT1/cmr/m/n/12 1.41421356237309514547e+00 1.01101010000010011110011001100111
+11110011101111001101*2$[]2[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.93 ...111111000001010001100011011011100010101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.95 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 93--95
+[]\OT1/cmr/m/n/12 1.18920711500272102690e+00 1.00110000011011111110000010100011
+00011011011100010101*2$[]3[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.96 ...011100000111100011111010101000101111011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.98 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 96--98
+[]\OT1/cmr/m/n/12 1.09050773266525768967e+00 1.00010111001010111000001111000111
+11010101000101111011*2$[]4[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.99 ...101100001101100111110011000100100001111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.101 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 99--101
+[]\OT1/cmr/m/n/12 1.04427378242741375480e+00 1.00001011010101011000011011001111
+10011000100100001111*2$[]5[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.102 ...11000011010011000101011000010101110100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.104 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 102--104
+[]\OT1/cmr/m/n/12 1.02189714865411662714e+00 1.00000101100110110000110100110001
+01011000010101110100*2$[]6[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.105 ...01101000111110011101111000000001100001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.107 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 105--107
+[]\OT1/cmr/m/n/12 1.01088928605170047526e+00 1.00000010110010011010001111100111
+01111000000001100001*2$[]7[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.108 ...11110110101001111110110011001100110101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.110 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 108--110
+[]\OT1/cmr/m/n/12 1.00542990111280272636e+00 1.00000001011000111101101010011111
+10110011001100110101*2$[]8[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.111 ...01101011111010010110101011110010111111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.113 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 111--113
+[]\OT1/cmr/m/n/12 1.00271127505020252180e+00 1.00000000101100011010111110100101
+10101011110010111111*2$[]9[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.114 ...00110010000110110110100001110000001010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.116 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 114--116
+[]\OT1/cmr/m/n/12 1.00135471989210822485e+00 1.00000000010110001100100001101101
+10100001110000001010*2$[]1[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.117 ...00011000000101111000101110100011001111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.119 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 117--119
+[]\OT1/cmr/m/n/12 1.00067713069306640783e+00 1.00000000001011000110000001011110
+00101110100011001111*2$[]1[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.120 ...10001011110011100100000100000001010010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.122 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 120--122
+[]\OT1/cmr/m/n/12 1.00033850805268231809e+00 1.00000000000101100010111100111001
+00000100000001010010*2$[]1[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.123 ...11000101110101111011111111110111000111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.125 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 123--125
+[]\OT1/cmr/m/n/12 1.00016923970530213772e+00 1.00000000000010110001011101011110
+11111111110111000111*2$[]1[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+[2]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.126 ...01100010111010000000011111101110011111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.128 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 126--128
+[]\OT1/cmr/m/n/12 1.00008461627269418237e+00 1.00000000000001011000101110100000
+00011111101110011111*2$[]1[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.129 ...10110001011100110000110111110110101001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.131 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 129--131
+[]\OT1/cmr/m/n/12 1.00004230724139575592e+00 1.00000000000000101100010111001100
+00110111110110101001*2$[]1[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.132 ...01011000101110010100100101111011100000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.134 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 132--134
+[]\OT1/cmr/m/n/12 1.00002115339696473484e+00 1.00000000000000010110001011100101
+00100101111011100000*2$[]1[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.135 ...00101100010111001001010101011101110110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.137 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 135--137
+[]\OT1/cmr/m/n/12 1.00001057664254977553e+00 1.00000000000000001011000101110010
+01010101011101110110*2$[]1[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.138 ...00010110001011100100011011010110111101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.140 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 138--140
+[]\OT1/cmr/m/n/12 1.00000528830729185081e+00 1.00000000000000000101100010111001
+00011011010110111101*2$[]1[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.141 ...00001011000101110010001001110101011111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.143 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 141--143
+[]\OT1/cmr/m/n/12 1.00000264415015016617e+00 1.00000000000000000010110001011100
+10001001110101011111*2$[]1[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.144 ...00000101100010111001000011111101010000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.146 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 144--146
+[]\OT1/cmr/m/n/12 1.00000132207420122654e+00 1.00000000000000000001011000101110
+01000011111101010000*2$[]2[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.147 ...00000010110001011100100001101111010000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.149 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 147--149
+[]\OT1/cmr/m/n/12 1.00000066103688212138e+00 1.00000000000000000000101100010111
+00100001101111010000*2$[]2[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.150 ...00000001011000101110010000110011110010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.152 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 150--152
+[]\OT1/cmr/m/n/12 1.00000033051838643772e+00 1.00000000000000000000010110001011
+10010000110011110010*2$[]2[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.153 ...00000000101100010111001000011000111100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.155 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 153--155
+[]\OT1/cmr/m/n/12 1.00000016525917967414e+00 1.00000000000000000000001011000101
+11001000011000111100*2$[]2[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.156 ...00000000010110001011100100001100001111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.158 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 156--158
+[]\OT1/cmr/m/n/12 1.00000008262958650640e+00 1.00000000000000000000000101100010
+11100100001100001111*2$[]2[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.159 ...00000000001011000101110010000110000100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.161 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 159--161
+[]\OT1/cmr/m/n/12 1.00000004131479247604e+00 1.00000000000000000000000010110001
+01110010000110000100*2$[]2[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.162 ...00000000000101100010111001000011000001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.164 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 162--164
+[]\OT1/cmr/m/n/12 1.00000002065739601598e+00 1.00000000000000000000000001011000
+10111001000011000001*2$[]2[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.165 ...00000000000010110001011100100001100000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.167 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 165--167
+[]\OT1/cmr/m/n/12 1.00000001032869789697e+00 1.00000000000000000000000000101100
+01011100100001100000*2$[]2[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.168 ...00000000000001011000101110010000110000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.170 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 168--170
+[]\OT1/cmr/m/n/12 1.00000000516434894848e+00 1.00000000000000000000000000010110
+00101110010000110000*2$[]2[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.171 ...00000000000000101100010111001000011000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.173 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 171--173
+[]\OT1/cmr/m/n/12 1.00000000258217447424e+00 1.00000000000000000000000000001011
+00010111001000011000*2$[]2[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.174 ...00000000000000010110001011100100001100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.176 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 174--176
+[]\OT1/cmr/m/n/12 1.00000000129108723712e+00 1.00000000000000000000000000000101
+10001011100100001100*2$[]3[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.177 ...00000000000000001011000101110010000110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.179 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 177--179
+[]\OT1/cmr/m/n/12 1.00000000064554361856e+00 1.00000000000000000000000000000010
+11000101110010000110*2$[]3[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.180 ...00000000000000000101100010111001000011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.182 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 180--182
+[]\OT1/cmr/m/n/12 1.00000000032277180928e+00 1.00000000000000000000000000000001
+01100010111001000011*2$[]3[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+[3]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.183 ...00000000000000000010110001011100100001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.185 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 183--185
+[]\OT1/cmr/m/n/12 1.00000000016138579362e+00 1.00000000000000000000000000000000
+10110001011100100001*2$[]3[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.186 ...00000000000000000001011000101110010000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.188 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 186--188
+[]\OT1/cmr/m/n/12 1.00000000008069278579e+00 1.00000000000000000000000000000000
+01011000101110010000*2$[]3[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.189 ...00000000000000000000101100010111001000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.191 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 189--191
+[]\OT1/cmr/m/n/12 1.00000000004034639289e+00 1.00000000000000000000000000000000
+00101100010111001000*2$[]3[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.192 ...00000000000000000000010110001011100100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.194 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 192--194
+[]\OT1/cmr/m/n/12 1.00000000002017319645e+00 1.00000000000000000000000000000000
+00010110001011100100*2$[]3[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.195 ...00000000000000000000001011000101110010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.197 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 195--197
+[]\OT1/cmr/m/n/12 1.00000000001008659822e+00 1.00000000000000000000000000000000
+00001011000101110010*2$[]3[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.198 ...00000000000000000000000101100010111001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.200 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 198--200
+[]\OT1/cmr/m/n/12 1.00000000000504329911e+00 1.00000000000000000000000000000000
+00000101100010111001*2$[]3[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.201 ...00000000000000000000000010110001011100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.203 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 201--203
+[]\OT1/cmr/m/n/12 1.00000000000252153853e+00 1.00000000000000000000000000000000
+00000010110001011100*2$[]3[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.204 ...00000000000000000000000001011000101110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.206 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 204--206
+[]\OT1/cmr/m/n/12 1.00000000000126076927e+00 1.00000000000000000000000000000000
+00000001011000101110*2$[]4[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.207 ...00000000000000000000000000101100010111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.209 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 207--209
+[]\OT1/cmr/m/n/12 1.00000000000063038463e+00 1.00000000000000000000000000000000
+00000000101100010111*2$[]4[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.210 ...00000000000000000000000000010110001011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.212 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 210--212
+[]\OT1/cmr/m/n/12 1.00000000000031508129e+00 1.00000000000000000000000000000000
+00000000010110001011*2$[]4[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.213 ...00000000000000000000000000001011000101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.215 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 213--215
+[]\OT1/cmr/m/n/12 1.00000000000015742962e+00 1.00000000000000000000000000000000
+00000000001011000101*2$[]4[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.216 ...00000000000000000000000000000101100010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.218 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 216--218
+[]\OT1/cmr/m/n/12 1.00000000000007860379e+00 1.00000000000000000000000000000000
+00000000000101100010*2$[]4[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.219 ...00000000000000000000000000000010110001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.221 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 219--221
+[]\OT1/cmr/m/n/12 1.00000000000003930190e+00 1.00000000000000000000000000000000
+00000000000010110001*2$[]4[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.222 ...00000000000000000000000000000001011000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.224 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 222--224
+[]\OT1/cmr/m/n/12 1.00000000000001953993e+00 1.00000000000000000000000000000000
+00000000000001011000*2$[]4[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.225 ...00000000000000000000000000000000101100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.227 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 225--227
+[]\OT1/cmr/m/n/12 1.00000000000000976996e+00 1.00000000000000000000000000000000
+00000000000000101100*2$[]4[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.228 ...00000000000000000000000000000000010110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.230 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 228--230
+[]\OT1/cmr/m/n/12 1.00000000000000488498e+00 1.00000000000000000000000000000000
+00000000000000010110*2$[]4[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.231 ...00000000000000000000000000000000001011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.233 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 231--233
+[]\OT1/cmr/m/n/12 1.00000000000000244249e+00 1.00000000000000000000000000000000
+00000000000000001011*2$[]4[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.234 ...00000000000000000000000000000000000101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.236 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 234--236
+[]\OT1/cmr/m/n/12 1.00000000000000111022e+00 1.00000000000000000000000000000000
+00000000000000000101*2$[]5[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.237 ...00000000000000000000000000000000000010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.239 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 237--239
+[]\OT1/cmr/m/n/12 1.00000000000000044409e+00 1.00000000000000000000000000000000
+00000000000000000010*2$[]5[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+[4]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.240 ...00000000000000000000000000000000000001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.242 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 240--242
+[]\OT1/cmr/m/n/12 1.00000000000000022204e+00 1.00000000000000000000000000000000
+00000000000000000001*2$[]5[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.243 ...00000000000000000000000000000000000000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.245 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 243--245
+[]\OT1/cmr/m/n/12 1.00000000000000000000e+00 1.00000000000000000000000000000000
+00000000000000000000*2$[]5[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.246 ...00000000000000000000000000000000000000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.247 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (6.19666pt too wide) in paragraph at lines 246--247
+[]\OT1/cmr/m/n/12 1.00000000000000000000e+00 1.00000000000000000000000000000000
+00000000000000000000*2$[]$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.252 ...00000000000000000000000000000000000000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.253 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (125.32712pt too wide) in paragraph at lines 251--253
+[]\OT1/cmr/m/n/12 10e10: De-ci-mal Bi-na-rio 1.00000000000000000000e+00 1.00000
+00000000000000000000000000000000000000000000000*2$[]$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.254 ...00111100010000011001101011011111001100*2^
+                                                  18
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.256 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (153.29375pt too wide) in paragraph at lines 254--256
+[]\OT1/cmr/m/n/12 3.16227766016837907955e+05 1.00110100110100001111000100000110
+01101011011111001100*2$[]82[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/
+n/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.257 ...11101100001000101100111000111011001101*2^
+                                                  9
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.259 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 257--259
+[]\OT1/cmr/m/n/12 5.62341325190349039076e+02 1.00011001001010111011000010001011
+00111000111011001101*2$[]3[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.260 ...11011101111000110001000001110010000100*2^
+                                                  4
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.262 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 260--262
+[]\OT1/cmr/m/n/12 2.37137370566165515129e+01 1.01111011011010110111011110001100
+01000001110010000100*2$[]4[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.263 ...00110000100110001100000000111010111100*2^
+                                                  2
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.265 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 263--265
+[]\OT1/cmr/m/n/12 4.86967525165863079906e+00 1.00110111101010001100001001100011
+00000000111010111100*2$[]5[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.266 ...10010000110001000011010111111110100000*2^
+                                                  1
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.268 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 266--268
+[]\OT1/cmr/m/n/12 2.20673406908458957787e+00 1.00011010011101100100001100010000
+11010111111110100000*2$[]6[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.269 ...10010000001101111110110011111011111010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.271 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 269--271
+[]\OT1/cmr/m/n/12 1.48550801717277503045e+00 1.01111100010010100100000011011111
+10110011111011111010*2$[]7[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.272 ...00001101001101011111001100011011001011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.274 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 272--274
+[]\OT1/cmr/m/n/12 1.21881418484228976062e+00 1.00111000000001000011010011010111
+11001100011011001011*2$[]8[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.275 ...11101100001010101111110111010100101110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.277 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 275--277
+[]\OT1/cmr/m/n/12 1.10399917791739765605e+00 1.00011010100111111011000010101011
+11110111010100101110*2$[]9[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.278 ...11100100011110001110011100100101100001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.280 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 278--280
+[]\OT1/cmr/m/n/12 1.05071365172315034364e+00 1.00001100111110111001000111100011
+10011100100101100001*2$[]1[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.281 ...01001110111110100100111101001011110011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.283 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 281--283
+[]\OT1/cmr/m/n/12 1.02504324383079103988e+00 1.00000110011010010011101111101001
+00111101001011110011*2$[]1[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.284 ...11100010101110100110111010110011011000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.286 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 284--286
+[]\OT1/cmr/m/n/12 1.01244419294635257245e+00 1.00000011001011111000101011101001
+10111010110011011000*2$[]1[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.287 ...10100000101011001101110011011100000101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.289 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 287--289
+[]\OT1/cmr/m/n/12 1.00620285874487191968e+00 1.00000001100101101000001010110011
+01110011011100000101*2$[]1[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.290 ...10111100001110100100110000010111001111*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.292 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 290--292
+[]\OT1/cmr/m/n/12 1.00309663479889699111e+00 1.00000000110010101111000011101001
+00110000010111001111*2$[]1[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.293 ...01011001000110000001101010011101101100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.295 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 293--295
+[]\OT1/cmr/m/n/12 1.00154712060836015297e+00 1.00000000011001010110010001100000
+01101010011101101100*2$[]1[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.296 ...10101011010010110000101000000010010011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.298 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 296--298
+[]\OT1/cmr/m/n/12 1.00077326133763189198e+00 1.00000000001100101010110100101100
+00101000000010010011*2$[]1[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+[5]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.299 ...01010101010101010100110000011110100000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.301 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 299--301
+[]\OT1/cmr/m/n/12 1.00038655595606229554e+00 1.00000000000110010101010101010101
+00110000011110100000*2$[]1[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.302 ...00101010100101101001100011010100100100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.304 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 302--304
+[]\OT1/cmr/m/n/12 1.00019325930345193143e+00 1.00000000000011001010101001011010
+01100011010100100100*2$[]1[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.305 ...10010101010001100100100100111011010110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.307 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 305--307
+[]\OT1/cmr/m/n/12 1.00009662498353213422e+00 1.00000000000001100101010100011001
+00100100111011010110*2$[]1[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.308 ...11001010101000011110001111010101111010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.310 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 308--310
+[]\OT1/cmr/m/n/12 1.00004831132477400857e+00 1.00000000000000110010101010000111
+10001111010101111010*2$[]2[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.311 ...01100101010100001010000110111001100000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.313 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 311--313
+[]\OT1/cmr/m/n/12 1.00002415537064592854e+00 1.00000000000000011001010101000010
+10000110111001100000*2$[]2[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.314 ...00110010101010000011110011010000011101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.316 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 314--316
+[]\OT1/cmr/m/n/12 1.00001207761238863903e+00 1.00000000000000001100101010100000
+11110011010000011101*2$[]2[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.317 ...00011001010101000001100101100101001010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.319 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 317--319
+[]\OT1/cmr/m/n/12 1.00000603878796079371e+00 1.00000000000000000110010101010000
+01100101100101001010*2$[]2[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.320 ...00001100101010100000101101110001110100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.322 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 320--322
+[]\OT1/cmr/m/n/12 1.00000301938942204316e+00 1.00000000000000000011001010101000
+00101101110001110100*2$[]2[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.323 ...00000110010101010000010101101000101110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.325 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 323--325
+[]\OT1/cmr/m/n/12 1.00000150969357148867e+00 1.00000000000000000001100101010100
+00010101101000101110*2$[]2[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.326 ...00000011001010101000001010100000010100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.328 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 326--328
+[]\OT1/cmr/m/n/12 1.00000075484650086111e+00 1.00000000000000000000110010101010
+00001010100000010100*2$[]2[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.329 ...00000001100101010100000101001011001001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.331 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 329--331
+[]\OT1/cmr/m/n/12 1.00000037742317915423e+00 1.00000000000000000000011001010101
+00000101001011001001*2$[]2[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.332 ...00000000110010101010000010100100010100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.334 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 332--334
+[]\OT1/cmr/m/n/12 1.00000018871157170253e+00 1.00000000000000000000001100101010
+10000010100100010100*2$[]2[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.335 ...00000000011001010101000001010001110110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.337 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 335--337
+[]\OT1/cmr/m/n/12 1.00000009435578141037e+00 1.00000000000000000000000110010101
+01000001010001110110*2$[]2[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.338 ...00000000001100101010100000101000110110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.340 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 338--340
+[]\OT1/cmr/m/n/12 1.00000004717788959496e+00 1.00000000000000000000000011001010
+10100000101000110110*2$[]3[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.341 ...00000000000110010101010000010100011010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.343 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 341--343
+[]\OT1/cmr/m/n/12 1.00000002358894457544e+00 1.00000000000000000000000001100101
+01010000010100011010*2$[]3[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.344 ...00000000000011001010101000001010001101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.346 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 344--346
+[]\OT1/cmr/m/n/12 1.00000001179447228772e+00 1.00000000000000000000000000110010
+10101000001010001101*2$[]3[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.347 ...00000000000001100101010100000101000110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.349 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 347--349
+[]\OT1/cmr/m/n/12 1.00000000589723603284e+00 1.00000000000000000000000000011001
+01010100000101000110*2$[]3[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.350 ...00000000000000110010101010000010100011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.352 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 350--352
+[]\OT1/cmr/m/n/12 1.00000000294861801642e+00 1.00000000000000000000000000001100
+10101010000010100011*2$[]3[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.353 ...00000000000000011001010101000001010001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.355 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 353--355
+[]\OT1/cmr/m/n/12 1.00000000147430889719e+00 1.00000000000000000000000000000110
+01010101000001010001*2$[]3[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+[6]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.356 ...00000000000000001100101010100000101000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.358 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 356--358
+[]\OT1/cmr/m/n/12 1.00000000073715433757e+00 1.00000000000000000000000000000011
+00101010100000101000*2$[]3[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.359 ...00000000000000000110010101010000010100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.361 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 359--361
+[]\OT1/cmr/m/n/12 1.00000000036857716879e+00 1.00000000000000000000000000000001
+10010101010000010100*2$[]3[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.362 ...00000000000000000011001010101000001010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.364 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 362--364
+[]\OT1/cmr/m/n/12 1.00000000018428858439e+00 1.00000000000000000000000000000000
+11001010101000001010*2$[]3[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.365 ...00000000000000000001100101010100000101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.367 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 365--367
+[]\OT1/cmr/m/n/12 1.00000000009214429220e+00 1.00000000000000000000000000000000
+01100101010100000101*2$[]3[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.368 ...00000000000000000000110010101010000010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.370 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 368--370
+[]\OT1/cmr/m/n/12 1.00000000004607203508e+00 1.00000000000000000000000000000000
+00110010101010000010*2$[]4[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.371 ...00000000000000000000011001010101000001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.373 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 371--373
+[]\OT1/cmr/m/n/12 1.00000000002303601754e+00 1.00000000000000000000000000000000
+00011001010101000001*2$[]4[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.374 ...00000000000000000000001100101010100000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.376 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 374--376
+[]\OT1/cmr/m/n/12 1.00000000001151789775e+00 1.00000000000000000000000000000000
+00001100101010100000*2$[]4[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.377 ...00000000000000000000000110010101010000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.379 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 377--379
+[]\OT1/cmr/m/n/12 1.00000000000575894887e+00 1.00000000000000000000000000000000
+00000110010101010000*2$[]4[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.380 ...00000000000000000000000011001010101000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.382 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 380--382
+[]\OT1/cmr/m/n/12 1.00000000000287947444e+00 1.00000000000000000000000000000000
+00000011001010101000*2$[]4[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.383 ...00000000000000000000000001100101010100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.385 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 383--385
+[]\OT1/cmr/m/n/12 1.00000000000143973722e+00 1.00000000000000000000000000000000
+00000001100101010100*2$[]4[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.386 ...00000000000000000000000000110010101010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.388 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 386--388
+[]\OT1/cmr/m/n/12 1.00000000000071986861e+00 1.00000000000000000000000000000000
+00000000110010101010*2$[]4[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.389 ...00000000000000000000000000011001010101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.391 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 389--391
+[]\OT1/cmr/m/n/12 1.00000000000035993430e+00 1.00000000000000000000000000000000
+00000000011001010101*2$[]4[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.392 ...00000000000000000000000000001100101010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.394 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 392--394
+[]\OT1/cmr/m/n/12 1.00000000000017985613e+00 1.00000000000000000000000000000000
+00000000001100101010*2$[]4[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.395 ...00000000000000000000000000000110010101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.397 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 395--397
+[]\OT1/cmr/m/n/12 1.00000000000008992806e+00 1.00000000000000000000000000000000
+00000000000110010101*2$[]4[]90000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.398 ...00000000000000000000000000000011001010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.400 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 398--400
+[]\OT1/cmr/m/n/12 1.00000000000004485301e+00 1.00000000000000000000000000000000
+00000000000011001010*2$[]5[]00000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.401 ...00000000000000000000000000000001100101*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.403 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 401--403
+[]\OT1/cmr/m/n/12 1.00000000000002242651e+00 1.00000000000000000000000000000000
+00000000000001100101*2$[]5[]10000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.404 ...00000000000000000000000000000000110010*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.406 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 404--406
+[]\OT1/cmr/m/n/12 1.00000000000001110223e+00 1.00000000000000000000000000000000
+00000000000000110010*2$[]5[]20000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.407 ...00000000000000000000000000000000011001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.409 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 407--409
+[]\OT1/cmr/m/n/12 1.00000000000000555112e+00 1.00000000000000000000000000000000
+00000000000000011001*2$[]5[]30000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.410 ...00000000000000000000000000000000001100*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.412 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 410--412
+[]\OT1/cmr/m/n/12 1.00000000000000266454e+00 1.00000000000000000000000000000000
+00000000000000001100*2$[]5[]40000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+[7]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.413 ...00000000000000000000000000000000000110*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.415 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 413--415
+[]\OT1/cmr/m/n/12 1.00000000000000133227e+00 1.00000000000000000000000000000000
+00000000000000000110*2$[]5[]50000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.416 ...00000000000000000000000000000000000011*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.418 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 416--418
+[]\OT1/cmr/m/n/12 1.00000000000000066613e+00 1.00000000000000000000000000000000
+00000000000000000011*2$[]5[]60000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.419 ...00000000000000000000000000000000000001*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.421 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 419--421
+[]\OT1/cmr/m/n/12 1.00000000000000022204e+00 1.00000000000000000000000000000000
+00000000000000000001*2$[]5[]70000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.422 ...00000000000000000000000000000000000000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.424 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (147.41881pt too wide) in paragraph at lines 422--424
+[]\OT1/cmr/m/n/12 1.00000000000000000000e+00 1.00000000000000000000000000000000
+00000000000000000000*2$[]5[]80000000000000000000\OML/cmm/m/it/12 e \OT1/cmr/m/n
+/12 +
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.425 ...00000000000000000000000000000000000000*2^
+                                                  0
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: \begin{document} ended by \end{comment}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.426 \end{comment}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.426 \end{comment}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (6.19666pt too wide) in paragraph at lines 425--427
+[]\OT1/cmr/m/n/12 1.00000000000000000000e+00 1.00000000000000000000000000000000
+00000000000000000000*2$[]$ 
+ []
+
+[8] (./descripcion.aux
+LaTeX Info: Redefining \. on input line 7.
+LaTeX Info: Redefining \% on input line 7.
+) ) 
+Here is how much of TeX's memory you used:
+ 15557 strings out of 492641
+ 293295 string characters out of 6133116
+ 357284 words of memory out of 5000000
+ 19151 multiletter control sequences out of 15000+600000
+ 11619 words of font info for 45 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 48i,7n,54p,440b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
+<d:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><d:/texlive/201
+8/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2018/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/texlive/2018/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb><d:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy8.pfb><d:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12
+.pfb>
+Output written on descripcion.pdf (8 pages, 87959 bytes).
+PDF statistics:
+ 66 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

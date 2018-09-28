@@ -25,8 +25,11 @@ int main(int argc, char **argv) {
 		int n = atoi(argv[2]);
 		int m = atoi(argv[3]);
 		string name = string(argv[4]);
+		//Generar un árbol de forma aleatoria.
 		Tree t = generate_random_tree(n);
+		//Generar las queries de forma aleatoria.
 		vector<pair<int, int> > queries = generate_random_queries(t, m);
+		//Guardar el caso de prueba en un archivo.
 		save_in_file(t, queries, name);
 		cout << "Archivo generado.\n";
 		return 0;
@@ -58,6 +61,7 @@ int main(int argc, char **argv) {
 	file.close();
 
 	//LCA Naive
+	cout << "Algoritmo naive en proceso...\n";
 	begin = clock();
 	for(int i = 0; i < m; i++) {
 		l = queries[i].first;
@@ -72,13 +76,14 @@ int main(int argc, char **argv) {
 	cout << "Tiempo transcurrido: " << time_elapsed << "s.\n\n";
 
 	//Preprocess Euler-tour
+	cout << "Algoritmo optimizado en proceso...\n";
 	begin = clock();
 	vector<pair<int, int> > path;
 	vector<int> occurences(n, -1);
 
 	euler_tour(t, path, occurences, t.root, 0);
 
-	//preprocess Sparse table
+	//preprocesar la Sparse table
 	preprocess_st(path);
 
 	//LCA-RMQ

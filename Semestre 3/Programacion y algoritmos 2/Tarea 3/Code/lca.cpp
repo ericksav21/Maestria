@@ -1,5 +1,8 @@
 #include "lca.hpp"
 
+/*
+	Esta función genera un árbol vacío
+*/
 Tree create_tree(int n) {
 	Tree res;
 	res.n = n;
@@ -11,6 +14,9 @@ Tree create_tree(int n) {
 	return res;
 }
 
+/*
+	Esta función calcula los padres de cada nodo y los guarda en el vector parent de la estructura
+*/
 void compute_parents(Tree &t) {
 	int n = t.n;
 	for(int i = 0; i < n; i++) {
@@ -26,6 +32,9 @@ void compute_parents(Tree &t) {
 	}
 }
 
+/*
+	Algoritmo trivial del LCA
+*/
 int lca_naive(Tree &t, int u, int v) {
 	int n = t.n, lca = -1;
 	bool vis[n];
@@ -50,6 +59,9 @@ int lca_naive(Tree &t, int u, int v) {
 
 vector<vector<int> > table;
 
+/*
+	Preprocesamiento de la Sparse table
+*/
 void preprocess_st(vector<pair<int, int> > &path) {
 	int sz = path.size();
 	int k = (int)log2(sz);
@@ -69,6 +81,9 @@ void preprocess_st(vector<pair<int, int> > &path) {
 	}
 }
 
+/*
+	Hacer una query tipo RMQ a la Sparse table
+*/
 int lca_optimized(vector<pair<int, int> > &path, vector<int> &occurences, int l, int r) {
 	int res = -1;
 	if(occurences[l] > occurences[r]) {
@@ -87,6 +102,10 @@ int lca_optimized(vector<pair<int, int> > &path, vector<int> &occurences, int l,
 	return path[res].second;
 }
 
+/*
+	Tour euleriano al árbol, se guarda el camino en el vector path y la primer ocurrencia de cada nodo en el
+	vector occurences
+*/
 void euler_tour(Tree &t, vector<pair<int, int> > &path, vector<int> &occurences, int node, int lvl) {
 	path.push_back(make_pair(lvl, node));
 	if(occurences[node] == -1) occurences[node] = path.size() - 1;

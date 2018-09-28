@@ -12,6 +12,7 @@
 
 using namespace std;
 
+//Definición del árbol
 typedef struct tree_str {
 	int n, root;
 	vector<vector<int> > adj;
