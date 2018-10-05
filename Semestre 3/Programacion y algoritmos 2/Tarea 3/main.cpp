@@ -58,6 +58,7 @@ int main(int argc, char **argv) {
 	file.close();
 
 	//LCA Naive
+	cout << "Algoritmo naive en proceso...\n";
 	begin = clock();
 	for(int i = 0; i < m; i++) {
 		l = queries[i].first;
@@ -72,6 +73,7 @@ int main(int argc, char **argv) {
 	cout << "Tiempo transcurrido: " << time_elapsed << "s.\n\n";
 
 	//Preprocess Euler-tour
+	cout << "Algoritmo optimizado en proceso...\n";
 	begin = clock();
 	vector<pair<int, int> > path;
 	vector<int> occurences(n, -1);
