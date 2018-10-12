@@ -1,5 +1,8 @@
 #include <iostream>
+#include <cstdio>
 #include <vector>
+#include <queue>
+#include <set>
 #include <algorithm>
 #include <utility>
 #include <cstring>
@@ -7,7 +10,7 @@
 #include <climits>
 
 #define MAXN 10004
-#define LIM 1000
+#define LIM 1010
 #define pb push_back
 #define mp make_pair
 #define fst first
@@ -27,8 +30,16 @@ struct Point {
 		y = _y;
 	}
 
+	bool operator==(const Point &other) const {
+		return x == other.x && y == other.y;
+	}
+
 	~Point() {}
 };
+
+bool operator<(const Point &left, const Point &right) {
+	return left.x < right.x;
+}
 
 struct Node {
 	Point pos;
@@ -83,23 +94,43 @@ public:
 			delete n;
 		}
 	}
+
+	void set_boundaries(Point _top, Point _bot) {
+		top_left = _top;
+		bot_right = _bot;
+	}
 	
 	void ask_quad();
 	void insert(Node*);
 	Node *search(Point);
-	void search_area(Point, Point, vector<Point>&);
-	void delete_point(Point);
-	bool is_boundary(Point);
+	void search_area(Point&, Point&, vector<pair<int, pair<int, int> > >&);
+	void delete_point(Point&);
+	bool is_boundary(Point&);
+	void clear_tree();
 };
 
-void Quadtree::ask_quad() {
-	cout << top_left_tree << "\n";
-	if(top_left_tree) {
-		top_left_tree->ask_quad();
+/*
+	Borrado en forma recursiva del QuadTree
+*/
+void Quadtree::clear_tree() {
+	if(top_left_tree) top_left_tree->clear_tree();
+	if(top_right_tree) top_right_tree->clear_tree();
+	if(bot_left_tree) bot_left_tree->clear_tree();
+	if(bot_right_tree) bot_right_tree->clear_tree();
+	delete top_left_tree;
+	delete top_right_tree;
+	delete bot_left_tree;
+	delete bot_right_tree;
+	top_left_tree = top_right_tree = bot_left_tree = bot_right_tree = NULL;
+	if(n) {
+		delete n;
+		n = NULL;
 	}
+	top_left = Point(0, 0);
+	bot_right = Point(0, 0);
 }
 
-bool Quadtree::is_boundary(Point p) {
+bool Quadtree::is_boundary(Point &p) {
 	return (p.x >= top_left.x && p.x <= bot_right.x &&
 		p.y >= top_left.y && p.y <= bot_right.y);
 }
@@ -192,7 +223,10 @@ Node* Quadtree::search(Point p) {
 	}
 }
 
-void Quadtree::search_area(Point _top, Point _bot, vector<Point> &points) {
+/*
+	La búsqueda se hace como en un SegmentTree
+*/
+void Quadtree::search_area(Point &_top, Point &_bot, vector<pair<int, pair<int, int> > > &points) {
 	//No hay intersección
 	if(_top.x > bot_right.x || top_left.x > _bot.x ||
 		_top.y > bot_right.y || top_left.y > _bot.y) {
@@ -203,7 +237,9 @@ void Quadtree::search_area(Point _top, Point _bot, vector<Point> &points) {
 
 		//Completamente adentro
 		if(n != NULL) {
-			points.push_back(n->pos);
+			//X, Y, Z en ese orden
+			points.pb(mp(n->data, mp(n->pos.x, n->pos.y)));
+			//points.push_back(n->pos);
 			return;
 		}
 	}
@@ -224,7 +260,7 @@ bool Quadtree::clean_quadnode(Quadtree *quad) {
 	return (cnt > 0);
 }
 
-void Quadtree::delete_point(Point p) {
+void Quadtree::delete_point(Point &p) {
 	if(!is_boundary(p)) return;
 
 	if(n != NULL) {
@@ -279,36 +315,108 @@ void Quadtree::delete_point(Point p) {
 	}
 }
 
+int dist(int x1, int y1, int z1, int x2, int y2, int z2) {
+	int aa = ((x2 - x1) * (x2 - x1));
+	int bb = ((y2 - y1) * (y2 - y1));
+	int cc = ((z2 - z1) * (z2 - z1));
 
-
-double dist(Point a, Point b) {
-	double aa = (b.x - a.x) * (b.x - a.x);
-	double bb = (b.y - a.y) * (b.y - a.y);
-	return sqrt(bb + aa);
+	return (aa + bb + cc);
 }
 
 vector<pair<int, pair<int, int> > > points;
+pair<int, pair<int, int> > pd1, pd2;
+int id_p1, id_p2;
+int min_d;
+
+void get_min_dist(Quadtree &qt) {
+	id_p1 = 0; id_p2 = 1;
+	int id_act, id_suc = 0;
+	Node nn(Point(points[0].snd.fst, points[0].snd.snd), points[0].fst);
+	Node mm(Point(points[1].snd.fst, points[1].snd.snd), points[1].fst);
+	min_d = dist(points[0].fst, points[0].snd.fst, points[0].snd.snd,
+				points[1].fst, points[1].snd.fst, points[1].snd.snd);
+	qt.insert(&nn);
+	qt.insert(&mm);
+	vector<pair<int, pair<int, int> > > suc_points;
+	int xi, yi, zi, x_ant, y_ant, z_ant;
+
+	for(id_act = 2; id_act < points.size(); id_act++) {
+		xi = points[id_act].fst; yi = points[id_act].snd.fst; zi = points[id_act].snd.snd;
+		while(true) {
+			//Obtener un punto anterior
+			x_ant = points[id_suc].fst; y_ant = points[id_suc].snd.fst; z_ant = points[id_suc].snd.snd;
+			if(x_ant < xi - min_d) {
+				Point p_del(y_ant, z_ant);
+				qt.delete_point(p_del);
+				id_suc++;
+			}
+			else {
+				break;
+			}
+		}
+		suc_points.clear();
+		Point _top(yi - min_d, zi - min_d);
+		Point _bot(yi + min_d, zi + min_d);
+		qt.search_area(_top, _bot, suc_points);
+
+		for(int i = 0; i < suc_points.size(); i++) {
+			pair<int, pair<int, int> > p_suc_act = suc_points[i];
+			x_ant = p_suc_act.fst; y_ant = p_suc_act.snd.fst; z_ant = p_suc_act.snd.snd;
+			int act_d = dist(xi, yi, zi, x_ant, y_ant, z_ant);
+			if(act_d < min_d) {
+				min_d = act_d;
+				id_p1 = id_act;
+				for(int j = 0; j < points.size(); j++) {
+					if(x_ant == points[j].fst && y_ant == points[j].snd.fst && z_ant == points[j].snd.snd) {
+						id_p2 = j;
+						break;
+					}
+				}
+			}
+		}
+		nn = Node(Point(yi, zi), xi);
+		qt.insert(&nn);
+	}
+}
 
 int main() {
 	int n, x, y, z;
+	double res;
 	Quadtree qt(Point(-LIM, -LIM), Point(LIM, LIM));
 
-	while(cin >> n && n) {
+	while(scanf("%d", &n) && n) {
 		points.clear();
-		for(int i = 0; i < n; i++) {
-			cin >> x >> y >> z;
+		res = 0.0;
+		priority_queue<int, vector<int>, greater<int> > pq;
+		for(int idx = 0; idx < n; idx++) {
+			scanf("%d %d %d", &x, &y, &z);
 			points.pb(mp(x, mp(y, z)));
 		}
 		sort(points.begin(), points.end());
 
-		float min_d = (float)INT_MAX;
-		int id_act, lst_sc = 0;
-		cout << (int)ceil(min_d) << "\n";
-		for(id_act = 1; id_act < points.size(); id_act++) {
-			while(true) {
-				break;
+		int i = 0;
+		while(i < 6 && points.size() > 1) {
+			get_min_dist(qt);
+			pq.push(min_d);
+
+			for(int j = 0; j < points.size(); j++) {
+				if(j == id_p2 || j == id_p1) continue;
+				pair<int, pair<int, int> > p_act = points[j];
+				x = p_act.fst; y = p_act.snd.fst; z = p_act.snd.snd;
+				int act_d = dist(points[id_p1].fst, points[id_p1].snd.fst, points[id_p1].snd.snd, x, y, z);
+				pq.push(act_d);
 			}
+			points.erase(points.begin() + id_p1);
+			qt.clear_tree();
+			qt.set_boundaries(Point(-LIM, -LIM), Point(LIM, LIM));
+			i++;
 		}
+
+		for(int i = 0; i < 6; i++) {
+			res += sqrt(pq.top()); pq.pop();
+		}
+
+		printf("%.2f\n", res);
 	}
 
 	return 0;
