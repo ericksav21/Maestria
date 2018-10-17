@@ -17,18 +17,29 @@ using namespace std;
 
 int dist[MAXN][MAXN];
 bool mat[MAXN][MAXN];
+
+//Se usan para generar los vecinos de la casilla actual
 int row[] = {-1, 1, 0, 0};
 int col[] = {0, 0, -1, 1};
 
-//m: rows, n: cols
+//m: Filas, n: Columnas
 int m, n, sz, cp_r[3], cp_c[3], cp_time[3];
 int cnt, no_paths;
 
+/*
+	Este método verifica si una posición está adentro o no 
+	de la matriz.
+*/
 bool check_boundaries(int y, int x) {
 	return (y >= 0 && y < m &&
 			x >= 0 && x < n);
 }
 
+/*
+	Este método ejecuta un BFS partiendo de la casilla final a las demás.
+	Se usa una matriz auxiliar para guardar los resultados por casilla.
+	Actualmente esta función no es usada en el algoritmo pero se dejó en el código.
+*/
 void bfs() {
 	for(int i = 0; i < m; i++) {
 		for(int j = 0; j < n; j++) {
@@ -57,6 +68,10 @@ void bfs() {
 	}
 }
 
+/*
+	Este método se usa para saber si desde una cierta casilla existe
+	un camino a las demás sin pasar más de una vez por alguna
+*/
 bool is_blocked(int y, int x) {
     int y_i, x_i;
     bool lst = false, act = false, fst = false;
@@ -80,10 +95,16 @@ bool is_blocked(int y, int x) {
     return outs >= 4;
 }
 
+/*
+	Distancia de Manhattan
+*/
 int manhattan(int y1, int x1, int y2, int x2) {
 	return abs(x2 - x1) + abs(y2 - y1);
 }
 
+/*
+	Búsqueda completa
+*/
 void solve(int y, int x, int cnt, int nxt_cp) {
 	//Si se pisa la casilla final
 	if(y == 0 && x == 1) {
@@ -117,14 +138,6 @@ void solve(int y, int x, int cnt, int nxt_cp) {
 	if(is_blocked(y, x)) {
 		return;
 	}
-	/*bfs();
-	for(int i = 0; i < m; i++) {
-		for(int j = 0; j < n; j++) {
-			if(dist[i][j] == INT_MAX && !mat[i][j]) {
-				return;
-			}
-		}
-	}*/
 
 	for(int i = 0; i < 4; i++) {
 		int x_new = x + col[i], y_new = y + row[i];
