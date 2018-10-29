@@ -5,7 +5,7 @@ int rand_in_range(int a, int b) {
 }
 
 vector<point> get_points(string file_name) {
-	ifstream file(file_name);
+	ifstream file(file_name.c_str());
 	vector<point> res;
 	int n, xi, yi;
 	if(file.is_open()) {
@@ -27,7 +27,7 @@ void generate_random_points(int test_case, int n, int linf, int lsup) {
 	stringstream ss;
 	ss << test_case;
 	string file_name = "test_" + ss.str() + ".txt";
-	ofstream file(file_name);
+	ofstream file(file_name.c_str());
 	set<point> st;
 	point p_aux;
 	file << n << "\n";
@@ -45,5 +45,14 @@ void generate_random_points(int test_case, int n, int linf, int lsup) {
 		st.insert(p_aux);
 	}
 
+	file.close();
+}
+
+void save_forces_in_file(vector<int> &forces, string file_name) {
+	int n = forces.size();
+	ofstream file(file_name.c_str());
+	for(int i = 0; i < n; i++) {
+		file << "Punto " << (i + 1) << ": " << forces[i] << "\n";
+	}
 	file.close();
 }

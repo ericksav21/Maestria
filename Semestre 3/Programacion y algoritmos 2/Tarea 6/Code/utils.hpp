@@ -26,4 +26,6 @@ vector<point> get_points(string file_name);
 
 void generate_random_points(int test_case, int n, int linf, int lsup);
 
+void save_forces_in_file(vector<int> &forces, string file_name);
+
 #endif
