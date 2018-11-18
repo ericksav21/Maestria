@@ -4,6 +4,9 @@ int rand_in_range(int a, int b) {
 	return rand() % (b - a + 1) + a;
 }
 
+/*
+	Este método obtiene los puntos de un archivo de texto
+*/
 vector<point> get_points(string file_name) {
 	ifstream file(file_name.c_str());
 	vector<point> res;
@@ -23,6 +26,9 @@ vector<point> get_points(string file_name) {
 	return res;
 }
 
+/*
+	Este método genera puntos aleatorios y diferentes
+*/
 void generate_random_points(int test_case, int n, int linf, int lsup) {
 	stringstream ss;
 	ss << test_case;
@@ -48,6 +54,9 @@ void generate_random_points(int test_case, int n, int linf, int lsup) {
 	file.close();
 }
 
+/*
+	Este método guarda los puntos en un archivo de texto
+*/
 void save_forces_in_file(vector<int> &forces, string file_name) {
 	int n = forces.size();
 	ofstream file(file_name.c_str());
