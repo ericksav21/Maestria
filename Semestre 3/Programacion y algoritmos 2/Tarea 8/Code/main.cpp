@@ -14,6 +14,11 @@ typedef long long ll;
 ll dp[105][MAXN], arr[MAXN];
 int n, k;
 
+ll function(int k, int n, ll x) {
+	ll power = (arr[k] - x) * (arr[k] - x);
+	return dp[k - 1][n - 1] + power;
+}
+
 class LiChao {
 private:
 	ll tree[4 * MAXN];
@@ -72,7 +77,7 @@ ll solve(int k, int n) {
 	ll power;
 	for(int k_i = 2; k_i <= k; k_i++) {
 		for(int i = k_i; i <= n; i++) {
-			for(int j = i; j >= k_i; j--) {
+			for(int j = k_i; j <= i; j++) {
 				power = (arr[i] - arr[j]) * (arr[i] - arr[j]);
 				dp[k_i][i] = min(dp[k_i][i], dp[k_i - 1][j - 1] + power);
 			}
